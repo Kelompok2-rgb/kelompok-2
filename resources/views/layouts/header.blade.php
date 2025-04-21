@@ -2,7 +2,7 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Akademik</a>
+            <a class="navbar-brand" href="/"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" 
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -21,6 +21,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/club">Klub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hasil_pertandingan">Hasil Pertandingan</a>
                     </li>
                 </ul>
             </div>
