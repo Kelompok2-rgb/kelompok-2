@@ -1,27 +1,44 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AtletController;
+use App\Http\Controllers\JuriController;
+use App\Http\Controllers\HasilPertandinganController;
 use App\Http\Controllers\KategoriPertandinganController;
 use App\Http\Controllers\JadwalPertandinganController;
-use App\Http\Controllers\JuriController;
-use App\Http\Controllers\AtletController;
-use App\Http\Controllers\HasilPertandinganController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\ClubController;
+use App\Http\Controllers\PengumumanController;
 
 Route::get('/anggota', function () {
     return view('anggota.index');
 });
 
-Route::resource('kategoripertandingan', KategoriPertandinganController::class);
-Route::put('/kategoripertandingans/{id}', [KategoriPertandinganController::class, 'update'])->name('kategoripertandingans.update');
-Route::resource('kategori_pertandingan', KategoriPertandinganController::class);
-
-Route::resource('jadwal_pertandingan', JadwalPertandinganController::class);
-
+// Route untuk atlet
 Route::resource('atlet', AtletController::class);
 Route::put('/atlet/{id}', [AtletController::class, 'update'])->name('atlet.update');
 
+// Route untuk juri
 Route::resource('juri', JuriController::class);
 Route::put('/juri/{id}', [JuriController::class, 'update'])->name('juri.update');
 
+// Route untuk hasil pertandingan
 Route::resource('hasil_pertandingan', HasilPertandinganController::class);
 Route::put('/hasil_pertandingan/{id}', [HasilPertandinganController::class, 'update'])->name('hasil_pertandingan.update');
+
+// Route untuk kategori pertandingan
+Route::resource('kategori_pertandingan', KategoriPertandinganController::class);
+Route::put('/kategoripertandingans/{id}', [KategoriPertandinganController::class, 'update'])->name('kategoripertandingans.update');
+
+// Route untuk jadwal pertandingan
+Route::resource('jadwal_pertandingan', JadwalPertandinganController::class);
+
+// Route untuk galeri
+Route::resource('galeri', GaleriController::class);
+
+// Route untuk club
+Route::resource('club', ClubController::class);
+Route::put('/clubs/{id}', [ClubController::class, 'update'])->name('Clubs.update');
+
+// Route untuk pengumuman
+Route::resource('pengumuman', PengumumanController::class);
