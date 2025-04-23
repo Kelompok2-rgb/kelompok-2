@@ -20,7 +20,7 @@
             <th>Deskripsi</th>
             <th>Aksi</th>
         </tr>
-        @foreach ($clubs as $clubs)
+        @foreach ($clubs as $club)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $club->nama }}</td>
