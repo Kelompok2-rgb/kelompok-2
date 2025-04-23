@@ -1,51 +1,41 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@yield('title', 'PORLEMPIKA')</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
 
-@section('content')
-<div class="text-center mb-4">
-    <h2>PORLEMPIKA</h2>
-</div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="/">🏫 PORLEMPIKA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/home"> Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/anggota"> Anggota</a></li>
+            <li class="nav-item"><a class="nav-link" href="/atlet"> Atlet</a></li>
+            <li class="nav-item"><a class="nav-link" href="/hasil_pertandingan"> Hasil Pertandingan</a></li>
+            <li class="nav-item"><a class="nav-link" href="/juri"> Juri </a></li>
+            <li class="nav-item"><a class="nav-link" href="/jadwal_pertandingan"> Jadwal </a></li>
+            <li class="nav-item"><a class="nav-link" href="/kategori_pertandingan"> Kategori </a></li>
+            <li class="nav-item"><a class="nav-link" href="/galeri"> Galeri</a></li>
+            <li class="nav-item"><a class="nav-link" href="/pengumuman"> Pengumuman</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Isi halaman -->
+    <div class="container py-4 mt-5 pt-4">
+        @yield('content')
     </div>
-@endif
 
-<div class="mb-3">
-    <a href="{{ route('kategori_pertandingan.create') }}" class="btn btn-primary">Tambah Kategori Pertandingan</a>
-</div>
-
-<table class="table table-bordered table-striped">
-    <thead class="table-dark text-center">
-        <tr>
-            <th>No</th>
-            <th>Nama Kategori</th>
-            <th>Aturan</th>
-            <th>Batasan</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($kategoripertandingans as $index => $kategori)
-            <tr>
-                <td class="text-center">{{ $index + 1 }}</td>
-                <td>{{ $kategori->nama }}</td>
-                <td>{{ $kategori->aturan }}</td>
-                <td>{{ $kategori->batasan }}</td>
-                <td class="text-center">
-                    <a href="{{ route('kategori_pertandingan.edit', $kategori->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                    <form action="{{ route('kategori_pertandingan.destroy', $kategori->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau hapus?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="5" class="text-center">Belum ada kategori pertandingan</td>
-            </tr>
-        @endforelse
-    </tbody>
-</table>
-@endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

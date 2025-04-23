@@ -16,9 +16,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/anggota">Anggota</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="/atlet">Atlet</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="/club">Klub</a>
                     </li>

@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriPertandinganController;
 use App\Http\Controllers\JadwalPertandinganController;
-
-Route::resource('jadwal_pertandingan', JadwalPertandinganController::class);
+use App\Http\Controllers\JuriController;
+use App\Http\Controllers\AtletController;
 
 
 Route::get('/anggota', function () {
@@ -20,3 +20,11 @@ Route::resource('jadwal_pertandingan', JadwalPertandinganController::class);
 
 
 
+Route::resource('atlet', AtletController::class);
+Route::put('/atlet/{id}', [AtletController::class, 'update'])->name('atlet.update');
+
+Route::resource('juri', JuriController::class);
+Route::put('/juri/{id}', [JuriController::class, 'update'])->name('juri.update');
+
+Route::resource('hasil_pertandingan', HasilPertandinganController::class);
+Route::put('/hasil_pertandingan/{id}', [HasilPertandinganController::class, 'update'])->name('hasil_pertandingan.update');

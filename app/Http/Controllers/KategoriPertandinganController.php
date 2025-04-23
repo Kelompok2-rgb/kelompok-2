@@ -12,6 +12,7 @@ class KategoriPertandinganController extends Controller
         $kategoripertandingans = Kategori_Pertandingan::all();
         return view('kategori_pertandingan.index', compact('kategoripertandingans'));
     }
+    
 
     public function create()
     {
