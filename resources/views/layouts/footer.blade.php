@@ -1,5 +1,3 @@
-<footer class="bg-dark mt-auto py-3 text-white">
-    <div class="container">
-        <h2 class="text-center">Copyright &copy; {{ date("Y") }} PNP</h2>
-    </div>
+<footer class="bg-dark text-white text-center mt-5 p-3">
+    <p class="mb-0">&copy; {{ date('Y') }} Sistem Informasi Pengelolaan - Lempar Pisau & Kapak Padang</p>
 </footer>
