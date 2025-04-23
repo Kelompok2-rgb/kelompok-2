@@ -1,3 +1,4 @@
+
 @extends('layouts.main')
 
 @section('content')
@@ -46,3 +47,5 @@
         @endforelse
     </tbody>
 </table>
+@endsection
+
