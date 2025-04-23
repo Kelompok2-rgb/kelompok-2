@@ -1,22 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Aplikasi Mahasiswa')</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Aplikasi Atlet</a>
-        </div>
-    </nav>
 
-    <div class="container mt-4">
-        @yield('content')
+@extends('layouts.main')
+
+@section('content')
+<div class="text-center mb-4">
+    <h2>Data Juri PORLEMPIKA</h2>
+</div>
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
     </div>
+@endif
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<div class="mb-3">
+    <a href="{{ route('juri.create') }}" class="btn btn-primary">Tambah Juri</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Pengalaman</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse ($juris as $index => $juri)
+            <tr>
+                <td class="text-center">{{ $index + 1 }}</td>
+                <td>{{ $juri->nama }}</td>
+                <td>{{ $juri->pengalaman }}</td>
+                <td class="text-center">
+                    <a href="{{ route('juri.edit', $juri->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
+                    <form action="{{ route('juri.destroy', $juri->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="4" class="text-center">Belum ada data juri</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
+@endsection
+

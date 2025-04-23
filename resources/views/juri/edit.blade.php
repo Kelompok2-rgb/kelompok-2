@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 8d7f5a308a18df9365fa9cae52e5f9e683bbb02f
 @extends('layouts.main') {{-- Ganti dengan layout juri jika berbeda --}}
 
 @section('content')
@@ -20,4 +25,3 @@
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
-@endsection

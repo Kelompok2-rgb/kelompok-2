@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Atlet extends Model
+class HasilPertandingan extends Model
 {
     use HasFactory;
 
+    protected $table = 'hasil__pertandingans'; 
+
     protected $fillable = [
-        'nama',
-        'foto',
-        'prestasi',
-        'statistik_pertandingan',
-        'training_record',
+        'skor',
+        'rangking',
+        'catatan_juri',
     ];
 }
+
