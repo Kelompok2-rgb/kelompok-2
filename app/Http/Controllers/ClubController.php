@@ -9,7 +9,7 @@ class ClubController extends Controller
 {
     public function index()
     {
-        $club = Club::all();
+        $clubs = Club::all();
         return view('club.index', compact('clubs'));
     }
 
