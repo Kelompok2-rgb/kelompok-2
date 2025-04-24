@@ -3,6 +3,8 @@
 @section('navMhs', 'active')
 
 @section('content')
-    <h1>Daftar Anggota</h1>
+<div class="text-center mb-4">
+    <h2>DAFTAR ANGGOTA</h2>
+</div>
     
 @endsection

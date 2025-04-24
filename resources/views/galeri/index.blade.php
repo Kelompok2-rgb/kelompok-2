@@ -1,18 +1,20 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title','Halaman Galeri')
+@section('navMhs', 'active')
 
 @section('content')
-<div class="container mt-4">
-    <h2 class="text-center mb-4">Galeri PORLEMPIKA</h2>
+<div class="text-center mb-4">
+    <h2>GALERI</h2>
+</div>
+
 
     @if (session('success'))
-        <div class="alert alert-success text-center">
+        <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
 
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{{ route('galeri.create') }}" class="btn btn-primary">+ Tambah Galeri</a>
-    </div>
+    <a href="{{ route('galeri.create') }}" class="btn btn-primary mb-3">+ Tambah Galeri</a>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @forelse ($galeris as $galeri)
@@ -40,5 +42,4 @@
             </div>
         @endforelse
     </div>
-</div>
 @endsection

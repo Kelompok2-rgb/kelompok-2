@@ -3,7 +3,9 @@
 @section('navMhs', 'active')
 
 @section('content')
-    <h1>Daftar Club</h1>
+    <div class="text-center mb-4">
+        <h2>DAFTAR CLUB</h2>
+    </div>
     
     @if (session('success'))
         <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">

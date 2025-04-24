@@ -14,6 +14,10 @@ Route::get('/anggota', function () {
     return view('anggota.index');
 });
 
+Route::get('/', function () {
+    return view('anggota.index');
+});
+
 // Route untuk atlet
 Route::resource('atlet', AtletController::class);
 Route::put('/atlet/{id}', [AtletController::class, 'update'])->name('atlet.update');
