@@ -1,4 +1,4 @@
-@extends('layouts.main') {{-- Ganti dengan app layout kamu jika beda --}}
+@extends('layouts.appatlet')
 
 @section('content')
 <div class="container mt-4">

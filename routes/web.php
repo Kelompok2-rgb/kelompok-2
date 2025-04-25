@@ -12,12 +12,9 @@ use App\Http\Controllers\JadwalPertandinganController;
 use App\Http\Controllers\KategoriPertandinganController;
 use App\Http\Controllers\PertandinganController;
 
-Route::get('/anggota', function () {
-    return view('anggota.index');
-});
 
 Route::get('/', function () {
-    return view('anggota.index');
+    return view('home');
 });
 
 // Route untuk atlet

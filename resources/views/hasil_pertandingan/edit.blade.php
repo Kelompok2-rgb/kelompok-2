@@ -1,4 +1,4 @@
-@extends('layouts.main') {{-- Ganti jika kamu pakai layout yang berbeda --}}
+@extends('layouts.apphasil_pertandingan')
 
 @section('content')
 <div class="container mt-4">

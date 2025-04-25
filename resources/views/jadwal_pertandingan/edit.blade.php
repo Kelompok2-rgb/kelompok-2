@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.appjadwalpertandingan')
 
 @section('content')
 <div class="container mt-4">

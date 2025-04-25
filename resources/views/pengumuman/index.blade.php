@@ -3,24 +3,44 @@
 @section('navMhs', 'active')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="text-center mb-4">
         <h2>Daftar Pengumuman</h2>
-        <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">Tambah Pengumuman</a>
     </div>
 
-    @foreach ($pengumumans as $item)
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ $item->judul }}</h5>
-                <h6 class="card-subtitle text-muted">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</h6>
-                <p class="card-text">{{ $item->isi }}</p>
-                <a href="{{ route('pengumuman.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                <form action="{{ route('pengumuman.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                </form>
-            </div>
+    @if (session('success'))
+        <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+            {{ session('success') }}
         </div>
-    @endforeach
+    @endif
+
+    <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">Tambah Pengumuman</a>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Judul</th>
+                <th>Tanggal</th>
+                <th>Isi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($pengumumans as $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->judul }}</td>
+                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                    <td>{{ $item->isi }}</td>
+                    <td>
+                        <a href="{{ route('pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('pengumuman.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection

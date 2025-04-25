@@ -1,4 +1,4 @@
-@extends('layouts.appatlet')
+@extends('layouts.apphasil_pertandingan')
 
 @section('title', 'Tambah Hasil Pertandingan')
 

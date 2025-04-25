@@ -9,7 +9,7 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/anggota">Anggota</a></li>
                     <li class="nav-item"><a class="nav-link" href="/club">Club</a></li>
                     <li class="nav-item"><a class="nav-link" href="/atlet">Atlet</a></li>

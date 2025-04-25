@@ -1,4 +1,4 @@
-@extends('layouts.appatlet')
+@extends('layouts.appjuri')
 
 @section('title', 'Tambah Juri')
 
