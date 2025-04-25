@@ -20,6 +20,6 @@ class CreatePengumumansTable extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('pengumumans');
+        Schema::dropIfExists('pengumuman');
     }
 }

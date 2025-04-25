@@ -1,6 +1,6 @@
 @extends('layouts.main')
-
 @section('title', 'Daftar Pengumuman')
+@section('navMhs', 'active')
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">

@@ -1,4 +1,6 @@
 @extends('layouts.main')
+@section('title','Halaman Hasil Pertandingan')
+@section('navMhs', 'active')
 
 @section('content')
 <div class="text-center mb-4">
