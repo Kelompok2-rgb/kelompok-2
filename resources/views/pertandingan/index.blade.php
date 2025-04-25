@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="text-center mb-4">
-        <h2>DAFTAR Pertandingan</h2>
+        <h2>Daftar Pertandingan</h2>
     </div>
 
     @if (session('success'))

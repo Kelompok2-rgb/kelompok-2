@@ -10,6 +10,7 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\HasilPertandinganController;
 use App\Http\Controllers\JadwalPertandinganController;
 use App\Http\Controllers\KategoriPertandinganController;
+use App\Http\Controllers\PertandinganController;
 
 Route::get('/anggota', function () {
     return view('anggota.index');
@@ -48,6 +49,10 @@ Route::put('/clubs/{id}', [ClubController::class, 'update'])->name('Clubs.update
 // Route untuk pengumuman
 Route::resource('pengumuman', PengumumanController::class);
 
-
+// Route untuk anggota
 Route::resource('anggota', AnggotaController::class);
 Route::put('/anggotas/{id}', [AnggotaController::class, 'update'])->name('Clubs.update');
+
+// Route untuk pertandingan
+Route::resource('pertandingan', PertandinganController::class);
+Route::put('/pertandingans/{id}', [PertandinganController::class, 'update'])->name('Pertandingans.update');
