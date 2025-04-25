@@ -19,6 +19,7 @@
                     <li class="nav-item"><a class="nav-link" href="/kategori_pertandingan">Kategori</a></li>
                     <li class="nav-item"><a class="nav-link" href="/galeri">Galeri</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pengumuman">Pengumuman</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pertandingan">Pertandingan</a></li>
                 </ul>
             </div>
         </div>

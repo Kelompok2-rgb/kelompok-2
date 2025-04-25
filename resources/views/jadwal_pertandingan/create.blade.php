@@ -6,6 +6,10 @@
         Tambah Jadwal Pertandingan
     </div>
     <div class="card-body">
+
+        @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
         
         {{-- Tampilkan error jika ada --}}
         @if ($errors->any())

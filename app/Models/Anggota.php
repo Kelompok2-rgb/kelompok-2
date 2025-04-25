@@ -12,8 +12,10 @@ class Anggota extends Model
     protected $fillable = [
         'nama',
         'foto',
-        'prestasi',
-        'statistik_pertandingan',
-        'training_record',
+        'tgl_lahir',
+        'peran',
+        'riwayat_prestasi',
+        'kontak'
     ];
 }
+

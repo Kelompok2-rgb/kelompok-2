@@ -8,6 +8,9 @@
         Tambah Juri
     </div>
     <div class="card-body">
+        @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
         <form action="{{ route('juri.store') }}" method="POST">
             @csrf
 

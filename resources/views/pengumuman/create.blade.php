@@ -7,6 +7,9 @@
             <h4 class="mb-0">Tambah Pengumuman</h4>
         </div>
         <div class="card-body">
+            @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
             <form action="{{ route('pengumuman.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
