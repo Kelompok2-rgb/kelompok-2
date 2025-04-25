@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appgaleri')
 
 @section('content')
 <div class="text-center mb-4">
