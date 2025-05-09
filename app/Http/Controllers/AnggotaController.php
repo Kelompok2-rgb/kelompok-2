@@ -12,12 +12,12 @@ class AnggotaController extends Controller
     public function index()
     {
         $anggotas = Anggota::all();
-        return view('anggota.index', compact('anggotas'));
+        return view('backend.anggota.index', compact('anggotas'));
     }
 
     public function create()
     {
-        return view('anggota.create');
+        return view('backend.anggota.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -37,13 +37,13 @@ class AnggotaController extends Controller
 
         Anggota::create($validated);
 
-        return redirect()->route('anggota.index')->with('success', 'Anggota berhasil ditambahkan');
+        return redirect()->route('backend.anggota.index')->with('success', 'Anggota berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $anggota = Anggota::findOrFail($id);
-        return view('anggota.edit', compact('anggota'));
+        return view('backend.anggota.edit', compact('anggota'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -68,7 +68,7 @@ class AnggotaController extends Controller
 
         $anggota->update($validated);
 
-        return redirect()->route('anggota.index')->with('success', 'Anggota berhasil diperbarui');
+        return redirect()->route('backend.anggota.index')->with('success', 'Anggota berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
@@ -81,6 +81,6 @@ class AnggotaController extends Controller
 
         $anggota->delete();
 
-        return redirect()->route('anggota.index')->with('success', 'Anggota berhasil dihapus');
+        return redirect()->route('backend.anggota.index')->with('success', 'Anggota berhasil dihapus');
     }
 }

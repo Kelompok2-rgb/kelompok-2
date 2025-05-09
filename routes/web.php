@@ -14,7 +14,7 @@ use App\Http\Controllers\PertandinganController;
 
 
 Route::get('/', function () {
-    return view('home');
+    return view('backend.index');
 });
 
 // Route untuk atlet
@@ -47,8 +47,9 @@ Route::put('/clubs/{id}', [ClubController::class, 'update'])->name('Clubs.update
 Route::resource('pengumuman', PengumumanController::class);
 
 // Route untuk anggota
-Route::resource('anggota', AnggotaController::class);
-Route::put('/anggotas/{id}', [AnggotaController::class, 'update'])->name('Clubs.update');
+Route::prefix('backend')->name('backend.')->group(function () {
+    Route::resource('anggota', AnggotaController::class);
+});
 
 // Route untuk pertandingan
 Route::resource('pertandingan', PertandinganController::class);
