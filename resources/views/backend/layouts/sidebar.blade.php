@@ -26,63 +26,63 @@
         </li>
 
         <li>
-            <a href="{{ route('backend.atlet.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Atlet</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.club.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Club</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.galeri.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Galeri</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.hasil_pertandingan.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Hasil Pertandingan</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.jadwal_pertandingan.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Jadwal Pertandingan</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.juri.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Juri</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.kategori_pertandingan.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Kategori Pertandingan</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.pengumuman.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Pengumuman</div>
             </a>
         </li>
 
         <li>
-            <a href="{{ route('backend.pertandingan.index') }}">
+            <a href="#">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i></div>
                 <div class="menu-title">Pertandingan</div>
             </a>
