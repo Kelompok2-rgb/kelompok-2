@@ -1,4 +1,4 @@
-@extends('layouts.apppengumuman') <!-- Sesuaikan dengan layout utama kamu -->
+@extends('backend.layouts.app') <!-- Sesuaikan dengan layout utama kamu -->
 
 @section('content')
 <div class="container mt-4">
@@ -10,7 +10,7 @@
             @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-            <form action="{{ route('pengumuman.store') }}" method="POST">
+            <form action="{{ route('backend.pengumuman.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="judul" class="form-label">Judul</label>
@@ -25,7 +25,7 @@
                     <input type="date" name="tanggal" class="form-control" id="tanggal" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('pengumuman.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('backend.pengumuman.index') }}" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </div>

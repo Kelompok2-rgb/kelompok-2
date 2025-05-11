@@ -1,10 +1,10 @@
-@extends('layouts.appkategori_pertandingan')
+@extends('backend.layouts.app')
 
 
 @section('content')
 <div class="container mt-4">
     <h2>Edit Kategori Pertandingan</h2>
-    <form action="{{ route('kategoripertandingans.update', $kategoripertandingan->id) }}" method="POST">
+   <form action="{{ route('backend.kategori_pertandingan.update', $kategoripertandingan->id) }}" method="POST">
         @csrf
         @method('PUT')
 

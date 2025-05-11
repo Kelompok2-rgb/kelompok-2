@@ -1,4 +1,4 @@
-@extends('backend.layouts.appanggota')
+@extends('backend.layouts.app')
 
 @section('title', 'Edit Anggota')
 

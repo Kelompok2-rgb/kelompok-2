@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backend.layouts.main')
 
 @section('title', 'Kategori Pertandingan')
 
@@ -14,7 +14,7 @@
   @endif
 
   <div class="mb-3">
-      <a href="{{ route('kategori_pertandingan.create') }}" class="btn btn-primary">
+      <a href="{{ route('backend.kategori_pertandingan.create') }}" class="btn btn-primary">
           Tambah Kategori Pertandingan
       </a>
   </div>
@@ -37,9 +37,9 @@
                   <td>{{ $kategori->aturan }}</td>
                   <td>{{ $kategori->batasan }}</td>
                   <td class="text-center">
-                      <a href="{{ route('kategori_pertandingan.edit', $kategori->id) }}"
-                         class="btn btn-warning btn-sm me-1">Edit</a>
-                      <form action="{{ route('kategori_pertandingan.destroy', $kategori->id) }}"
+                      <a href="{{ route('backend.kategori_pertandingan.edit', $kategori->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
+
+                      <form action="{{ route('backend.kategori_pertandingan.destroy', $kategori->id) }}"
                             method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backend.layouts.main')
 @section('title', 'Daftar Pengumuman')
 @section('navMhs', 'active')
 
@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">Tambah Pengumuman</a>
+    <a href="{{ route('backend.pengumuman.create') }}" class="btn btn-primary">Tambah Pengumuman</a>
     <table class="table table-bordered mt-3">
         <thead>
             <tr>
@@ -32,8 +32,8 @@
                     <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
                     <td>{{ $item->isi }}</td>
                     <td>
-                        <a href="{{ route('pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('pengumuman.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
+                        <a href="{{ route('backend.pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm">Hapus</button>

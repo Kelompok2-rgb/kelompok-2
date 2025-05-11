@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backend.layouts.main')
 @section('title','Halaman Galeri')
 @section('navMhs', 'active')
 
@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <a href="{{ route('galeri.create') }}" class="btn btn-primary mb-3">+ Tambah Galeri</a>
+    <a href="{{ route('backend.galeri.create') }}" class="btn btn-primary mb-3">+ Tambah Galeri</a>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @forelse ($galeris as $galeri)
@@ -24,8 +24,8 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $galeri->judul }}</h5>
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('galeri.edit', $galeri->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('galeri.destroy', $galeri->id) }}" method="POST" class="d-inline">
+                            <a href="{{ route('backend.galeri.edit', $galeri->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('backend.galeri.destroy', $galeri->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau hapus?')">Hapus</button>

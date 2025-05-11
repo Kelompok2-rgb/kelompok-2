@@ -1,9 +1,9 @@
-@extends('layouts.appjadwalpertandingan')
+@extends('backend.layouts.app')
 
 @section('content')
 <div class="container mt-4">
     <h2>Edit Jadwal Pertandingan</h2>
-    <form action="{{ route('jadwal_pertandingan.update', $jadwalpertandingan->id) }}" method="POST">
+    <form action="{{ route('backend.jadwal_pertandingan.update', $jadwalpertandingan->id) }}" method="POST">
         @csrf
         @method('PUT')
 

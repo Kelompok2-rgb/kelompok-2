@@ -1,5 +1,4 @@
-@extends('layouts.appjuri')
-
+@extends('backend.layouts.app')
 @section('title', 'Tambah Juri')
 
 @section('content')
@@ -10,8 +9,8 @@
     <div class="card-body">
         @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-        <form action="{{ route('juri.store') }}" method="POST">
+        @endif
+        <form action="{{ route('backend.juri.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">
@@ -30,8 +29,4 @@
         </form>
     </div>
 </div>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> 8d7f5a308a18df9365fa9cae52e5f9e683bbb02f

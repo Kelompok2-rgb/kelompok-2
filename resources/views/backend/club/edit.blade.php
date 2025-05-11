@@ -1,9 +1,9 @@
-@extends('layouts.appclub')
+@extends('backend.layouts.app')
 
 @section('content')
     <div class="container mt-4">
         <h2>Edit Club</h2>
-        <form action="{{ route('club.update', $club->id) }}" method="POST">
+        <form action="{{ route('backend.club.update', $club->id) }}" method="POST">
             @csrf
             @method('PUT')
 

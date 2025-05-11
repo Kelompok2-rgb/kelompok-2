@@ -1,4 +1,4 @@
-@extends('layouts.appclub')
+@extends('backend.layouts.app')
 
 @section('content')
     <div class="card">
@@ -11,7 +11,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('club.store') }}" method="POST">
+            <form action="{{ route('backend.club.store') }}" method="POST">
                 @csrf
 
                 <div class="col-md-6">

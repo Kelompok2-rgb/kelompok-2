@@ -10,13 +10,13 @@ class HasilPertandinganController extends Controller
 {
     public function index()
     {
-        $hasil_pertandingans = HasilPertandingan::all();
-        return view('hasil_pertandingan.index', compact('hasil_pertandingans'));
+        $hasilPertandingans = HasilPertandingan::all();
+        return view('backend.hasil_pertandingan.index', compact('hasilPertandingans'));
     }
 
     public function create()
     {
-        return view('hasil_pertandingan.create');
+        return view('backend.hasil_pertandingan.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -29,18 +29,20 @@ class HasilPertandinganController extends Controller
 
         HasilPertandingan::create($validated);
 
-        return redirect()->route('hasil_pertandingan.index')->with('success', 'Hasil pertandingan berhasil ditambahkan');
+        return redirect()->route('backend.hasil_pertandingan.index')
+            ->with('success', 'Hasil pertandingan berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $hasil_pertandingan = HasilPertandingan::findOrFail($id);
-        return view('hasil_pertandingan.edit', compact('hasil_pertandingan'));
+        return view('backend.hasil_pertandingan.edit', compact('hasil_pertandingan'));
     }
+
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $hasil_pertandingan = HasilPertandingan::findOrFail($id);
+        $hasilPertandingan = HasilPertandingan::findOrFail($id);
 
         $validated = $request->validate([
             'skor' => 'required|numeric',
@@ -48,16 +50,18 @@ class HasilPertandinganController extends Controller
             'catatan_juri' => 'nullable|string',
         ]);
 
-        $hasil_pertandingan->update($validated);
+        $hasilPertandingan->update($validated);
 
-        return redirect()->route('hasil_pertandingan.index')->with('success', 'Hasil pertandingan berhasil diperbarui');
+        return redirect()->route('backend.hasil_pertandingan.index')
+            ->with('success', 'Hasil pertandingan berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
     {
-        $hasil_pertandingan = HasilPertandingan::findOrFail($id);
-        $hasil_pertandingan->delete();
+        $hasilPertandingan = HasilPertandingan::findOrFail($id);
+        $hasilPertandingan->delete();
 
-        return redirect()->route('hasil_pertandingan.index')->with('success', 'Hasil pertandingan berhasil dihapus');
+        return redirect()->route('backend.hasil_pertandingan.index')
+            ->with('success', 'Hasil pertandingan berhasil dihapus');
     }
 }

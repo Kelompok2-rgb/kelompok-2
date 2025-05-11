@@ -2,54 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengumuman;
 use Illuminate\Http\Request;
+use App\Models\Pengumuman;
 
 class PengumumanController extends Controller
 {
     public function index()
     {
         $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get();
-        return view('pengumuman.index', compact('pengumumans'));
+        return view('backend.pengumuman.index', compact('pengumumans'));
     }
 
     public function create()
     {
-        return view('pengumuman.create');
+        return view('backend.pengumuman.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'judul' => 'required',
-            'isi' => 'required',
+        $validated = $request->validate([
+            'judul'   => 'required|string|max:255',
+            'isi'     => 'required|string',
             'tanggal' => 'required|date',
         ]);
 
-        Pengumuman::create($request->all());
-        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil ditambahkan.');
+        Pengumuman::create($validated);
+        return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil ditambahkan.');
     }
 
-    public function edit(Pengumuman $pengumuman)
+    public function edit($id)
     {
-        return view('pengumuman.edit', compact('pengumuman'));
+        $pengumuman = Pengumuman::findOrFail($id);
+        return view('backend.pengumuman.edit', compact('pengumuman'));
     }
 
-    public function update(Request $request, Pengumuman $pengumuman)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'judul' => 'required',
-            'isi' => 'required',
+        $pengumuman = Pengumuman::findOrFail($id);
+
+        $validated = $request->validate([
+            'judul'   => 'required|string|max:255',
+            'isi'     => 'required|string',
             'tanggal' => 'required|date',
         ]);
 
-        $pengumuman->update($request->all());
-        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil diperbarui.');
+        $pengumuman->update($validated);
+        return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil diperbarui.');
     }
 
-    public function destroy(Pengumuman $pengumuman)
+    public function destroy($id)
     {
+        $pengumuman = Pengumuman::findOrFail($id);
         $pengumuman->delete();
-        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil dihapus.');
+        return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil dihapus.');
     }
 }

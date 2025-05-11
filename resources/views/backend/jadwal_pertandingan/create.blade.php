@@ -1,4 +1,4 @@
-@extends('layouts.appjadwalpertandingan')
+@extends('backend.layouts.app')
 
 @section('content')
 <div class="card">
@@ -23,7 +23,7 @@
         @endif
 
         {{-- Form Tambah Jadwal Pertandingan --}}
-        <form action="{{ route('jadwal_pertandingan.store') }}" method="POST">
+        <form action="{{ route('backend.jadwal_pertandingan.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">

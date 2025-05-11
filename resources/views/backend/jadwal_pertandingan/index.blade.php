@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backend.layouts.main')
 @section('title','Halaman Jadwal Pertandingan')
 @section('navMhs', 'active')
 
@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <a href="{{ route('jadwal_pertandingan.create') }}" class="btn btn-primary mb-3">Tambah Jadwal Pertandingan</a>
+    <a href="{{ route('backend.jadwal_pertandingan.create') }}" class="btn btn-primary mb-3">Tambah Jadwal Pertandingan</a>
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark text-center">
@@ -33,8 +33,8 @@
                     <td>{{ $jadwal->waktu }}</td>
                     <td>{{ $jadwal->lokasi }}</td>
                     <td class="text-center">
-                        <a href="{{ route('jadwal_pertandingan.edit', $jadwal->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <form action="{{ route('jadwal_pertandingan.destroy', $jadwal->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('backend.jadwal_pertandingan.edit', $jadwal->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
+                        <form action="{{ route('backend.jadwal_pertandingan.destroy', $jadwal->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau hapus?')">Hapus</button>

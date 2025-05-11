@@ -1,9 +1,9 @@
-@extends('layouts.appatlet')
+@extends('backend.layouts.app')
 
 @section('content')
 <div class="container mt-4">
     <h2>Edit Atlet</h2>
-    <form action="{{ route('atlet.update', $atlet->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('backend.atlet.update', $atlet->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

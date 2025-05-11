@@ -1,4 +1,4 @@
-@extends('layouts.apppengumuman')
+@extends('backend.layouts.app')
 
 
 @section('title', 'Edit Pengumuman')
@@ -7,7 +7,7 @@
 <div class="container">
     <h2 class="mb-4">Edit Pengumuman</h2>
 
-    <form action="{{ route('pengumuman.update', $pengumuman->id) }}" method="POST">
+    <form action="{{ route('backend.pengumuman.update', $pengumuman->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -27,7 +27,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Update</button>
-        <a href="{{ route('pengumuman.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('backend.pengumuman.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

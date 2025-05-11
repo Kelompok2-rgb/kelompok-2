@@ -1,5 +1,4 @@
-@extends('layouts.apphasil_pertandingan')
-
+@extends('backend.layouts.app')
 @section('title', 'Tambah Hasil Pertandingan')
 
 @section('content')
@@ -9,10 +8,10 @@
     </div>
     <div class="card-body">
         @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-        <form action="{{ route('hasil_pertandingan.store') }}" method="POST">
+        <form action="{{ route('backend.hasil_pertandingan.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">

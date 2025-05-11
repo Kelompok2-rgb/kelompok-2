@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backend.layouts.main')
 @section('title','Halaman Juri')
 @section('navMhs', 'active')
 
@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <a href="{{ route('juri.create') }}" class="btn btn-primary mb-3">Tambah Juri</a>
+    <a href="{{ route('backend.juri.create') }}" class="btn btn-primary mb-3">Tambah Juri</a>
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark text-center">
@@ -31,8 +31,8 @@
                     <td>{{ $juri->nama }}</td>
                     <td>{{ $juri->pengalaman }}</td>
                     <td class="text-center">
-                        <a href="{{ route('juri.edit', $juri->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <form action="{{ route('juri.destroy', $juri->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('backend.juri.edit', $juri->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
+                        <form action="{{ route('backend.juri.destroy', $juri->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>

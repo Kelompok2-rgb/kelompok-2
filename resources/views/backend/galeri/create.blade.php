@@ -1,4 +1,4 @@
-@extends('layouts.appgaleri')
+@extends('backend.layouts.app')
 
 @section('content')
 <div class="row justify-content-center">
@@ -13,7 +13,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
             
-                <form action="{{ route('galeri.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('backend.galeri.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
@@ -27,7 +27,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{ route('galeri.index') }}" class="btn btn-warning">Batal</a>
+                    <a href="{{ route('backend.galeri.index') }}" class="btn btn-warning">Batal</a>
                 </form>
             </div>
         </div>

@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}">
 
     <!-- Loader CSS -->
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/css/pace.min.css') }}">
-    <script src="{{ asset('dashboard/assets/js/pace.min.js') }}"></script>
+    {{-- <link rel="stylesheet" href="{{ asset('dashboard/assets/css/pace.min.css') }}">
+    <script src="{{ asset('dashboard/assets/js/pace.min.js') }}"></script> --}}
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/bootstrap.min.css') }}">

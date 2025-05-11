@@ -1,4 +1,4 @@
-@extends('layouts.appatlet')
+@extends('backend.layouts.app')
 
 @section('title', 'Tambah Atlet')
 
@@ -8,7 +8,8 @@
         Tambah Atlet
     </div>
     <div class="card-body">
-        <form action="{{ route('atlet.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('backend.atlet.store') }}" method="POST" enctype="multipart/form-data">
+       
             @csrf
 
             <div class="mb-3">

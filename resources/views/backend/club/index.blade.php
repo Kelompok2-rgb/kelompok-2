@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backend.layouts.main')
 @section('title','Halaman Club')
 @section('navMhs', 'active')
 
@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <a href="{{ route('club.create') }}" class="btn btn-primary">Tambah Club</a>
+    <a href="{{ route('backend.club.create') }}" class="btn btn-primary">Tambah Club</a>
     <table class="table table-bordered mt-3">
         <tr>
             <th>No</th>
@@ -29,8 +29,8 @@
                 <td>{{ $club->lokasi }}</td>
                 <td>{{ $club->deskripsi }}</td>
                 <td>
-                    <a href="{{ route('club.edit', $club->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('club.destroy', $club->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('backend.club.edit', $club->id) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ route('backend.club.destroy', $club->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"

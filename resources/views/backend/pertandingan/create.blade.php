@@ -1,4 +1,4 @@
-@extends('layouts.apppertandingan')
+@extends('backend.layouts.app')
 
 @section('content')
     <div class="card">
@@ -12,7 +12,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('pertandingan.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('backend.pertandingan.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">

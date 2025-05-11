@@ -1,11 +1,11 @@
-@extends('layouts.appgaleri')
+@extends('backend.layouts.app')
 
 @section('content')
 <div class="text-center mb-4">
     <h2>Edit Galeri</h2>
 </div>
 
-<form action="{{ route('galeri.update', $galeri->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('backend.galeri.update', $galeri->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('backend.layouts.main')
 @section('title','Halaman Atlet')
 @section('navMhs', 'active')
 
@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <a href="{{ route('atlet.create') }}" class="btn btn-primary">Tambah Atlet</a>
+    <a href="{{ route('backend.atlet.create') }}" class="btn btn-primary">Tambah Atlet</a>
 
     <table class="table table-bordered mt-3">
         <thead class="table-dark text-center">
@@ -43,8 +43,8 @@
                     <td>{{ $atlet->statistik_pertandingan }}</td>
                     <td>{{ $atlet->training_record }}</td>
                     <td class="text-center">
-                        <a href="{{ route('atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <form action="{{ route('atlet.destroy', $atlet->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('backend.atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
+                        <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>

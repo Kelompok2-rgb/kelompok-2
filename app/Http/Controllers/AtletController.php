@@ -12,12 +12,12 @@ class AtletController extends Controller
     public function index()
     {
         $atlets = Atlet::all();
-        return view('atlet.index', compact('atlets'));
+        return view('backend.atlet.index', compact('atlets'));
     }
 
     public function create()
     {
-        return view('atlet.create');
+        return view('backend.atlet.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -36,13 +36,13 @@ class AtletController extends Controller
 
         Atlet::create($validated);
 
-        return redirect()->route('atlet.index')->with('success', 'Atlet berhasil ditambahkan');
+        return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $atlet = Atlet::findOrFail($id);
-        return view('atlet.edit', compact('atlet'));
+        return view('backend.atlet.edit', compact('atlet'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -58,7 +58,6 @@ class AtletController extends Controller
         ]);
 
         if ($request->hasFile('foto')) {
-            // Hapus foto lama kalau ada
             if ($atlet->foto && Storage::disk('public')->exists($atlet->foto)) {
                 Storage::disk('public')->delete($atlet->foto);
             }
@@ -67,7 +66,7 @@ class AtletController extends Controller
 
         $atlet->update($validated);
 
-        return redirect()->route('atlet.index')->with('success', 'Atlet berhasil diperbarui');
+        return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
@@ -80,6 +79,6 @@ class AtletController extends Controller
 
         $atlet->delete();
 
-        return redirect()->route('atlet.index')->with('success', 'Atlet berhasil dihapus');
+        return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil dihapus');
     }
 }

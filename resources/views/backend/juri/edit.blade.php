@@ -1,14 +1,10 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 8d7f5a308a18df9365fa9cae52e5f9e683bbb02f
-@extends('layouts.appjuri')
+@extends('backend.layouts.app')
 
 @section('content')
+  @section('content')
 <div class="container mt-4">
     <h2>Edit Juri</h2>
-    <form action="{{ route('juri.update', $juri->id) }}" method="POST">
+    <form action="{{ route('backend.juri.update', $juri->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -25,3 +21,4 @@
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
+@endsection
