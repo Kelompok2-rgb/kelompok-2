@@ -15,8 +15,12 @@ use App\Http\Controllers\{
     PertandinganController
 };
 
+Route::get('/', function () {
+    return view('frontend.index');
+});
+
 // Route untuk halaman login (halaman awal)
-Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 // Proses login & logout
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.process');
@@ -42,3 +46,5 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::resource('anggota', AnggotaController::class);
     Route::resource('pertandingan', PertandinganController::class);
 });
+
+
