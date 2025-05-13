@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('dashboard/assets/images/favicon-32x32.png') }}" type="image/png">
+    <link href="{{ asset('dashboard/assets/images/logoporlempika.png') }}" rel="icon">
 
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard/assets/plugins/simplebar/css/simplebar.css') }}">
