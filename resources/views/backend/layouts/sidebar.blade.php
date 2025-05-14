@@ -63,7 +63,7 @@
 
         <li>
             <a href="{{ route('backend.juri.index') }}">
-                <div class="parent-icon">><i class='bx bx-user-voice'></i></div>
+                <div class="parent-icon"><i class='bx bx-user-voice'></i></div>
                 <div class="menu-title">Juri</div>
             </a>
         </li>
