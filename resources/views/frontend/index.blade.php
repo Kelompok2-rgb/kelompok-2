@@ -104,25 +104,17 @@
 
         <div class="row gy-4">
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3>Voluptatem dignissimos provident laboris nisi ut aliquip ex ea commodo</h3>
+            <h3>Porlempika</h3>
             <img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid rounded-4 mb-4" alt="">
-            <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
-            <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
+            <p>Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman, kompetitif, dan menghibur. Dengan slogan "Berbeda, Bersatu, Berjaya!", federasi ini mendorong kolaborasi antar-komunitas dan atlet dari berbagai daerah. Melalui kejuaraan nasional dan pelatihan, Porlempika berkomitmen untuk meningkatkan prestasi atlet Indonesia di kancah internasional sekaligus melestarikan olahraga yang unik ini.</p>
+            
           </div>
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
             <div class="content ps-0 ps-lg-5">
-              <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.
-              </p>
-              <ul>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-              </ul>
+
+
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+                Porlempika (Perkumpulan Olahraga Lempar Pisau dan Kapak Indonesia) adalah organisasi resmi yang mewadahi olahraga lempar pisau dan kapak di Indonesia. Federasi ini dibentuk pada tahun 2017 sebagai hasil pengembangan dari komunitas D'Lempar Pisau Indonesia, yang awalnya digagas oleh mahasiswa Seni Rupa ITB pada akhir 1980-an. Porlempika bertujuan untuk memajukan olahraga ini secara profesional, termasuk mengatur regulasi, mengoordinasikan kegiatan, dan memperjuangkan pengakuan dari Komite Olahraga Nasional Indonesia (KONI). Saat ini, Porlempika memiliki jaringan luas dengan 13 Pengurus Daerah, 27 Pengurus Cabang, dan 37 klub di seluruh Indonesia.
               </p>
 
               <div class="position-relative mt-4">
@@ -149,7 +141,7 @@
               <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
               <div>
                 <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Happy Clients</p>
+                <p>Anggota</p>
               </div>
             </div>
           </div><!-- End Stats Item -->
@@ -159,7 +151,7 @@
               <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
               <div>
                 <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Projects</p>
+                <p>Klub</p>
               </div>
             </div>
           </div><!-- End Stats Item -->
@@ -169,7 +161,7 @@
               <i class="bi bi-headset color-green flex-shrink-0"></i>
               <div>
                 <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hours Of Support</p>
+                <p>Atlet</p>
               </div>
             </div>
           </div><!-- End Stats Item -->
@@ -179,7 +171,7 @@
               <i class="bi bi-people color-pink flex-shrink-0"></i>
               <div>
                 <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Hard Workers</p>
+                <p>High Score</p>
               </div>
             </div>
           </div><!-- End Stats Item -->
@@ -195,8 +187,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Featured Srvices<br></p>
+        <h2>Pisau</h2>
+        <p>Standard Competition<br></p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -213,9 +205,9 @@
                   <i class="bi bi-activity"></i>
                 </div>
                 <a href="service-details.html" class="stretched-link">
-                  <h3>Nesciunt Mete</h3>
+                  <h3>Panjang</h3>
                 </a>
-                <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis.</p>
+                <p>Panjang minimal 12 inchi (30,5cm), maksimal 16 inchi (40 cm)</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -230,9 +222,9 @@
                   <i class="bi bi-broadcast"></i>
                 </div>
                 <a href="service-details.html" class="stretched-link">
-                  <h3>Eosle Commodi</h3>
+                  <h3>Berat</h3>
                 </a>
-                <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+                <p>Berat min 200 gram....,maksimal tidak disebutkan</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -247,9 +239,9 @@
                   <i class="bi bi-easel"></i>
                 </div>
                 <a href="service-details.html" class="stretched-link">
-                  <h3>Ledo Markt</h3>
+                  <h3>Lebar</h3>
                 </a>
-                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+                <p>Lebar tidak lebih dari 7cm</p>
               </div>
             </div>
           </div><!-- End Service Item -->
