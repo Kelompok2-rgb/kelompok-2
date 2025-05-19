@@ -297,25 +297,25 @@
           <li class="nav-item col-3">
             <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
               <i class="bi bi-binoculars"></i>
-              <h4 class="d-none d-lg-block">Modi sit est dela pireda nest</h4>
+              <h4 class="d-none d-lg-block"> Precision Short Range </h4>
             </a>
           </li>
           <li class="nav-item col-3">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
               <i class="bi bi-box-seam"></i>
-              <h4 class="d-none d-lg-block">Unde praesenti mara setra le</h4>
+              <h4 class="d-none d-lg-block"> Precision Long Range </h4>
             </a>
           </li>
           <li class="nav-item col-3">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
               <i class="bi bi-brightness-high"></i>
-              <h4 class="d-none d-lg-block">Pariatur explica nitro dela</h4>
+              <h4 class="d-none d-lg-block">Precision Mix Technique </h4>
             </a>
           </li>
           <li class="nav-item col-3">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-4">
               <i class="bi bi-command"></i>
-              <h4 class="d-none d-lg-block">Nostrum qui dile node</h4>
+              <h4 class="d-none d-lg-block"> Precision Instinctive Mix Technique </h4>
             </a>
           </li>
         </ul><!-- End Tab Nav -->
@@ -325,22 +325,19 @@
           <div class="tab-pane fade active show" id="features-tab-1">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                <h3>PERATURAN KEJUARAAN OLAHRAGA LEMPAR PISAU DAN KAPAK </h3>
                 <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
+                  Tata Cara Dan Urutan Melempar 
                 </p>
                 <ul>
                   <li><i class="bi bi-check2-all"></i>
-                    <spab>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</spab>
+                    <spab>Atlet diberikan kesempatan  9 kali melempar untuk pemanasan, point tidak dihitung.</spab>
                   </li>
-                  <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit</span>.</li>
-                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span> Ketika pertandingan dimulai, Juri akan  memberikan isyarat untuk memulai melempar, berhenti melempar dan mundur ke jarak selanjutnya serta memberitahukan ronde lemparan </span>.</li>
+                  <li><i class="bi bi-check2-all"></i> <span>Ketika melempar, kaki atlet tidak boleh melewati garis jarak.</span></li>
                 </ul>
                 <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
+                  Peserta dilarang menggunakan doping dalam bentuk apapun sesuai dengan ketentuan anti doping yang diatur dalam World Anti Doping Code (the “Code”), Lembaga Anti Doping Indonesia dan peraturan Anti Doping Komite Olahraga Nasional Indonesia
                 </p>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
