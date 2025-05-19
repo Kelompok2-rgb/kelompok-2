@@ -53,7 +53,7 @@
             <ul>
               <li><a href="#">Anggota</a></li>
               <li><a href="#">Club</a></li>
-              <li><a href="{{ route('frontend.indexatlet') }}">Atlet</a></li>
+              <li><a href="#">Atlet</a></li>
               <li><a href="#">Jadwal Pertandingan</a></li>
               <li><a href="#">Hasil Pertandingan</a></li>
               <li><a href="#">Juri</a></li>
