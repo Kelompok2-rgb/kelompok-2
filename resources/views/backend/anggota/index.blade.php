@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-@section('title','Halaman Anggota')
+@section('title', 'Halaman Anggota')
 @section('navMhs', 'active')
 
 @section('content')
@@ -42,13 +42,35 @@
                 <td>{{ $anggota->kontak }}</td>
                 <td>
                     <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST"
+                        style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                        <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                     </form>
                 </td>
             </tr>
         @endforeach
     </table>
+
+    <!-- Tambahkan CDN SheetJS -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+    <!-- Tombol Export -->
+    <button onclick="exportTableToExcel()" class="btn btn-success mt-2">Export Excel (Client-Side)</button>
+
+    <script>
+        function exportTableToExcel() {
+            // Ambil elemen tabel
+            var table = document.querySelector('table');
+            var workbook = XLSX.utils.table_to_book(table, {
+                sheet: "Anggota"
+            });
+
+            // Simpan file Excel
+            XLSX.writeFile(workbook, 'anggota.xlsx');
+        }
+    </script>
+
 @endsection
