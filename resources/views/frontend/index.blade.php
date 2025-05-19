@@ -51,16 +51,16 @@
           <li><a href="#team">Team</a></li>
           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Anggota</a></li>
-              <li><a href="#">Club</a></li>
+              <li><a href="{{ route('frontend.indexanggota') }}">Anggota</a></li>
+              <li><a href="{{ route('frontend.indexclub') }}">Club</a></li>
               <li><a href="{{ route('frontend.indexatlet') }}">Atlet</a></li>
-              <li><a href="#">Jadwal Pertandingan</a></li>
-              <li><a href="#">Hasil Pertandingan</a></li>
-              <li><a href="#">Juri</a></li>
-              <li><a href="#">Pertandingan</a></li>
-              <li><a href="#">Kategori Pertandingan</a></li>
-              <li><a href="#">Galeri</a></li>
-              <li><a href="#">Pengumuman</a></li>
+              <li><a href="{{ route('frontend.indexjadwalpertandingan') }}">Jadwal Pertandingan</a></li>
+              <li><a href="{{ route('frontend.indexhasilpertandingan') }}">Hasil Pertandingan</a></li>
+              <li><a href="{{ route('frontend.indexjuri') }}">Juri</a></li>
+              <li><a href="{{ route('frontend.indexpertandingan') }}">Pertandingan</a></li>
+              <li><a href="{{ route('frontend.indexkategoripertandingan') }}">Kategori Pertandingan</a></li>
+              <li><a href="{{ route('frontend.indexgaleri') }}">Galeri</a></li>
+              <li><a href="{{ route('frontend.indexpengumuman') }}">Pengumuman</a></li>
 
 
 
