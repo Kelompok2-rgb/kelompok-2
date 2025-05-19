@@ -85,14 +85,3 @@ class AtletController extends Controller
     
 }
 
-
-class AtletController extends Controller
-{
-
-    public function index()
-    {
-        $atlets = Atlet::all();
-        return view('frontend.indexatlet', compact('atlets')); 
-  
-    }
-}
