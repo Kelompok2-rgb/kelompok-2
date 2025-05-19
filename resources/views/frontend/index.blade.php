@@ -298,6 +298,7 @@
             <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
               <i class="bi bi-binoculars"></i>
               <h4 class="d-none d-lg-block"> Precision Short Range </h4>
+              
             </a>
           </li>
           <li class="nav-item col-3">
