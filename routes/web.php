@@ -12,7 +12,8 @@ use App\Http\Controllers\{
     HasilPertandinganController,
     JadwalPertandinganController,
     KategoriPertandinganController,
-    PertandinganController
+    PertandinganController,
+    FrontendController
 };
 
 Route::get('/', function () {
@@ -46,12 +47,15 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::resource('anggota', AnggotaController::class);
     Route::resource('pertandingan', PertandinganController::class);
 });
-
-
-//     Route::name('frontend.')->group(function () {
-//     Route::get('/atlet', [AtletfrontController::class, 'index'])->name('indexatlet');
-// });
-
-
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
+
+
+   Route::name('frontend.')->group(function () {
+    Route::get('/atlet', [FrontendController::class, 'atlet'])->name('indexatlet');
+});
+
+    
+
+
+
  
