@@ -51,7 +51,17 @@ Route::get('/register', [AuthController::class, 'register'])->name('authentikasi
 
 
    Route::name('frontend.')->group(function () {
+    Route::get('/anggota', [FrontendController::class, 'anggota'])->name('indexanggota');
+    Route::get('/club', [FrontendController::class, 'club'])->name('indexclub');
     Route::get('/atlet', [FrontendController::class, 'atlet'])->name('indexatlet');
+    Route::get('/jadwalpertandingan', [FrontendController::class, 'jadwalpertandingan'])->name('indexjadwalpertandingan');
+    Route::get('/hasilpertandingan', [FrontendController::class, 'hasilpertandingan'])->name('indexhasilpertandingan');
+    Route::get('/juri', [FrontendController::class, 'juri'])->name('indexjuri');
+    Route::get('/pertandingan', [FrontendController::class, 'pertandingan'])->name('indexpertandingan');
+    Route::get('/kategoripertandingan', [FrontendController::class, 'kategoripertandingan'])->name('indexkategoripertandingan');
+    Route::get('/galeri', [FrontendController::class, 'galeri'])->name('indexgaleri');
+    Route::get('/pengumuman', [FrontendController::class, 'pengumuman'])->name('indexpengumuman');
+    
 });
 
     
