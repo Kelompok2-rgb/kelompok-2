@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -814,7 +813,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Zahadi Rizfy</h4>
                 <span>Project Manager</span>
@@ -830,7 +829,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Syarah Izzati</h4>
                 <span>UI/UX Designer</span>
@@ -846,7 +845,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Givani Arianti</h4>
                 <span>Technical Writer</span>
@@ -862,7 +861,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Davi Ahmad Yani</h4>
                 <span>Tester</span>

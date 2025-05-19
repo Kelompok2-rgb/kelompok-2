@@ -51,3 +51,7 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::name('frontend.')->group(function () {
     Route::get('/atlet', [AtletfrontController::class, 'index'])->name('indexatlet');
 });
+
+
+Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
+ 

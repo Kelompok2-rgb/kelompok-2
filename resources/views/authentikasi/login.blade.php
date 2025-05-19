@@ -88,7 +88,7 @@
 								<!-- Sign Up Link -->
 								<div class="col-12">
 									<div class="text-center">
-										<p class="mb-0">Don't have an account yet? <a href="#">Sign up here</a></p>
+										<p class="mb-0">Don't have an account yet? <a href="{{ route('authentikasi.register') }}">Sign up here</a></p>
 									</div>
 								</div>
 							</form>

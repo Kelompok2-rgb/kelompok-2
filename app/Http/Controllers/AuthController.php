@@ -50,4 +50,9 @@ class AuthController extends Controller
         // Redirect ke halaman login setelah logout
         return redirect('/');
     }
+
+     public function register()
+    {
+        return view('authentikasi.register'); 
+    }
 }
