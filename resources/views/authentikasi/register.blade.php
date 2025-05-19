@@ -30,7 +30,7 @@
 <link href="{{ asset('dashboard/assets/css/app.css') }}" rel="stylesheet">
 <link href="{{ asset('dashboard/assets/css/icons.css') }}" rel="stylesheet">
 
-	<title>Porlempika - SignUp</title>
+	<title>SignUp-Porlempika</title>
 </head>
 
 <body class="bg-theme bg-theme2">
@@ -44,10 +44,10 @@
 							<div class="card-body">
 								<div class="p-4">
 									<div class="mb-3 text-center">
-										<img src="assets/images/logo-icon.png" width="60" alt="" />
+										<img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" class="logo-icon" alt="logo icon" width="60">
 									</div>
 									<div class="text-center mb-4">
-										<h5 class="">Dashtrans Admin</h5>
+										<h5 class="">Porlempika Admin</h5>
 										<p class="mb-0">Please fill the below details to create your account</p>
 									</div>
 									<div class="form-body">
@@ -88,7 +88,8 @@
 											</div>
 											<div class="col-12">
 												<div class="text-center ">
-													<p class="mb-0">Already have an account? <a href="auth-basic-signin.html">Sign in here</a></p>
+													<p class="mb-0">Already have an account? <a href="{{ route('login') }}">Sign in here</a>
+</p>
 												</div>
 											</div>
 										</form>
@@ -153,12 +154,15 @@
 	</div>
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<!--plugins-->
-	<script src="assets/js/jquery.min.js"></script>
-	<!--Password show & hide js -->
-	<script>
-		$(document).ready(function () {
+	<!-- Bootstrap Bundle JS -->
+<script src="{{ asset('dashboard/assets/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- jQuery -->
+<script src="{{ asset('dashboard/assets/js/jquery.min.js') }}"></script>
+
+<!-- Password show & hide js -->
+<script>
+    $(document).ready(function () {
 			$("#show_hide_password a").on('click', function (event) {
 				event.preventDefault();
 				if ($('#show_hide_password input').attr("type") == "text") {
@@ -172,7 +176,7 @@
 				}
 			});
 		});
-	</script>
+</script>
 	<script>
 	$(".switcher-btn").on("click", function() {
 		$(".switcher-wrapper").toggleClass("switcher-toggled")
