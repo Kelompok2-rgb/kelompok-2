@@ -47,4 +47,11 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::resource('pertandingan', PertandinganController::class);
 });
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
+
+//     Route::name('frontend.')->group(function () {
+//     Route::get('/atlet', [AtletfrontController::class, 'index'])->name('indexatlet');
+// });
+
+
+Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
+ 

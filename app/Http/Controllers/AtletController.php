@@ -13,6 +13,7 @@ class AtletController extends Controller
     {
         $atlets = Atlet::all();
         return view('backend.atlet.index', compact('atlets'));
+
     }
 
     public function create()
@@ -81,4 +82,6 @@ class AtletController extends Controller
 
         return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil dihapus');
     }
+    
 }
+

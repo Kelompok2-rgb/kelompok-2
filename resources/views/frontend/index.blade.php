@@ -51,19 +51,19 @@
           <li><a href="#team">Team</a></li>
           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+              <li><a href="#">Anggota</a></li>
+              <li><a href="#">Club</a></li>
+              <li><a href="#">Atlet</a></li>
+              <li><a href="#">Jadwal Pertandingan</a></li>
+              <li><a href="#">Hasil Pertandingan</a></li>
+              <li><a href="#">Juri</a></li>
+              <li><a href="#">Pertandingan</a></li>
+              <li><a href="#">Kategori Pertandingan</a></li>
+              <li><a href="#">Galeri</a></li>
+              <li><a href="#">Pengumuman</a></li>
+
+
+
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
@@ -813,7 +813,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Zahadi Rizfy</h4>
                 <span>Project Manager</span>
@@ -829,7 +829,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Syarah Izzati</h4>
                 <span>UI/UX Designer</span>
@@ -845,7 +845,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Givani Arianti</h4>
                 <span>Technical Writer</span>
@@ -861,7 +861,7 @@
 
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid" alt=""></div>
+              <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Davi Ahmad Yani</h4>
                 <span>Tester</span>

@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+    @extends('backend.layouts.main')
 
 @section('content')
     <h1>Selamat datang di Dashboard</h1>
