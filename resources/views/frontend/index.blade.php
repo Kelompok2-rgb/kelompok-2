@@ -448,8 +448,9 @@
             <div class="service-item d-flex position-relative h-100">
               <i class="bi bi-briefcase icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a href="#" class="stretched-link">Lorem Ipsum</a></h4>
-                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
+                <p class="description">Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak atau 
+hewan di sekitar tempat anda berlatih.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -458,8 +459,8 @@
             <div class="service-item d-flex position-relative h-100">
               <i class="bi bi-card-checklist icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a href="#" class="stretched-link">Dolor Sitema</a></h4>
-                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
+                <p class="description">Sebuah pisau yang memiliki pegangan ideal akan lebih mudah dalam menggenggam</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -468,8 +469,9 @@
             <div class="service-item d-flex position-relative h-100">
               <i class="bi bi-bar-chart icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a href="#" class="stretched-link">Sed ut perspiciatis</a></h4>
-                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
+                <p class="description">Sebuah pisau yang memiliki berat, akan lebih mudah untuk dipegang dan dilempar
+serta menancap dengan baik.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -478,8 +480,9 @@
             <div class="service-item d-flex position-relative h-100">
               <i class="bi bi-binoculars icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a href="#" class="stretched-link">Magni Dolores</a></h4>
-                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
+                <p class="description">Pergelangan tangan Anda tetap terkunci dan mencoba untuk mendapatkan gerakan 
+secara mulus, biarkan pisau yang dipegang lepas dengan sendirinya.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -488,8 +491,10 @@
             <div class="service-item d-flex position-relative h-100">
               <i class="bi bi-brightness-high icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a href="#" class="stretched-link">Nemo Enim</a></h4>
-                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
+                <p class="description">Selalu memperhatikan pegangan, bukan titik menancapnya. Jika pisau menancap
+target dengan pegangan ke atas, bergerak maju beberapa inci. Itu menandakan terlalu 
+banyak waktu untuk berputar sebelum mencapai target.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -498,8 +503,10 @@
             <div class="service-item d-flex position-relative h-100">
               <i class="bi bi-calendar4-week icon flex-shrink-0"></i>
               <div>
-                <h4 class="title"><a href="#" class="stretched-link">Eiusmod Tempor</a></h4>
-                <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
+                <p class="description">Meski terasa alami, cobalah untuk tidak menjentikkan pergelangan tangan ketika 
+Anda melepaskan pisau. Sulit untuk melakukan itu persis sama setiap kali Anda 
+melempar.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -537,7 +544,7 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <img src="assets/images/pnp.jpg" class="testimonial-img" alt="">
                 <h3>Saul Goodman</h3>
                 <h4>Ceo &amp; Founder</h4>
                 <div class="stars">
