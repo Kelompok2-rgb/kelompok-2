@@ -17,3 +17,4 @@ class Atlet extends Model
         'training_record',
     ];
 }
+
