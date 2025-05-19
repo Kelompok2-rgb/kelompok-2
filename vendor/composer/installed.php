@@ -3,8 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-atlet
- main
+        'reference' => '229d0f66f840a73f7f866d19b5bd31de7b4547bb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -424,10 +423,8 @@ atlet
         ),
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
-            'version' => 'dev-main'
-          atlet
-            'reference' => 'fdfa2f109bb6968f50c8d68e00fb8438796b8ac1',
- main
+            'version' => 'dev-main',
+            'reference' => '229d0f66f840a73f7f866d19b5bd31de7b4547bb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
