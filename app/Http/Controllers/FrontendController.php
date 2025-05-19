@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
-class AtletfrontController extends Controller
+class FrontendController extends Controller
 {
-    public function index()
+    public function atlet()
     {
-       $atlets = Atlet::where('status', 'active')->get();
+       $atlets = Atlet::all();
         return view('frontend.indexatlet', compact('atlets'));
     } 
+    
 }
 
 
