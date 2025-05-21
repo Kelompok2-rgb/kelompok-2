@@ -51,16 +51,16 @@
           <li><a href="#team">Team</a></li>
           <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="{{ route('frontend.indexanggota') }}">Anggota</a></li>
-              <li><a href="{{ route('frontend.indexclub') }}">Club</a></li>
+              <li><a href="#">Anggota</a></li>
+              <li><a href="#">Club</a></li>
               <li><a href="{{ route('frontend.indexatlet') }}">Atlet</a></li>
-              <li><a href="{{ route('frontend.indexjadwalpertandingan') }}">Jadwal Pertandingan</a></li>
-              <li><a href="{{ route('frontend.indexhasilpertandingan') }}">Hasil Pertandingan</a></li>
-              <li><a href="{{ route('frontend.indexjuri') }}">Juri</a></li>
-              <li><a href="{{ route('frontend.indexpertandingan') }}">Pertandingan</a></li>
-              <li><a href="{{ route('frontend.indexkategoripertandingan') }}">Kategori Pertandingan</a></li>
-              <li><a href="{{ route('frontend.indexgaleri') }}">Galeri</a></li>
-              <li><a href="{{ route('frontend.indexpengumuman') }}">Pengumuman</a></li>
+              <li><a href="#">Jadwal Pertandingan</a></li>
+              <li><a href="#">Hasil Pertandingan</a></li>
+              <li><a href="#">Juri</a></li>
+              <li><a href="#">Pertandingan</a></li>
+              <li><a href="#">Kategori Pertandingan</a></li>
+              <li><a href="#">Galeri</a></li>
+              <li><a href="#">Pengumuman</a></li>
 
 
 
@@ -350,25 +350,22 @@
           <div class="tab-pane fade" id="features-tab-2">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>Neque exercitationem debitis soluta quos debitis quo mollitia officia est</h3>
+                <h3>PERATURAN KEJUARAAN OLAHRAGA LEMPAR PISAU DAN KAPAK</h3>
                 <p>
-                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum
+                  Peserta dilarang menggunakan doping dalam bentuk apapun sesuai dengan ketentuan anti doping yang diatur dalam World Anti Doping Code (the “Code”), Lembaga Anti Doping Indonesia dan peraturan Anti Doping Komite Olahraga Nasional Indonesia
                 </p>
-                <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
-                </p>
+      
                 <ul>
-                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</span></li>
-                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                  <li><i class="bi bi-check2-all"></i>
+                    <spab>Atlet diberikan kesempatan  9 kali melempar untuk pemanasan, point tidak dihitung.</spab>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span> Ketika pertandingan dimulai, Juri akan  memberikan isyarat untuk memulai melempar, berhenti melempar dan mundur ke jarak selanjutnya serta memberitahukan ronde lemparan </span>.</li>
+                  <li><i class="bi bi-check2-all"></i> <span>Ketika melempar, kaki atlet tidak boleh melewati garis jarak.</span></li>
                 </ul>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="assets/img/working-2.jpg" alt="" class="img-fluid">
+              <img src="{{ asset('frontend/assets/images/porlempika.png') }}" alt="" class="img-fluid">
+
               </div>
             </div>
           </div><!-- End Tab Content Item -->
