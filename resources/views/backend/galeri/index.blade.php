@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="text-center mb-4">
-    <h2>GALERI</h2>
+    <h2>Galeri</h2>
 </div>
 
 

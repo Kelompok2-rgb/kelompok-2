@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="text-center mb-4">
-        <h2>DAFTAR ANGGOTA</h2>
+        <h2>Anggota</h2>
     </div>
 
     @if (session('success'))
@@ -13,8 +13,21 @@
         </div>
     @endif
 
-    <a href="{{ route('backend.anggota.create') }}" class="btn btn-primary">Tambah Anggota</a>
-    <table class="table table-bordered mt-3">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="{{ route('backend.anggota.create') }}" class="btn btn-primary"
+            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
+            Tambah Anggota
+        </a>
+
+        <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
+            style="font-size: 24px; padding: 6px; height: 38px; width: 38px; display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-file-excel"></i>
+        </button>
+    </div>
+
+
+    <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
+        <thead class="table-dark">
         <tr>
             <th>No</th>
             <th>Nama</th>
@@ -25,6 +38,8 @@
             <th>Kontak</th>
             <th>Aksi</th>
         </tr>
+        </thead>
+        <tbody>
         @foreach ($anggotas as $anggota)
             <tr>
                 <td>{{ $loop->iteration }}</td>
@@ -52,25 +67,33 @@
                 </td>
             </tr>
         @endforeach
+        </tbody>
     </table>
 
-    <!-- Tambahkan CDN SheetJS -->
+    <!-- SheetJS untuk Export Excel -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-
-    <!-- Tombol Export -->
-    <button onclick="exportTableToExcel()" class="btn btn-success mt-2">Export Excel (Client-Side)</button>
-
     <script>
         function exportTableToExcel() {
-            // Ambil elemen tabel
-            var table = document.querySelector('table');
-            var workbook = XLSX.utils.table_to_book(table, {
-                sheet: "Anggota"
-            });
+    // Ambil tabel asli
+    const originalTable = document.querySelector('#tableExportArea');
 
-            // Simpan file Excel
-            XLSX.writeFile(workbook, 'anggota.xlsx');
+    // Clone tabel supaya tidak merubah tabel asli di halaman
+    const cloneTable = originalTable.cloneNode(true);
+
+    // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
+    cloneTable.querySelectorAll('tr').forEach(row => {
+        if (row.cells.length > 0) {
+            row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
         }
+    });
+
+    // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
+    const workbook = XLSX.utils.table_to_book(cloneTable, { sheet: "Anggota" });
+    XLSX.writeFile(workbook, 'anggota.xlsx');
+}
+
     </script>
+
+
 
 @endsection
