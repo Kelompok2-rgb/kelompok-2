@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/icons.css') }}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
 
 
     <title>Backend-Porlempika</title>
