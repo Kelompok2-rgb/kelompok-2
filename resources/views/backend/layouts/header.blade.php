@@ -644,7 +644,7 @@
                 <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret"
                     href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                    <img src="{{ asset('dashboard/assets/images/avatars/avatar-2.png') }}" class="user-img"
+                    <img src="{{ asset('dashboard/assets/images/logokel2.jpg') }}" class="user-img"
                         alt="user">
                     <div class="user-info">
                         <p class="user-name mb-0">Kel-2</p>

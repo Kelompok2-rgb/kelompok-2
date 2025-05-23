@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="card">
         <div class="card-header bg-light">
-            <h4 class="mb-0">Tambah Pengumuman</h4>
+            <h2>Tambah Pengumuman</h2> 
         </div>
         <div class="card-body">
             @if (session('success'))

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        Tambah Atlet
+       <h2>Tambah Atlet</h2> 
     </div>
     <div class="card-body">
         <form action="{{ route('backend.atlet.store') }}" method="POST" enctype="multipart/form-data">

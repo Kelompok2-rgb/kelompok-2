@@ -4,7 +4,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        Tambah Juri
+        <h2>Tambah Juri</h2> 
     </div>
     <div class="card-body">
         @if (session('success'))

@@ -5,7 +5,7 @@
     <div class="col-md-8">
         <div class="card shadow-sm">
             <div class="card-header bg-success text-white fw-bold">
-                Tambah Galeri
+               <h2>Tambah Galeri</h2> 
             </div>
             <div class="card-body">
 

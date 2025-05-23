@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        Tambah Kategori Pertandingan
+        <h2>Tambah Kategori Pertandingan</h2> 
     </div>
     <div class="card-body">
         @if (session('success'))
