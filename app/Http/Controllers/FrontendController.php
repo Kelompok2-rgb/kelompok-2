@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FrontendController extends Controller
 {
+    
     public function anggota()
     {
        $anggotas = Anggota::all();
