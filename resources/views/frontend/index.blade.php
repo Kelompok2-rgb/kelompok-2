@@ -443,14 +443,14 @@
 
           <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item d-flex position-relative h-100">
-              <i class="bi bi-briefcase icon flex-shrink-0"></i>
+              <i class="bi bi-card-checklist icon flex-shrink-0"></i>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                <p class="description">Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak atau 
-hewan di sekitar tempat anda berlatih.</p>
+                <p class="description">Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak atau hewan di sekitar tempat anda berlatih.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
+          
 
           <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item d-flex position-relative h-100">
@@ -467,8 +467,7 @@ hewan di sekitar tempat anda berlatih.</p>
               <i class="bi bi-bar-chart icon flex-shrink-0"></i>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                <p class="description">Sebuah pisau yang memiliki berat, akan lebih mudah untuk dipegang dan dilempar
-serta menancap dengan baik.</p>
+                <p class="description">Sebuah pisau yang memiliki berat, akan lebih mudah untuk dipegang dan dilempar serta menancap dengan baik.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -478,8 +477,7 @@ serta menancap dengan baik.</p>
               <i class="bi bi-binoculars icon flex-shrink-0"></i>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                <p class="description">Pergelangan tangan Anda tetap terkunci dan mencoba untuk mendapatkan gerakan 
-secara mulus, biarkan pisau yang dipegang lepas dengan sendirinya.</p>
+                <p class="description">Pergelangan tangan Anda tetap terkunci dan mencoba untuk mendapatkan gerakan secara mulus, biarkan pisau yang dipegang lepas dengan sendirinya.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -489,9 +487,7 @@ secara mulus, biarkan pisau yang dipegang lepas dengan sendirinya.</p>
               <i class="bi bi-brightness-high icon flex-shrink-0"></i>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                <p class="description">Selalu memperhatikan pegangan, bukan titik menancapnya. Jika pisau menancap
-target dengan pegangan ke atas, bergerak maju beberapa inci. Itu menandakan terlalu 
-banyak waktu untuk berputar sebelum mencapai target.</p>
+                <p class="description">Selalu memperhatikan pegangan, bukan titik menancapnya. Jika pisau menancaptarget dengan pegangan ke atas, bergerak maju beberapa inci. Itu menandakan terlalu banyak waktu untuk berputar sebelum mencapai target.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -501,9 +497,7 @@ banyak waktu untuk berputar sebelum mencapai target.</p>
               <i class="bi bi-calendar4-week icon flex-shrink-0"></i>
               <div>
                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                <p class="description">Meski terasa alami, cobalah untuk tidak menjentikkan pergelangan tangan ketika 
-Anda melepaskan pisau. Sulit untuk melakukan itu persis sama setiap kali Anda 
-melempar.</p>
+                <p class="description">Meski terasa alami, cobalah untuk tidak menjentikkan pergelangan tangan ketika Anda melepaskan pisau. Sulit untuk melakukan itu persis sama setiap kali Anda melempar.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
