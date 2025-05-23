@@ -90,8 +90,8 @@
         </li>
 
         <li>
-            <a href="{{ route('backend.pertandingan.index') }}">
-                <div class="parent-icon"><i class='bx bx-trophy'></i></div>
+            <a href="{{ route('backend.penyelenggara_event.index') }}">
+                <div class=""><i class='bx bx-trophy'></i></div>
                 <div class="menu-title">Penyelenggara Event</div>
             </a>
         </li>
