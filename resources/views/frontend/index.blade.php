@@ -51,18 +51,18 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="#"><span>Menu</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Anggota</a></li>
-              <li><a href="#">Club</a></li>
-              <li><a href="{{ route('frontend.indexatlet') }}">Atlet</a></li>
-              <li><a href="#">Jadwal Pertandingan</a></li>
-              <li><a href="#">Hasil Pertandingan</a></li>
-              <li><a href="#">Juri</a></li>
-              <li><a href="#">Pertandingan</a></li>
-              <li><a href="#">Kategori Pertandingan</a></li>
-              <li><a href="#">Galeri</a></li>
-              <li><a href="#">Pengumuman</a></li>
+             <li><a href="{{ route('frontend.indexanggota') }}">Anggota</a></li>
+                            <li><a href="{{ route('frontend.indexclub') }}">Club</a></li>
+                            <li><a href="{{ route('frontend.indexatlet') }}">Atlet</a></li>
+                            <li><a href="{{ route('frontend.indexjadwalpertandingan') }}">Jadwal Pertandingan</a></li>
+                            <li><a href="{{ route('frontend.indexhasilpertandingan') }}">Hasil Pertandingan</a></li>
+                            <li><a href="{{ route('frontend.indexjuri') }}">Juri</a></li>
+                            <li><a href="{{ route('frontend.indexpertandingan') }}">Pertandingan</a></li>
+                            <li><a href="{{ route('frontend.indexkategoripertandingan') }}">Kategori Pertandingan</a></li>
+                            <li><a href="{{ route('frontend.indexgaleri') }}">Galeri</a></li>
+                            <li><a href="{{ route('frontend.indexpengumuman') }}">Pengumuman</a></li>
 
 
 
@@ -97,6 +97,351 @@
       </div>
 
     </section><!-- /Hero Section -->
+
+    @isset($anggotas)
+    <section>
+        <div class="container py-4">
+            <!-- ... header tabel ... -->
+            
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr class="text-center">
+                            <th width="5%">No</th>
+                            <th>Nama</th>
+                            <th width="15%">Foto</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Peran</th>
+                            <th>Riwayat Prestasi</th>
+                            <th>Kontak</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($anggotas as $anggota)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $anggota->nama }}</td>
+                            <td class="text-center">
+                                @if($anggota->foto)
+                                    <img src="{{ asset('storage/'.$anggota->foto) }}" 
+                                         alt="{{ $anggota->nama }}" 
+                                         class="img-thumbnail"
+                                         style="max-height: 80px">
+                                @else
+                                    <span class="badge bg-secondary">Tidak ada foto</span>
+                                @endif
+                            </td>
+                            <td>{{ $anggota->tgl_lahir }}</td>
+                            <td>{{ $anggota->peran }}</td>
+                            <td>{{ $anggota->riwayat_prestasi }}</td>
+                            <td>{{ $anggota->kontak }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-4">
+                                <i class="bi bi-exclamation-circle me-2"></i> Data anggota belum tersedia
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+@endisset
+
+
+    @isset($atlets)
+    <section>
+        <div class="container py-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">DAFTAR ATLET PORLEMPIKA</h2>
+                    <hr class="w-25 mx-auto border-primary">
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr class="text-center">
+                                <th width="5%">No</th>
+                                <th>Nama Atlet</th>
+                                <th width="15%">Foto</th>
+                                <th>Prestasi</th>
+                                <th>Statistik Pertandingan</th>
+                                <th>Rekam Latihan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($atlets as $atlet)
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ $atlet->nama }}</td>
+                                <td class="text-center">
+                                    @if($atlet->foto)
+                                        <img src="{{ asset('storage/'.$atlet->foto) }}" 
+                                             alt="{{ $atlet->nama }}" 
+                                             class="img-thumbnail"
+                                             style="max-height: 80px">
+                                    @else
+                                        <span class="badge bg-secondary">No Image</span>
+                                    @endif
+                                </td>
+                                <td>{{ $atlet->prestasi ?? '-' }}</td>
+                                <td>{{ $atlet->statistik_pertandingan ?? '-' }}</td>
+                                <td>{{ $atlet->training_record ?? '-' }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    <i class="bi bi-exclamation-circle me-2"></i> Data atlet belum tersedia
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </section>
+@endisset
+
+ @isset($clubs)
+    <section>
+        <div class="container py-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">DAFTAR CLUB PORLEMPIKA</h2>
+                    <hr class="w-25 mx-auto border-primary">
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr class="text-center">
+                                <th width="5%">No</th>
+                                <th>Nama Club</th>
+                                <th>Lokasi</th>
+                                <th>Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($clubs as $club)
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ $club->nama }}</td>
+                                <td>{{ $club->lokasi }}</td>
+                                <td>{{ $club->deskripsi }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-4">
+                                    <i class="bi bi-exclamation-circle me-2"></i> Data club belum tersedia
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </section>
+@endisset
+
+
+ @isset($galeris)
+    <section>
+         <div class="container py-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">GALERI PORLEMPIKA</h2>
+                    <hr class="w-25 mx-auto border-primary">
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    @forelse ($galeris as $galeri)
+                        <div class="col" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card shadow-sm rounded-4 h-100">
+                                <img src="{{ asset('uploads/' . $galeri->gambar) }}" 
+                                     class="card-img-top" 
+                                     alt="{{ $galeri->judul }}"
+                                     style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">{{ $galeri->judul }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-12">
+                            <div class="alert alert-warning text-center py-4">
+                                <i class="bi bi-exclamation-circle me-2"></i> Belum ada data galeri
+                            </div>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+    </section>
+@endisset
+
+
+
+ @isset($hasilpertandingans)
+    <section>
+        <div class="container py-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">DATA HASIL PERTANDINGAN PORLEMPIKA</h2>
+                    <hr class="w-25 mx-auto border-primary">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr class="text-center">
+                                <th width="5%">No</th>
+                                <th>Skor</th>
+                                <th>Ranking</th>
+                                <th>Catatan Juri</th>
+                                <th>Dibuat</th>
+                                <th>Diperbarui</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($hasilpertandingans as $index => $hasil)
+                            <tr>
+                                <td class="text-center">{{ $index + 1 }}</td>
+                                <td class="text-center">{{ $hasil->skor }}</td>
+                                <td class="text-center">{{ $hasil->rangking }}</td>
+                                <td>{{ $hasil->catatan_juri }}</td>
+                                <td class="text-center">{{ $hasil->created_at->format('d-m-Y H:i') }}</td>
+                                <td class="text-center">{{ $hasil->updated_at->format('d-m-Y H:i') }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    <i class="bi bi-exclamation-circle me-2"></i> Belum ada data hasil pertandingan
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </section>
+@endisset
+
+
+@isset($jadwalpertandingans)
+    <section>
+         <div class="container py-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">JADWAL PERTANDINGAN PORLEMPIKA</h2>
+                    <hr class="w-25 mx-auto border-primary">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Lokasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($jadwalpertandingans as $jadwal)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $jadwal->tanggal }}</td>
+                                    <td>{{ $jadwal->waktu }}</td>
+                                    <td>{{ $jadwal->lokasi }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">Belum ada jadwal pertandingan</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </section>
+@endisset
+
+
+@isset($juris)
+    <section>
+        <div class="container py-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">DATA JURI PORLEMPIKA</h2>
+                    <hr class="w-25 mx-auto border-primary">
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Pengalaman</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($juris as $juri)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $juri->nama }}</td>
+                                    <td>{{ $juri->pengalaman }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center">Belum ada data juri</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+    </section>
+@endisset
+
+
+@isset($kategoripertandingans)
+    <section>
+                    <div class="container py-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">KATEGORI PERTANDINGAN PORLEMPIKA</h2>
+                    <hr class="w-25 mx-auto border-primary">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kategori</th>
+                                <th>Aturan</th>
+                                <th>Batasan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($kategoripertandingans as $index => $kategori)
+                                <tr>
+                                    <td class="text-center">{{ $index + 1 }}</td>
+                                    <td>{{ $kategori->nama }}</td>
+                                    <td>{{ $kategori->aturan }}</td>
+                                    <td>{{ $kategori->batasan }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">Belum ada kategori pertandingan</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+    </section>
+@endisset
+
 
     <!-- About Section -->
     <section id="about" class="about section">
