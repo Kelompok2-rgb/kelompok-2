@@ -13,6 +13,7 @@ use App\Http\Controllers\{
     JadwalPertandinganController,
     KategoriPertandinganController,
     PertandinganController,
+    PenyelenggaraEventController,
     FrontendController
 };
 
@@ -46,6 +47,8 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::resource('pengumuman', PengumumanController::class);
     Route::resource('anggota', AnggotaController::class);
     Route::resource('pertandingan', PertandinganController::class);
+    Route::resource('penyelenggara_event', PenyelenggaraEventController::class);
+
 });
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
 
