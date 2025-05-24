@@ -27,8 +27,7 @@ class AtletController extends Controller
             'nama' => 'required|string|max:255',
             'foto' => 'nullable|image|max:2048',
             'prestasi' => 'nullable|string',
-            'statistik_pertandingan' => 'nullable|string',
-            'training_record' => 'nullable|string',
+            'rekap Latihan' => 'nullable|string',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -54,8 +53,8 @@ class AtletController extends Controller
             'nama' => 'required|string|max:255',
             'foto' => 'nullable|image|max:2048',
             'prestasi' => 'nullable|string',
-            'statistik_pertandingan' => 'nullable|string',
-            'training_record' => 'nullable|string',
+
+            'rekap latihan' => 'nullable|string',
         ]);
 
         if ($request->hasFile('foto')) {

@@ -26,12 +26,7 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Statistik Pertandingan:</label>
-            <textarea name="statistik_pertandingan" class="form-control">{{ $atlet->statistik_pertandingan }}</textarea>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Training Record:</label>
+            <label class="form-label">rekap Latihan:</label>
             <textarea name="training_record" class="form-control">{{ $atlet->training_record }}</textarea>
         </div>
 
