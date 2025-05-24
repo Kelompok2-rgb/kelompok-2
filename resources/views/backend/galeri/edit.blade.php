@@ -24,7 +24,12 @@
         <img src="{{ asset('uploads/' . $galeri->gambar) }}" width="150" alt="{{ $galeri->judul }}">
     </div>
 
+    <div class="mb-3">
+        <label for="deskripsi" class="form-label">Deskripsi</label>
+        <textarea name="deskripsi" id="deskripsi" class="form-control" rows="4" placeholder="Tambahkan deskripsi...">{{ old('deskripsi', $galeri->deskripsi) }}</textarea>
+    </div>
+
     <button type="submit" class="btn btn-primary">Update</button>
-    <a href="{{ route('galeri.index') }}" class="btn btn-secondary">Batal</a>
+    <a href="{{ route('backend.galeri.index') }}" class="btn btn-secondary">Batal</a>
 </form>
 @endsection

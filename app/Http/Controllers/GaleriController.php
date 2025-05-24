@@ -24,6 +24,7 @@ class GaleriController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -32,6 +33,7 @@ class GaleriController extends Controller
 
         Galeri::create([
             'judul' => $validated['judul'],
+            'deskripsi' => $validated['deskripsi'] ?? null,
             'gambar' => $fileName,
         ]);
 
@@ -50,10 +52,12 @@ class GaleriController extends Controller
 
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $galeri->judul = $validated['judul'];
+        $galeri->deskripsi = $validated['deskripsi'] ?? $galeri->deskripsi;
 
         if ($request->hasFile('gambar')) {
             $oldPath = public_path('uploads/' . $galeri->gambar);
