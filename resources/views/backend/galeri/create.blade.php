@@ -11,8 +11,8 @@
 
                 @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            
+                @endif
+
                 <form action="{{ route('backend.galeri.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -24,6 +24,11 @@
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
                         <input type="file" name="gambar" id="gambar" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea name="deskripsi" id="deskripsi" class="form-control" rows="4" placeholder="Tambahkan deskripsi...">{{ old('deskripsi') }}</textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Simpan</button>

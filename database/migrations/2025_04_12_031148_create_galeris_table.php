@@ -11,6 +11,7 @@ public function up()
     Schema::create('galeris', function (Blueprint $table) {
         $table->id();
         $table->string('judul');
+        $table->text('deskripsi')->nullable();
         $table->string('gambar');
         $table->timestamps();
     });
@@ -22,6 +23,3 @@ public function up()
         Schema::dropIfExists('galeris');
     }
 }
-
-
-
