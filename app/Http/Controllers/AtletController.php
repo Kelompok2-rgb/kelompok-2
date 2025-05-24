@@ -21,54 +21,47 @@ class AtletController extends Controller
         return view('backend.atlet.create');
     }
 
-    public function store(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|max:2048',
-            'prestasi' => 'nullable|string',
-            'statistik_pertandingan' => 'nullable|string',
-            'training_record' => 'nullable|string',
-        ]);
+   public function store(Request $request): RedirectResponse
+{
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'foto' => 'nullable|image|max:2048',
+        'prestasi' => 'nullable|string',
+        'training_record' => 'nullable|string', // <- diperbaiki
+    ]);
 
-        if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('foto', 'public');
+    if ($request->hasFile('foto')) {
+        $validated['foto'] = $request->file('foto')->store('foto', 'public');
+    }
+
+    Atlet::create($validated);
+
+    return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil ditambahkan');
+}
+
+public function update(Request $request, $id): RedirectResponse
+{
+    $atlet = Atlet::findOrFail($id);
+
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'foto' => 'nullable|image|max:2048',
+        'prestasi' => 'nullable|string',
+        'training_record' => 'nullable|string', // <- diperbaiki
+    ]);
+
+    if ($request->hasFile('foto')) {
+        if ($atlet->foto && Storage::disk('public')->exists($atlet->foto)) {
+            Storage::disk('public')->delete($atlet->foto);
         }
-
-        Atlet::create($validated);
-
-        return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil ditambahkan');
+        $validated['foto'] = $request->file('foto')->store('foto', 'public');
     }
 
-    public function edit($id)
-    {
-        $atlet = Atlet::findOrFail($id);
-        return view('backend.atlet.edit', compact('atlet'));
-    }
+    $atlet->update($validated);
 
-    public function update(Request $request, $id): RedirectResponse
-    {
-        $atlet = Atlet::findOrFail($id);
+    return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil diperbarui');
+}
 
-        $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|max:2048',
-            'prestasi' => 'nullable|string',
-            'statistik_pertandingan' => 'nullable|string',
-            'training_record' => 'nullable|string',
-        ]);
-
-        if ($request->hasFile('foto')) {
-            if ($atlet->foto && Storage::disk('public')->exists($atlet->foto)) {
-                Storage::disk('public')->delete($atlet->foto);
-            }
-            $validated['foto'] = $request->file('foto')->store('foto', 'public');
-        }
-
-        $atlet->update($validated);
-
-        return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil diperbarui');
-    }
 
     public function destroy($id): RedirectResponse
     {

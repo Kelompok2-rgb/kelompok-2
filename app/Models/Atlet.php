@@ -13,8 +13,7 @@ class Atlet extends Model
         'nama',
         'foto',
         'prestasi',
-        'statistik_pertandingan',
-        'training_record',
+        'rekap Latihan',
     ];
 }
 

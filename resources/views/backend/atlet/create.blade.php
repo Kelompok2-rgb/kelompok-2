@@ -29,13 +29,9 @@
                 <textarea class="form-control" id="prestasi" name="prestasi">{{ old('prestasi') }}</textarea>
             </div>
 
-            <div class="mb-3">
-                <label for="statistik_pertandingan" class="form-label">Statistik Pertandingan</label>
-                <textarea class="form-control" id="statistik_pertandingan" name="statistik_pertandingan">{{ old('statistik_pertandingan') }}</textarea>
-            </div>
 
             <div class="mb-3">
-                <label for="training_record" class="form-label">Training Record</label>
+                <label for="training_record" class="form-label">rekap Latihan</label>
                 <textarea class="form-control" id="training_record" name="training_record">{{ old('training_record') }}</textarea>
             </div>
 
