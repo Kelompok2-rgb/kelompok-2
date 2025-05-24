@@ -24,6 +24,7 @@
             <i class="fa-solid fa-file-excel"></i>
         </button>
     </div>
+
     <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
         <thead class="table-dark">
             <tr>
@@ -35,7 +36,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pengumumans as $item)
+            @forelse ($pengumumans as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->judul }}</td>
@@ -50,28 +51,27 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center">Belum ada data pengumuman</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 
-     <!-- SheetJS untuk Export Excel -->
+    <!-- SheetJS untuk Export Excel -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script>
         function exportTableToExcel() {
-            // Ambil tabel asli
             const originalTable = document.querySelector('#tableExportArea');
-
-            // Clone tabel supaya tidak merubah tabel asli di halaman
             const cloneTable = originalTable.cloneNode(true);
 
-            // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
             cloneTable.querySelectorAll('tr').forEach(row => {
                 if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
+                    row.deleteCell(row.cells.length - 1);
                 }
             });
 
-            // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
             const workbook = XLSX.utils.table_to_book(cloneTable, {
                 sheet: "Pengumuman"
             });
