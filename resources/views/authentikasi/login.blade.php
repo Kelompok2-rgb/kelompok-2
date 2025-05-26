@@ -93,18 +93,6 @@
 								</div>
 							</form>
 							<!-- End Form login -->
-
-							<div class="login-separater text-center mb-5">
-								<span>OR SIGN IN WITH</span>
-								<hr>
-							</div>
-							
-							<div class="list-inline contacts-social text-center">
-								<a href="javascript:;" class="list-inline-item bg-light text-white border-0 rounded-3"><i class="bx bxl-facebook"></i></a>
-								<a href="javascript:;" class="list-inline-item bg-light text-white border-0 rounded-3"><i class="bx bxl-twitter"></i></a>
-								<a href="javascript:;" class="list-inline-item bg-light text-white border-0 rounded-3"><i class="bx bxl-google"></i></a>
-								<a href="javascript:;" class="list-inline-item bg-light text-white border-0 rounded-3"><i class="bx bxl-linkedin"></i></a>
-							</div>
 						</div>
 					</div>
 				</div>

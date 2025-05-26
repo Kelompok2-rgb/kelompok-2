@@ -1,6 +1,7 @@
 @extends('frontend.index')
 
 @section('content')
+<section id="galeri">
             <div class="container py-4">
                 <div class="text-center mb-4">
                     <h2 class="fw-bold">GALERI PORLEMPIKA</h2>
@@ -29,4 +30,5 @@
                     @endforelse
                 </div>
             </div>
+            </section>
 @endsection
