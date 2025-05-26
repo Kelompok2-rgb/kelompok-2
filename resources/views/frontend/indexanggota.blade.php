@@ -1,6 +1,7 @@
 @extends('frontend.index')
 
 @section('content')
+<section id="anggota">
     <div class="container py-4">
         <div class="text-center mb-4">
             <h2 class="fw-bold">DAFTAR ANGGOTA PORLEMPIKA</h2>
@@ -51,4 +52,5 @@
             </table>
         </div>
     </div>
+    </section>
 @endsection
