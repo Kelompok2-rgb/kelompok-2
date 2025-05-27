@@ -27,7 +27,7 @@
 
         <div class="mb-3">
             <label class="form-label">rekap Latihan:</label>
-            <textarea name="training_record" class="form-control">{{ $atlet->training_record }}</textarea>
+            <textarea name="rekap_latihan" class="form-control">{{ $atlet->rekap_latihan }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
