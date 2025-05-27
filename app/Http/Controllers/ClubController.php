@@ -24,7 +24,7 @@ class ClubController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|min:2|max:255',
             'lokasi' => 'required|string|min:2|max:255',
-            'deskripsi' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:255',
         ]);
 
         Club::create($validated);
@@ -45,7 +45,7 @@ class ClubController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|min:2|max:255',
             'lokasi' => 'required|string|min:2|max:255',
-            'deskripsi' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:255',
         ]);
 
         $club->update($validated);

@@ -21,8 +21,10 @@ class PertandinganController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tanggal' => 'required|date',
             'lokasi'  => 'required|string|min:2|max:255',
+            'nama_pertandingan'  => 'required|string|min:2|max:255',
+            'nama_penyelenggara'  => 'required|string|min:2|max:255',
+            'tanggal' => 'required|date',
         ]);
 
         Pertandingan::create($validated);
@@ -40,8 +42,10 @@ class PertandinganController extends Controller
         $pertandingan = Pertandingan::findOrFail($id);
 
         $validated = $request->validate([
-            'tanggal' => 'required|date',
             'lokasi'  => 'required|string|min:2|max:255',
+            'nama_pertandingan'  => 'required|string|min:2|max:255',
+            'nama_penyelenggara'  => 'required|string|min:2|max:255',
+            'tanggal' => 'required|date',
         ]);
 
         $pertandingan->update($validated);

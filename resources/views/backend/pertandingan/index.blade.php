@@ -1,5 +1,5 @@
 @extends('backend.layouts.main')
-@section('title','Halaman Pertandingan')
+@section('title', 'Halaman Pertandingan')
 @section('navMhs', 'active')
 
 @section('content')
@@ -26,32 +26,44 @@
     </div>
     <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
         <thead class="table-dark">
-        <tr>
-            <th>No</th>
-            <th>Lokasi</th>
-            <th>Tanggal</th>
-            <th>Aksi</th>
-        </tr>
+            <tr>
+                <th>No</th>
+                <th>Nama Pertandingan</th>
+                <th>Nama Penyelenggara</th>
+                <th>Lokasi</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach ($pertandingans as $pertandingan)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $pertandingan->lokasi }}</td>
-                <td>{{ $pertandingan->tanggal }}</td>
-                <td>
-                    <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
+            @forelse ($pertandingans as $pertandingan)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $pertandingan->lokasi }}</td>
+                    <td>{{ $pertandingan->nama_pertandingan }}</td>
+                    <td>{{ $pertandingan->nama_penyelenggara }}</td>
+                    <td>{{ $pertandingan->tanggal }}</td>
+                    <td>
+                        <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}"
+                            class="btn btn-warning">Edit</a>
+                        <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST"
+                            style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="text-center">Belum ada data pertandingan</td>
+                </tr>
+            @endforelse
         </tbody>
+
     </table>
-     <!-- SheetJS untuk Export Excel -->
+    <!-- SheetJS untuk Export Excel -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script>
         function exportTableToExcel() {

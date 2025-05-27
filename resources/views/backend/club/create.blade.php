@@ -32,7 +32,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
                     <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="4">{{ old('deskripsi', $club->deskripsi ?? '') }}</textarea>
                     @error('deskripsi')

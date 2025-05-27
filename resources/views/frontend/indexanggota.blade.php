@@ -47,6 +47,10 @@
                             <i class="bi bi-exclamation-circle me-2"></i> Data anggota belum tersedia
                         </td>
                     </tr>
+                     @empty
+                <tr>
+                    <td colspan="7" class="text-center">Belum ada data anggota</td>
+                </tr>
                     @endforelse
                 </tbody>
             </table>

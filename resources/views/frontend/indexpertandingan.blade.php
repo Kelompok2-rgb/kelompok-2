@@ -8,25 +8,34 @@
                 <hr class="w-25 mx-auto border-primary">
             </div>
 
-         
+
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead class="table-dark text-center">
                         <tr>
                             <th>No</th>
+                            <th>Nama Pertandingan</th>
+                            <th>Nama Penyelenggara</th>
                             <th>Lokasi</th>
                             <th>Tanggal</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pertandingans as $pertandingan)
+                        @forelse ($pertandingans as $pertandingan)
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $pertandingan->lokasi }}</td>
+                                <td>{{ $pertandingan->nama_pertandingan }}</td>
+                                <td>{{ $pertandingan->nama_penyelenggara }}</td>
                                 <td>{{ $pertandingan->tanggal }}</td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center">Belum ada data pertandingan</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
