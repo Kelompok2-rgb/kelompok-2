@@ -31,8 +31,8 @@
 
 
             <div class="mb-3">
-                <label for="training_record" class="form-label">rekap Latihan</label>
-                <textarea class="form-control" id="training_record" name="training_record">{{ old('training_record') }}</textarea>
+                <label for="rekap_latihan" class="form-label">rekap Latihan</label>
+                <textarea class="form-control" id="rekap_latihan" name="rekap_latihan">{{ old('rekap_latihan') }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Simpan</button>
