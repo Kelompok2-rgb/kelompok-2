@@ -4,7 +4,7 @@
 <section id="club">
             <div class="container py-4">
                 <div class="text-center mb-4">
-                    <h2 class="fw-bold">DAFTAR CLUB PORLEMPIKA</h2>
+                    <h2 class="fw-bold">DAFTAR KLUB PORLEMPIKA</h2>
                     <hr class="w-25 mx-auto border-primary">
                 </div>
 
@@ -14,7 +14,7 @@
                         <thead class="table-dark">
                             <tr class="text-center">
                                 <th width="5%">No</th>
-                                <th>Nama Club</th>
+                                <th>Nama Klub</th>
                                 <th>Lokasi</th>
                                 <th>Deskripsi</th>
                             </tr>
@@ -30,7 +30,7 @@
                             @empty
                             <tr>
                                 <td colspan="4" class="text-center text-muted py-4">
-                                    <i class="bi bi-exclamation-circle me-2"></i> Data club belum tersedia
+                                    <i class="bi bi-exclamation-circle me-2"></i> Data klub belum tersedia
                                 </td>
                             </tr>
                             @endforelse

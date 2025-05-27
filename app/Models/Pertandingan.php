@@ -10,7 +10,9 @@ class Pertandingan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'lokasi',
         'tanggal',
-        'lokasi'
+        'nama_pertandingan',
+        'nama_penyelenggara'
     ];
 }

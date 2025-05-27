@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="text-center mb-4">
-        <h2>Club</h2>
+        <h2>Klub</h2>
     </div>
     
     @if (session('success'))
@@ -16,7 +16,7 @@
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.club.create') }}" class="btn btn-primary"
             style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
-            Tambah Club
+            Tambah Klub
         </a>
 
         <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
@@ -28,14 +28,14 @@
         <thead class="table-dark">
         <tr>
             <th>No</th>
-            <th>Nama Club</th>
+            <th>Nama Klub</th>
             <th>Lokasi</th>
             <th>Deskripsi</th>
             <th>Aksi</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($clubs as $club)
+        @forelse ($clubs as $club)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $club->nama }}</td>
@@ -51,7 +51,11 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @empty
+                <tr>
+                    <td colspan="7" class="text-center">Data klub belum tersedia</td>
+                </tr>
+        @endforelse
         </tbody>
     </table>
      <!-- SheetJS untuk Export Excel -->
