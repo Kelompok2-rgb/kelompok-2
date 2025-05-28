@@ -34,7 +34,7 @@ class JuriController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'tgl_lahir' => 'required|date',
-            'sertifikat' => 'nullable|pdf|max:2048',
+            'sertifikat' => 'required|mimes:pdf|max:2048',
         ]);
 
         // Menambahkan juri baru
@@ -64,7 +64,7 @@ class JuriController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'tgl_lahir' => 'required|date',
-            'sertifikat' => 'nullable|pdf|max:2048',
+            'sertifikat' => 'required|mimes:pdf|max:2048',
         ]);
 
         // Memperbarui data juri

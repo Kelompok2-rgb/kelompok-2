@@ -53,7 +53,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="text-center">Belum ada data juri</td>
+                    <td colspan="5" class="text-center">Belum ada data juri</td>
                 </tr>
             @endforelse
         </tbody>
