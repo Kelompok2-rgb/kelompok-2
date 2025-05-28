@@ -15,7 +15,10 @@ return new class extends Migration
 
         $table->id();
         $table->string('nama');
-        $table->string('pengalaman');
+        $table->date('tanggal_lahir');
+        $table->string('sertifikat');
+        
+       
         $table->timestamps();
     });
 }

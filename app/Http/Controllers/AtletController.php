@@ -83,4 +83,3 @@ class AtletController extends Controller
     }
     
 }
-

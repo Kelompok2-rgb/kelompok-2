@@ -11,6 +11,7 @@ class Juri extends Model
 
     protected $fillable = [
         'nama',
-        'pengalaman',
+        'tgl_lahir', 
+        'sertifikat',
     ];
 }

@@ -29,7 +29,8 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Pengalaman</th>
+                <th>Tanggal Lahir</th>
+                <th>Sertifikat</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -38,7 +39,9 @@
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $juri->nama }}</td>
-                    <td>{{ $juri->pengalaman }}</td>
+                    <td>{{ $juri->tanggal_lahir }}</td>
+                    <td>{{ $juri->Sertifikat }}</td>
+
                     <td class="text-center">
                         <a href="{{ route('backend.juri.edit', $juri->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
                         <form action="{{ route('backend.juri.destroy', $juri->id) }}" method="POST" class="d-inline">
