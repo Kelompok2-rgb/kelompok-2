@@ -17,9 +17,7 @@ return new class extends Migration
         $table->string('nama');
         $table->string('foto');
         $table->string('prestasi');
-        $table->string('statistik_pertandingan');
-        $table->string('training_record');
-        $table->timestamps();
+        $table->string('rekap_latihan');
     });
 }
 
