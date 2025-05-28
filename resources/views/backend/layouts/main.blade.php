@@ -34,7 +34,7 @@
 
     <style>
         .foto-hover.enlarged {
-            transform: scale(10);
+            transform: scale(5);
             /* bisa disesuaikan */
             z-index: 999;
             position: relative;

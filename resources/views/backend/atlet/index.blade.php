@@ -42,7 +42,7 @@
                     <td>{{ $atlet->nama }}</td>
                     <td class="text-center">
                         @if ($atlet->foto)
-                            <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" width="60" class="img-thumbnail">
+                            <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" width="60" class="foto-hover" width="60" style="transition: transform 0.5s;">
                         @else
                             Tidak ada foto
                         @endif
