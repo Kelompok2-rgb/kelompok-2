@@ -37,8 +37,8 @@
             <input type="text" name="lokasi" class="form-control" value="{{ old('lokasi', $penyelenggara_event->lokasi) }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('backend.penyelenggara_event.index') }}" class="btn btn-secondary">Kembali</a>
+         <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="reset" class="btn btn-warning">Reset</button>
     </form>
 </div>
 @endsection

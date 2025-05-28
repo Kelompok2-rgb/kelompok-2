@@ -13,7 +13,7 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Foto (opsional):</label><br>
+            <label class="form-label">Foto :</label><br>
             @if ($atlet->foto)
                 <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" style="max-width: 100px;"><br>
             @endif
@@ -30,7 +30,8 @@
             <textarea name="rekap_latihan" class="form-control">{{ $atlet->rekap_latihan }}</textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+       <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
     </form>
 </div>
 
