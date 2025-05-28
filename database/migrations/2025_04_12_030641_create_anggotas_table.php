@@ -15,9 +15,9 @@ return new class extends Migration
         $table->id();
         $table->string('nama');
         $table->string('foto');
-        $table->string('tgl_lahir');
+        $table->date('tgl_lahir');
         $table->string('peran');
-        $table->string('riwayat_prestasi');
+        $table->text('riwayat_prestasi')->nullable();
         $table->string('kontak');
         $table->timestamps();
     });

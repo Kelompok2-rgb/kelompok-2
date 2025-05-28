@@ -24,11 +24,11 @@ class AnggotaController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'tgl_lahir' => 'required|date',
-            'peran' => 'required|string|max:255',
+            'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
             'riwayat_prestasi' => 'nullable|string',
-            'kontak' => 'nullable|string|max:255',
+            'kontak' => 'required|digits_between:8,15',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -52,11 +52,11 @@ class AnggotaController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'tgl_lahir' => 'required|date',
-            'peran' => 'required|string|max:255',
+            'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
             'riwayat_prestasi' => 'nullable|string',
-            'kontak' => 'nullable|string|max:255',
+            'kontak' => 'required|digits_between:8,15',
         ]);
 
         if ($request->hasFile('foto')) {
