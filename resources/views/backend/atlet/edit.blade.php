@@ -1,4 +1,5 @@
 @extends('backend.layouts.app')
+
 @section('content')
 <div class="container mt-4">
     <h2>Edit Atlet</h2>
@@ -25,11 +26,12 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Rekap Latihan:</label>
+            <label class="form-label">rekap Latihan:</label>
             <textarea name="rekap_latihan" class="form-control">{{ $atlet->rekap_latihan }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
+
 @endsection

@@ -40,7 +40,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($anggotas as $anggota)
+        @forelse ($anggotas as $anggota)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $anggota->nama }}</td>
@@ -66,7 +66,11 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+             @empty
+                <tr>
+                    <td colspan="8" class="text-center">Belum ada data anggota</td>
+                </tr>
+        @endforelse
         </tbody>
     </table>
 

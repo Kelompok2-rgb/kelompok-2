@@ -48,7 +48,7 @@
                         @endif
                     </td>
                     <td>{{ $atlet->prestasi }}</td>
-                    <td>{{ $atlet->rekap_Latihan }}</td>
+                    <td>{{ $atlet->rekap_latihan }}</td>
                     <td class="text-center">
                         <a href="{{ route('backend.atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
                         <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" class="d-inline">

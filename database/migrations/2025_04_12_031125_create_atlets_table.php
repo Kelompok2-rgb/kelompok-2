@@ -18,6 +18,8 @@ return new class extends Migration
         $table->string('foto');
         $table->string('prestasi');
         $table->string('rekap_latihan');
+        
+        $table->timestamps();
     });
 }
 
@@ -29,8 +31,3 @@ return new class extends Migration
         Schema::dropIfExists('atlets');
     }
 };
-
-
-
-
-
