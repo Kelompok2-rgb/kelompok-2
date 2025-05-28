@@ -32,6 +32,17 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
+    <style>
+        .foto-hover.enlarged {
+            transform: scale(10);
+            /* bisa disesuaikan */
+            z-index: 999;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+
+        }
+    </style>
+
 
 
 
@@ -48,7 +59,7 @@
         <!--end sidebar wrapper -->
 
         <!--start header -->
-       @include('backend.layouts.header')
+        @include('backend.layouts.header')
         <!--end header -->
 
         <!--start page wrapper -->
@@ -57,11 +68,11 @@
 
                 <div class="card radius-10">
                     <div class="card-body">
-                        
-                            <div>
-                                @yield('content')
-                            </div>
-                        
+
+                        <div>
+                            @yield('content')
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -73,7 +84,7 @@
         <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
                 class='bx bxs-up-arrow-alt'></i></a>
         <!--End Back To Top Button-->
-       
+
     </div>
     <!--end wrapper-->
     <!--start switcher-->
@@ -145,6 +156,26 @@
 
             new PerfectScrollbar('.product-list');
             new PerfectScrollbar('.customers-list');
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.foto-hover');
+
+            images.forEach(img => {
+                let timer;
+
+                img.addEventListener('mouseenter', () => {
+                    timer = setTimeout(() => {
+                        img.classList.add('enlarged');
+                    }, 1000); // tunggu 1 detik
+                });
+
+                img.addEventListener('mouseleave', () => {
+                    clearTimeout(timer); // batalkan jika belum 3 detik
+                    img.classList.remove('enlarged'); // kecilkan kembali
+                });
+            });
         });
     </script>
 

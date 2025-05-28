@@ -32,6 +32,23 @@
     <link href="{{ asset('frontend/assets/css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+    <style>
+        .anggota-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .anggota-img.enlarged {
+            transform: scale(3);
+            z-index: 999;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 1);
+        }
+    </style>
+
 
 </head>
 
@@ -59,11 +76,14 @@
                             <li><a href="{{ route('frontend.indexanggota') }}#anggota">Anggota</a></li>
                             <li><a href="{{ route('frontend.indexclub') }}#club">Club</a></li>
                             <li><a href="{{ route('frontend.indexatlet') }}#atlet">Atlet</a></li>
-                            <li><a href="{{ route('frontend.indexjadwalpertandingan') }}#jadwal_pertandingan">Jadwal Pertandingan</a></li>
-                            <li><a href="{{ route('frontend.indexhasilpertandingan') }}#hasil_pertandingan">Hasil Pertandingan</a></li>
+                            <li><a href="{{ route('frontend.indexjadwalpertandingan') }}#jadwal_pertandingan">Jadwal
+                                    Pertandingan</a></li>
+                            <li><a href="{{ route('frontend.indexhasilpertandingan') }}#hasil_pertandingan">Hasil
+                                    Pertandingan</a></li>
                             <li><a href="{{ route('frontend.indexjuri') }}#juri">Juri</a></li>
                             <li><a href="{{ route('frontend.indexpertandingan') }}#pertandingan">Pertandingan</a></li>
-                            <li><a href="{{ route('frontend.indexkategoripertandingan') }}#kategori_pertandingan">Kategori Pertandingan</a>
+                            <li><a href="{{ route('frontend.indexkategoripertandingan') }}#kategori_pertandingan">Kategori
+                                    Pertandingan</a>
                             </li>
                             <li><a href="{{ route('frontend.indexgaleri') }}#galeri">Galeri</a></li>
                             <li><a href="{{ route('frontend.indexpengumuman') }}#pengumuman">Pengumuman</a></li>
@@ -105,7 +125,7 @@
 
         </section><!-- /Hero Section -->
 
-        <div>
+        <div class="container py-5">
             @yield('content')
         </div>
 
@@ -1197,6 +1217,26 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.foto-hover');
+
+            images.forEach(img => {
+                let timer;
+
+                img.addEventListener('mouseenter', () => {
+                    timer = setTimeout(() => {
+                        img.classList.add('enlarged');
+                    }, 1000); // tunggu 1 detik
+                });
+
+                img.addEventListener('mouseleave', () => {
+                    clearTimeout(timer); // batalkan jika belum 3 detik
+                    img.classList.remove('enlarged'); // kecilkan kembali
+                });
+            });
+        });
+    </script>
 
 </body>
 

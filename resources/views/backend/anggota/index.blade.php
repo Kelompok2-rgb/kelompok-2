@@ -35,7 +35,7 @@
             <th>Tanggal Lahir</th>
             <th>Peran</th>
             <th>Riwayat Prestasi</th>
-            <th>Kontak</th>
+            <th>Nomor WA</th>
             <th>Aksi</th>
         </tr>
         </thead>
@@ -46,7 +46,8 @@
                 <td>{{ $anggota->nama }}</td>
                 <td>
                     @if ($anggota->foto)
-                        <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto" width="70">
+                        <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto" width="70"
+                        class="foto-hover" width="60" style="transition: transform 0.5s;">
                     @else
                         <span>Tidak ada foto</span>
                     @endif
