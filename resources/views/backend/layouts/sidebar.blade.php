@@ -20,7 +20,7 @@
         </li>
 
         <li>
-           <a href="{{ route('backend.anggota.index') }}">
+            <a href="{{ route('backend.anggota.index') }}">
                 <div class="parent-icon"><i class='bx bx-user'></i></i></div>
                 <div class="menu-title">Anggota</div>
             </a>
@@ -91,12 +91,12 @@
 
         <li>
             <a href="{{ route('backend.penyelenggara_event.index') }}">
-                <div class=""><i class='bx bx-trophy'></i></div>
+                <div class=""><i class='bx bx-briefcase'></i></div>
                 <div class="menu-title">Penyelenggara Event</div>
             </a>
         </li>
-       
-       
+
+
     </ul>
     <!--end navigation-->
 </div>

@@ -137,11 +137,11 @@
             <div class="container">
 
                 <div class="row gy-4">
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100" >
                         <h3>Porlempika</h3>
                         <img src="{{ asset('frontend/assets/images/porlempika.png') }}"
                             class="img-fluid rounded-4 mb-4" alt="">
-                        <p>Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman,
+                        <p >Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman,
                             kompetitif, dan menghibur. Dengan slogan "Berbeda, Bersatu, Berjaya!", federasi ini
                             mendorong kolaborasi antar-komunitas dan atlet dari berbagai daerah. Melalui kejuaraan
                             nasional dan pelatihan, Porlempika berkomitmen untuk meningkatkan prestasi atlet Indonesia
