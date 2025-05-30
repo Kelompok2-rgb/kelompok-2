@@ -36,7 +36,11 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         return view('backend.index'); // Pastikan ada file resources/views/backend/index.blade.php
     })->name('dashboard'); // Nama route untuk dashboard
 
+
     // Resource routes untuk controller di backend
+    Route::get('/admin-dashboard', function () {
+    return view('backend.dashboard.dashboard');
+})->name('admin.dashboard');
     Route::resource('atlet', AtletController::class);
     Route::resource('juri', JuriController::class);
     Route::resource('hasil_pertandingan', HasilPertandinganController::class);

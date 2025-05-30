@@ -45,7 +45,7 @@
 								<!-- Email Input -->
 								<div class="col-12">
 									<label for="inputEmailAddress" class="form-label">Email</label>
-									<input type="email" class="form-control @error('email') is-invalid @enderror" id="inputEmailAddress" name="email" placeholder="jhon@example.com" value="{{ old('email') }}" required autofocus>
+									<input type="email" class="form-control @error('email') is-invalid @enderror" id="inputEmailAddress" name="email" placeholder="Porlempika@gmail.com" value="{{ old('email') }}" required autofocus>
 									@error('email')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>

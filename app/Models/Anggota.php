@@ -12,6 +12,7 @@ class Anggota extends Model
     protected $fillable = [
         'nama',
         'foto',
+        'klub',
         'tgl_lahir',
         'peran',
         'riwayat_prestasi',

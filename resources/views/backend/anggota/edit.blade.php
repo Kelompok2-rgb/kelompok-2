@@ -39,6 +39,15 @@
             </div>
 
             <div class="mb-3">
+                    <label for="klub" class="form-label">Klub</label>
+                    <input type="text" class="form-control @error('klub') is-invalid @enderror" id="klub"
+                        name="klub">
+                    @error('klub')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+            <div class="mb-3">
                 <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
                 <input type="date" class="form-control @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir"
                     name="tgl_lahir" value="{{ old('tgl_lahir', $anggota->tgl_lahir) }}">

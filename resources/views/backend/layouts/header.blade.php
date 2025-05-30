@@ -4,13 +4,7 @@
             <div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
             </div>
             <div class="search-bar flex-grow-1">
-                <div class="position-relative search-bar-box">
-                    <input type="text" class="form-control search-control" placeholder="Type to search..."> <span
-                        class="position-absolute top-50 search-show translate-middle-y"><i
-                            class='bx bx-search'></i></span>
-                    <span class="position-absolute top-50 search-close translate-middle-y"><i
-                            class='bx bx-x'></i></span>
-                </div>
+               
             </div>
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center gap-1">
@@ -19,46 +13,7 @@
                         <a class="nav-link" href="avascript:;"><i class='bx bx-search'></i>
                         </a>
                     </li>
-                    <li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="avascript:;"
-                            data-bs-toggle="dropdown"><img src="assets/images/county/02.png" width="22"
-                                alt="">
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/01.png" width="20" alt=""><span
-                                        class="ms-2">English</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/02.png" width="20" alt=""><span
-                                        class="ms-2">Catalan</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/03.png" width="20" alt=""><span
-                                        class="ms-2">French</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/04.png" width="20" alt=""><span
-                                        class="ms-2">Belize</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/05.png" width="20" alt=""><span
-                                        class="ms-2">Colombia</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/06.png" width="20" alt=""><span
-                                        class="ms-2">Spanish</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/07.png" width="20" alt=""><span
-                                        class="ms-2">Georgian</span></a>
-                            </li>
-                            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                        src="assets/images/county/08.png" width="20" alt=""><span
-                                        class="ms-2">Hindi</span></a>
-                            </li>
-                        </ul>
-                    </li>
+                  
 
                     <li class="nav-item dropdown dropdown-app">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"
@@ -652,24 +607,7 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                class="bx bx-user fs-5"></i><span>Profile</span></a>
-                    </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                class="bx bx-cog fs-5"></i><span>Settings</span></a>
-                    </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                class="bx bx-home-circle fs-5"></i><span>Dashboard</span></a>
-                    </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                class="bx bx-dollar-circle fs-5"></i><span>Earnings</span></a>
-                    </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
-                                class="bx bx-download fs-5"></i><span>Downloads</span></a>
-                    </li>
-                    <li>
-                        <div class="dropdown-divider mb-0"></div>
-                    </li>
+                
                     <li>
                         <!-- Form Logout -->
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
