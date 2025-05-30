@@ -25,6 +25,7 @@ class AnggotaController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'klub' => 'nullable|string|max:255',
             'tgl_lahir' => 'required|date',
             'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
             'riwayat_prestasi' => 'nullable|string',
@@ -53,6 +54,7 @@ class AnggotaController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'klub' => 'nullable|string|max:255',
             'tgl_lahir' => 'required|date',
             'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
             'riwayat_prestasi' => 'nullable|string',

@@ -32,6 +32,7 @@
             <th>No</th>
             <th>Nama</th>
             <th>Foto</th>
+            <th>Klub</th>
             <th>Tanggal Lahir</th>
             <th>Peran</th>
             <th>Riwayat Prestasi</th>
@@ -52,6 +53,7 @@
                         <span>Tidak ada foto</span>
                     @endif
                 </td>
+                <td>{{ $anggota->klub }}</td>
                 <td>{{ $anggota->tgl_lahir }}</td>
                 <td>{{ $anggota->peran }}</td>
                 <td>{{ $anggota->riwayat_prestasi }}</td>
@@ -69,7 +71,7 @@
             </tr>
              @empty
                 <tr>
-                    <td colspan="8" class="text-center">Belum ada data anggota</td>
+                    <td colspan="9" class="text-center">Belum ada data anggota</td>
                 </tr>
         @endforelse
         </tbody>
