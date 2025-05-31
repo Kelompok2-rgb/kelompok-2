@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
@@ -16,26 +19,29 @@ class AuthController extends Controller
     // Proses autentikasi (login)
     public function authenticate(Request $request)
     {
-        // Validasi input email dan password
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        // Cek apakah kredensial cocok
         if (Auth::attempt($credentials)) {
-            // Regenerasi sesi setelah login berhasil
+            if (!Auth::user()->is_approved) {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Akun Anda belum disetujui oleh admin.',
+                ])->onlyInput('email');
+            }
+
             $request->session()->regenerate();
 
-            // Redirect ke route dashboard.backend setelah login
-            return redirect()->route('backend.dashboard'); // Sesuaikan dengan nama route 'backend.dashboard'
+            return redirect()->route('backend.dashboard');
         }
 
-        // Jika gagal login, kembali dengan error
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+
 
     // Proses logout
     public function logout(Request $request)
@@ -51,8 +57,27 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-     public function register()
+    public function register()
     {
-        return view('authentikasi.register'); 
+        return view('authentikasi.register');
+    }
+
+    public function registerPost(Request $request)
+    {
+        
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:atlet,juri,klub,anggota,penyelenggara'],
+        ]);
+
+        User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'is_approved' => false,
+        ]);
+
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan tunggu persetujuan admin.');
     }
 }
