@@ -14,7 +14,8 @@ use App\Http\Controllers\{
     KategoriPertandinganController,
     PertandinganController,
     PenyelenggaraEventController,
-    FrontendController
+    FrontendController,
+    KonfirmasiController
 };
 
 Route::get('/', function () {
@@ -52,6 +53,11 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
 
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('authentikasi.register.post');
+Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
+    Route::get('/konfirmasi', [KonfirmasiController::class, 'index'])->name('konfirmasi.index');
+    Route::post('/konfirmasi/{id}/approve', [KonfirmasiController::class, 'approve'])->name('konfirmasi.approve');
+});
+
 
 
 
