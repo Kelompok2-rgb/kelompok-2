@@ -51,6 +51,8 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
 });
 
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
+Route::post('/register', [AuthController::class, 'registerPost'])->name('authentikasi.register.post');
+
 
 
    Route::name('frontend.')->group(function () {

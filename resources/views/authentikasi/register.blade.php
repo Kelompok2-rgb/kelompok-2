@@ -50,19 +50,37 @@
                                         <h5 class="">Porlempika Admin</h5>
                                         <p class="mb-0">Please fill the below details to create your account</p>
                                     </div>
-                                    <div class="form-body">
-                                        <form class="row g-3">
 
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul class="mb-0">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    @if (session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+
+                                    <div class="form-body">
+                                        <form class="row g-3" method="POST"
+                                            action="{{ route('authentikasi.register.post') }}">
+                                            @csrf
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Email Address</label>
-                                                <input type="email" class="form-control" id="inputEmailAddress"
-                                                    placeholder="example@user.com">
+                                                <input type="email" class="form-control" name="email"
+                                                    id="inputEmailAddress" placeholder="porlempika@gmail.com">
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Password</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0"
-                                                        id="inputChoosePassword"
+                                                        name="password" id="inputChoosePassword"
                                                         placeholder="Enter Password"> <a href="javascript:;"
                                                         class="input-group-text bg-transparent"><i
                                                             class='bx bx-hide'></i></a>
@@ -73,7 +91,7 @@
                                                     Password</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0"
-                                                        id="inputChoosePassword" name="password_confirmation"
+                                                        name="password_confirmation" id="inputChoosePassword"
                                                         placeholder="Enter Password">
                                                     <a href="javascript:;" class="input-group-text bg-transparent"><i
                                                             class='bx bx-hide'></i></a>
@@ -96,7 +114,8 @@
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox"
                                                         id="flexSwitchCheckChecked">
-                                                    <label class="form-check-label" for="flexSwitchCheckChecked">I read
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked">I
+                                                        read
                                                         and agree to Terms & Conditions</label>
                                                 </div>
                                             </div>
@@ -114,16 +133,16 @@
                                             </div>
                                         </form>
                                     </div>
-                                    </div>
-
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--end row-->
             </div>
+            <!--end row-->
         </div>
+    </div>
     </div>
     <!--end wrapper-->
     <!--start switcher-->
