@@ -34,8 +34,8 @@
 
                     <img src="{{ asset('dashboard/assets/images/logokel2.jpg') }}" class="user-img" alt="user">
                     <div class="user-info">
-                        <p class="user-name mb-0">Kel-2</p>
-                        <p class="designattion mb-0">Axe PBL</p>
+                        <p class="user-name mb-0">{{ Auth::user()->email }}</p>
+                        <p class="designattion mb-0">{{ ucfirst(Auth::user()->role) }}</p>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
