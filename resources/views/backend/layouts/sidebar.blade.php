@@ -19,82 +19,136 @@
             </a>
         </li>
 
-        <li>
-            <a href="{{ route('backend.anggota.index') }}">
-                <div class="parent-icon"><i class='bx bx-user'></i></i></div>
-                <div class="menu-title">Anggota</div>
-            </a>
-        </li>
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'anggota', 'klub']))
+                <li>
+                    <a href="{{ route('backend.anggota.index') }}">
+                        <div class="parent-icon"><i class='bx bx-user'></i></div>
+                        <div class="menu-title">Anggota</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
 
-        <li>
-            <a href="{{ route('backend.atlet.index') }}">
-                <div class="parent-icon"><i class='bx bx-run'></i></div>
-                <div class="menu-title">Atlet</div>
-            </a>
-        </li>
 
-        <li>
-            <a href="{{ route('backend.club.index') }}">
-                <div class="parent-icon"><i class='bx bx-group'></i></div>
-                <div class="menu-title">Club</div>
-            </a>
-        </li>
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'atlet', 'klub']))
+                <li>
+                    <a href="{{ route('backend.atlet.index') }}">
+                        <div class="parent-icon"><i class='bx bx-run'></i></div>
+                        <div class="menu-title">Atlet</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
 
-        <li>
-            <a href="{{ route('backend.galeri.index') }}">
-                <div class="parent-icon"><i class='bx bx-image'></i></div>
-                <div class="menu-title">Galeri</div>
-            </a>
-        </li>
 
-        <li>
-            <a href="{{ route('backend.hasil_pertandingan.index') }}">
-                <div class="parent-icon"><i class='bx bx-medal'></i></div>
-                <div class="menu-title">Hasil Pertandingan</div>
-            </a>
-        </li>
 
-        <li>
-            <a href="{{ route('backend.jadwal_pertandingan.index') }}">
-                <div class="parent-icon"><i class='bx bx-calendar'></i></div>
-                <div class="menu-title">Jadwal Pertandingan</div>
-            </a>
-        </li>
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'klub']))
+                <li>
+                    <a href="{{ route('backend.club.index') }}">
+                        <div class="parent-icon"><i class='bx bx-group'></i></div>
+                        <div class="menu-title">Club</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
 
-        <li>
-            <a href="{{ route('backend.juri.index') }}">
-                <div class="parent-icon"><i class='bx bx-user-voice'></i></div>
-                <div class="menu-title">Juri</div>
-            </a>
-        </li>
 
-        <li>
-            <a href="{{ route('backend.kategori_pertandingan.index') }}">
-                <div class="parent-icon"><i class='bx bx-category'></i></div>
-                <div class="menu-title">Kategori Pertandingan</div>
-            </a>
-        </li>
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
+                <li>
+                    <a href="{{ route('backend.galeri.index') }}">
+                        <div class="parent-icon"><i class='bx bx-image'></i></div>
+                        <div class="menu-title">Galeri</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
 
-        <li>
-            <a href="{{ route('backend.pengumuman.index') }}">
-                <div class="parent-icon"><i class='bx bx-bell'></i></div>
-                <div class="menu-title">Pengumuman</div>
-            </a>
-        </li>
 
-        <li>
-            <a href="{{ route('backend.pertandingan.index') }}">
-                <div class="parent-icon"><i class='bx bx-trophy'></i></div>
-                <div class="menu-title">Pertandingan</div>
-            </a>
-        </li>
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'juri']))
+                <li>
+                    <a href="{{ route('backend.hasil_pertandingan.index') }}">
+                        <div class="parent-icon"><i class='bx bx-medal'></i></div>
+                        <div class="menu-title">Hasil Pertandingan</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
 
-        <li>
-            <a href="{{ route('backend.penyelenggara_event.index') }}">
-                <div class=""><i class='bx bx-briefcase'></i></div>
-                <div class="menu-title">Penyelenggara Event</div>
-            </a>
-        </li>
+
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
+                <li>
+                    <a href="{{ route('backend.jadwal_pertandingan.index') }}">
+                        <div class="parent-icon"><i class='bx bx-calendar'></i></div>
+                        <div class="menu-title">Jadwal Pertandingan</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
+
+
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'juri']))
+                <li>
+                    <a href="{{ route('backend.juri.index') }}">
+                        <div class="parent-icon"><i class='bx bx-user-voice'></i></div>
+                        <div class="menu-title">Juri</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
+
+
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
+                <li>
+                    <a href="{{ route('backend.kategori_pertandingan.index') }}">
+                        <div class="parent-icon"><i class='bx bx-category'></i></div>
+                        <div class="menu-title">Kategori Pertandingan</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
+
+
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <li>
+                    <a href="{{ route('backend.pengumuman.index') }}">
+                        <div class="parent-icon"><i class='bx bx-bell'></i></div>
+                        <div class="menu-title">Pengumuman</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
+
+
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
+                <li>
+                    <a href="{{ route('backend.pertandingan.index') }}">
+                        <div class="parent-icon"><i class='bx bx-trophy'></i></div>
+                        <div class="menu-title">Pertandingan</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
+
+        @auth
+            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
+                <li>
+                    <a href="{{ route('backend.penyelenggara_event.index') }}">
+                        <div class=""><i class='bx bx-briefcase'></i></div>
+                        <div class="menu-title">Penyelenggara Event</div>
+                    </a>
+                </li>
+            @endif
+        @endauth
 
 
     </ul>
