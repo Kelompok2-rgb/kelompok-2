@@ -44,11 +44,24 @@
                     <td>{{ $item->isi }}</td>
                     <td>
                         <a href="{{ route('backend.pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus?')">
+                        <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST"
+                            style="display:inline;" onsubmit="return handleDeletePengumuman()">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm">Hapus</button>
                         </form>
+
+                        <script>
+                            function handleDeletePengumuman() {
+                                const userRole = @json(Auth::user()->role);
+                                if (userRole !== 'admin' && userRole !== 'penyelenggara') {
+                                    alert('Hanya admin atau penyelenggara yang dapat menghapus.');
+                                    return false;
+                                }
+                                return confirm('Yakin hapus?');
+                            }
+                        </script>
+
                     </td>
                 </tr>
             @empty

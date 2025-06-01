@@ -28,52 +28,63 @@
 
     <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
         <thead class="table-dark">
-        <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>Foto</th>
-            <th>Klub</th>
-            <th>Tanggal Lahir</th>
-            <th>Peran</th>
-            <th>Riwayat Prestasi</th>
-            <th>Nomor WA</th>
-            <th>Aksi</th>
-        </tr>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Foto</th>
+                <th>Klub</th>
+                <th>Tanggal Lahir</th>
+                <th>Peran</th>
+                <th>Riwayat Prestasi</th>
+                <th>Nomor WA</th>
+                <th>Aksi</th>
+            </tr>
         </thead>
         <tbody>
-        @forelse ($anggotas as $anggota)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $anggota->nama }}</td>
-                <td>
-                    @if ($anggota->foto)
-                        <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto" width="70"
-                        class="foto-hover" width="60" style="transition: transform 0.5s;">
-                    @else
-                        <span>Tidak ada foto</span>
-                    @endif
-                </td>
-                <td>{{ $anggota->klub }}</td>
-                <td>{{ $anggota->tgl_lahir }}</td>
-                <td>{{ $anggota->peran }}</td>
-                <td>{{ $anggota->riwayat_prestasi }}</td>
-                <td>{{ $anggota->kontak }}</td>
-                <td>
-                    <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST"
-                        style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger"
-                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-             @empty
+            @forelse ($anggotas as $anggota)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $anggota->nama }}</td>
+                    <td>
+                        @if ($anggota->foto)
+                            <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto" width="70"
+                                class="foto-hover" width="60" style="transition: transform 0.5s;">
+                        @else
+                            <span>Tidak ada foto</span>
+                        @endif
+                    </td>
+                    <td>{{ $anggota->klub }}</td>
+                    <td>{{ $anggota->tgl_lahir }}</td>
+                    <td>{{ $anggota->peran }}</td>
+                    <td>{{ $anggota->riwayat_prestasi }}</td>
+                    <td>{{ $anggota->kontak }}</td>
+                    <td>
+                        <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST"
+                            style="display:inline;" onsubmit="return handleDeleteAnggota()">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+
+                        <script>
+                            function handleDeleteAnggota() {
+                                const userRole = @json(Auth::user()->role);
+                                if (userRole !== 'admin') {
+                                    alert('Hanya admin yang dapat menghapus');
+                                    return false;
+                                }
+                                return confirm('Yakin ingin menghapus?');
+                            }
+                        </script>
+
+                    </td>
+                </tr>
+            @empty
                 <tr>
                     <td colspan="9" class="text-center">Belum ada data anggota</td>
                 </tr>
-        @endforelse
+            @endforelse
         </tbody>
     </table>
 
@@ -81,24 +92,25 @@
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script>
         function exportTableToExcel() {
-    // Ambil tabel asli
-    const originalTable = document.querySelector('#tableExportArea');
+            // Ambil tabel asli
+            const originalTable = document.querySelector('#tableExportArea');
 
-    // Clone tabel supaya tidak merubah tabel asli di halaman
-    const cloneTable = originalTable.cloneNode(true);
+            // Clone tabel supaya tidak merubah tabel asli di halaman
+            const cloneTable = originalTable.cloneNode(true);
 
-    // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
-    cloneTable.querySelectorAll('tr').forEach(row => {
-        if (row.cells.length > 0) {
-            row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
+            // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
+            cloneTable.querySelectorAll('tr').forEach(row => {
+                if (row.cells.length > 0) {
+                    row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
+                }
+            });
+
+            // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
+            const workbook = XLSX.utils.table_to_book(cloneTable, {
+                sheet: "Anggota"
+            });
+            XLSX.writeFile(workbook, 'anggota.xlsx');
         }
-    });
-
-    // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
-    const workbook = XLSX.utils.table_to_book(cloneTable, { sheet: "Anggota" });
-    XLSX.writeFile(workbook, 'anggota.xlsx');
-}
-
     </script>
 
 

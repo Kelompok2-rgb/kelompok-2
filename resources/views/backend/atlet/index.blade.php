@@ -14,7 +14,8 @@
     @endif
 
     <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ route('backend.atlet.create') }}" class="btn btn-primary" style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
+        <a href="{{ route('backend.atlet.create') }}" class="btn btn-primary"
+            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
             Tambah Atlet
         </a>
 
@@ -42,7 +43,8 @@
                     <td>{{ $atlet->nama }}</td>
                     <td class="text-center">
                         @if ($atlet->foto)
-                            <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" width="60" class="foto-hover" width="60" style="transition: transform 0.5s;">
+                            <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" width="60"
+                                class="foto-hover" width="60" style="transition: transform 0.5s;">
                         @else
                             Tidak ada foto
                         @endif
@@ -51,11 +53,24 @@
                     <td>{{ $atlet->rekap_latihan }}</td>
                     <td class="text-center">
                         <a href="{{ route('backend.atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" class="d-inline">
+                        <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" class="d-inline"
+                            onsubmit="return handleDelete()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
+
+                        <script>
+                            function handleDelete() {
+                                const userRole = @json(Auth::user()->role);
+                                if (userRole !== 'admin') {
+                                    alert('Hanya admin yang dapat menghapus');
+                                    return false;
+                                }
+                                return confirm('Yakin ingin menghapus?');
+                            }
+                        </script>
+
                     </td>
                 </tr>
             @empty
@@ -76,7 +91,9 @@
                     row.deleteCell(row.cells.length - 1);
                 }
             });
-            const workbook = XLSX.utils.table_to_book(cloneTable, { sheet: "Atlet" });
+            const workbook = XLSX.utils.table_to_book(cloneTable, {
+                sheet: "Atlet"
+            });
             XLSX.writeFile(workbook, 'atlet.xlsx');
         }
     </script>

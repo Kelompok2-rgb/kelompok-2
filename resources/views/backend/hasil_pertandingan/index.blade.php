@@ -50,12 +50,23 @@
                         <a href="{{ route('backend.hasil_pertandingan.edit', $hasil->id) }}"
                             class="btn btn-warning btn-sm me-1">Edit</a>
                         <form action="{{ route('backend.hasil_pertandingan.destroy', $hasil->id) }}" method="POST"
-                            class="d-inline">
+                            class="d-inline" onsubmit="return handleDeleteHasil()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
+
+                        <script>
+                            function handleDeleteHasil() {
+                                const userRole = @json(Auth::user()->role);
+                                if (userRole !== 'admin' && userRole !== 'juri') {
+                                    alert('Hanya admin atau juri yang dapat menghapus');
+                                    return false;
+                                }
+                                return confirm('Yakin ingin menghapus?');
+                            }
+                        </script>
+
                     </td>
                 </tr>
             @empty
