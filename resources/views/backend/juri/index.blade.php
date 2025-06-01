@@ -1,11 +1,11 @@
 @extends('backend.layouts.main')
-@section('title','Halaman Juri')
+@section('title', 'Halaman Juri')
 @section('navMhs', 'active')
 
 @section('content')
-<div class="text-center mb-4">
-    <h2>Juri</h2>
-</div>
+    <div class="text-center mb-4">
+        <h2>Juri</h2>
+    </div>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -13,7 +13,7 @@
         </div>
     @endif
 
-   <div style="display: flex; align-items: center; gap: 10px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.juri.create') }}" class="btn btn-primary"
             style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
             Tambah Juri
@@ -44,11 +44,24 @@
 
                     <td class="text-center">
                         <a href="{{ route('backend.juri.edit', $juri->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <form action="{{ route('backend.juri.destroy', $juri->id) }}" method="POST" class="d-inline">
+                        <form action="{{ route('backend.juri.destroy', $juri->id) }}" method="POST" class="d-inline"
+                            onsubmit="return handleDeleteJuri()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
+
+                        <script>
+                            function handleDeleteJuri() {
+                                const userRole = @json(Auth::user()->role);
+                                if (userRole !== 'admin') {
+                                    alert('Hanya admin yang dapat menghapus');
+                                    return false;
+                                }
+                                return confirm('Yakin ingin menghapus?');
+                            }
+                        </script>
+
                     </td>
                 </tr>
             @empty
@@ -58,7 +71,7 @@
             @endforelse
         </tbody>
     </table>
-     <!-- SheetJS untuk Export Excel -->
+    <!-- SheetJS untuk Export Excel -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script>
         function exportTableToExcel() {

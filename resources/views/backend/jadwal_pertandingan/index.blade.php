@@ -1,11 +1,11 @@
 @extends('backend.layouts.main')
-@section('title','Halaman Jadwal Pertandingan')
+@section('title', 'Halaman Jadwal Pertandingan')
 @section('navMhs', 'active')
 
 @section('content')
-<div class="text-center mb-4">
-    <h2>Jadwal Pertandingan</h2>
-</div>
+    <div class="text-center mb-4">
+        <h2>Jadwal Pertandingan</h2>
+    </div>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -42,12 +42,26 @@
                     <td>{{ $jadwal->waktu }}</td>
                     <td>{{ $jadwal->lokasi }}</td>
                     <td class="text-center">
-                        <a href="{{ route('backend.jadwal_pertandingan.edit', $jadwal->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <form action="{{ route('backend.jadwal_pertandingan.destroy', $jadwal->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('backend.jadwal_pertandingan.edit', $jadwal->id) }}"
+                            class="btn btn-warning btn-sm me-1">Edit</a>
+                        <form action="{{ route('backend.jadwal_pertandingan.destroy', $jadwal->id) }}" method="POST"
+                            class="d-inline" onsubmit="return handleDeleteJadwal()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau hapus?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
+
+                        <script>
+                            function handleDeleteJadwal() {
+                                const userRole = @json(Auth::user()->role);
+                                if (userRole !== 'admin' && userRole !== 'penyelenggara') {
+                                    alert('Hanya admin atau penyelenggara yang dapat menghapus');
+                                    return false;
+                                }
+                                return confirm('Yakin mau hapus?');
+                            }
+                        </script>
+
                     </td>
                 </tr>
             @empty
@@ -57,7 +71,7 @@
             @endforelse
         </tbody>
     </table>
-     <!-- SheetJS untuk Export Excel -->
+    <!-- SheetJS untuk Export Excel -->
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script>
         function exportTableToExcel() {
