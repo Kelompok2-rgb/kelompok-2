@@ -8,6 +8,11 @@ use Illuminate\Http\RedirectResponse;
 
 class HasilPertandinganController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,juri');
+    }
     public function index()
     {
         $hasilPertandingans = HasilPertandingan::all();

@@ -7,6 +7,11 @@ use App\Models\PenyelenggaraEvent;
 
 class PenyelenggaraEventController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,penyelenggara');
+    }
     public function index()
     {
         $penyelenggara_events = PenyelenggaraEvent::orderBy('tanggal', 'desc')->get();

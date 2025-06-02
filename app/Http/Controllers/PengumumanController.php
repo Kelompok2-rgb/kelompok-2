@@ -7,6 +7,11 @@ use App\Models\Pengumuman;
 
 class PengumumanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin');
+    }
     public function index()
     {
         $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get();

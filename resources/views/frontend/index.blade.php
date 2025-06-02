@@ -113,8 +113,7 @@
 
             <div class="container d-flex flex-column align-items-center">
                 <h2 data-aos="fade-up" data-aos-delay="100">Berbeda. Bersatu. Berjaya.</h2>
-                <p data-aos="fade-up" data-aos-delay="200">We are team of talented designers making websites with
-                    Bootstrap</p>
+                <p data-aos="fade-up" data-aos-delay="200">Sistem Informasi Pengelolaan Persatuan Lempar Pisau & Kapak Kota Padang</p>
                 <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
                     <a href="#about" class="btn-get-started">Get Started</a>
                     <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
@@ -139,7 +138,7 @@
                 <div class="row gy-4">
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100" >
                         <h3>Porlempika</h3>
-                        <img src="{{ asset('frontend/assets/images/porlempika.png') }}"
+                        <img src="{{ asset('frontend/assets/images/thumbnail.png') }}"
                             class="img-fluid rounded-4 mb-4" alt="">
                         <p >Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman,
                             kompetitif, dan menghibur. Dengan slogan "Berbeda, Bersatu, Berjaya!", federasi ini
@@ -223,7 +222,7 @@
                             <div>
                                 <span data-purecounter-start="0" data-purecounter-end="15"
                                     data-purecounter-duration="1" class="purecounter"></span>
-                                <p>High Score</p>
+                                <p>Juri</p>
                             </div>
                         </div>
                     </div><!-- End Stats Item -->
@@ -239,7 +238,7 @@
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Pisau</h2>
+                <h2>Porlempika</h2>
                 <p>Standard Competition<br></p>
             </div><!-- End Section Title -->
 
@@ -247,28 +246,29 @@
 
                 <div class="row gy-5">
 
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid"
+                                <img src="{{ asset('frontend/assets/images/pisau.png') }}" class="img-fluid"
                                     alt="">
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
-                                    <i class="bi bi-activity"></i>
+                                    <i class="bi bi-scissors"></i>
+
                                 </div>
                                 <a href="service-details.html" class="stretched-link">
-                                    <h3>Panjang</h3>
+                                    <h3>Pisau</h3>
                                 </a>
                                 <p>Panjang minimal 12 inchi (30,5cm), maksimal 16 inchi (40 cm)</p>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid"
+                                <img src="{{ asset('frontend/assets/images/kapak.png') }}" class="img-fluid"
                                     alt="">
                             </div>
                             <div class="details position-relative">
@@ -276,17 +276,17 @@
                                     <i class="bi bi-broadcast"></i>
                                 </div>
                                 <a href="service-details.html" class="stretched-link">
-                                    <h3>Berat</h3>
+                                    <h3>Kapak</h3>
                                 </a>
                                 <p>Berat min 200 gram....,maksimal tidak disebutkan</p>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ asset('frontend/assets/images/porlempika.png') }}" class="img-fluid"
+                                <img src="{{ asset('frontend/assets/images/jarak.png') }}" class="img-fluid"
                                     alt="">
                             </div>
                             <div class="details position-relative">
@@ -294,9 +294,26 @@
                                     <i class="bi bi-easel"></i>
                                 </div>
                                 <a href="service-details.html" class="stretched-link">
-                                    <h3>Lebar</h3>
+                                    <h3>Jarak</h3>
                                 </a>
                                 <p>Lebar tidak lebih dari 7cm</p>
+                            </div>
+                        </div>
+                    </div><!-- End Service Item -->
+                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="service-item">
+                            <div class="img">
+                                <img src="{{ asset('frontend/assets/images/target.png') }}" class="img-fluid"
+                                    alt="">
+                            </div>
+                            <div class="details position-relative">
+                                <div class="icon">
+                                    <i class="bi bi-activity"></i>
+                                </div>
+                                <a href="service-details.html" class="stretched-link">
+                                    <h3>Target</h3>
+                                </a>
+                                <p>Panjang minimal 12 inchi (30,5cm), maksimal 16 inchi (40 cm)</p>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
@@ -353,7 +370,7 @@
                     <li class="nav-item col-3">
                         <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
                             <i class="bi bi-binoculars"></i>
-                            <h4 class="d-none d-lg-block"> Precision Short Range </h4>
+                            <h4 class="d-none d-lg-block"> Peraturan </h4>
 
                         </a>
                     </li>

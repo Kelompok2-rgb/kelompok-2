@@ -9,6 +9,11 @@ use App\Models\Galeri;
 
 class GaleriController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,penyelenggara');
+    }
     public function index()
     {
         $galeris = Galeri::paginate(10);
