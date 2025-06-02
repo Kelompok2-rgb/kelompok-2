@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class AnggotaController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+    $this->middleware('role:admin,klub,anggota');
+}
+
     public function index()
     {
         $anggotas = Anggota::all();

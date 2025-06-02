@@ -7,6 +7,11 @@ use App\Models\Jadwal_Pertandingan;
 
 class JadwalPertandinganController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,penyelenggara');
+    }
     /**
      * Menampilkan semua jadwal pertandingan.
      */

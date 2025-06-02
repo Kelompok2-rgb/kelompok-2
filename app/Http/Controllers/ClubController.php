@@ -8,6 +8,11 @@ use App\Models\Club;
 
 class ClubController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,klub');
+    }
     public function index()
     {
         $clubs = Club::all();

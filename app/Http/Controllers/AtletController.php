@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class AtletController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,klub,atlet');
+    }
     public function index()
     {
         $atlets = Atlet::all();
         return view('backend.atlet.index', compact('atlets'));
-
     }
 
     public function create()
@@ -81,5 +85,4 @@ class AtletController extends Controller
 
         return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil dihapus');
     }
-    
 }

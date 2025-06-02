@@ -8,6 +8,11 @@ use Illuminate\Http\RedirectResponse;
 
 class JuriController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,juri');
+    }
     /**
      * Menampilkan semua data juri.
      */

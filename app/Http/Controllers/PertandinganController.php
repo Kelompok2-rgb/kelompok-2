@@ -7,6 +7,11 @@ use App\Models\Pertandingan;
 
 class PertandinganController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,penyelenggara');
+    }
     public function index()
     {
         $pertandingans = Pertandingan::orderBy('tanggal', 'desc')->get();
