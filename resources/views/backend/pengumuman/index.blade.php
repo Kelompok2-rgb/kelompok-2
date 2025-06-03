@@ -39,9 +39,21 @@
             @forelse ($pengumumans as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->judul }}</td>
+                    <td style="font-size: 1.1rem; font-weight: 600;">{{ $item->judul }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
-                    <td>{{ $item->isi }}</td>
+                    <td style="text-align: left;">
+                        <div style="max-height: 70px; overflow: hidden; position: relative;">
+                            <div style="font-size: 1rem;">
+                                {{ Str::limit($item->isi, 100) }}
+                            </div>
+                            <a href="javascript:void(0);"
+   onclick="showDetailModal(`{{ addslashes($item->judul) }}`, `{{ $item->tanggal }}`, `{{ addslashes($item->isi) }}`)"
+   style="position: absolute; bottom: 0; right: 0; font-size: 0.85rem; color: black;">
+   Lihat Selengkapnya
+</a>
+
+                        </div>
+                    </td>
                     <td>
                         <a href="{{ route('backend.pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST"
@@ -50,18 +62,6 @@
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm">Hapus</button>
                         </form>
-
-                        <script>
-                            function handleDeletePengumuman() {
-                                const userRole = @json(Auth::user()->role);
-                                if (userRole !== 'admin' && userRole !== 'penyelenggara') {
-                                    alert('Hanya admin atau penyelenggara yang dapat menghapus.');
-                                    return false;
-                                }
-                                return confirm('Yakin hapus?');
-                            }
-                        </script>
-
                     </td>
                 </tr>
             @empty
@@ -72,23 +72,88 @@
         </tbody>
     </table>
 
-    <!-- SheetJS untuk Export Excel -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <!-- Modal Detail -->
+    <div id="detailModal" class="modal" onclick="closeModal()">
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modalJudul" class="modal-title text-white mt-3"></h3>
+            <p id="modalTanggal" class="text-white mb-2"></p>
+            <p id="modalIsi" class="modal-description text-white"></p>
+        </div>
+    </div>
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            overflow-y: auto;
+        }
+
+        .modal-content-wrapper {
+            margin: 50px auto;
+            max-width: 70%;
+            padding: 30px;
+            background: #222;
+            border-radius: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+
     <script>
+        function handleDeletePengumuman() {
+            const userRole = @json(Auth::user()->role);
+            if (userRole !== 'admin' && userRole !== 'penyelenggara') {
+                alert('Hanya admin atau penyelenggara yang dapat menghapus.');
+                return false;
+            }
+            return confirm('Yakin hapus?');
+        }
+
         function exportTableToExcel() {
             const originalTable = document.querySelector('#tableExportArea');
             const cloneTable = originalTable.cloneNode(true);
-
             cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1);
-                }
+                if (row.cells.length > 0) row.deleteCell(row.cells.length - 1);
             });
-
-            const workbook = XLSX.utils.table_to_book(cloneTable, {
-                sheet: "Pengumuman"
-            });
+            const workbook = XLSX.utils.table_to_book(cloneTable, { sheet: "Pengumuman" });
             XLSX.writeFile(workbook, 'pengumuman.xlsx');
         }
+
+        function showDetailModal(judul, tanggal, isi) {
+            document.getElementById('modalJudul').innerText = judul;
+            document.getElementById('modalTanggal').innerText = `Tanggal: ${tanggal}`;
+            document.getElementById('modalIsi').innerText = isi;
+            document.getElementById('detailModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
     </script>
+
+    <!-- SheetJS -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 @endsection
