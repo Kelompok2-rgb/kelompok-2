@@ -26,6 +26,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
+        <button type="reset" class="btn btn-warning">Reset</button>
     </form>
 </div>
 @endsection

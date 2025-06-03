@@ -14,9 +14,12 @@ return new class extends Migration
     Schema::create('jadwal__pertandingans', function (Blueprint $table) {
 
         $table->id();
-        $table->string('tanggal');
-        $table->string('waktu');
+        $table->date('tanggal');
+        $table->time('waktu');
         $table->string('lokasi');
+        $table->string('nama_pertandingan');
+        $table->text('deskripsi')->nullable();
+
         $table->timestamps();
     });
 }
