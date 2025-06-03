@@ -113,7 +113,8 @@
 
             <div class="container d-flex flex-column align-items-center">
                 <h2 data-aos="fade-up" data-aos-delay="100">Berbeda. Bersatu. Berjaya.</h2>
-                <p data-aos="fade-up" data-aos-delay="200">Sistem Informasi Pengelolaan Persatuan Lempar Pisau & Kapak Kota Padang</p>
+                <p data-aos="fade-up" data-aos-delay="200">Sistem Informasi Pengelolaan Persatuan Lempar Pisau & Kapak
+                    Kota Padang</p>
                 <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
                     <a href="#about" class="btn-get-started">Get Started</a>
                     <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
@@ -136,11 +137,11 @@
             <div class="container">
 
                 <div class="row gy-4">
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100" >
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                         <h3>Porlempika</h3>
-                        <img src="{{ asset('frontend/assets/images/thumbnail.png') }}"
-                            class="img-fluid rounded-4 mb-4" alt="">
-                        <p >Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman,
+                        <img src="{{ asset('frontend/assets/images/thumbnail.png') }}" class="img-fluid rounded-4 mb-4"
+                            alt="">
+                        <p>Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman,
                             kompetitif, dan menghibur. Dengan slogan "Berbeda, Bersatu, Berjaya!", federasi ini
                             mendorong kolaborasi antar-komunitas dan atlet dari berbagai daerah. Melalui kejuaraan
                             nasional dan pelatihan, Porlempika berkomitmen untuk meningkatkan prestasi atlet Indonesia
@@ -247,15 +248,15 @@
                 <div class="row gy-5">
 
                     <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="service-item">
-                            <div class="img">
+                        <div class="service-item text-center"> <!-- Tambah text-center supaya isi rata tengah -->
+                            <div class="img mb-3"> <!-- kasih margin bawah agar jarak -->
                                 <img src="{{ asset('frontend/assets/images/pisau.png') }}" class="img-fluid"
                                     alt="">
                             </div>
                             <div class="details position-relative">
-                                <div class="icon">
-                                    <i class="bi bi-scissors"></i>
-
+                                <div class="icon mb-2">
+                                    <i class="bi bi-scissors" style="font-size: 2rem;"></i>
+                                    <!-- ukuran icon bisa diatur -->
                                 </div>
                                 <a href="service-details.html" class="stretched-link">
                                     <h3>Pisau</h3>
@@ -263,17 +264,18 @@
                                 <p>Panjang minimal 12 inchi (30,5cm), maksimal 16 inchi (40 cm)</p>
                             </div>
                         </div>
-                    </div><!-- End Service Item -->
+                    </div>
+
 
                     <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="service-item">
-                            <div class="img">
+                        <div class="service-item text-center">
+                            <div class="img mb-3">
                                 <img src="{{ asset('frontend/assets/images/kapak.png') }}" class="img-fluid"
                                     alt="">
                             </div>
                             <div class="details position-relative">
-                                <div class="icon">
-                                    <i class="bi bi-broadcast"></i>
+                                <div class="icon mb-2">
+                                    <i class="bi bi-broadcast" style="font-size: 2rem;"></i>
                                 </div>
                                 <a href="service-details.html" class="stretched-link">
                                     <h3>Kapak</h3>
@@ -281,17 +283,18 @@
                                 <p>Berat min 200 gram....,maksimal tidak disebutkan</p>
                             </div>
                         </div>
-                    </div><!-- End Service Item -->
+                    </div>
+
 
                     <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="service-item">
-                            <div class="img">
+                        <div class="service-item text-center">
+                            <div class="img mb-3">
                                 <img src="{{ asset('frontend/assets/images/jarak.png') }}" class="img-fluid"
                                     alt="">
                             </div>
                             <div class="details position-relative">
-                                <div class="icon">
-                                    <i class="bi bi-easel"></i>
+                                <div class="icon mb-2">
+                                    <i class="bi bi-easel" style="font-size: 2rem;"></i>
                                 </div>
                                 <a href="service-details.html" class="stretched-link">
                                     <h3>Jarak</h3>
@@ -299,16 +302,18 @@
                                 <p>Lebar tidak lebih dari 7cm</p>
                             </div>
                         </div>
-                    </div><!-- End Service Item -->
+                    </div>
+
+
                     <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="service-item">
-                            <div class="img">
+                        <div class="service-item text-center">
+                            <div class="img mb-3">
                                 <img src="{{ asset('frontend/assets/images/target.png') }}" class="img-fluid"
                                     alt="">
                             </div>
                             <div class="details position-relative">
-                                <div class="icon">
-                                    <i class="bi bi-activity"></i>
+                                <div class="icon mb-2">
+                                    <i class="bi bi-activity" style="font-size: 2rem;"></i>
                                 </div>
                                 <a href="service-details.html" class="stretched-link">
                                     <h3>Target</h3>
@@ -316,7 +321,8 @@
                                 <p>Panjang minimal 12 inchi (30,5cm), maksimal 16 inchi (40 cm)</p>
                             </div>
                         </div>
-                    </div><!-- End Service Item -->
+                    </div>
+
 
                 </div>
 

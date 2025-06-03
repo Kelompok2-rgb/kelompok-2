@@ -20,135 +20,196 @@
         </li>
 
         @auth
-            @if (in_array(Auth::user()->role, ['admin', 'anggota', 'klub']))
-                <li>
-                    <a href="{{ route('backend.anggota.index') }}">
-                        <div class="parent-icon"><i class='bx bx-user'></i></div>
-                        <div class="menu-title">Anggota</div>
-                    </a>
-                </li>
-            @endif
-        @endauth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'anggota', 'klub'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
 
-
-        @auth
-            @if (in_array(Auth::user()->role, ['admin', 'atlet', 'klub']))
-                <li>
-                    <a href="{{ route('backend.atlet.index') }}">
-                        <div class="parent-icon"><i class='bx bx-run'></i></div>
-                        <div class="menu-title">Atlet</div>
-                    </a>
-                </li>
-            @endif
+                <a href="{{ $canAccess ? route('backend.anggota.index') : '#' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-user'></i></div>
+                    <div class="menu-title">Anggota</div>
+                </a>
+            </li>
         @endauth
 
 
 
         @auth
-            @if (in_array(Auth::user()->role, ['admin', 'klub']))
-                <li>
-                    <a href="{{ route('backend.club.index') }}">
-                        <div class="parent-icon"><i class='bx bx-group'></i></div>
-                        <div class="menu-title">Club</div>
-                    </a>
-                </li>
-            @endif
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'atlet', 'klub'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.atlet.index') : '#' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-run'></i></div>
+                    <div class="menu-title">Atlet</div>
+                </a>
+            </li>
         @endauth
 
 
         @auth
-            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
-                <li>
-                    <a href="{{ route('backend.galeri.index') }}">
-                        <div class="parent-icon"><i class='bx bx-image'></i></div>
-                        <div class="menu-title">Galeri</div>
-                    </a>
-                </li>
-            @endif
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'klub'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.club.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-group'></i></div>
+                    <div class="menu-title">Club</div>
+                </a>
+            </li>
         @endauth
 
 
         @auth
-            @if (in_array(Auth::user()->role, ['admin', 'juri']))
-                <li>
-                    <a href="{{ route('backend.hasil_pertandingan.index') }}">
-                        <div class="parent-icon"><i class='bx bx-medal'></i></div>
-                        <div class="menu-title">Hasil Pertandingan</div>
-                    </a>
-                </li>
-            @endif
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.galeri.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-image'></i></div>
+                    <div class="menu-title">Galeri</div>
+                </a>
+            </li>
+        @endauth
+
+
+
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'juri'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.hasil_pertandingan.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-medal'></i></div>
+                    <div class="menu-title">Hasil Pertandingan</div>
+                </a>
+            </li>
+        @endauth
+
+
+
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.jadwal_pertandingan.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-calendar'></i></div>
+                    <div class="menu-title">Jadwal Pertandingan</div>
+                </a>
+            </li>
+        @endauth
+
+
+
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'juri'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.juri.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-user-voice'></i></div>
+                    <div class="menu-title">Juri</div>
+                </a>
+            </li>
+        @endauth
+
+
+
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.kategori_pertandingan.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-category'></i></div>
+                    <div class="menu-title">Kategori Pertandingan</div>
+                </a>
+            </li>
+        @endauth
+
+
+
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.pengumuman.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-bell'></i></div>
+                    <div class="menu-title">Pengumuman</div>
+                </a>
+            </li>
+        @endauth
+
+
+
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.pertandingan.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-trophy'></i></div>
+                    <div class="menu-title">Pertandingan</div>
+                </a>
+            </li>
         @endauth
 
 
         @auth
-            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
-                <li>
-                    <a href="{{ route('backend.jadwal_pertandingan.index') }}">
-                        <div class="parent-icon"><i class='bx bx-calendar'></i></div>
-                        <div class="menu-title">Jadwal Pertandingan</div>
-                    </a>
-                </li>
-            @endif
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.penyelenggara_event.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class=""><i class='bx bx-briefcase'></i></div>
+                    <div class="menu-title">Penyelenggara Event</div>
+                </a>
+            </li>
         @endauth
 
-
-        @auth
-            @if (in_array(Auth::user()->role, ['admin', 'juri']))
-                <li>
-                    <a href="{{ route('backend.juri.index') }}">
-                        <div class="parent-icon"><i class='bx bx-user-voice'></i></div>
-                        <div class="menu-title">Juri</div>
-                    </a>
-                </li>
-            @endif
-        @endauth
-
-
-        @auth
-            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
-                <li>
-                    <a href="{{ route('backend.kategori_pertandingan.index') }}">
-                        <div class="parent-icon"><i class='bx bx-category'></i></div>
-                        <div class="menu-title">Kategori Pertandingan</div>
-                    </a>
-                </li>
-            @endif
-        @endauth
-
-
-        @auth
-            @if (Auth::user()->role === 'admin')
-                <li>
-                    <a href="{{ route('backend.pengumuman.index') }}">
-                        <div class="parent-icon"><i class='bx bx-bell'></i></div>
-                        <div class="menu-title">Pengumuman</div>
-                    </a>
-                </li>
-            @endif
-        @endauth
-
-
-        @auth
-            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
-                <li>
-                    <a href="{{ route('backend.pertandingan.index') }}">
-                        <div class="parent-icon"><i class='bx bx-trophy'></i></div>
-                        <div class="menu-title">Pertandingan</div>
-                    </a>
-                </li>
-            @endif
-        @endauth
-
-        @auth
-            @if (in_array(Auth::user()->role, ['admin', 'penyelenggara']))
-                <li>
-                    <a href="{{ route('backend.penyelenggara_event.index') }}">
-                        <div class=""><i class='bx bx-briefcase'></i></div>
-                        <div class="menu-title">Penyelenggara Event</div>
-                    </a>
-                </li>
-            @endif
-        @endauth
 
 
     </ul>
