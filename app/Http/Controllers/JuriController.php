@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Juri;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class JuriController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('role:admin,juri');
     }
+
     /**
      * Menampilkan semua data juri.
      */
@@ -35,17 +37,19 @@ class JuriController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Validasi input
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'tgl_lahir' => 'required|date',
+            'tanggal_lahir' => 'required|date',
             'sertifikat' => 'required|mimes:pdf|max:2048',
         ]);
 
-        // Menambahkan juri baru
+        // Simpan file sertifikat ke storage
+        if ($request->hasFile('sertifikat')) {
+            $validated['sertifikat'] = $request->file('sertifikat')->store('sertifikat', 'public');
+        }
+
         Juri::create($validated);
 
-        // Redirect setelah data berhasil ditambahkan
         return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil ditambahkan');
     }
 
@@ -65,17 +69,22 @@ class JuriController extends Controller
     {
         $juri = Juri::findOrFail($id);
 
-        // Validasi input
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'tgl_lahir' => 'required|date',
-            'sertifikat' => 'required|mimes:pdf|max:2048',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat' => 'nullable|mimes:pdf|max:2048',
         ]);
 
-        // Memperbarui data juri
+        // Cek jika ada sertifikat baru, simpan dan timpa
+        if ($request->hasFile('sertifikat')) {
+            if ($juri->sertifikat && Storage::disk('public')->exists($juri->sertifikat)) {
+                Storage::disk('public')->delete($juri->sertifikat);
+            }
+            $validated['sertifikat'] = $request->file('sertifikat')->store('sertifikat', 'public');
+        }
+
         $juri->update($validated);
 
-        // Redirect setelah data berhasil diperbarui
         return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil diperbarui');
     }
 
@@ -85,9 +94,14 @@ class JuriController extends Controller
     public function destroy($id): RedirectResponse
     {
         $juri = Juri::findOrFail($id);
+
+        // Hapus file sertifikat dari storage jika ada
+        if ($juri->sertifikat && Storage::disk('public')->exists($juri->sertifikat)) {
+            Storage::disk('public')->delete($juri->sertifikat);
+        }
+
         $juri->delete();
 
-        // Redirect setelah data berhasil dihapus
         return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil dihapus');
     }
 }
