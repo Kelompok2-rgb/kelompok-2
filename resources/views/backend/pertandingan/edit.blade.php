@@ -26,7 +26,7 @@
             </div>
 
             <div class="mb-3">
-                    <label for="nama_penyelenggara" class="form-label">Nama Pertandingan</label>
+                    <label for="nama_penyelenggara" class="form-label">Nama Penyelenggara</label>
                     <input type="text" class="form-control @error('nama_penyelenggara') is-invalid @enderror" id="nama_penyelenggara" name="nama_penyelenggara"
                         value="{{ old('nama_penyelenggara') }}">
                     @error('nama_penyelenggara')

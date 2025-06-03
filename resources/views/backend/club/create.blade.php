@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h2>Tambah Club</h2> 
+            <h2>Tambah Klub</h2> 
         </div>
         <div class="card-body">
 
@@ -15,7 +15,7 @@
                 @csrf
 
                 <div class="col-md-6">
-                    <label for="nama" class="form-label">Nama Club</label>
+                    <label for="nama" class="form-label">Nama Klub</label>
                     <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
                         name="nama" value="{{ old('nama', $club->nama ?? '') }}">
                     @error('nama')

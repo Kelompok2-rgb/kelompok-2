@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container mt-4">
-        <h2>Edit Club</h2>
+        <h2>Edit Klub</h2>
         <form action="{{ route('backend.club.update', $club->id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="col-md-6">
-                <label for="nama" class="form-label">Nama Club</label>
+                <label for="nama" class="form-label">Nama Klub</label>
                 <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
                     value="{{ old('nama', $club->nama ?? '') }}">
                 @error('nama')
@@ -34,7 +34,7 @@
             </div>
             
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary mt-2">Update</button>
         </form>
     </div>
 @endsection
