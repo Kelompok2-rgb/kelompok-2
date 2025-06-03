@@ -41,6 +41,25 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
 
         }
+
+        #typing-text {
+            border-right: 2px solid black;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: black;
+            }
+        }
     </style>
 
 
@@ -178,6 +197,32 @@
             });
         });
     </script>
+    <script>
+        const text = "Berbeda | Bersatu | Berjaya | Porlempika Padang";
+        const typingSpeed = 200; // ms per karakter
+        const delayBetweenLoops = 3000; // delay 2 detik setelah selesai
+        const typingElement = document.getElementById('typing-text');
+
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                typingElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, typingSpeed);
+            } else {
+                // Setelah selesai ketik, tunggu 2 detik lalu hapus teks dan mulai ulang
+                setTimeout(() => {
+                    typingElement.innerHTML = '';
+                    index = 0;
+                    typeWriter();
+                }, delayBetweenLoops);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', typeWriter);
+    </script>
+
 
 
 </body>
