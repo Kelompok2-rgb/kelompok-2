@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Jadwal_Pertandingan;
+use App\Models\Pertandingan;
 
 class JadwalPertandinganController extends Controller
 {
@@ -24,10 +25,16 @@ class JadwalPertandinganController extends Controller
     /**
      * Menampilkan form untuk membuat jadwal pertandingan.
      */
+// JadwalPertandinganController.php
     public function create()
     {
-        return view('backend.jadwal_pertandingan.create');
+        $pertandingans = Pertandingan::select('id', 'nama_pertandingan', 'lokasi', 'tanggal', 'waktu')
+                                    ->latest()
+                                    ->get();
+        
+        return view('backend.jadwal_pertandingan.create', compact('pertandingans'));
     }
+    
 
     /**
      * Menyimpan data jadwal pertandingan.
@@ -47,6 +54,8 @@ class JadwalPertandinganController extends Controller
         // Redirect setelah berhasil menambah data
         return redirect()->route('backend.jadwal_pertandingan.index')->with('success', 'Jadwal pertandingan berhasil ditambahkan');
     }
+    
+    
 
     /**
      * Menampilkan form untuk mengedit jadwal pertandingan.
