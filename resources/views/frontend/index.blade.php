@@ -372,30 +372,29 @@
 
             <div class="container">
 
-                <ul class="nav nav-tabs row  d-flex" data-aos="fade-up" data-aos-delay="100">
+                     <ul class="nav nav-tabs row d-flex" data-aos="fade-up" data-aos-delay="100">
                     <li class="nav-item col-3">
-                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
-                            <i class="bi bi-binoculars"></i>
+                    <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                            <i class="bi bi-exclamation-octagon-fill"></i>
                             <h4 class="d-none d-lg-block"> Peraturan </h4>
-
-                        </a>
+                     </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
-                            <i class="bi bi-box-seam"></i>
-                            <h4 class="d-none d-lg-block"> Precision Long Range </h4>
+                            <i class="bi bi-exclamation-octagon-fill"></i>
+                            <h4 class="d-none d-lg-block"> PERATURAN </h4>
                         </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
-                            <i class="bi bi-brightness-high"></i>
-                            <h4 class="d-none d-lg-block">Precision Mix Technique </h4>
+                           <i class="bi bi-exclamation-octagon-fill"></i>
+                            <h4 class="d-none d-lg-block">PERATURAN</h4>
                         </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-4">
-                            <i class="bi bi-command"></i>
-                            <h4 class="d-none d-lg-block"> Precision Instinctive Mix Technique </h4>
+                           <i class="bi bi-exclamation-octagon-fill"></i>
+                            <h4 class="d-none d-lg-block"> PERATURAN </h4>
                         </a>
                     </li>
                 </ul><!-- End Tab Nav -->
@@ -545,11 +544,11 @@
             <div class="container">
 
                 <div class="row gy-4">
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-card-checklist icon flex-shrink-0"></i>
-                            <div>
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item d-flex position-relative h-100">
+                                <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
+                <div>
+          
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak
                                     ada anak-anak atau hewan di sekitar tempat anda berlatih.</p>
@@ -560,7 +559,7 @@
 
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-card-checklist icon flex-shrink-0"></i>
+                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
                             <div>
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Sebuah pisau yang memiliki pegangan ideal akan lebih mudah dalam
@@ -571,7 +570,7 @@
 
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-bar-chart icon flex-shrink-0"></i>
+                          <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
                             <div>
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Sebuah pisau yang memiliki berat, akan lebih mudah untuk
@@ -582,7 +581,7 @@
 
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-binoculars icon flex-shrink-0"></i>
+                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
                             <div>
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Pergelangan tangan Anda tetap terkunci dan mencoba untuk
@@ -594,7 +593,7 @@
 
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
                         <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-brightness-high icon flex-shrink-0"></i>
+                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
                             <div>
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Selalu memperhatikan pegangan, bukan titik menancapnya. Jika
@@ -606,7 +605,7 @@
 
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
                         <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-calendar4-week icon flex-shrink-0"></i>
+                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
                             <div>
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Meski terasa alami, cobalah untuk tidak menjentikkan pergelangan
