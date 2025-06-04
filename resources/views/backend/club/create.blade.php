@@ -14,7 +14,7 @@
             <form action="{{ route('backend.club.store') }}" method="POST">
                 @csrf
 
-                <div class="col-md-6">
+                <div class="mb-3">
                     <label for="nama" class="form-label">Nama Klub</label>
                     <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
                         name="nama" value="{{ old('nama', $club->nama ?? '') }}">
@@ -23,7 +23,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6">
+                <div class="mb-3">
                     <label for="lokasi" class="form-label">Lokasi</label>
                     <input type="text" class="form-control @error('lokasi') is-invalid @enderror" id="lokasi"
                         name="lokasi" value="{{ old('lokasi', $club->lokasi ?? '') }}">
@@ -32,7 +32,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6">
+                <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
                     <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="4">{{ old('deskripsi', $club->deskripsi ?? '') }}</textarea>
                     @error('deskripsi')

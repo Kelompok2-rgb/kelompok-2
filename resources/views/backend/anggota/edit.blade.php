@@ -89,10 +89,10 @@
                 @enderror
             </div>
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Update</button>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-            </div>
+             <div class="mt-3">
+                     <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                </div>
         </form>
     </div>
 @endsection
