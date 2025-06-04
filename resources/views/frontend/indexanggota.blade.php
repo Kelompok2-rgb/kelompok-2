@@ -1,55 +1,46 @@
 @extends('frontend.index')
 
 @section('content')
-<section id="anggota">
-    <div class="container py-4">
-        <div class="text-center mb-4">
-            <h2 class="fw-bold">DAFTAR ANGGOTA PORLEMPIKA</h2>
-            <hr class="w-25 mx-auto border-primary">
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover text-center">
-                <thead class="table-dark">
-                   <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>Foto</th>
-            <th>Klub</th>
-            <th>Tanggal Lahir</th>
-            <th>Peran</th>
-            <th>Riwayat Prestasi</th>
-            <th>Nomor WA</th>
-           
-        </tr>
-        </thead>
-        <tbody>
-        @forelse ($anggotas as $anggota)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $anggota->nama }}</td>
-                <td>
-                    @if ($anggota->foto)
-                        <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto" width="70"
-                          class="img-thumbnail anggota-img" style="max-width: 100px;">
-                    @else
-                        <span>Tidak ada foto</span>
-                    @endif
-                </td>
-                <td>{{ $anggota->klub }}</td>
-                <td>{{ $anggota->tgl_lahir }}</td>
-                <td>{{ $anggota->peran }}</td>
-                <td>{{ $anggota->riwayat_prestasi }}</td>
-                <td>{{ $anggota->kontak }}</td>
-            </tr>
-             @empty
-                <tr>
-                    <td colspan="9" class="text-center">Belum ada data anggota</td>
-                </tr>
-        @endforelse
-        </tbody>
-            </table>
-        </div>
+    <div class="text-center mb-4">
+        <h2>Anggota</h2>
     </div>
-    </section>
+
+    @if ($anggotas->count())
+        <div class="container">
+            <div class="row">
+                @foreach ($anggotas as $anggota)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100 shadow">
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">{{ $loop->iteration }}. {{ $anggota->nama }}</h5>
+
+                                @if ($anggota->foto)
+                                    <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto" class="rounded mb-3" style="width: 100%; height: 200px; object-fit: cover;">
+                                @else
+                                    <div class="bg-dark text-white rounded d-flex justify-content-center align-items-center mb-3"
+                                        style="width: 100%; height: 200px;">
+                                        <strong>Foto</strong>
+                                    </div>
+                                @endif
+
+                                <div class="text-start">
+                                    <p><strong>Klub:</strong> {{ $anggota->klub }}</p>
+                                    <p><strong>Tanggal Lahir:</strong> {{ $anggota->tgl_lahir }}</p>
+                                    <p><strong>Peran:</strong> {{ $anggota->peran }}</p>
+                                    <p><strong>Nomor WA:</strong> {{ $anggota->kontak }}</p>
+                                </div>
+
+                                <div class="text-start mt-2">
+                                    <p class="fw-bold">Riwayat Prestasi:</p>
+                                    <p>{{ $anggota->riwayat_prestasi }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @else
+        <p class="text-center">Belum ada data anggota.</p>
+    @endif
 @endsection

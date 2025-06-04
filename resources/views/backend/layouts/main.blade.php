@@ -198,7 +198,7 @@
         });
     </script>
     <script>
-        const text = "Berbeda | Bersatu | Berjaya | Porlempika Padang";
+        const text = "Berbeda | Bersatu | Berjaya | Porlempika Kota Padang";
         const typingSpeed = 200; // ms per karakter
         const delayBetweenLoops = 3000; // delay 2 detik setelah selesai
         const typingElement = document.getElementById('typing-text');
