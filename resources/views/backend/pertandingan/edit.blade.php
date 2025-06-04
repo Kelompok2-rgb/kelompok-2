@@ -43,7 +43,11 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
+             <div class="mt-3">
+                     <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                </div>
+                
         </form>
     </div>
 @endsection
