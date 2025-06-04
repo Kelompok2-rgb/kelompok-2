@@ -28,9 +28,9 @@
         <thead class="table-dark">
             <tr>
                 <th>No</th>
+                <th>Lokasi</th>
                 <th>Nama Pertandingan</th>
                 <th>Nama Penyelenggara</th>
-                <th>Lokasi</th>
                 <th>Tanggal</th>
                 <th>Aksi</th>
             </tr>
