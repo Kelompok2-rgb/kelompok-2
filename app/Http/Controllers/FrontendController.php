@@ -21,7 +21,7 @@ class FrontendController extends Controller
     
     public function anggota()
     {
-       $anggotas = Anggota::all();
+       $anggotas =  Anggota::paginate(4); 
         return view('frontend.indexanggota', compact('anggotas'));
     } 
     public function club()
