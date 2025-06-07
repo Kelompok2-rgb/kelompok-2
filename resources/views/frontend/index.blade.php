@@ -74,7 +74,7 @@
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="{{ route('frontend.indexanggota') }}#anggota">Anggota</a></li>
-                            <li><a href="{{ route('frontend.indexclub') }}#club">Club</a></li>
+                            <li><a href="{{ route('frontend.indexclub') }}#club">Klub</a></li>
                             <li><a href="{{ route('frontend.indexatlet') }}#atlet">Atlet</a></li>
                             <li><a href="{{ route('frontend.indexjadwalpertandingan') }}#jadwal_pertandingan">Jadwal
                                     Pertandingan</a></li>
@@ -125,10 +125,6 @@
 
         </section><!-- /Hero Section -->
 
-        <div class="container py-5">
-            @yield('content')
-        </div>
-
 
 
         <!-- About Section -->
@@ -138,7 +134,7 @@
 
                 <div class="row gy-4">
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Porlempika</h3>
+                        <h1>Porlempika</h1>
                         <img src="{{ asset('frontend/assets/images/thumbnail.png') }}" class="img-fluid rounded-4 mb-4"
                             alt="">
                         <p>Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman,
@@ -240,7 +236,7 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Porlempika</h2>
-                <p>Standard Competition<br></p>
+                <p>Standar Kompetisi<br></p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -255,13 +251,18 @@
                             </div>
                             <div class="details position-relative">
                                 <div class="icon mb-2">
-                                    <i class="bi bi-scissors" style="font-size: 2rem;"></i>
+                                    <i class=""></i>
                                     <!-- ukuran icon bisa diatur -->
                                 </div>
-                                <a href="service-details.html" class="stretched-link">
+                                <a href="#" class="stretched-link">
                                     <h3>Pisau</h3>
                                 </a>
-                                <p>Panjang minimal 12 inchi (30,5cm), maksimal 16 inchi (40 cm)</p>
+                                <p style="text-align: justify;"> Dalam olahraga lempar pisau, standar internasional
+                                    mengatur bahwa panjang pisau yang digunakan berkisar antara 10 hingga 16 inci
+                                    (sekitar 25,4 hingga 40,6 cm), dengan berat antara 340 hingga 680 gram. Pisau harus
+                                    memiliki desain yang seimbang agar dapat dilempar dengan baik, dan biasanya dilempar
+                                    dengan memegang bagian gagangnya. Gaya lemparan harus konsisten dan akurat untuk
+                                    mencapai target dengan sudut yang tepat.</p>
                             </div>
                         </div>
                     </div>
@@ -275,12 +276,18 @@
                             </div>
                             <div class="details position-relative">
                                 <div class="icon mb-2">
-                                    <i class="bi bi-broadcast" style="font-size: 2rem;"></i>
+                                    <i class=""></i>
                                 </div>
-                                <a href="service-details.html" class="stretched-link">
+                                <a href="#" class="stretched-link">
                                     <h3>Kapak</h3>
                                 </a>
-                                <p>Berat min 200 gram....,maksimal tidak disebutkan</p>
+                                <p style="text-align: justify;">Kapak yang digunakan dalam kompetisi memiliki panjang
+                                    gagang antara 13 hingga 17 inci (sekitar 33 hingga 43 cm) dan berat total antara 1,5
+                                    hingga 2,5 pon (sekitar 680 hingga 1.130 gram). Kepala kapak biasanya memiliki
+                                    panjang antara 5 hingga 7 inci dan tinggi antara 1,5 hingga 4 inci. Kapak harus
+                                    terbuat dari satu bagian logam yang utuh tanpa modifikasi tambahan, selain dari
+                                    penajaman bilahnya. Kapak ini dirancang agar seimbang dan stabil saat dilempar dari
+                                    jarak tertentu.</p>
                             </div>
                         </div>
                     </div>
@@ -294,12 +301,17 @@
                             </div>
                             <div class="details position-relative">
                                 <div class="icon mb-2">
-                                    <i class="bi bi-easel" style="font-size: 2rem;"></i>
+                                    <i class=""></i>
                                 </div>
-                                <a href="service-details.html" class="stretched-link">
+                                <a href="#" class="stretched-link">
                                     <h3>Jarak</h3>
                                 </a>
-                                <p>Lebar tidak lebih dari 7cm</p>
+                                <p style="text-align: justify;">Jarak lempar dalam olahraga ini disesuaikan dengan
+                                    jenis alat yang digunakan. Untuk pisau, jarak minimal yang digunakan adalah 4 meter,
+                                    dan bisa ditambah dalam kelipatan 3 meter untuk kategori lanjutan. Sementara itu,
+                                    untuk kapak, jarak standar antara garis lempar dan target adalah 12 kaki atau
+                                    sekitar 3,66 meter. Penentuan jarak ini penting untuk memastikan rotasi alat yang
+                                    tepat sebelum mengenai target.</p>
                             </div>
                         </div>
                     </div>
@@ -313,12 +325,18 @@
                             </div>
                             <div class="details position-relative">
                                 <div class="icon mb-2">
-                                    <i class="bi bi-activity" style="font-size: 2rem;"></i>
+                                    <i class=""></i>
                                 </div>
-                                <a href="service-details.html" class="stretched-link">
+                                <a href="#" class="stretched-link">
                                     <h3>Target</h3>
                                 </a>
-                                <p>Panjang minimal 12 inchi (30,5cm), maksimal 16 inchi (40 cm)</p>
+                                <p style="text-align: justify;">Target untuk lempar pisau umumnya memiliki diameter
+                                    sekitar 1 meter, dengan pusat target diletakkan pada ketinggian sekitar 1,25 meter
+                                    dari permukaan tanah. Sementara itu, target untuk lempar kapak memiliki diameter
+                                    sekitar 24 inci (61 cm), dengan pusat atau bullseye berada pada ketinggian 60 inci
+                                    (152,4 cm). Target dilengkapi dengan zona skor seperti lingkaran pusat (bullseye)
+                                    dan area tambahan seperti "killshots" untuk tingkat kesulitan yang lebih tinggi
+                                    dalam penilaian.</p>
                             </div>
                         </div>
                     </div>
@@ -338,27 +356,31 @@
                 <div class="row gy-4">
 
                     <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
+                        <img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" class="img-fluid"
+                            alt="">
                     </div><!-- End Client Item -->
 
                     <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
+                        <img src="{{ asset('dashboard/assets/images/logokel2.jpg') }}" class="img-fluid"
+                            alt="">
                     </div><!-- End Client Item -->
 
                     <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/images/Logo_pnp.png') }} " class="img-fluid"
+                            alt="">
                     </div><!-- End Client Item -->
 
                     <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/images/Logo_satgaspnp.png') }} "class="img-fluid"
+                            alt="">
                     </div><!-- End Client Item -->
 
                     <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/images/menwa.png') }}" class="img-fluid" alt="">
                     </div><!-- End Client Item -->
 
                     <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
+                        <img src="{{ asset('frontend/assets/images/koni.png') }}"class="img-fluid" alt="">
                     </div><!-- End Client Item -->
 
                 </div>
@@ -375,26 +397,26 @@
                 <ul class="nav nav-tabs row d-flex" data-aos="fade-up" data-aos-delay="100">
                     <li class="nav-item col-3">
                         <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
-                            <i class="bi bi-exclamation-octagon-fill"></i>
-                            <h4 class="d-none d-lg-block"> Peraturan </h4>
+                            <i class="bi bi-calendar-event-fill"></i>
+                            <h4 class="d-none d-lg-block"> Jadwal Pertandingan </h4>
                         </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
-                            <i class="bi bi-exclamation-octagon-fill"></i>
-                            <h4 class="d-none d-lg-block"> PERATURAN </h4>
+                            <i class="bi bi-list-ul"></i>
+                            <h4 class="d-none d-lg-block"> Kategori Pertandingan </h4>
                         </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
-                            <i class="bi bi-exclamation-octagon-fill"></i>
-                            <h4 class="d-none d-lg-block">PERATURAN</h4>
+                            <i class="bi bi-images"></i>
+                            <h4 class="d-none d-lg-block">Galeri</h4>
                         </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-4">
-                            <i class="bi bi-exclamation-octagon-fill"></i>
-                            <h4 class="d-none d-lg-block"> PERATURAN </h4>
+                            <i class="bi bi-megaphone-fill"></i>
+                            <h4 class="d-none d-lg-block"> Pengumuman </h4>
                         </a>
                     </li>
                 </ul><!-- End Tab Nav -->
@@ -532,235 +554,9 @@
 
         </section><!-- /Features Section -->
 
-        <!-- Services 2 Section -->
-        <section id="services-2" class="services-2 section light-background">
-
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>Services</h2>
-                <p>CHECK OUR SERVICES</p>
-            </div><!-- End Section Title -->
-
-            <div class="container">
-
-                <div class="row gy-4">
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
-                            <div>
-
-                                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                                <p class="description">Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak
-                                    ada anak-anak atau hewan di sekitar tempat anda berlatih.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Service Item -->
-
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
-                            <div>
-                                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                                <p class="description">Sebuah pisau yang memiliki pegangan ideal akan lebih mudah dalam
-                                    menggenggam</p>
-                            </div>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                        <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
-                            <div>
-                                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                                <p class="description">Sebuah pisau yang memiliki berat, akan lebih mudah untuk
-                                    dipegang dan dilempar serta menancap dengan baik.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                        <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
-                            <div>
-                                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                                <p class="description">Pergelangan tangan Anda tetap terkunci dan mencoba untuk
-                                    mendapatkan gerakan secara mulus, biarkan pisau yang dipegang lepas dengan
-                                    sendirinya.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
-                        <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
-                            <div>
-                                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                                <p class="description">Selalu memperhatikan pegangan, bukan titik menancapnya. Jika
-                                    pisau menancaptarget dengan pegangan ke atas, bergerak maju beberapa inci. Itu
-                                    menandakan terlalu banyak waktu untuk berputar sebelum mencapai target.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="600">
-                        <div class="service-item d-flex position-relative h-100">
-                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
-                            <div>
-                                <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
-                                <p class="description">Meski terasa alami, cobalah untuk tidak menjentikkan pergelangan
-                                    tangan ketika Anda melepaskan pisau. Sulit untuk melakukan itu persis sama setiap
-                                    kali Anda melempar.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                </div>
-
-            </div>
-
-        </section><!-- /Services 2 Section -->
-
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials section dark-background">
-
-            <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
-
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-                <div class="swiper init-swiper">
-                    <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              }
-            }
-          </script>
-                    <div class="swiper-wrapper">
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/images/pnp.jpg" class="testimonial-img" alt="">
-                                <h3>Saul Goodman</h3>
-                                <h4>Ceo &amp; Founder</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum
-                                        suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et.
-                                        Maecen aliquam, risus at semper.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Sara Wilsson</h3>
-                                <h4>Designer</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum
-                                        quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat
-                                        irure amet legam anim culpa.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Jena Karlis</h3>
-                                <h4>Store Owner</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla
-                                        quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore
-                                        quis sint minim.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Matt Brandon</h3>
-                                <h4>Freelancer</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim
-                                        fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore
-                                        quem dolore labore illum veniam.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>John Larson</h3>
-                                <h4>Entrepreneur</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor
-                                        noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam
-                                        esse veniam culpa fore nisi cillum quid.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
-            </div>
-
-        </section><!-- /Testimonials Section -->
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
-
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Portfolio</h2>
@@ -967,92 +763,282 @@
                 </div>
 
             </div>
+            </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials section dark-background">
+
+            <img src="{{ asset('frontend/assets/images/thumbnail.png') }}" class="testimonials-bg" alt="">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="swiper init-swiper">
+                    <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{{ asset('frontend/assets/images/muhammad_ali.jpg') }}"
+                                    class="testimonial-img" alt="">
+                                <h3>Muhammad Ali</h3>
+                                <h4>Petinju Legendaris</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Saya membenci setiap menit latihan, tapi saya berkata: Jangan menyerah.
+                                        Deritalah sekarang dan hiduplah sebagai juara seumur hidup</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{{ asset('frontend/assets/images/Serena_Williams.jpg') }}"
+                                    class="testimonial-img" alt="">
+                                <h3>Serena Williams</h3>
+                                <h4>Petenis Profesional</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Seorang juara tidak ditentukan dari seberapa sering ia menang, tapi dari
+                                        bagaimana ia bangkit setiap kali terjatuh.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{{ asset('frontend/assets/images/jordan.jpg') }}" class="testimonial-img"
+                                    alt="">
+                                <h3>Michael Jordan</h3>
+                                <h4>Pebasket NBA</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Saya gagal lebih dari 9.000 kali dalam karier saya. Saya kalah di hampir 300
+                                        pertandingan... Dan karena itulah saya berhasil</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{{ asset('frontend/assets/images/Usain_Bolt.jpg') }}"
+                                    class="testimonial-img" alt="">
+                                <h3>Usain Bolt</h3>
+                                <h4>Pelari Olimpiade</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Jangan terlalu memikirkan bagaimana kamu memulai, fokuslah pada bagaimana kamu
+                                        akan mengakhiri.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{{ asset('frontend/assets/images/Khabib_Nurmagomedov.jpg') }}"
+                                    class="testimonial-img" alt="">
+                                <h3>Khabib Nurmagomedov</h3>
+                                <h4>Petarung MMA (Juara Dunia UFC)</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Jika kamu punya tujuan dan mimpi, jangan pernah menyerah untuk
+                                        mencapainya.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+
+        </section><!-- /Testimonials Section -->
+
 
             <section id="anggota">
-                @yield('anggota')
+                @yield('content')
             </section>
 
 
-            <!-- Team Section -->
-            <section id="team" class="team section light-background">
+            <!-- Services 2 Section -->
+            <section id="services-2" class="services-2 section light-background">
 
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
-                    <h2>Team</h2>
-                    <p>CHECK OUR TEAM</p>
+                    <h2>Porlempika</h2>
+                    <p>Susunan organisasi</p>
                 </div><!-- End Section Title -->
 
                 <div class="container">
 
-                    <div class="row gy-5">
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Zahadi Rizfy</h4>
-                                    <span>Project Manager</span>
-                                    <div class="social">
-                                        <a href="https://www.instagram.com/zahadirizfy_?igsh=YnNuOWg1cjllOHA="><i class="bi bi-instagram"></i></a>
+                    <div class="row gy-4">
 
-                                    </div>
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item d-flex position-relative h-100">
+                                <!-- Ganti icon dengan foto -->
+                                <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
+                                    class="flex-shrink-0 rounded-circle me-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+
+                                <div>
+                                    <h4 class="title">
+                                        <p>Ketua</p>
+                                    </h4>
+                                    <p class="description">
+                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                        atau hewan di sekitar tempat anda berlatih.
+                                    </p>
                                 </div>
                             </div>
-                        </div><!-- End Team Member -->
+                        </div>
 
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Syarah Izzati</h4>
-                                    <span>UI/UX Designer</span>
-                                    <div class="social">
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item d-flex position-relative h-100">
+                                <!-- Ganti icon dengan foto -->
+                                <img src="{{ asset('frontend/assets/images/yara.jpg') }}" alt="Foto Ketua"
+                                    class="flex-shrink-0 rounded-circle me-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
 
-                                        <a href="https://www.instagram.com/syarazzl?igsh=MWR0Nnpub2lrZTV0YQ=="><i class="bi bi-instagram"></i></a>
-
-                                    </div>
+                                <div>
+                                    <h4 class="title">
+                                        <p>Wakil Ketua</p>
+                                    </h4>
+                                    <p class="description">
+                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                        atau hewan di sekitar tempat anda berlatih.
+                                    </p>
                                 </div>
                             </div>
-                        </div><!-- End Team Member -->
+                        </div>
 
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Givani Arianti</h4>
-                                    <span>Technical Writer</span>
-                                    <div class="social">
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item d-flex position-relative h-100">
+                                <!-- Ganti icon dengan foto -->
+                                <img src="{{ asset('frontend/assets/images/vani.jpg') }}" alt="Foto Ketua"
+                                    class="flex-shrink-0 rounded-circle me-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
 
-                                        <a href="https://www.instagram.com/vanii_arn?igsh=MXdndzFlN3gwZG94dw=="><i class="bi bi-instagram"></i></a>
-
-                                    </div>
+                                <div>
+                                    <h4 class="title">
+                                       <p>Sekretaris</p>
+                                    </h4>
+                                    <p class="description">
+                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                        atau hewan di sekitar tempat anda berlatih.
+                                    </p>
                                 </div>
                             </div>
-                        </div><!-- End Team Member -->
+                        </div>
 
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Davi Ahmad Yani</h4>
-                                    <span>Tester</span>
-                                    <div class="social">
+                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item d-flex position-relative h-100">
+                                <!-- Ganti icon dengan foto -->
+                                <img src="{{ asset('frontend/assets/images/dapi.jpg') }}" alt="Foto Ketua"
+                                    class="flex-shrink-0 rounded-circle me-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
 
-                                        <a href="https://www.instagram.com/daviahmdy_?igsh=M2RwbmYyeXU4ZnUz"><i class="bi bi-instagram"></i></a>
-
-                                    </div>
+                                <div>
+                                    <h4 class="title">
+                                        <p>Bendahara</p>
+                                    </h4>
+                                    <p class="description">
+                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                        atau hewan di sekitar tempat anda berlatih.
+                                    </p>
                                 </div>
                             </div>
-                        </div><!-- End Team Member -->
+                        </div>
+
+                       <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item d-flex position-relative h-100">
+                                <!-- Ganti icon dengan foto -->
+                                <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
+                                    class="flex-shrink-0 rounded-circle me-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+
+                                <div>
+                                    <h4 class="title">
+                                        <p>Bendahara</p>
+                                    </h4>
+                                    <p class="description">
+                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                        atau hewan di sekitar tempat anda berlatih.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item d-flex position-relative h-100">
+                                <!-- Ganti icon dengan foto -->
+                                <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
+                                    class="flex-shrink-0 rounded-circle me-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+
+                                <div>
+                                    <h4 class="title">
+                                       <p>Bendahara</p>
+                                    </h4>
+                                    <p class="description">
+                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                        atau hewan di sekitar tempat anda berlatih.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
                 </div>
 
-            </section><!-- /Team Section -->
+            </section><!-- /Services 2 Section -->
+
+
+
 
             <!-- Contact Section -->
             <section id="contact" class="contact section">
@@ -1073,7 +1059,7 @@
                                     <div class="info-item d-flex flex-column justify-content-center align-items-center"
                                         data-aos="fade-up" data-aos-delay="200">
                                         <i class="bi bi-geo-alt"></i>
-                                        <h3>Address</h3>
+                                        <h3>Alamat</h3>
                                         <p>A108 Adam Street, New York, NY 535022</p>
                                     </div>
                                 </div><!-- End Info Item -->
@@ -1082,7 +1068,7 @@
                                     <div class="info-item d-flex flex-column justify-content-center align-items-center"
                                         data-aos="fade-up" data-aos-delay="300">
                                         <i class="bi bi-telephone"></i>
-                                        <h3>Call Us</h3>
+                                        <h3>Admin</h3>
                                         <p>+1 5589 55488 55</p>
                                     </div>
                                 </div><!-- End Info Item -->
@@ -1091,7 +1077,7 @@
                                     <div class="info-item d-flex flex-column justify-content-center align-items-center"
                                         data-aos="fade-up" data-aos-delay="400">
                                         <i class="bi bi-envelope"></i>
-                                        <h3>Email Us</h3>
+                                        <h3>Email Kami</h3>
                                         <p>info@example.com</p>
                                     </div>
                                 </div><!-- End Info Item -->
@@ -1140,6 +1126,91 @@
                 </div>
 
             </section><!-- /Contact Section -->
+
+            <!-- Team Section -->
+            <section id="team" class="team section light-background">
+
+                <!-- Section Title -->
+                <div class="container section-title" data-aos="fade-up">
+                    <h2>Tim</h2>
+                    <p>PENGEMBANG</p>
+                </div><!-- End Section Title -->
+
+                <div class="container">
+
+                    <div class="row gy-5">
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Zahadi Rizfy</h4>
+                                    <span>Project Manager</span>
+                                    <div class="social">
+                                        <a href="https://www.instagram.com/zahadirizfy_?igsh=YnNuOWg1cjllOHA="><i
+                                                class="bi bi-instagram"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Team Member -->
+
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Syarah Izzati</h4>
+                                    <span>UI/UX Designer</span>
+                                    <div class="social">
+
+                                        <a href="https://www.instagram.com/syarazzl?igsh=MWR0Nnpub2lrZTV0YQ=="><i
+                                                class="bi bi-instagram"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Team Member -->
+
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Givani Arianti</h4>
+                                    <span>Technical Writer</span>
+                                    <div class="social">
+
+                                        <a href="https://www.instagram.com/vanii_arn?igsh=MXdndzFlN3gwZG94dw=="><i
+                                                class="bi bi-instagram"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Team Member -->
+
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Davi Ahmad Yani</h4>
+                                    <span>Tester</span>
+                                    <div class="social">
+
+                                        <a href="https://www.instagram.com/daviahmdy_?igsh=M2RwbmYyeXU4ZnUz"><i
+                                                class="bi bi-instagram"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Team Member -->
+
+                    </div>
+
+                </div>
+
+            </section><!-- /Team Section -->
 
     </main>
 
