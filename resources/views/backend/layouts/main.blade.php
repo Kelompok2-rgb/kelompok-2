@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/icons.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.css"> --}}
+
 
     <style>
         .foto-hover.enlarged {
@@ -63,8 +66,6 @@
     </style>
 
 
-
-
     <title>Backend-Porlempika</title>
 </head>
 
@@ -94,15 +95,31 @@
 
                     </div>
                 </div>
+
+                <div class="card radius-10">
+                    <div class="card-body">
+
+                        <div class="text-center">
+                            <p>© <span>Copyright</span> <strong class="px-1 sitename">Porlempika</strong> <span>Kota
+                                    Padang</span>
+                            </p>
+                            <div class="credits">
+
+                                Designed by <a href="#">Kel 2</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <!--end page wrapper -->
-        <!--start overlay-->
-        <div class="overlay toggle-icon"></div>
-        <!--end overlay-->
-        <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
-                class='bx bxs-up-arrow-alt'></i></a>
-        <!--End Back To Top Button-->
+    </div>
+    <!--end page wrapper -->
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
 
     </div>
     <!--end wrapper-->
@@ -222,6 +239,39 @@
 
         document.addEventListener('DOMContentLoaded', typeWriter);
     </script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script>
+        function exportTableToExcel() {
+            // Ambil tabel asli
+            const originalTable = document.querySelector('.tableExportArea');
+
+            // Clone tabel supaya tidak merubah tabel asli di halaman
+            const cloneTable = originalTable.cloneNode(true);
+
+            // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
+            cloneTable.querySelectorAll('tr').forEach(row => {
+                if (row.cells.length > 0) {
+                    row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
+                }
+            });
+
+            // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
+            const workbook = XLSX.utils.table_to_book(cloneTable, {
+                sheet: "Anggota"
+            });
+            XLSX.writeFile(workbook, 'anggota.xlsx');
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.js"></script>
+    <script>
+        new DataTable('#example');
+    </script>
+
+
 
 
 

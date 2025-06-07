@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h2>Galeri</h2>
+        <hr>
     </div>
 
     @if (session('success'))
@@ -19,11 +20,9 @@
         @forelse ($galeris as $galeri)
             <div class="col">
                 <div class="card shadow-sm rounded-4">
-                    <img src="{{ asset('uploads/' . $galeri->gambar) }}"
-                         class="card-img-top"
-                         alt="gambar"
-                         style="height: 200px; object-fit: cover; cursor: pointer;"
-                         onclick="openModal(
+                    <img src="{{ asset('uploads/' . $galeri->gambar) }}" class="card-img-top" alt="gambar"
+                        style="height: 200px; object-fit: cover; cursor: pointer;"
+                        onclick="openModal(
                              '{{ asset('uploads/' . $galeri->gambar) }}',
                              `{{ addslashes($galeri->judul) }}`,
                              `{{ addslashes($galeri->deskripsi) }}`
@@ -32,22 +31,15 @@
                         <h5 class="card-title">{{ $galeri->judul }}</h5>
                         <p class="card-text text-white">{{ $galeri->deskripsi }}</p>
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('backend.galeri.edit', $galeri->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('backend.galeri.destroy', $galeri->id) }}" method="POST" class="d-inline" onsubmit="return handleDeleteGaleri()">
+                            <a href="{{ route('backend.galeri.edit', $galeri->id) }}"
+                                class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('backend.galeri.destroy', $galeri->id) }}" method="POST"
+                                class="d-inline" onsubmit="return handleDeleteGaleri()">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                             </form>
-                            <script>
-                                function handleDeleteGaleri() {
-                                    const userRole = @json(Auth::user()->role);
-                                    if (userRole !== 'admin') {
-                                        alert('Hanya admin yang dapat menghapus');
-                                        return false;
-                                    }
-                                    return confirm('Yakin mau hapus?');
-                                }
-                            </script>
+
                         </div>
                     </div>
                 </div>
@@ -82,7 +74,7 @@
             width: 100%;
             height: 100%;
             overflow-y: auto;
-            background-color: rgba(0,0,0,0.85);
+            background-color: rgba(0, 0, 0, 0.85);
         }
 
         .modal-content-wrapper {
@@ -95,7 +87,7 @@
             max-width: 100%;
             max-height: 70vh;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .modal-title {
@@ -134,5 +126,15 @@
         function closeModal() {
             document.getElementById("imageModal").style.display = "none";
         }
+
+        function handleDeleteGaleri() {
+            const userRole = @json(Auth::user()->role);
+            if (userRole !== 'admin') {
+                alert('Hanya admin yang dapat menghapus');
+                return false;
+            }
+            return confirm('Yakin mau hapus?');
+        }
     </script>
+   
 @endsection
