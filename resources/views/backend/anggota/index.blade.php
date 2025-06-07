@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h2>Anggota</h2>
+        <hr>
     </div>
 
     @if (session('success'))
@@ -26,7 +27,7 @@
     </div>
 
 
-    <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
+    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -41,7 +42,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($anggotas as $anggota)
+            @foreach ($anggotas as $anggota)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $anggota->nama }}</td>
@@ -66,53 +67,20 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Hapus</button>
                         </form>
-
-                        <script>
-                            function handleDeleteAnggota() {
-                                const userRole = @json(Auth::user()->role);
-                                if (userRole !== 'admin') {
-                                    alert('Hanya admin yang dapat menghapus');
-                                    return false;
-                                }
-                                return confirm('Yakin ingin menghapus?');
-                            }
-                        </script>
-
                     </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="9" class="text-center">Belum ada data anggota</td>
-                </tr>
-            @endforelse
+            @endforeach
         </tbody>
     </table>
 
-    <!-- SheetJS untuk Export Excel -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script>
-        function exportTableToExcel() {
-            // Ambil tabel asli
-            const originalTable = document.querySelector('#tableExportArea');
-
-            // Clone tabel supaya tidak merubah tabel asli di halaman
-            const cloneTable = originalTable.cloneNode(true);
-
-            // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
-            cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
-                }
-            });
-
-            // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
-            const workbook = XLSX.utils.table_to_book(cloneTable, {
-                sheet: "Anggota"
-            });
-            XLSX.writeFile(workbook, 'anggota.xlsx');
+        function handleDeleteAnggota() {
+            const userRole = @json(Auth::user()->role);
+            if (userRole !== 'admin') {
+                alert('Hanya admin yang dapat menghapus');
+                return false;
+            }
+            return confirm('Yakin ingin menghapus?');
         }
     </script>
-
-
-
 @endsection

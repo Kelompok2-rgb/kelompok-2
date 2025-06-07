@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h2>Pertandingan</h2>
+        <hr>
     </div>
 
     @if (session('success'))
@@ -24,7 +25,7 @@
             <i class="fa-solid fa-file-excel"></i>
         </button>
     </div>
-    <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
+    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -36,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($pertandingans as $pertandingan)
+            @foreach ($pertandingans as $pertandingan)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $pertandingan->lokasi }}</td>
@@ -53,49 +54,24 @@
                             <button type="submit" class="btn btn-danger">Hapus</button>
                         </form>
 
-                        <script>
-                            function handleDeletePertandingan() {
-                                const userRole = @json(Auth::user()->role);
-                                if (userRole !== 'admin' && userRole !== 'penyelenggara') {
-                                    alert('Hanya admin dan penyelenggara yang dapat menghapus.');
-                                    return false;
-                                }
-                                return confirm('Yakin ingin menghapus?');
-                            }
-                        </script>
 
                     </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="7" class="text-center">Belum ada data pertandingan</td>
-                </tr>
-            @endforelse
+
+            @endforeach
         </tbody>
 
     </table>
-    <!-- SheetJS untuk Export Excel -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+
     <script>
-        function exportTableToExcel() {
-            // Ambil tabel asli
-            const originalTable = document.querySelector('#tableExportArea');
-
-            // Clone tabel supaya tidak merubah tabel asli di halaman
-            const cloneTable = originalTable.cloneNode(true);
-
-            // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
-            cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
-                }
-            });
-
-            // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
-            const workbook = XLSX.utils.table_to_book(cloneTable, {
-                sheet: "Pertandingan"
-            });
-            XLSX.writeFile(workbook, 'pertandingan.xlsx');
+        function handleDeletePertandingan() {
+            const userRole = @json(Auth::user()->role);
+            if (userRole !== 'admin' && userRole !== 'penyelenggara') {
+                alert('Hanya admin dan penyelenggara yang dapat menghapus.');
+                return false;
+            }
+            return confirm('Yakin ingin menghapus?');
         }
     </script>
 @endsection

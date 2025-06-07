@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h2>Pengumuman</h2>
+        <hr>
     </div>
 
     @if (session('success'))
@@ -25,7 +26,7 @@
         </button>
     </div>
 
-    <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
+    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -36,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($pengumumans as $item)
+            @foreach ($pengumumans as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td style="font-size: 1.1rem; font-weight: 600;">{{ $item->judul }}</td>
@@ -64,11 +65,8 @@
                         </form>
                     </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="5" class="text-center">Belum ada data pengumuman</td>
-                </tr>
-            @endforelse
+           
+            @endforeach
         </tbody>
     </table>
 
@@ -132,15 +130,6 @@
             return confirm('Yakin hapus?');
         }
 
-        function exportTableToExcel() {
-            const originalTable = document.querySelector('#tableExportArea');
-            const cloneTable = originalTable.cloneNode(true);
-            cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) row.deleteCell(row.cells.length - 1);
-            });
-            const workbook = XLSX.utils.table_to_book(cloneTable, { sheet: "Pengumuman" });
-            XLSX.writeFile(workbook, 'pengumuman.xlsx');
-        }
 
         function showDetailModal(judul, tanggal, isi) {
             document.getElementById('modalJudul').innerText = judul;
@@ -155,5 +144,5 @@
     </script>
 
     <!-- SheetJS -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+   
 @endsection

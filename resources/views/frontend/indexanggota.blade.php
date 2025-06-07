@@ -1,66 +1,58 @@
 @extends('frontend.index')
 
-@section('content')
-    <div class="text-center mb-4">
-        <h2>Anggota</h2>
+@section('anggota')
+    <div class="container section-title mb-2" data-aos="fade-up">
+        <h2>Porlempika</h2>
+        <p>Anggota</p>
     </div>
 
     @if ($anggotas->count())
-        <div class="container">
-            {{-- Grid Card Anggota --}}
-            <div class="row justify-content-center align-items-stretch">
+        <div class="container py-3">
+            <div class="row gy-4">
                 @foreach ($anggotas as $anggota)
-                    <div class="col-12 col-sm-6 col-md-3 mb-4">
-                        <div class="card h-100 shadow">
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-bold">
-                                    {{ $loop->iteration + ($anggotas->currentPage() - 1) * $anggotas->perPage() }}. {{ $anggota->nama }}
-                                </h5>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="member shadow rounded-4 overflow-hidden text-center p-3 bg-white h-100">
+                            <div class="pic mb-3">
+                                <img src="{{ $anggota->foto ? asset('storage/' . $anggota->foto) : asset('frontend/assets/images/default.jpg') }}"
+                                    class="img-fluid rounded-5 border border-3" alt="Foto {{ $anggota->nama }}"
+                                    style="width: 100%; height: 250px; object-fit: cover;">
 
-                                @if ($anggota->foto)
-                                    <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto"
-                                         class="rounded mb-3"
-                                         style="width: 100%; height: 200px; object-fit: cover;">
-                                @else
-                                    <div class="bg-dark text-white rounded d-flex justify-content-center align-items-center mb-3"
-                                         style="width: 100%; height: 200px;">
-                                        <strong>Foto</strong>
-                                    </div>
-                                @endif
+                            </div>
 
-                                <div class="text-start">
-                                    <p><strong>Klub:</strong> {{ $anggota->klub }}</p>
-                                    <p><strong>Tanggal Lahir:</strong> {{ $anggota->tgl_lahir }}</p>
-                                    <p><strong>Peran:</strong> {{ $anggota->peran }}</p>
-                                    <p><strong>Nomor WA:</strong> {{ $anggota->kontak }}</p>
-                                </div>
-
-                                <div class="text-start mt-2">
-                                    <p class="fw-bold">Riwayat Prestasi:</p>
-                                    <p>{{ $anggota->riwayat_prestasi }}</p>
+                            <div class="member-info">
+                                <h5 class="fw-bold text-primary">{{ $anggota->nama }}</h5>
+                                <p class="text-muted mb-1">{{ $anggota->peran }}</p>
+                                <p><strong>Nama Klub:</strong> {{ $anggota->klub }}</p>
+                                <p><strong>Tanggal Lahir:</strong> {{ $anggota->tgl_lahir }}</p>
+                                <p><strong>Riwayat Prestasi:</strong><br>{{ $anggota->riwayat_prestasi }}</p>
+                                <div class="social mt-3">
+                                    @if ($anggota->kontak)
+                                        <a href="https://wa.me/{{ $anggota->kontak }}" target="_blank"
+                                            class="btn btn-success btn-sm rounded-pill">
+                                            <i class="bi bi-whatsapp me-1"></i> Kontak
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
 
-            {{-- Tombol Navigasi --}}
-            <div class="d-flex justify-content-center gap-3 my-4">
-                {{-- Tombol Sebelumnya --}}
-                @if ($anggotas->onFirstPage())
-                    <button class="btn btn-outline-secondary" disabled>&larr; Sebelumnya</button>
-                @else
-                    <a href="{{ $anggotas->previousPageUrl() }}" class="btn btn-outline-secondary">&larr; Sebelumnya</a>
-                @endif
+        {{-- Navigasi --}}
+        <div class="d-flex justify-content-center gap-3 my-4">
+            @if ($anggotas->onFirstPage())
+                <button class="btn btn-outline-secondary" disabled>&larr; Sebelumnya</button>
+            @else
+                <a href="{{ $anggotas->previousPageUrl() }}" class="btn btn-outline-secondary">&larr; Sebelumnya</a>
+            @endif
 
-                {{-- Tombol Selanjutnya --}}
-                @if ($anggotas->hasMorePages())
-                    <a href="{{ $anggotas->nextPageUrl() }}" class="btn btn-outline-primary">Selanjutnya &rarr;</a>
-                @else
-                    <button class="btn btn-outline-primary" disabled>Selanjutnya &rarr;</button>
-                @endif
-            </div>
+            @if ($anggotas->hasMorePages())
+                <a href="{{ $anggotas->nextPageUrl() }}" class="btn btn-outline-primary">Selanjutnya &rarr;</a>
+            @else
+                <button class="btn btn-outline-primary" disabled>Selanjutnya &rarr;</button>
+            @endif
         </div>
     @else
         <p class="text-center">Belum ada data anggota.</p>

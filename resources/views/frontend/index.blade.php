@@ -372,12 +372,12 @@
 
             <div class="container">
 
-                     <ul class="nav nav-tabs row d-flex" data-aos="fade-up" data-aos-delay="100">
+                <ul class="nav nav-tabs row d-flex" data-aos="fade-up" data-aos-delay="100">
                     <li class="nav-item col-3">
-                    <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
                             <i class="bi bi-exclamation-octagon-fill"></i>
                             <h4 class="d-none d-lg-block"> Peraturan </h4>
-                     </a>
+                        </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
@@ -387,13 +387,13 @@
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
-                           <i class="bi bi-exclamation-octagon-fill"></i>
+                            <i class="bi bi-exclamation-octagon-fill"></i>
                             <h4 class="d-none d-lg-block">PERATURAN</h4>
                         </a>
                     </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-4">
-                           <i class="bi bi-exclamation-octagon-fill"></i>
+                            <i class="bi bi-exclamation-octagon-fill"></i>
                             <h4 class="d-none d-lg-block"> PERATURAN </h4>
                         </a>
                     </li>
@@ -544,11 +544,11 @@
             <div class="container">
 
                 <div class="row gy-4">
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item d-flex position-relative h-100">
-                                <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
-                <div>
-          
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item d-flex position-relative h-100">
+                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
+                            <div>
+
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak
                                     ada anak-anak atau hewan di sekitar tempat anda berlatih.</p>
@@ -570,7 +570,7 @@
 
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-item d-flex position-relative h-100">
-                          <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
+                            <i class="bi bi-exclamation-triangle-fill icon flex-shrink-0"></i>
                             <div>
                                 <h4 class="title"><a href="#" class="stretched-link">Warning</a></h4>
                                 <p class="description">Sebuah pisau yang memiliki berat, akan lebih mudah untuk
@@ -968,181 +968,178 @@
 
             </div>
 
-        </section><!-- /Portfolio Section -->
+            <section id="anggota">
+                @yield('anggota')
+            </section>
 
-        <!-- Team Section -->
-        <section id="team" class="team section light-background">
 
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>Team</h2>
-                <p>CHECK OUR TEAM</p>
-            </div><!-- End Section Title -->
+            <!-- Team Section -->
+            <section id="team" class="team section light-background">
 
-            <div class="container">
+                <!-- Section Title -->
+                <div class="container section-title" data-aos="fade-up">
+                    <h2>Team</h2>
+                    <p>CHECK OUR TEAM</p>
+                </div><!-- End Section Title -->
 
-                <div class="row gy-5">
+                <div class="container">
 
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="member">
-                            <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}"
-                                    class="img-fluid" alt=""></div>
-                            <div class="member-info">
-                                <h4>Zahadi Rizfy</h4>
-                                <span>Project Manager</span>
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <div class="row gy-5">
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Zahadi Rizfy</h4>
+                                    <span>Project Manager</span>
+                                    <div class="social">
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- End Team Member -->
+                        </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <div class="member">
-                            <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}"
-                                    class="img-fluid" alt=""></div>
-                            <div class="member-info">
-                                <h4>Syarah Izzati</h4>
-                                <span>UI/UX Designer</span>
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Syarah Izzati</h4>
+                                    <span>UI/UX Designer</span>
+                                    <div class="social">
+                                  
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- End Team Member -->
+                        </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                        <div class="member">
-                            <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}"
-                                    class="img-fluid" alt=""></div>
-                            <div class="member-info">
-                                <h4>Givani Arianti</h4>
-                                <span>Technical Writer</span>
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Givani Arianti</h4>
+                                    <span>Technical Writer</span>
+                                    <div class="social">
+                                     
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                      
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- End Team Member -->
+                        </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                        <div class="member">
-                            <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}"
-                                    class="img-fluid" alt=""></div>
-                            <div class="member-info">
-                                <h4>Davi Ahmad Yani</h4>
-                                <span>Tester</span>
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                            <div class="member">
+                                <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}"
+                                        class="img-fluid" alt=""></div>
+                                <div class="member-info">
+                                    <h4>Davi Ahmad Yani</h4>
+                                    <span>Tester</span>
+                                    <div class="social">
+                                       
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                    
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- End Team Member -->
+                        </div><!-- End Team Member -->
 
-                </div>
-
-            </div>
-
-        </section><!-- /Team Section -->
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact section">
-
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>Contact</h2>
-                <p>Necessitatibus eius consequatur</p>
-            </div><!-- End Section Title -->
-
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-                <div class="row gy-4">
-                    <div class="col-lg-6 ">
-                        <div class="row gy-4">
-
-                            <div class="col-lg-12">
-                                <div class="info-item d-flex flex-column justify-content-center align-items-center"
-                                    data-aos="fade-up" data-aos-delay="200">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <h3>Address</h3>
-                                    <p>A108 Adam Street, New York, NY 535022</p>
-                                </div>
-                            </div><!-- End Info Item -->
-
-                            <div class="col-md-6">
-                                <div class="info-item d-flex flex-column justify-content-center align-items-center"
-                                    data-aos="fade-up" data-aos-delay="300">
-                                    <i class="bi bi-telephone"></i>
-                                    <h3>Call Us</h3>
-                                    <p>+1 5589 55488 55</p>
-                                </div>
-                            </div><!-- End Info Item -->
-
-                            <div class="col-md-6">
-                                <div class="info-item d-flex flex-column justify-content-center align-items-center"
-                                    data-aos="fade-up" data-aos-delay="400">
-                                    <i class="bi bi-envelope"></i>
-                                    <h3>Email Us</h3>
-                                    <p>info@example.com</p>
-                                </div>
-                            </div><!-- End Info Item -->
-
-                        </div>
                     </div>
 
-                    <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-                            data-aos-delay="500">
+                </div>
+
+            </section><!-- /Team Section -->
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact section">
+
+                <!-- Section Title -->
+                <div class="container section-title" data-aos="fade-up">
+                    <h2>Contact</h2>
+                    <p>Necessitatibus eius consequatur</p>
+                </div><!-- End Section Title -->
+
+                <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="row gy-4">
+                        <div class="col-lg-6 ">
                             <div class="row gy-4">
 
+                                <div class="col-lg-12">
+                                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                                        data-aos="fade-up" data-aos-delay="200">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <h3>Address</h3>
+                                        <p>A108 Adam Street, New York, NY 535022</p>
+                                    </div>
+                                </div><!-- End Info Item -->
+
                                 <div class="col-md-6">
-                                    <input type="text" name="name" class="form-control"
-                                        placeholder="Your Name" required="">
-                                </div>
+                                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                                        data-aos="fade-up" data-aos-delay="300">
+                                        <i class="bi bi-telephone"></i>
+                                        <h3>Call Us</h3>
+                                        <p>+1 5589 55488 55</p>
+                                    </div>
+                                </div><!-- End Info Item -->
 
-                                <div class="col-md-6 ">
-                                    <input type="email" class="form-control" name="email"
-                                        placeholder="Your Email" required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="subject" placeholder="Subject"
-                                        required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
-                                </div>
-
-                                <div class="col-md-12 text-center">
-                                    <div class="loading">Loading</div>
-                                    <div class="error-message"></div>
-                                    <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                    <button type="submit">Send Message</button>
-                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                                        data-aos="fade-up" data-aos-delay="400">
+                                        <i class="bi bi-envelope"></i>
+                                        <h3>Email Us</h3>
+                                        <p>info@example.com</p>
+                                    </div>
+                                </div><!-- End Info Item -->
 
                             </div>
-                        </form>
-                    </div><!-- End Contact Form -->
+                        </div>
+
+                        <div class="col-lg-6">
+                            <form action="forms/contact.php" method="post" class="php-email-form"
+                                data-aos="fade-up" data-aos-delay="500">
+                                <div class="row gy-4">
+
+                                    <div class="col-md-6">
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Your Name" required="">
+                                    </div>
+
+                                    <div class="col-md-6 ">
+                                        <input type="email" class="form-control" name="email"
+                                            placeholder="Your Email" required="">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="subject"
+                                            placeholder="Subject" required="">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
+                                    </div>
+
+                                    <div class="col-md-12 text-center">
+                                        <div class="loading">Loading</div>
+                                        <div class="error-message"></div>
+                                        <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                        <button type="submit">Send Message</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div><!-- End Contact Form -->
+
+                    </div>
 
                 </div>
 
-            </div>
-
-        </section><!-- /Contact Section -->
+            </section><!-- /Contact Section -->
 
     </main>
 
@@ -1206,15 +1203,14 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Dewi</strong> <span>All Rights Reserved</span>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Porlempika</strong> <span>Kota Padang</span>
             </p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you've purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
-                    href="https://themewagon.com">ThemeWagon
+                Designed by <a href="#">Kel 2</a>
             </div>
         </div>
 

@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h2>Penyelenggara Event</h2>
+        <hr>
     </div>
 
     @if (session('success'))
@@ -25,7 +26,7 @@
         </button>
     </div>
 
-    <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
+    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -54,40 +55,23 @@
                             <button type="submit" class="btn btn-danger">Hapus</button>
                         </form>
 
-                        <script>
-                            function handleDeletePenyelenggara() {
-                                const userRole = @json(Auth::user()->role);
-                                if (userRole !== 'admin') {
-                                    alert('Hanya admin yang dapat menghapus.');
-                                    return false;
-                                }
-                                return confirm('Yakin ingin menghapus?');
-                            }
-                        </script>
+
 
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
-    <!-- SheetJS untuk Export Excel -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script>
-        function exportTableToExcel() {
-            const originalTable = document.querySelector('#tableExportArea');
-            const cloneTable = originalTable.cloneNode(true);
-
-            cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1); // hapus kolom aksi
-                }
-            });
-
-            const workbook = XLSX.utils.table_to_book(cloneTable, {
-                sheet: "PenyelenggaraEvent"
-            });
-            XLSX.writeFile(workbook, 'penyelenggara_event.xlsx');
+        function handleDeletePenyelenggara() {
+            const userRole = @json(Auth::user()->role);
+            if (userRole !== 'admin') {
+                alert('Hanya admin yang dapat menghapus.');
+                return false;
+            }
+            return confirm('Yakin ingin menghapus?');
         }
     </script>
+
+
 @endsection

@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h2>Atlet</h2>
+        <hr>
     </div>
 
     @if (session('success'))
@@ -25,7 +26,7 @@
         </button>
     </div>
 
-    <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
+    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -37,7 +38,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($atlets as $index => $atlet)
+            @foreach ($atlets as $index => $atlet)
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $atlet->nama }}</td>
@@ -60,6 +61,13 @@
                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
 
+
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
                         <script>
                             function handleDelete() {
                                 const userRole = @json(Auth::user()->role);
@@ -70,31 +78,5 @@
                                 return confirm('Yakin ingin menghapus?');
                             }
                         </script>
-
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">Belum ada data atlet</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-    <script>
-        function exportTableToExcel() {
-            const originalTable = document.querySelector('#tableExportArea');
-            const cloneTable = originalTable.cloneNode(true);
-            cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1);
-                }
-            });
-            const workbook = XLSX.utils.table_to_book(cloneTable, {
-                sheet: "Atlet"
-            });
-            XLSX.writeFile(workbook, 'atlet.xlsx');
-        }
-    </script>
+   
 @endsection

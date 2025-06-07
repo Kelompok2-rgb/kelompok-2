@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-center mb-4">
         <h2>Hasil Pertandingan</h2>
+        <hr>
     </div>
 
     @if (session('success'))
@@ -25,28 +26,24 @@
         </button>
     </div>
 
-    <table id="tableExportArea" class="table table-bordered table-striped mt-3 text-center">
+    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
                 <th>Skor</th>
                 <th>Rangking</th>
                 <th>Catatan Juri</th>
-                <th>Dibuat</th>
-                <th>Diperbarui</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($hasilPertandingans as $index => $hasil)
+            @foreach  ($hasilPertandingans as $index => $hasil)
                 <tr>
-                    <td class="text-center">{{ $index + 1 }}</td>
-                    <td class="text-center">{{ $hasil->skor }}</td>
-                    <td class="text-center">{{ $hasil->rangking }}</td>
-                    <td>{{ $hasil->catatan_juri }}</td>
-                    <td class="text-center">{{ $hasil->created_at->format('d-m-Y H:i') }}</td>
-                    <td class="text-center">{{ $hasil->updated_at->format('d-m-Y H:i') }}</td>
-                    <td class="text-center">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $hasil->skor ?? '-' }}</td>
+                    <td>{{ $hasil->rangking ?? '-' }}</td>
+                    <td>{{ $hasil->catatan_juri ?? '-' }}</td>
+                    <td>
                         <a href="{{ route('backend.hasil_pertandingan.edit', $hasil->id) }}"
                             class="btn btn-warning btn-sm me-1">Edit</a>
                         <form action="{{ route('backend.hasil_pertandingan.destroy', $hasil->id) }}" method="POST"
@@ -55,50 +52,21 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
-
-                        <script>
-                            function handleDeleteHasil() {
-                                const userRole = @json(Auth::user()->role);
-                                if (userRole !== 'admin' && userRole !== 'juri') {
-                                    alert('Hanya admin atau juri yang dapat menghapus');
-                                    return false;
-                                }
-                                return confirm('Yakin ingin menghapus?');
-                            }
-                        </script>
-
                     </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="7" class="text-center">Belum ada data hasil pertandingan</td>
-                </tr>
-            @endforelse
+           
+           @endforeach
         </tbody>
-
     </table>
-    <!-- SheetJS untuk Export Excel -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
     <script>
-        function exportTableToExcel() {
-            // Ambil tabel asli
-            const originalTable = document.querySelector('#tableExportArea');
-
-            // Clone tabel supaya tidak merubah tabel asli di halaman
-            const cloneTable = originalTable.cloneNode(true);
-
-            // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
-            cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
-                }
-            });
-
-            // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
-            const workbook = XLSX.utils.table_to_book(cloneTable, {
-                sheet: "Hasil Pertandingan"
-            });
-            XLSX.writeFile(workbook, 'hasil_pertandingan.xlsx');
+        function handleDeleteHasil() {
+            const userRole = @json(Auth::user()->role);
+            if (userRole !== 'admin' && userRole !== 'juri') {
+                alert('Hanya admin atau juri yang dapat menghapus');
+                return false;
+            }
+            return confirm('Yakin ingin menghapus?');
         }
     </script>
 @endsection
