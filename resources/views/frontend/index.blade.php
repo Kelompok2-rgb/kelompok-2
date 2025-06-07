@@ -993,8 +993,8 @@
                                     <h4>Zahadi Rizfy</h4>
                                     <span>Project Manager</span>
                                     <div class="social">
-                                        <a href=""><i class="bi bi-instagram"></i></a>
-                                        
+                                        <a href="https://www.instagram.com/zahadirizfy_?igsh=YnNuOWg1cjllOHA="><i class="bi bi-instagram"></i></a>
+
                                     </div>
                                 </div>
                             </div>
@@ -1008,9 +1008,9 @@
                                     <h4>Syarah Izzati</h4>
                                     <span>UI/UX Designer</span>
                                     <div class="social">
-                                  
-                                        <a href=""><i class="bi bi-instagram"></i></a>
-                                        
+
+                                        <a href="https://www.instagram.com/syarazzl?igsh=MWR0Nnpub2lrZTV0YQ=="><i class="bi bi-instagram"></i></a>
+
                                     </div>
                                 </div>
                             </div>
@@ -1024,9 +1024,9 @@
                                     <h4>Givani Arianti</h4>
                                     <span>Technical Writer</span>
                                     <div class="social">
-                                     
-                                        <a href=""><i class="bi bi-instagram"></i></a>
-                                      
+
+                                        <a href="https://www.instagram.com/vanii_arn?igsh=MXdndzFlN3gwZG94dw=="><i class="bi bi-instagram"></i></a>
+
                                     </div>
                                 </div>
                             </div>
@@ -1040,9 +1040,9 @@
                                     <h4>Davi Ahmad Yani</h4>
                                     <span>Tester</span>
                                     <div class="social">
-                                       
-                                        <a href=""><i class="bi bi-instagram"></i></a>
-                                    
+
+                                        <a href="https://www.instagram.com/daviahmdy_?igsh=M2RwbmYyeXU4ZnUz"><i class="bi bi-instagram"></i></a>
+
                                     </div>
                                 </div>
                             </div>
@@ -1254,6 +1254,38 @@
                 });
             });
         });
+    </script>
+    <script>
+        (function() {
+            if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+                window.chatbase = (...arguments) => {
+                    if (!window.chatbase.q) {
+                        window.chatbase.q = []
+                    }
+                    window.chatbase.q.push(arguments)
+                };
+                window.chatbase = new Proxy(window.chatbase, {
+                    get(target, prop) {
+                        if (prop === "q") {
+                            return target.q
+                        }
+                        return (...args) => target(prop, ...args)
+                    }
+                })
+            }
+            const onLoad = function() {
+                const script = document.createElement("script");
+                script.src = "https://www.chatbase.co/embed.min.js";
+                script.id = "sf2RVcB0jTngkTxpn7mQ_";
+                script.domain = "www.chatbase.co";
+                document.body.appendChild(script)
+            };
+            if (document.readyState === "complete") {
+                onLoad()
+            } else {
+                window.addEventListener("load", onLoad)
+            }
+        })();
     </script>
 
 </body>
