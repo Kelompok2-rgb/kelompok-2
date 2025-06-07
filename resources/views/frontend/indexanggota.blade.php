@@ -1,6 +1,6 @@
 @extends('frontend.index')
 
-@section('anggota')
+@section('content')
     <div class="container section-title mb-2" data-aos="fade-up">
         <h2>Porlempika</h2>
         <p>Anggota</p>
