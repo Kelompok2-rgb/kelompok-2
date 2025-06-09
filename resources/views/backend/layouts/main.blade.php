@@ -124,7 +124,7 @@
     </div>
     <!--end wrapper-->
     <!--start switcher-->
-    <div class="switcher-wrapper">
+    {{-- <div class="switcher-wrapper">
         <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
         </div>
         <div class="switcher-body">
@@ -158,23 +158,23 @@
                 <li id="theme15"></li>
             </ul>
         </div>
-    </div>
+    </div> --}}
     <!--end switcher-->
     <!-- Bootstrap JS -->
     <!-- Bootstrap Bundle JS -->
     <!-- jQuery (wajib sebelum plugin lain yang bergantung pada jQuery) -->
-    <script src="{{ asset('dashboard/assets/js/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('dashboard/assets/js/jquery.min.js') }}"></script>
 
     <!-- Bootstrap Bundle -->
-    <script src="{{ asset('dashboard/assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/js/bootstrap.bundle.min.js') }}"></script> --}}
 
     <!-- Plugins -->
     <script src="{{ asset('dashboard/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    {{-- <script src="{{ asset('dashboard/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script> --}}
 
     <!-- Custom JS -->
     <script src="{{ asset('dashboard/assets/js/app.js') }}"></script>

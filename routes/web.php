@@ -75,6 +75,19 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     
 });
 
+// Form lupa password
+Route::get('/forgot-password', [AuthController::class, 'showForgotForm'])->name('password.request');
+
+// Proses form lupa password
+Route::post('/forgot-password', [AuthController::class, 'handleForgot'])->name('password.handle');
+
+// Form reset password
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+
+// Proses reset password
+Route::post('/reset-password', [AuthController::class, 'handleReset'])->name('password.update');
+
+
     
 
 

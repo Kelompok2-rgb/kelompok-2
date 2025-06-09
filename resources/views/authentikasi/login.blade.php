@@ -42,8 +42,15 @@
                                 <p class="mb-0">Please log in to your account</p>
                             </div>
 
-                            @if (session('success'))
+                            @if (session('status'))
                                 <div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+                            @if (session('success'))
+                                <div class="alert alert-success"
+                                    style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
                                     {{ session('success') }}
                                 </div>
                             @endif
@@ -92,8 +99,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <a href="#">Forgot Password ?</a>
+                                    <a href="{{ route('password.request') }}">Forgot Password?</a>
                                 </div>
+
 
                                 <!-- Submit Button -->
                                 <div class="col-12">
