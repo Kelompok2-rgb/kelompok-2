@@ -63,7 +63,7 @@
                     title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
                     @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
                     <div class="parent-icon"><i class='bx bx-group'></i></div>
-                    <div class="menu-title">Club</div>
+                    <div class="menu-title">Klub</div>
                 </a>
             </li>
         @endauth
