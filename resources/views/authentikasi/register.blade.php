@@ -71,6 +71,19 @@
                                         <form class="row g-3" method="POST"
                                             action="{{ route('authentikasi.register.post') }}">
                                             @csrf
+
+                                            <div class="col-12">
+                                                <label for="name" class="form-label">Nama</label>
+                                                <input type="text" class="form-control" name="name"
+                                                    id="name" placeholder="Zahadi Rizfy">
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="phone_number" class="form-label">Nomor HP</label>
+                                                <input type="number" class="form-control" name="phone_number"
+                                                    id="phone_number" placeholder="0822****3862">
+                                            </div>
+
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Email Address</label>
                                                 <input type="email" class="form-control" name="email"
@@ -110,15 +123,7 @@
                                                     <option value="anggota">Anggota</option>
                                                 </select>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="flexSwitchCheckChecked">
-                                                    <label class="form-check-label" for="flexSwitchCheckChecked">I
-                                                        read
-                                                        and agree to Terms & Conditions</label>
-                                                </div>
-                                            </div>
+                                          
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <button type="submit" class="btn btn-light">Sign up</button>
