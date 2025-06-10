@@ -219,7 +219,7 @@
                 <a href="{{ $canAccess ? route('backend.users.index') : '#' }}"
                     title="{{ $canAccess ? 'Manajemen User' : 'Anda tidak memiliki akses' }}"
                     @unless ($canAccess) style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endunless>
-                    <div><i class='bx bx-user'></i></div>
+                    <div><i class='bx bx-user-pin'></i></div>
                     <div class="menu-title">User</div>
                 </a>
             </li>
