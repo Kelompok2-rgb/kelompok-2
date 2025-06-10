@@ -43,7 +43,7 @@ class JadwalPertandinganController extends Controller
     {
         // Validasi input
         $validated = $request->validate([
-            'tanggal' => 'required|string|max:255',
+            'tanggal' => 'required|date|max:255',
             'waktu'   => 'required|string|max:255',
             'lokasi'  => 'required|string|max:255',
         ]);

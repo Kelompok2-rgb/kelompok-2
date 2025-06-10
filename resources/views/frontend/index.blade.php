@@ -117,7 +117,7 @@
                     Kota Padang</p>
                 <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
                     <a href="#about" class="btn-get-started">Get Started</a>
-                    <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
+                    <a href="#"
                         class="glightbox btn-watch-video d-flex align-items-center"><i
                             class="bi bi-play-circle"></i><span>Watch Video</span></a>
                 </div>
@@ -162,7 +162,7 @@
                             <div class="position-relative mt-4">
                                 <img src="{{ asset('frontend/assets/images/porlempika.png') }}"
                                     class="img-fluid rounded-4" alt="">
-                                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
+                                <a href="#"
                                     class="glightbox pulsating-play-btn"></a>
                             </div>
                         </div>
@@ -1046,7 +1046,7 @@
                 <!-- Section Title -->
                 <div class="container section-title" data-aos="fade-up">
                     <h2>Contact</h2>
-                    <p>Necessitatibus eius consequatur</p>
+                    <p>Porlempika Kota Padang</p>
                 </div><!-- End Section Title -->
 
                 <div class="container" data-aos="fade-up" data-aos-delay="100">

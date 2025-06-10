@@ -28,7 +28,7 @@ class HasilPertandinganController extends Controller
     {
         $validated = $request->validate([
             'skor' => 'required|numeric',
-            'rangking' => 'nullable|integer',
+            'rangking' => 'required|integer',
             'catatan_juri' => 'nullable|string',
         ]);
 
