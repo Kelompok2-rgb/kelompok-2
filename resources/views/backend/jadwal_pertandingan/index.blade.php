@@ -46,9 +46,11 @@
             <td>
                 {{ $jadwal->tanggal ? \Carbon\Carbon::parse($jadwal->tanggal)->format('d/m/Y') : '-' }}
             </td>
-
+            <td>
+                {{ $jadwal->waktu ? \Carbon\Carbon::parse($jadwal->waktu)->format('H:i') : '-' }}
+            </td>
             <td>{{ $jadwal->lokasi }}</td>
-
+            <td>{{ Str::limit($jadwal->deskripsi, 50) }}</td>
             <td>
                 <div class="d-flex justify-content-center gap-2">
                     <a href="{{ route('backend.jadwal_pertandingan.edit', $jadwal->id) }}"
