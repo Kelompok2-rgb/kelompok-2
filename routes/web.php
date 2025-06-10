@@ -15,7 +15,8 @@ use App\Http\Controllers\{
     PertandinganController,
     PenyelenggaraEventController,
     FrontendController,
-    KonfirmasiController
+    KonfirmasiController,
+    UserController
 };
 
 Route::get('/', function () {
@@ -49,6 +50,8 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::resource('anggota', AnggotaController::class);
     Route::resource('pertandingan', PertandinganController::class);
     Route::resource('penyelenggara_event', PenyelenggaraEventController::class);
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
