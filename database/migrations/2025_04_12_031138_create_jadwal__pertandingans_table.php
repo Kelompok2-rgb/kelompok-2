@@ -9,35 +9,29 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::create('jadwal__pertandingans', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('jadwal_pertandingans', function (Blueprint $table) {
+            $table->id();
 
-        $table->id();
-        $table->date('tanggal');
-        $table->time('waktu');
-        $table->string('lokasi');
-        $table->string('nama_pertandingan');
-        $table->text('deskripsi')->nullable();
+            // Foreign key ke tabel 'pertandingans'
+            $table->unsignedBigInteger('pertandingan_id');
+            $table->foreign('pertandingan_id')->references('id')->on('pertandingans')->onDelete('cascade');
 
-        $table->timestamps();
-    });
-}
+            $table->date('tanggal');
+            $table->time('waktu');
+            $table->string('lokasi');
+            $table->text('deskripsi')->nullable();
+
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwal__pertandingans');
+        Schema::dropIfExists('jadwal_pertandingans');
     }
 };
-
-
-
-
-
-
-
-
-
