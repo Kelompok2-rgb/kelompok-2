@@ -57,7 +57,6 @@ class AtletController extends Controller
             'nama' => 'required|string|max:255',
             'foto' => 'nullable|image|max:2048',
             'prestasi' => 'nullable|string',
-
             'rekap_latihan' => 'nullable|string',
         ]);
 
