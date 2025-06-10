@@ -28,69 +28,52 @@
         <form action="{{ route('backend.jadwal_pertandingan.store') }}" method="POST">
             @csrf
 
-            <div class="row">
-        <div class="mb-3">
-    <label for="nama_pertandingan" class="form-label">Nama Pertandingan</label>
-    <input type="text" class="form-control" id="nama_pertandingan" name="nama_pertandingan" 
-           value="{{ old('nama_pertandingan') }}" required>
-    @error('nama_pertandingan') 
-        <small class="text-danger">{{ $message }}</small> 
-    @enderror
+            <!-- Pilih Pertandingan -->
+            <div class="mb-3">
+                <label for="pertandingan_id" class="form-label">Nama Pertandingan</label>
+                <select id="pertandingan_id" name="pertandingan_id" class="form-select" required>
+                    <option value="">-- Pilih Pertandingan --</option>
+                    @foreach ($pertandingans as $p)
+                        <option value="{{ $p->id }}"
+                                data-tanggal="{{ $p->tanggal }}"
+                                data-lokasi="{{ $p->lokasi }}">
+                            {{ $p->nama_pertandingan }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
-           
-
-                
-
-                <div class="col-md-6 mb-3">
-                    <label for="lokasi" class="form-label">Lokasi</label>
-                    <input type="text" class="form-control" id="lokasi" name="lokasi" 
-                           value="{{ old('lokasi') }}" required>
-                    @error('lokasi') 
-                        <small class="text-danger">{{ $message }}</small> 
-                    @enderror
-                </div>
+            <!-- Tanggal (auto) -->
+            <div class="mb-3">
+                <label for="tanggal" class="form-label">Tanggal</label>
+                <input type="text" id="tanggal" name="tanggal" class="form-control" readonly>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="tanggal" class="form-label">Tanggal</label>
-                    <input type="date" class="form-control" id="tanggal" name="tanggal" 
-                           value="{{ old('tanggal') }}" required>
-                    @error('tanggal') 
-                        <small class="text-danger">{{ $message }}</small> 
-                    @enderror
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label for="waktu" class="form-label">Waktu</label>
-                    <input type="time" class="form-control" id="waktu" name="waktu" 
-                           value="{{ old('waktu') }}" required>
-                    @error('waktu') 
-                        <small class="text-danger">{{ $message }}</small> 
-                    @enderror
-                </div>
+            <!-- Lokasi (auto) -->
+            <div class="mb-3">
+                <label for="lokasi" class="form-label">Lokasi</label>
+                <input type="text" id="lokasi" name="lokasi" class="form-control" readonly>
             </div>
 
+            <!-- Waktu (manual) -->
+            <div class="mb-3">
+                <label for="waktu" class="form-label">Waktu</label>
+                <input type="time" id="waktu" name="waktu" class="form-control" required>
+            </div>
+
+            <!-- Deskripsi (manual) -->
             <div class="mb-3">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
-                @error('deskripsi') 
-                    <small class="text-danger">{{ $message }}</small> 
-                @enderror
+                <textarea id="deskripsi" name="deskripsi" class="form-control" rows="3"></textarea>
             </div>
 
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <button type="reset" class="btn btn-warning">Reset</button>
-                <a href="{{ route('backend.jadwal_pertandingan.index') }}" class="btn btn-secondary">Kembali</a>
-            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
+
     </div>
 </div>
 
 <style>
-    /* Style untuk date picker dan time picker */
     input[type="date"]::-webkit-calendar-picker-indicator,
     input[type="time"]::-webkit-calendar-picker-indicator {
         background-color: white;
@@ -98,4 +81,15 @@
         border-radius: 4px;
     }
 </style>
+
+<script>
+    document.getElementById('pertandingan_id').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const tanggal = selectedOption.getAttribute('data-tanggal');
+        const lokasi = selectedOption.getAttribute('data-lokasi');
+
+        document.getElementById('tanggal').value = tanggal || '';
+        document.getElementById('lokasi').value = lokasi || '';
+    });
+</script>
 @endsection

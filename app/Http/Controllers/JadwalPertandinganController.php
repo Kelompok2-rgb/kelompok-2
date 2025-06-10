@@ -13,49 +13,74 @@ class JadwalPertandinganController extends Controller
         $this->middleware('auth');
         $this->middleware('role:admin,penyelenggara');
     }
+    
     /**
      * Menampilkan semua jadwal pertandingan.
      */
     public function index()
     {
         $jadwalpertandingans = Jadwal_Pertandingan::all();
+        
+        // Debug - uncomment untuk melihat data
+        // dd($jadwalpertandingans->toArray());
+        
         return view('backend.jadwal_pertandingan.index', compact('jadwalpertandingans'));
     }
 
     /**
      * Menampilkan form untuk membuat jadwal pertandingan.
      */
-// JadwalPertandinganController.php
     public function create()
     {
-        $pertandingans = Pertandingan::select('id', 'nama_pertandingan', 'lokasi', 'tanggal', 'waktu')
+        $pertandingans = Pertandingan::select('id', 'nama_pertandingan', 'lokasi', 'tanggal')
                                     ->latest()
                                     ->get();
         
         return view('backend.jadwal_pertandingan.create', compact('pertandingans'));
     }
     
-
     /**
      * Menyimpan data jadwal pertandingan.
      */
     public function store(Request $request)
     {
+        // Debug input yang diterima
+        // dd($request->all());
+        
         // Validasi input
         $validated = $request->validate([
+            'pertandingan_id' => 'required|exists:pertandingans,id',
             'tanggal' => 'required|string|max:255',
             'waktu'   => 'required|string|max:255',
             'lokasi'  => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:1000',
         ]);
 
-        // Membuat jadwal pertandingan baru
-        Jadwal_Pertandingan::create($validated);
+        // Ambil data pertandingan berdasarkan ID
+        $pertandingan = Pertandingan::findOrFail($validated['pertandingan_id']);
 
-        // Redirect setelah berhasil menambah data
-        return redirect()->route('backend.jadwal_pertandingan.index')->with('success', 'Jadwal pertandingan berhasil ditambahkan');
+        // Siapkan data untuk disimpan
+        $dataToSave = [
+            'pertandingan_id' => $validated['pertandingan_id'],
+            'nama_pertandingan' => $pertandingan->nama_pertandingan,
+            'tanggal' => $validated['tanggal'],
+            'waktu' => $validated['waktu'],
+            'lokasi' => $validated['lokasi'],
+            'deskripsi' => $validated['deskripsi'],
+        ];
+
+        // Debug data yang akan disimpan
+        // dd($dataToSave);
+
+        // Membuat jadwal pertandingan baru
+        $jadwal = Jadwal_Pertandingan::create($dataToSave);
+
+        // Debug data yang tersimpan
+        // dd($jadwal->toArray());
+
+        return redirect()->route('backend.jadwal_pertandingan.index')
+            ->with('success', 'Jadwal pertandingan berhasil ditambahkan');
     }
-    
-    
 
     /**
      * Menampilkan form untuk mengedit jadwal pertandingan.
@@ -63,7 +88,9 @@ class JadwalPertandinganController extends Controller
     public function edit($id)
     {
         $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
-        return view('backend.jadwal_pertandingan.edit', compact('jadwalpertandingan'));
+        $pertandingans = Pertandingan::all();
+        
+        return view('backend.jadwal_pertandingan.edit', compact('jadwalpertandingan', 'pertandingans'));
     }
 
     /**
@@ -75,16 +102,31 @@ class JadwalPertandinganController extends Controller
 
         // Validasi input
         $validated = $request->validate([
+            'pertandingan_id' => 'required|exists:pertandingans,id',
             'tanggal' => 'required|string|max:255',
             'waktu'   => 'required|string|max:255',
             'lokasi'  => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:1000',
         ]);
 
-        // Memperbarui data jadwal pertandingan
-        $jadwalpertandingan->update($validated);
+        // Ambil data pertandingan berdasarkan ID
+        $pertandingan = Pertandingan::findOrFail($validated['pertandingan_id']);
+        
+        // Siapkan data untuk update
+        $dataToUpdate = [
+            'pertandingan_id' => $validated['pertandingan_id'],
+            'nama_pertandingan' => $pertandingan->nama_pertandingan,
+            'tanggal' => $validated['tanggal'],
+            'waktu' => $validated['waktu'],
+            'lokasi' => $validated['lokasi'],
+            'deskripsi' => $validated['deskripsi'],
+        ];
 
-        // Redirect setelah berhasil memperbarui data
-        return redirect()->route('backend.jadwal_pertandingan.index')->with('success', 'Jadwal pertandingan berhasil diperbarui');
+        // Update data jadwal pertandingan
+        $jadwalpertandingan->update($dataToUpdate);
+
+        return redirect()->route('backend.jadwal_pertandingan.index')
+            ->with('success', 'Jadwal pertandingan berhasil diperbarui');
     }
 
     /**
@@ -93,11 +135,9 @@ class JadwalPertandinganController extends Controller
     public function destroy($id)
     {
         $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
-
-        // Menghapus jadwal pertandingan
         $jadwalpertandingan->delete();
 
-        // Redirect setelah berhasil menghapus data
-        return redirect()->route('backend.jadwal_pertandingan.index')->with('success', 'Jadwal pertandingan berhasil dihapus');
+        return redirect()->route('backend.jadwal_pertandingan.index')
+            ->with('success', 'Jadwal pertandingan berhasil dihapus');
     }
 }

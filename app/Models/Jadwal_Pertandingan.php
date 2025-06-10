@@ -9,10 +9,14 @@ class Jadwal_Pertandingan extends Model
 {
     use HasFactory;
     protected $fillable = [
+    'pertandingan_id',
     'nama_pertandingan',
     'tanggal',  // tipe date
     'waktu',    // tipe time
     'lokasi',
     'deskripsi'
+    
 ];
 }
+
+
