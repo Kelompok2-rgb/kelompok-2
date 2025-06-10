@@ -27,15 +27,23 @@
             @csrf
             @method('PUT')
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="nama_pertandingan" class="form-label">Nama Pertandingan</label>
-                    <input type="text" class="form-control" id="nama_pertandingan" name="nama_pertandingan" 
-                           value="{{ old('nama_pertandingan', $jadwalpertandingan->nama_pertandingan) }}" required>
-                    @error('nama_pertandingan') 
-                        <small class="text-danger">{{ $message }}</small> 
-                    @enderror
-                </div>
+           <div class="col-md-6 mb-3">
+  <label for="pertandingan_id" class="form-label">Nama Pertandingan</label>
+<select class="form-control" id="pertandingan_id" name="pertandingan_id" required>
+    <option value="">-- Pilih Pertandingan --</option>
+    @foreach ($pertandingans as $pertandingan)
+        <option value="{{ $pertandingan->id }}"
+            {{ old('pertandingan_id', $jadwalpertandingan->pertandingan_id) == $pertandingan->id ? 'selected' : '' }}>
+            {{ $pertandingan->nama_pertandingan }}
+        </option>
+    @endforeach
+</select>
+@error('pertandingan_id')
+    <small class="text-danger">{{ $message }}</small>
+@enderror
+
+</div>
+
 
                 <div class="col-md-6 mb-3">
                     <label for="lokasi" class="form-label">Lokasi</label>
