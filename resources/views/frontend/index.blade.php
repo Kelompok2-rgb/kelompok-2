@@ -73,15 +73,8 @@
                     <li class="dropdown"><a href="#"><span>Menu</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ route('frontend.indexanggota') }}#anggota">Anggota</a></li>
-                            <li><a href="{{ route('frontend.indexclub') }}#club">Klub</a></li>
-                            <li><a href="{{ route('frontend.indexatlet') }}#atlet">Atlet</a></li>
                             <li><a href="{{ route('frontend.indexjadwalpertandingan') }}#jadwal_pertandingan">Jadwal
                                     Pertandingan</a></li>
-                            <li><a href="{{ route('frontend.indexhasilpertandingan') }}#hasil_pertandingan">Hasil
-                                    Pertandingan</a></li>
-                            <li><a href="{{ route('frontend.indexjuri') }}#juri">Juri</a></li>
-                            <li><a href="{{ route('frontend.indexpertandingan') }}#pertandingan">Pertandingan</a></li>
                             <li><a href="{{ route('frontend.indexkategoripertandingan') }}#kategori_pertandingan">Kategori
                                     Pertandingan</a>
                             </li>

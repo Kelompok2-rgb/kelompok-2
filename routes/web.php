@@ -48,8 +48,7 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::resource('anggota', AnggotaController::class);
     Route::resource('pertandingan', PertandinganController::class);
     Route::resource('penyelenggara_event', PenyelenggaraEventController::class);
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::resource('users', UserController::class);
 });
 
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
@@ -60,16 +59,9 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
 });
 
 
-
-
    Route::name('frontend.')->group(function () {
-    Route::get('/anggota', [FrontendController::class, 'anggota'])->name('indexanggota');
-    Route::get('/club', [FrontendController::class, 'club'])->name('indexclub');
-    Route::get('/atlet', [FrontendController::class, 'atlet'])->name('indexatlet');
+    
     Route::get('/jadwalpertandingan', [FrontendController::class, 'jadwalpertandingan'])->name('indexjadwalpertandingan');
-    Route::get('/hasilpertandingan', [FrontendController::class, 'hasilpertandingan'])->name('indexhasilpertandingan');
-    Route::get('/juri', [FrontendController::class, 'juri'])->name('indexjuri');
-    Route::get('/pertandingan', [FrontendController::class, 'pertandingan'])->name('indexpertandingan');
     Route::get('/kategoripertandingan', [FrontendController::class, 'kategoripertandingan'])->name('indexkategoripertandingan');
     Route::get('/galeri', [FrontendController::class, 'galeri'])->name('indexgaleri');
     Route::get('/pengumuman', [FrontendController::class, 'pengumuman'])->name('indexpengumuman');

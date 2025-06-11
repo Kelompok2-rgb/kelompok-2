@@ -24,7 +24,7 @@
                     </div>
                 </div>
             @empty
-                <div class="col-12">
+                <div class="col-12 text-center">
                     <div class="alert alert-warning text-center py-4">
                         <i class="bi bi-exclamation-circle me-2"></i> Belum ada data galeri
                     </div>
