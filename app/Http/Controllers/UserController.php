@@ -22,13 +22,14 @@ class UserController extends Controller
 
     // Menghapus user tertentu
     public function destroy(User $user)
-    {
-        // Cegah penghapusan admin
-        if ($user->role === 'admin') {
-            return redirect()->route('users.index')->with('error', 'User dengan role admin tidak bisa dihapus.');
-        }
-
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
+{
+    // Cegah penghapusan admin
+    if ($user->role === 'admin') {
+        return redirect()->route('backend.users.index')->with('error', 'User dengan role admin tidak bisa dihapus.');
     }
+
+    $user->delete();
+    return redirect()->route('backend.users.index')->with('success', 'User berhasil dihapus.');
+}
+
 }

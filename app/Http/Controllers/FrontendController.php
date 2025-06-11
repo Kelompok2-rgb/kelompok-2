@@ -28,46 +28,17 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function anggota()
-    {
-        $anggotas = Anggota::paginate(4);
-        return view('frontend.indexanggota', compact('anggotas'));
-    }
-
-    public function club()
-    {
-        $clubs = Club::all();
-        return view('frontend.indexclub', compact('clubs'));
-    }
-
-    public function atlet()
-    {
-        $atlets = Atlet::all();
-        return view('frontend.indexatlet', compact('atlets'));
-    }
-
+   
     public function jadwalpertandingan()
     {
         $jadwalpertandingans = Jadwal_Pertandingan::all();
         return view('frontend.indexjadwalpertandingan', compact('jadwalpertandingans'));
     }
 
-    public function hasilpertandingan()
-    {
-        $hasilpertandingans = HasilPertandingan::all();
-        return view('frontend.indexhasilpertandingan', compact('hasilpertandingans'));
-    }
-
     public function juri()
     {
         $juris = Juri::all();
         return view('frontend.indexjuri', compact('juris'));
-    }
-
-    public function pertandingan()
-    {
-        $pertandingans = Pertandingan::all();
-        return view('frontend.indexpertandingan', compact('pertandingans'));
     }
 
     public function kategoripertandingan()
