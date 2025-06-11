@@ -12,6 +12,8 @@ class HasilPertandingan extends Model
     protected $table = 'hasil__pertandingans'; 
 
     protected $fillable = [
+        'nama_pertandingan',
+        'nama',
         'skor',
         'rangking',
         'catatan_juri',

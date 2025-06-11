@@ -27,6 +27,8 @@ class HasilPertandinganController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
+            'nama_pertandingan'  => 'required|string|min:2|max:255',
+            'nama' => 'required|string|max:255',
             'skor' => 'required|numeric',
             'rangking' => 'required|integer',
             'catatan_juri' => 'nullable|string',
@@ -50,6 +52,8 @@ class HasilPertandinganController extends Controller
         $hasilPertandingan = HasilPertandingan::findOrFail($id);
 
         $validated = $request->validate([
+            'nama_pertandingan'  => 'required|string|min:2|max:255',
+            'nama' => 'required|string|max:255',
             'skor' => 'required|numeric',
             'rangking' => 'nullable|integer',
             'catatan_juri' => 'nullable|string',
