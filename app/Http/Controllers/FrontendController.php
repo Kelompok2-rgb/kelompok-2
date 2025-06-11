@@ -13,65 +13,85 @@ use App\Models\Kategori_pertandingan;
 use App\Models\Galeri;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 
 class FrontendController extends Controller
 {
-    
+    public function __construct()
+    {
+        // Share data ke semua view yang dipanggil oleh controller ini
+        View::share([
+            'jumlahAnggota' => Anggota::count(),
+            'jumlahKlub' => Club::count(),
+            'jumlahAtlet' => Atlet::count(),
+            'jumlahJuri' => Juri::count(),
+        ]);
+    }
+
     public function anggota()
     {
-       $anggotas =  Anggota::paginate(4); 
+        $anggotas = Anggota::paginate(4);
         return view('frontend.indexanggota', compact('anggotas'));
-    } 
+    }
+
     public function club()
     {
-       $clubs = Club::all();
+        $clubs = Club::all();
         return view('frontend.indexclub', compact('clubs'));
-    } 
+    }
+
     public function atlet()
     {
-       $atlets = Atlet::all();
+        $atlets = Atlet::all();
         return view('frontend.indexatlet', compact('atlets'));
-    } 
-     public function jadwalpertandingan()
+    }
+
+    public function jadwalpertandingan()
     {
-       $jadwalpertandingans = Jadwal_Pertandingan::all();
+        $jadwalpertandingans = Jadwal_Pertandingan::all();
         return view('frontend.indexjadwalpertandingan', compact('jadwalpertandingans'));
-    } 
-     public function hasilpertandingan()
+    }
+
+    public function hasilpertandingan()
     {
-       $hasilpertandingans = HasilPertandingan::all();
+        $hasilpertandingans = HasilPertandingan::all();
         return view('frontend.indexhasilpertandingan', compact('hasilpertandingans'));
-    } 
-     public function juri()
+    }
+
+    public function juri()
     {
-       $juris = Juri::all();
+        $juris = Juri::all();
         return view('frontend.indexjuri', compact('juris'));
-    } 
-     public function pertandingan()
+    }
+
+    public function pertandingan()
     {
-       $pertandingans = Pertandingan::all();
+        $pertandingans = Pertandingan::all();
         return view('frontend.indexpertandingan', compact('pertandingans'));
-    } 
+    }
+
     public function kategoripertandingan()
     {
-       $kategoripertandingans = Kategori_pertandingan::all();
+        $kategoripertandingans = Kategori_pertandingan::all();
         return view('frontend.indexkategoripertandingan', compact('kategoripertandingans'));
-    } 
+    }
+
     public function galeri()
     {
-       $galeris = Galeri::all();
+        $galeris = Galeri::all();
         return view('frontend.indexgaleri', compact('galeris'));
-    } 
+    }
+
     public function pengumuman()
     {
-       $pengumumans = Pengumuman::all();
+        $pengumumans = Pengumuman::all();
         return view('frontend.indexpengumuman', compact('pengumumans'));
-    } 
+    }
 
-
-    
+    public function index()
+    {
+        // Tidak perlu kirim variabel karena sudah dibagikan via constructor
+        return view('frontend.index');
+    }
 }
-
 

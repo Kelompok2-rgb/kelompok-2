@@ -67,7 +67,7 @@
                 <ul>
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
+                    <li><a href="#rules">Rules</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#team">Team</a></li>
                     <li class="dropdown"><a href="#"><span>Menu</span> <i
@@ -117,8 +117,7 @@
                     Kota Padang</p>
                 <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
                     <a href="#about" class="btn-get-started">Get Started</a>
-                    <a href="#"
-                        class="glightbox btn-watch-video d-flex align-items-center"><i
+                    <a href="#" class="glightbox btn-watch-video d-flex align-items-center"><i
                             class="bi bi-play-circle"></i><span>Watch Video</span></a>
                 </div>
             </div>
@@ -162,8 +161,7 @@
                             <div class="position-relative mt-4">
                                 <img src="{{ asset('frontend/assets/images/porlempika.png') }}"
                                     class="img-fluid rounded-4" alt="">
-                                <a href="#"
-                                    class="glightbox pulsating-play-btn"></a>
+                                <a href="#" class="glightbox pulsating-play-btn"></a>
                             </div>
                         </div>
                     </div>
@@ -174,64 +172,11 @@
         </section><!-- /About Section -->
 
         <!-- Stats Section -->
-        <section id="stats" class="stats section light-background">
-
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-                <div class="row gy-4">
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item d-flex align-items-center w-100 h-100">
-                            <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
-                            <div>
-                                <span data-purecounter-start="0" data-purecounter-end="232"
-                                    data-purecounter-duration="1" class="purecounter"></span>
-                                <p>Anggota</p>
-                            </div>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item d-flex align-items-center w-100 h-100">
-                            <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
-                            <div>
-                                <span data-purecounter-start="0" data-purecounter-end="521"
-                                    data-purecounter-duration="1" class="purecounter"></span>
-                                <p>Klub</p>
-                            </div>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item d-flex align-items-center w-100 h-100">
-                            <i class="bi bi-headset color-green flex-shrink-0"></i>
-                            <div>
-                                <span data-purecounter-start="0" data-purecounter-end="1463"
-                                    data-purecounter-duration="1" class="purecounter"></span>
-                                <p>Atlet</p>
-                            </div>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item d-flex align-items-center w-100 h-100">
-                            <i class="bi bi-people color-pink flex-shrink-0"></i>
-                            <div>
-                                <span data-purecounter-start="0" data-purecounter-end="15"
-                                    data-purecounter-duration="1" class="purecounter"></span>
-                                <p>Juri</p>
-                            </div>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                </div>
-
-            </div>
-
-        </section><!-- /Stats Section -->
+        @include('frontend.stats')
+<!-- /Stats Section -->
 
         <!-- Services Section -->
-        <section id="services" class="services section">
+        <section id="rules" class="services section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -763,7 +708,7 @@
                 </div>
 
             </div>
-            </section>
+        </section>
 
         <!-- Testimonials Section -->
         <section id="testimonials" class="testimonials section dark-background">
@@ -899,318 +844,318 @@
         </section><!-- /Testimonials Section -->
 
 
-            <section id="anggota">
-                @yield('content')
-            </section>
+        <section id="anggota">
+            @yield('content')
+        </section>
 
 
-            <!-- Services 2 Section -->
-            <section id="services-2" class="services-2 section light-background">
+        <!-- Services 2 Section -->
+        <section id="services-2" class="services-2 section light-background">
 
-                <!-- Section Title -->
-                <div class="container section-title" data-aos="fade-up">
-                    <h2>Porlempika</h2>
-                    <p>Susunan organisasi</p>
-                </div><!-- End Section Title -->
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Porlempika</h2>
+                <p>Susunan organisasi</p>
+            </div><!-- End Section Title -->
 
-                <div class="container">
+            <div class="container">
 
-                    <div class="row gy-4">
+                <div class="row gy-4">
 
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item d-flex position-relative h-100">
-                                <!-- Ganti icon dengan foto -->
-                                <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
-                                    class="flex-shrink-0 rounded-circle me-3"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item d-flex position-relative h-100">
+                            <!-- Ganti icon dengan foto -->
+                            <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
+                                class="flex-shrink-0 rounded-circle me-3"
+                                style="width: 100px; height: 100px; object-fit: cover;">
 
-                                <div>
-                                    <h4 class="title">
-                                        <p>Ketua</p>
-                                    </h4>
-                                    <p class="description">
-                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                        atau hewan di sekitar tempat anda berlatih.
-                                    </p>
-                                </div>
+                            <div>
+                                <h4 class="title">
+                                    <p>Ketua</p>
+                                </h4>
+                                <p class="description">
+                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                    atau hewan di sekitar tempat anda berlatih.
+                                </p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item d-flex position-relative h-100">
-                                <!-- Ganti icon dengan foto -->
-                                <img src="{{ asset('frontend/assets/images/yara.jpg') }}" alt="Foto Ketua"
-                                    class="flex-shrink-0 rounded-circle me-3"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item d-flex position-relative h-100">
+                            <!-- Ganti icon dengan foto -->
+                            <img src="{{ asset('frontend/assets/images/yara.jpg') }}" alt="Foto Ketua"
+                                class="flex-shrink-0 rounded-circle me-3"
+                                style="width: 100px; height: 100px; object-fit: cover;">
 
-                                <div>
-                                    <h4 class="title">
-                                        <p>Wakil Ketua</p>
-                                    </h4>
-                                    <p class="description">
-                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                        atau hewan di sekitar tempat anda berlatih.
-                                    </p>
-                                </div>
+                            <div>
+                                <h4 class="title">
+                                    <p>Wakil Ketua</p>
+                                </h4>
+                                <p class="description">
+                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                    atau hewan di sekitar tempat anda berlatih.
+                                </p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item d-flex position-relative h-100">
-                                <!-- Ganti icon dengan foto -->
-                                <img src="{{ asset('frontend/assets/images/vani.jpg') }}" alt="Foto Ketua"
-                                    class="flex-shrink-0 rounded-circle me-3"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item d-flex position-relative h-100">
+                            <!-- Ganti icon dengan foto -->
+                            <img src="{{ asset('frontend/assets/images/vani.jpg') }}" alt="Foto Ketua"
+                                class="flex-shrink-0 rounded-circle me-3"
+                                style="width: 100px; height: 100px; object-fit: cover;">
 
-                                <div>
-                                    <h4 class="title">
-                                       <p>Sekretaris</p>
-                                    </h4>
-                                    <p class="description">
-                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                        atau hewan di sekitar tempat anda berlatih.
-                                    </p>
-                                </div>
+                            <div>
+                                <h4 class="title">
+                                    <p>Sekretaris</p>
+                                </h4>
+                                <p class="description">
+                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                    atau hewan di sekitar tempat anda berlatih.
+                                </p>
                             </div>
                         </div>
+                    </div>
 
-                         <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item d-flex position-relative h-100">
-                                <!-- Ganti icon dengan foto -->
-                                <img src="{{ asset('frontend/assets/images/dapi.jpg') }}" alt="Foto Ketua"
-                                    class="flex-shrink-0 rounded-circle me-3"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item d-flex position-relative h-100">
+                            <!-- Ganti icon dengan foto -->
+                            <img src="{{ asset('frontend/assets/images/dapi.jpg') }}" alt="Foto Ketua"
+                                class="flex-shrink-0 rounded-circle me-3"
+                                style="width: 100px; height: 100px; object-fit: cover;">
 
-                                <div>
-                                    <h4 class="title">
-                                        <p>Bendahara</p>
-                                    </h4>
-                                    <p class="description">
-                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                        atau hewan di sekitar tempat anda berlatih.
-                                    </p>
-                                </div>
+                            <div>
+                                <h4 class="title">
+                                    <p>Bendahara</p>
+                                </h4>
+                                <p class="description">
+                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                    atau hewan di sekitar tempat anda berlatih.
+                                </p>
                             </div>
                         </div>
+                    </div>
 
-                       <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item d-flex position-relative h-100">
-                                <!-- Ganti icon dengan foto -->
-                                <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
-                                    class="flex-shrink-0 rounded-circle me-3"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item d-flex position-relative h-100">
+                            <!-- Ganti icon dengan foto -->
+                            <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
+                                class="flex-shrink-0 rounded-circle me-3"
+                                style="width: 100px; height: 100px; object-fit: cover;">
 
-                                <div>
-                                    <h4 class="title">
-                                        <p>Bendahara</p>
-                                    </h4>
-                                    <p class="description">
-                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                        atau hewan di sekitar tempat anda berlatih.
-                                    </p>
-                                </div>
+                            <div>
+                                <h4 class="title">
+                                    <p>Bendahara</p>
+                                </h4>
+                                <p class="description">
+                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                    atau hewan di sekitar tempat anda berlatih.
+                                </p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="service-item d-flex position-relative h-100">
-                                <!-- Ganti icon dengan foto -->
-                                <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
-                                    class="flex-shrink-0 rounded-circle me-3"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item d-flex position-relative h-100">
+                            <!-- Ganti icon dengan foto -->
+                            <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
+                                class="flex-shrink-0 rounded-circle me-3"
+                                style="width: 100px; height: 100px; object-fit: cover;">
 
-                                <div>
-                                    <h4 class="title">
-                                       <p>Bendahara</p>
-                                    </h4>
-                                    <p class="description">
-                                        Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                        atau hewan di sekitar tempat anda berlatih.
-                                    </p>
-                                </div>
+                            <div>
+                                <h4 class="title">
+                                    <p>Bendahara</p>
+                                </h4>
+                                <p class="description">
+                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
+                                    atau hewan di sekitar tempat anda berlatih.
+                                </p>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
 
-            </section><!-- /Services 2 Section -->
+            </div>
+
+        </section><!-- /Services 2 Section -->
 
 
 
 
-            <!-- Contact Section -->
-            <section id="contact" class="contact section">
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
 
-                <!-- Section Title -->
-                <div class="container section-title" data-aos="fade-up">
-                    <h2>Contact</h2>
-                    <p>Porlempika Kota Padang</p>
-                </div><!-- End Section Title -->
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Contact</h2>
+                <p>Porlempika Kota Padang</p>
+            </div><!-- End Section Title -->
 
-                <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                    <div class="row gy-4">
-                        <div class="col-lg-6 ">
+                <div class="row gy-4">
+                    <div class="col-lg-6 ">
+                        <div class="row gy-4">
+
+                            <div class="col-lg-12">
+                                <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                                    data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <h3>Alamat</h3>
+                                    <p>A108 Adam Street, New York, NY 535022</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <div class="col-md-6">
+                                <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                                    data-aos="fade-up" data-aos-delay="300">
+                                    <i class="bi bi-telephone"></i>
+                                    <h3>Admin</h3>
+                                    <p>+1 5589 55488 55</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <div class="col-md-6">
+                                <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                                    data-aos="fade-up" data-aos-delay="400">
+                                    <i class="bi bi-envelope"></i>
+                                    <h3>Email Kami</h3>
+                                    <p>info@example.com</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
+                            data-aos-delay="500">
                             <div class="row gy-4">
 
-                                <div class="col-lg-12">
-                                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
-                                        data-aos="fade-up" data-aos-delay="200">
-                                        <i class="bi bi-geo-alt"></i>
-                                        <h3>Alamat</h3>
-                                        <p>A108 Adam Street, New York, NY 535022</p>
-                                    </div>
-                                </div><!-- End Info Item -->
-
                                 <div class="col-md-6">
-                                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
-                                        data-aos="fade-up" data-aos-delay="300">
-                                        <i class="bi bi-telephone"></i>
-                                        <h3>Admin</h3>
-                                        <p>+1 5589 55488 55</p>
-                                    </div>
-                                </div><!-- End Info Item -->
+                                    <input type="text" name="name" class="form-control"
+                                        placeholder="Your Name" required="">
+                                </div>
 
-                                <div class="col-md-6">
-                                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
-                                        data-aos="fade-up" data-aos-delay="400">
-                                        <i class="bi bi-envelope"></i>
-                                        <h3>Email Kami</h3>
-                                        <p>info@example.com</p>
-                                    </div>
-                                </div><!-- End Info Item -->
+                                <div class="col-md-6 ">
+                                    <input type="email" class="form-control" name="email"
+                                        placeholder="Your Email" required="">
+                                </div>
 
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                        required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <div class="loading">Loading</div>
+                                    <div class="error-message"></div>
+                                    <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                    <button type="submit">Send Message</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div><!-- End Contact Form -->
+
+                </div>
+
+            </div>
+
+        </section><!-- /Contact Section -->
+
+        <!-- Team Section -->
+        <section id="team" class="team section light-background">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Tim</h2>
+                <p>PENGEMBANG</p>
+            </div><!-- End Section Title -->
+
+            <div class="container">
+
+                <div class="row gy-5">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="member">
+                            <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Zahadi Rizfy</h4>
+                                <span>Project Manager</span>
+                                <div class="social">
+                                    <a href="https://www.instagram.com/zahadirizfy_?igsh=YnNuOWg1cjllOHA="><i
+                                            class="bi bi-instagram"></i></a>
+
+                                </div>
                             </div>
                         </div>
+                    </div><!-- End Team Member -->
 
-                        <div class="col-lg-6">
-                            <form action="forms/contact.php" method="post" class="php-email-form"
-                                data-aos="fade-up" data-aos-delay="500">
-                                <div class="row gy-4">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member">
+                            <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Syarah Izzati</h4>
+                                <span>UI/UX Designer</span>
+                                <div class="social">
 
-                                    <div class="col-md-6">
-                                        <input type="text" name="name" class="form-control"
-                                            placeholder="Your Name" required="">
-                                    </div>
-
-                                    <div class="col-md-6 ">
-                                        <input type="email" class="form-control" name="email"
-                                            placeholder="Your Email" required="">
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control" name="subject"
-                                            placeholder="Subject" required="">
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
-                                    </div>
-
-                                    <div class="col-md-12 text-center">
-                                        <div class="loading">Loading</div>
-                                        <div class="error-message"></div>
-                                        <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                        <button type="submit">Send Message</button>
-                                    </div>
+                                    <a href="https://www.instagram.com/syarazzl?igsh=MWR0Nnpub2lrZTV0YQ=="><i
+                                            class="bi bi-instagram"></i></a>
 
                                 </div>
-                            </form>
-                        </div><!-- End Contact Form -->
+                            </div>
+                        </div>
+                    </div><!-- End Team Member -->
 
-                    </div>
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="member">
+                            <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Givani Arianti</h4>
+                                <span>Technical Writer</span>
+                                <div class="social">
+
+                                    <a href="https://www.instagram.com/vanii_arn?igsh=MXdndzFlN3gwZG94dw=="><i
+                                            class="bi bi-instagram"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Team Member -->
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="member">
+                            <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}"
+                                    class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Davi Ahmad Yani</h4>
+                                <span>Tester</span>
+                                <div class="social">
+
+                                    <a href="https://www.instagram.com/daviahmdy_?igsh=M2RwbmYyeXU4ZnUz"><i
+                                            class="bi bi-instagram"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Team Member -->
 
                 </div>
 
-            </section><!-- /Contact Section -->
+            </div>
 
-            <!-- Team Section -->
-            <section id="team" class="team section light-background">
-
-                <!-- Section Title -->
-                <div class="container section-title" data-aos="fade-up">
-                    <h2>Tim</h2>
-                    <p>PENGEMBANG</p>
-                </div><!-- End Section Title -->
-
-                <div class="container">
-
-                    <div class="row gy-5">
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/zahadi.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Zahadi Rizfy</h4>
-                                    <span>Project Manager</span>
-                                    <div class="social">
-                                        <a href="https://www.instagram.com/zahadirizfy_?igsh=YnNuOWg1cjllOHA="><i
-                                                class="bi bi-instagram"></i></a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End Team Member -->
-
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/yara.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Syarah Izzati</h4>
-                                    <span>UI/UX Designer</span>
-                                    <div class="social">
-
-                                        <a href="https://www.instagram.com/syarazzl?igsh=MWR0Nnpub2lrZTV0YQ=="><i
-                                                class="bi bi-instagram"></i></a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End Team Member -->
-
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/vani.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Givani Arianti</h4>
-                                    <span>Technical Writer</span>
-                                    <div class="social">
-
-                                        <a href="https://www.instagram.com/vanii_arn?igsh=MXdndzFlN3gwZG94dw=="><i
-                                                class="bi bi-instagram"></i></a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End Team Member -->
-
-                        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="member">
-                                <div class="pic"><img src="{{ asset('frontend/assets/images/dapi.jpg') }}"
-                                        class="img-fluid" alt=""></div>
-                                <div class="member-info">
-                                    <h4>Davi Ahmad Yani</h4>
-                                    <span>Tester</span>
-                                    <div class="social">
-
-                                        <a href="https://www.instagram.com/daviahmdy_?igsh=M2RwbmYyeXU4ZnUz"><i
-                                                class="bi bi-instagram"></i></a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- End Team Member -->
-
-                    </div>
-
-                </div>
-
-            </section><!-- /Team Section -->
+        </section><!-- /Team Section -->
 
     </main>
 
