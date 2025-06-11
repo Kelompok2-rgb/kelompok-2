@@ -41,7 +41,7 @@
             <div class="mb-3">
                     <label for="klub" class="form-label">Klub</label>
                     <input type="text" class="form-control @error('klub') is-invalid @enderror" id="klub"
-                        name="klub">
+                        name="klub" value="{{ old('klub', $anggota->klub) }}">
                     @error('klub')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -14,9 +14,11 @@ return new class extends Migration
     Schema::create('hasil__pertandingans', function (Blueprint $table) {
 
         $table->id();
+        $table->string('nama_pertandingan');
+        $table->string('nama');
         $table->string('skor');
         $table->string('rangking');
-        $table->text('catatan_juri');
+        $table->text('catatan_juri')->nullable();
         $table->timestamps();
     });
 }

@@ -7,6 +7,25 @@
             @csrf
             @method('PUT')
 
+
+            <div class="mb-3">
+                <label for="nama_pertandingan" class="form-label">Nama Pertandingan</label>
+                <input type="text" step="0.01" class="form-control" id="nama_pertandingan" name="nama_pertandingan"
+                    value="{{ old('nama_pertandingan') }}" required>
+                @error('skor')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Atlet</label>
+                <input type="text" step="0.01" class="form-control" id="nama" name="nama"
+                    value="{{ old('nama') }}" required>
+                @error('skor')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
             <div class="mb-3">
                 <label class="form-label">Skor:</label>
                 <input type="number" step="0.01" name="skor" class="form-control"

@@ -16,8 +16,8 @@ return new class extends Migration
         $table->id();
         $table->string('nama');
         $table->string('foto');
-        $table->string('prestasi');
-        $table->string('rekap_latihan');
+        $table->string('prestasi')->nullable();
+        $table->string('rekap_latihan')->nullable();
         
         $table->timestamps();
     });

@@ -8,11 +8,12 @@
         <hr>
     </div>
 
-    @if (session('success'))
-        <div class="alert alert-success">
+   @if (session('success'))
+        <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
             {{ session('success') }}
         </div>
     @endif
+    
 
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.hasil_pertandingan.create') }}" class="btn btn-primary"
@@ -30,6 +31,8 @@
         <thead class="table-dark">
             <tr>
                 <th>No</th>
+                <th>Nama Pertandingan</th>
+                <th>Nama Atlet</th>
                 <th>Skor</th>
                 <th>Rangking</th>
                 <th>Catatan Juri</th>
@@ -40,6 +43,8 @@
             @foreach  ($hasilPertandingans as $index => $hasil)
                 <tr>
                     <td>{{ $index + 1 }}</td>
+                    <td>{{ $hasil->nama_pertandingan ?? '-' }}</td>
+                    <td>{{ $hasil->nama ?? '-' }}</td>
                     <td>{{ $hasil->skor ?? '-' }}</td>
                     <td>{{ $hasil->rangking ?? '-' }}</td>
                     <td>{{ $hasil->catatan_juri ?? '-' }}</td>
