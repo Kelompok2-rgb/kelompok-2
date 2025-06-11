@@ -34,7 +34,7 @@ class PenyelenggaraEventController extends Controller
         ]);
 
         PenyelenggaraEvent::create($validated);
-        return redirect()->route('backend.penyelenggara_event.index')->with('success', 'Event berhasil ditambahkan.');
+        return redirect()->route('backend.penyelenggara_event.index')->with('success', 'Penyelenggara Event berhasil ditambahkan.');
     }
 
    public function edit($id)
@@ -56,13 +56,13 @@ class PenyelenggaraEventController extends Controller
         ]);
 
         $event->update($validated);
-        return redirect()->route('backend.penyelenggara_event.index')->with('success', 'Event berhasil diperbarui.');
+        return redirect()->route('backend.penyelenggara_event.index')->with('success', 'Penyelenggara Event berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $event = PenyelenggaraEvent::findOrFail($id);
         $event->delete();
-        return redirect()->route('backend.penyelenggara_event.index')->with('success', 'Event berhasil dihapus.');
+        return redirect()->route('backend.penyelenggara_event.index')->with('success', 'Penyelenggara Event berhasil dihapus.');
     }
 }
