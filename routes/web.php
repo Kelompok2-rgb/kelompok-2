@@ -19,9 +19,7 @@ use App\Http\Controllers\{
     UserController
 };
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 
 // Route untuk halaman login (halaman awal)
 Route::get('/login', [AuthController::class, 'login'])->name('login');
