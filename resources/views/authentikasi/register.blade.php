@@ -10,7 +10,7 @@
     <!--plugins-->
     <link href="{{ asset('dashboard/assets/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/assets/css/perfect-scrollbar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('dashboard/assets/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+
 
     <link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
     <!-- loader-->
@@ -28,6 +28,9 @@
     <!-- App CSS -->
     <link href="{{ asset('dashboard/assets/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/assets/css/icons.css') }}" rel="stylesheet">
+
+    {{-- link awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <title>SignUp-Porlempika</title>
 </head>
@@ -52,7 +55,8 @@
                                     </div>
 
                                     @if ($errors->any())
-                                        <div class="alert alert-danger">
+                                        <div
+                                            style="background-color: #d4edda; color: #ff0000; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
                                             <ul class="mb-0">
                                                 @foreach ($errors->all() as $error)
                                                     <li>{{ $error }}</li>
@@ -62,7 +66,8 @@
                                     @endif
 
                                     @if (session('success'))
-                                        <div class="alert alert-success">
+                                        <div
+                                            style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
                                             {{ session('success') }}
                                         </div>
                                     @endif
@@ -74,8 +79,8 @@
 
                                             <div class="col-12">
                                                 <label for="name" class="form-label">Nama</label>
-                                                <input type="text" class="form-control" name="name"
-                                                    id="name" placeholder="Zahadi Rizfy">
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    placeholder="Zahadi Rizfy">
                                             </div>
 
                                             <div class="col-12">
@@ -123,12 +128,29 @@
                                                     <option value="anggota">Anggota</option>
                                                 </select>
                                             </div>
-                                          
+
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <button type="submit" class="btn btn-light">Sign up</button>
                                                 </div>
                                             </div>
+
+
+                                            <div class="col-12">
+                                                <div>
+                                                    <span>*setelah mengisi data dan sebelum klik button signup, silahkan
+                                                        di screenshoot, kemudian dikirim ke wa admin</span>
+                                                    <!-- Button WhatsApp -->
+                                                    <a href="https://wa.me/6282286233862" target="_blank">
+                                                        <div class=""><i class='bx bxl-whatsapp'></i> admin</div>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+
+
+
+
                                             <div class="col-12">
                                                 <div class="text-center ">
                                                     <p class="mb-0">Already have an account? <a
@@ -150,45 +172,7 @@
     </div>
     </div>
     <!--end wrapper-->
-    <!--start switcher-->
-    <div class="switcher-wrapper">
-        <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
-        </div>
-        <div class="switcher-body">
-            <div class="d-flex align-items-center">
-                <h5 class="mb-0 text-uppercase">Theme Customizer</h5>
-                <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
-            </div>
-            <hr />
-            <p class="mb-0">Gaussian Texture</p>
-            <hr>
 
-            <ul class="switcher">
-                <li id="theme1"></li>
-                <li id="theme2"></li>
-                <li id="theme3"></li>
-                <li id="theme4"></li>
-                <li id="theme5"></li>
-                <li id="theme6"></li>
-            </ul>
-            <hr>
-            <p class="mb-0">Gradient Background</p>
-            <hr>
-
-            <ul class="switcher">
-                <li id="theme7"></li>
-                <li id="theme8"></li>
-                <li id="theme9"></li>
-                <li id="theme10"></li>
-                <li id="theme11"></li>
-                <li id="theme12"></li>
-                <li id="theme13"></li>
-                <li id="theme14"></li>
-                <li id="theme15"></li>
-            </ul>
-        </div>
-    </div>
-    <!--end switcher-->
     <!-- Bootstrap JS -->
     <!-- Bootstrap Bundle JS -->
     <script src="{{ asset('dashboard/assets/js/bootstrap.bundle.min.js') }}"></script>
