@@ -9,6 +9,8 @@ class Pengumuman extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengumuman'; // <- tambahkan ini!
-    protected $fillable = ['judul', 'isi', 'tanggal'];
+    protected $table = 'pengumuman';
+
+    // Tambahkan 'foto' ke fillable
+    protected $fillable = ['judul', 'isi', 'tanggal', 'foto'];
 }

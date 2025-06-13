@@ -15,4 +15,12 @@ class Pertandingan extends Model
         'nama_pertandingan',
         'nama_penyelenggara'
     ];
+
+    /**
+     * Relasi many-to-many dengan model Atlet
+     */
+    public function atlets()
+    {
+        return $this->belongsToMany(Atlet::class, 'peserta_pertandingan');
+    }
 }

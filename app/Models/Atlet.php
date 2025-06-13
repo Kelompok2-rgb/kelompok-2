@@ -15,5 +15,12 @@ class Atlet extends Model
         'prestasi',
         'rekap_latihan',
     ];
-}
 
+    /**
+     * Relasi many-to-many dengan pertandingan
+     */
+    public function pertandingans()
+    {
+        return $this->belongsToMany(Pertandingan::class, 'peserta_pertandingan');
+    }
+}

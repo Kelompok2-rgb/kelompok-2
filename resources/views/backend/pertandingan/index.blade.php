@@ -32,6 +32,7 @@
                 <th>Lokasi</th>
                 <th>Nama Pertandingan</th>
                 <th>Nama Penyelenggara</th>
+                <th>Nama Peserta</th>
                 <th>Tanggal</th>
                 <th>Aksi</th>
             </tr>
@@ -43,6 +44,7 @@
                     <td>{{ $pertandingan->lokasi }}</td>
                     <td>{{ $pertandingan->nama_pertandingan }}</td>
                     <td>{{ $pertandingan->nama_penyelenggara }}</td>
+                    <td><a href="{{ route('backend.peserta.index', $pertandingan->id) }}" class="btn btn-secondary">Kelola Peserta</a></td>
                     <td>{{ $pertandingan->tanggal }}</td>
                     <td>
                         <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}"

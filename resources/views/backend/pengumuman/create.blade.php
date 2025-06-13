@@ -10,7 +10,19 @@
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
-                <form action="{{ route('backend.pengumuman.store') }}" method="POST">
+
+                {{-- Tampilkan error validasi --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('backend.pengumuman.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
@@ -19,12 +31,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="isi" class="form-label">Isi</label>
-                        <textarea name="isi" class="form-control" id="isi" rows="4" placeholder="Masukkan isi pengumuman"
-                            required></textarea>
+                        <textarea name="isi" class="form-control" id="isi" rows="4"
+                            placeholder="Masukkan isi pengumuman" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="tanggal" class="form-label">Tanggal</label>
                         <input type="date" name="tanggal" class="form-control" id="tanggal" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">Foto (opsional)</label>
+                        <input type="file" name="foto" class="form-control" id="foto" accept="image/*">
+                        <small class="text-muted">Hanya file gambar (jpg, jpeg, png). Maksimal 2MB.</small>
                     </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary">Simpan</button>

@@ -1,13 +1,23 @@
 @extends('backend.layouts.app')
 
-
 @section('title', 'Edit Pengumuman')
 
 @section('content')
     <div class="container">
         <h2 class="mb-4">Edit Pengumuman</h2>
 
-        <form action="{{ route('backend.pengumuman.update', $pengumuman->id) }}" method="POST">
+        {{-- Tampilkan error validasi --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('backend.pengumuman.update', $pengumuman->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -25,6 +35,19 @@
                 <label for="tanggal" class="form-label">Tanggal</label>
                 <input type="date" name="tanggal" class="form-control" value="{{ $pengumuman->tanggal }}" required>
             </div>
+
+            <div class="mb-3">
+                <label for="foto" class="form-label">Ganti Foto (opsional)</label>
+                <input type="file" name="foto" class="form-control" accept="image/*">
+                <small class="text-muted">Biarkan kosong jika tidak ingin mengganti foto. Maksimal 2MB.</small>
+            </div>
+
+            @if ($pengumuman->foto)
+                <div class="mb-3">
+                    <label class="form-label">Foto Saat Ini:</label><br>
+                    <img src="{{ asset('storage/pengumuman/' . $pengumuman->foto) }}" alt="Foto Pengumuman" style="max-width: 300px; border-radius: 8px;">
+                </div>
+            @endif
 
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary">Update</button>
