@@ -33,6 +33,7 @@
                 <th>Judul</th>
                 <th>Tanggal</th>
                 <th>Isi</th>
+                <th>Foto</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -48,12 +49,18 @@
                                 {{ Str::limit($item->isi, 100) }}
                             </div>
                             <a href="javascript:void(0);"
-   onclick="showDetailModal(`{{ addslashes($item->judul) }}`, `{{ $item->tanggal }}`, `{{ addslashes($item->isi) }}`)"
-   style="position: absolute; bottom: 0; right: 0; font-size: 0.85rem; color: black;">
-   Lihat Selengkapnya
-</a>
-
+                                onclick="showDetailModal(`{{ addslashes($item->judul) }}`, `{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}`, `{{ addslashes($item->isi) }}`, `{{ $item->foto ?? '' }}`)"
+                                style="position: absolute; bottom: 0; right: 0; font-size: 0.85rem; color: black;">
+                                Lihat Selengkapnya
+                            </a>
                         </div>
+                    </td>
+                    <td>
+                        @if ($item->foto)
+                            <img src="{{ asset('uploads/pengumuman/' . $item->foto) }}" width="80" alt="Foto">
+                        @else
+                            <span class="text-muted">-</span>
+                        @endif
                     </td>
                     <td>
                         <a href="{{ route('backend.pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -65,7 +72,6 @@
                         </form>
                     </td>
                 </tr>
-           
             @endforeach
         </tbody>
     </table>
@@ -77,6 +83,7 @@
             <h3 id="modalJudul" class="modal-title text-white mt-3"></h3>
             <p id="modalTanggal" class="text-white mb-2"></p>
             <p id="modalIsi" class="modal-description text-white"></p>
+            <div id="modalFoto" class="mt-3"></div>
         </div>
     </div>
 
@@ -89,7 +96,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.85);
+            background-color: rgba(0, 0, 0, 0.85);
             overflow-y: auto;
         }
 
@@ -130,11 +137,17 @@
             return confirm('Yakin hapus?');
         }
 
-
-        function showDetailModal(judul, tanggal, isi) {
+        function showDetailModal(judul, tanggal, isi, foto) {
             document.getElementById('modalJudul').innerText = judul;
             document.getElementById('modalTanggal').innerText = `Tanggal: ${tanggal}`;
             document.getElementById('modalIsi').innerText = isi;
+
+            if (foto) {
+                document.getElementById('modalFoto').innerHTML = `<img src="/uploads/pengumuman/${foto}" style="max-width: 100%; border-radius: 8px;">`;
+            } else {
+                document.getElementById('modalFoto').innerHTML = '';
+            }
+
             document.getElementById('detailModal').style.display = 'block';
         }
 
@@ -142,7 +155,4 @@
             document.getElementById('detailModal').style.display = 'none';
         }
     </script>
-
-    <!-- SheetJS -->
-   
 @endsection

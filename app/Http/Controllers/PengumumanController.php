@@ -12,6 +12,7 @@ class PengumumanController extends Controller
         $this->middleware('auth');
         $this->middleware('role:admin');
     }
+
     public function index()
     {
         $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get();
@@ -29,7 +30,15 @@ class PengumumanController extends Controller
             'judul'   => 'required|string|max:255',
             'isi'     => 'required|string',
             'tanggal' => 'required|date',
+            'foto'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/pengumuman'), $filename);
+            $validated['foto'] = $filename;
+        }
 
         Pengumuman::create($validated);
         return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil ditambahkan.');
@@ -49,7 +58,20 @@ class PengumumanController extends Controller
             'judul'   => 'required|string|max:255',
             'isi'     => 'required|string',
             'tanggal' => 'required|date',
+            'foto'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($pengumuman->foto && file_exists(public_path('uploads/pengumuman/' . $pengumuman->foto))) {
+                unlink(public_path('uploads/pengumuman/' . $pengumuman->foto));
+            }
+
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/pengumuman'), $filename);
+            $validated['foto'] = $filename;
+        }
 
         $pengumuman->update($validated);
         return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil diperbarui.');
@@ -58,6 +80,12 @@ class PengumumanController extends Controller
     public function destroy($id)
     {
         $pengumuman = Pengumuman::findOrFail($id);
+
+        // Hapus file jika ada
+        if ($pengumuman->foto && file_exists(public_path('uploads/pengumuman/' . $pengumuman->foto))) {
+            unlink(public_path('uploads/pengumuman/' . $pengumuman->foto));
+        }
+
         $pengumuman->delete();
         return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil dihapus.');
     }

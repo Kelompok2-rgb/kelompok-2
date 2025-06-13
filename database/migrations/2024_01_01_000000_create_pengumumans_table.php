@@ -13,9 +13,9 @@ class CreatePengumumansTable extends Migration
             $table->string('judul');
             $table->text('isi');
             $table->date('tanggal');
+            $table->string('foto')->nullable(); // Kolom untuk menyimpan nama/path foto
             $table->timestamps();
         });
-        
     }
 
     public function down(): void
