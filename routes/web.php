@@ -17,7 +17,8 @@ use App\Http\Controllers\{
     FrontendController,
     KonfirmasiController,
     UserController,
-    PesertaPertandinganController
+    PesertaPertandinganController,
+    RekapLatihanController
 };
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
@@ -54,6 +55,8 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::get('pertandingan/{id}/peserta', [PesertaPertandinganController::class, 'index'])->name('peserta.index');
     Route::post('pertandingan/{id}/peserta', [PesertaPertandinganController::class, 'store'])->name('peserta.store');
     Route::delete('pertandingan/{pertandingan_id}/peserta/{atlet_id}', [PesertaPertandinganController::class, 'destroy'])->name('peserta.destroy');
+    Route::get('rekap-latihan/{anggota}', [RekapLatihanController::class, 'index'])->name('rekap_latihan.index');
+    Route::post('rekap-latihan/{anggota}', [RekapLatihanController::class, 'store'])->name('rekap_latihan.store');
 });
 
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');

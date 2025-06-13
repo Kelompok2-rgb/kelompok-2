@@ -15,8 +15,8 @@ class Anggota extends Model
         'klub',
         'tgl_lahir',
         'peran',
-        'riwayat_prestasi',
-        'kontak'
+        'kontak',
+      
     ];
 }
 

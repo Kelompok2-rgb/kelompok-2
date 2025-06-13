@@ -36,8 +36,8 @@
                 <th>Klub</th>
                 <th>Tanggal Lahir</th>
                 <th>Peran</th>
-                <th>Riwayat Prestasi</th>
                 <th>Nomor WA</th>
+                <th>Rekap Latihan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -57,8 +57,8 @@
                     <td>{{ $anggota->klub }}</td>
                     <td>{{ $anggota->tgl_lahir }}</td>
                     <td>{{ $anggota->peran }}</td>
-                    <td>{{ $anggota->riwayat_prestasi }}</td>
                     <td>{{ $anggota->kontak }}</td>
+                    <td><a href="{{ route('backend.rekap_latihan.index', $anggota->id) }}" class="btn btn-secondary">Detail</a></td>
                     <td>
                         <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST"

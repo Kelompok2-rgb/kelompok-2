@@ -34,8 +34,8 @@ class AnggotaController extends Controller
             'klub' => 'nullable|string|max:255',
             'tgl_lahir' => 'required|date',
             'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
-            'riwayat_prestasi' => 'nullable|string',
             'kontak' => 'required|digits_between:8,15',
+            
         ]);
 
         if ($request->hasFile('foto')) {
@@ -63,8 +63,8 @@ class AnggotaController extends Controller
             'klub' => 'nullable|string|max:255',
             'tgl_lahir' => 'required|date',
             'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
-            'riwayat_prestasi' => 'nullable|string',
             'kontak' => 'required|digits_between:8,15',
+            
         ]);
 
         if ($request->hasFile('foto')) {

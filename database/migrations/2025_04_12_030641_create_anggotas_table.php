@@ -18,8 +18,8 @@ return new class extends Migration
          $table->string('klub')->nullable();
         $table->date('tgl_lahir');
         $table->string('peran');
-        $table->text('riwayat_prestasi')->nullable();
         $table->string('kontak');
+       
         $table->timestamps();
     });
 }

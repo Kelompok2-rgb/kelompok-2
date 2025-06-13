@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Atlet;
+use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -14,15 +15,17 @@ class AtletController extends Controller
         $this->middleware('auth');
         $this->middleware('role:admin,klub,atlet');
     }
+
     public function index()
     {
-        $atlets = Atlet::all();
+        $atlets = Atlet::with('club')->get();
         return view('backend.atlet.index', compact('atlets'));
     }
 
     public function create()
     {
-        return view('backend.atlet.create');
+        $clubs = Club::all();
+        return view('backend.atlet.create', compact('clubs'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -31,8 +34,11 @@ class AtletController extends Controller
             'nama' => 'required|string|max:255',
             'foto' => 'nullable|image|max:2048',
             'prestasi' => 'nullable|string',
-            'rekap_latihan' => 'nullable|string',
+            'club_id' => 'nullable',
+            
         ]);
+
+        
 
         if ($request->hasFile('foto')) {
             $validated['foto'] = $request->file('foto')->store('foto', 'public');
@@ -46,7 +52,8 @@ class AtletController extends Controller
     public function edit($id)
     {
         $atlet = Atlet::findOrFail($id);
-        return view('backend.atlet.edit', compact('atlet'));
+        $clubs = Club::all();
+        return view('backend.atlet.edit', compact('atlet', 'clubs'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -57,8 +64,11 @@ class AtletController extends Controller
             'nama' => 'required|string|max:255',
             'foto' => 'nullable|image|max:2048',
             'prestasi' => 'nullable|string',
-            'rekap_latihan' => 'nullable|string',
+            'club_id' => 'nullable',
+            
         ]);
+
+     
 
         if ($request->hasFile('foto')) {
             if ($atlet->foto && Storage::disk('public')->exists($atlet->foto)) {
