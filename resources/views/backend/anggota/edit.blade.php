@@ -72,15 +72,6 @@
 
 
             <div class="mb-3">
-                <label for="riwayat_prestasi" class="form-label">Riwayat Prestasi</label>
-                <textarea class="form-control @error('riwayat_prestasi') is-invalid @enderror" id="riwayat_prestasi"
-                    name="riwayat_prestasi" rows="4">{{ old('riwayat_prestasi', $anggota->riwayat_prestasi) }}</textarea>
-                @error('riwayat_prestasi')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
                 <label for="kontak" class="form-label">Nomor WA</label>
                 <input type="number" class="form-control @error('kontak') is-invalid @enderror" id="kontak"
                     name="kontak" value="{{ old('kontak', $anggota->kontak) }}">

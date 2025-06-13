@@ -13,7 +13,7 @@ class Atlet extends Model
         'nama',
         'foto',
         'prestasi',
-        'rekap_latihan',
+        'club_id', // tambahkan ini
     ];
 
     /**
@@ -22,5 +22,13 @@ class Atlet extends Model
     public function pertandingans()
     {
         return $this->belongsToMany(Pertandingan::class, 'peserta_pertandingan');
+    }
+
+    /**
+     * Relasi many-to-one ke Club
+     */
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 }

@@ -8,7 +8,7 @@
         <hr>
     </div>
 
-   @if (session('success'))
+    @if (session('success'))
         <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
             {{ session('success') }}
         </div>
@@ -32,8 +32,8 @@
                 <th>No</th>
                 <th>Nama</th>
                 <th>Foto</th>
+                <th>Klub</th>
                 <th>Prestasi</th>
-                <th>Rekap Latihan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -45,13 +45,13 @@
                     <td class="text-center">
                         @if ($atlet->foto)
                             <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" width="60"
-                                class="foto-hover" width="60" style="transition: transform 0.5s;">
+                                class="foto-hover" style="transition: transform 0.5s;">
                         @else
                             Tidak ada foto
                         @endif
                     </td>
+                    <td>{{ $atlet->club ? $atlet->club->nama : '-' }}</td>
                     <td>{{ $atlet->prestasi }}</td>
-                    <td>{{ $atlet->rekap_latihan }}</td>
                     <td class="text-center">
                         <a href="{{ route('backend.atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
                         <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" class="d-inline"
@@ -60,23 +60,20 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
-
-
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-                        <script>
-                            function handleDelete() {
-                                const userRole = @json(Auth::user()->role);
-                                if (userRole !== 'admin') {
-                                    alert('Hanya admin yang dapat menghapus');
-                                    return false;
-                                }
-                                return confirm('Yakin ingin menghapus?');
-                            }
-                        </script>
-   
+    <script>
+        function handleDelete() {
+            const userRole = @json(Auth::user()->role);
+            if (userRole !== 'admin') {
+                alert('Hanya admin yang dapat menghapus');
+                return false;
+            }
+            return confirm('Yakin ingin menghapus?');
+        }
+    </script>
 @endsection

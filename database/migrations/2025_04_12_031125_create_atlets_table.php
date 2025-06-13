@@ -10,18 +10,19 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::create('atlets', function (Blueprint $table) {
+    {
+        Schema::create('atlets', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('foto');
+            $table->string('prestasi')->nullable();
 
-        $table->id();
-        $table->string('nama');
-        $table->string('foto');
-        $table->string('prestasi')->nullable();
-        $table->string('rekap_latihan')->nullable();
-        
-        $table->timestamps();
-    });
-}
+            // Kolom relasi ke tabel clubs (boleh kosong)
+            $table->foreignId('club_id')->nullable()->constrained('clubs')->onDelete('set null');
+
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
