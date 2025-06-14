@@ -3,78 +3,65 @@
 @section('navMhs', 'active')
 
 @section('content')
-    <div class="text-center mb-4">
-        <h2>Pengumuman</h2>
-        <hr>
-    </div>
+    <div class="container mt-4">
+        <h2 class="mb-4">Daftar Pengumuman</h2>
 
-    @if (session('success'))
-        <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-            {{ session('success') }}
+        @if (session('success'))
+            <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="d-flex justify-content-between mb-3">
+            <a href="{{ route('backend.pengumuman.create') }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Tambah Pengumuman</a>
+            
         </div>
-    @endif
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ route('backend.pengumuman.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
-            Tambah Pengumuman
-        </a>
-
-        <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
-            style="font-size: 24px; padding: 6px; height: 38px; width: 38px; display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-file-excel"></i>
-        </button>
-    </div>
-
-    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Tanggal</th>
-                <th>Isi</th>
-                <th>Foto</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pengumumans as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td style="font-size: 1.1rem; font-weight: 600;">{{ $item->judul }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
-                    <td style="text-align: left;">
-                        <div style="max-height: 70px; overflow: hidden; position: relative;">
-                            <div style="font-size: 1rem;">
-                                {{ Str::limit($item->isi, 100) }}
-                            </div>
-                            <a href="javascript:void(0);"
-                                onclick="showDetailModal(`{{ addslashes($item->judul) }}`, `{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}`, `{{ addslashes($item->isi) }}`, `{{ $item->foto ?? '' }}`)"
-                                style="position: absolute; bottom: 0; right: 0; font-size: 0.85rem; color: black;">
-                                Lihat Selengkapnya
-                            </a>
-                        </div>
-                    </td>
-                    <td>
+        <div class="row">
+            @forelse($pengumumans as $item)
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
                         @if ($item->foto)
-                            <img src="{{ asset('uploads/pengumuman/' . $item->foto) }}" width="80" alt="Foto">
-                        @else
-                            <span class="text-muted">-</span>
+                            <img src="{{ asset('uploads/pengumuman/' . $item->foto) }}" class="card-img-top"
+                                alt="Foto Pengumuman" style="height: 200px; object-fit: cover;">
                         @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('backend.pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit</a>
-                        <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST"
-                            style="display:inline;" onsubmit="return handleDeletePengumuman()">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $item->judul }}</h5>
+                            <small class="text-muted">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</small>
+                            <p class="card-text mt-2">{{ Str::limit($item->isi, 100) }}</p>
+
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-sm btn-info text-white"
+                                    onclick="showDetailModal(`{{ addslashes($item->judul) }}`, `{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}`, `{{ addslashes($item->isi) }}`, `{{ $item->foto ?? '' }}`)">
+                                    Detail
+                                </button>
+                                <div>
+                                    <a href="{{ route('backend.pengumuman.edit', $item->id) }}"
+                                        class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST"
+                                        style="display:inline;" onsubmit="return handleDeletePengumuman()">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12">
+                    <div class="col-12 text-center">
+                        <p>Belum ada pengumuman.</p>
+                    </div>
+                </div>
+            @endforelse
+        </div>
+    </div>
 
     <!-- Modal Detail -->
     <div id="detailModal" class="modal" onclick="closeModal()">
@@ -87,6 +74,7 @@
         </div>
     </div>
 
+    {{-- CSS --}}
     <style>
         .modal {
             display: none;
@@ -127,6 +115,7 @@
         }
     </style>
 
+    {{-- JS --}}
     <script>
         function handleDeletePengumuman() {
             const userRole = @json(Auth::user()->role);
@@ -134,7 +123,7 @@
                 alert('Hanya admin atau penyelenggara yang dapat menghapus.');
                 return false;
             }
-            return confirm('Yakin hapus?');
+            return confirm('Yakin ingin menghapus pengumuman ini?');
         }
 
         function showDetailModal(judul, tanggal, isi, foto) {
@@ -143,7 +132,8 @@
             document.getElementById('modalIsi').innerText = isi;
 
             if (foto) {
-                document.getElementById('modalFoto').innerHTML = `<img src="/uploads/pengumuman/${foto}" style="max-width: 100%; border-radius: 8px;">`;
+                document.getElementById('modalFoto').innerHTML =
+                    `<img src="/uploads/pengumuman/${foto}" style="max-width: 100%; border-radius: 8px;">`;
             } else {
                 document.getElementById('modalFoto').innerHTML = '';
             }

@@ -15,7 +15,7 @@
     @endif
 
     <div class="d-flex justify-content-start gap-2 mb-3">
-        <a href="{{ route('backend.hasil_pertandingan.create') }}" class="btn btn-primary">
+        <a href="{{ route('backend.hasil_pertandingan.create') }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>
             Tambah Pertandingan ke Daftar
         </a>
     </div>

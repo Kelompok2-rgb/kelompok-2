@@ -31,7 +31,7 @@
                          onclick="openModal('{{ asset('uploads/' . $galeri->gambar) }}', `{{ addslashes($galeri->judul) }}`)">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $galeri->judul }}</h5>
-                        <p class="card-text text-dark">{{ $galeri->deskripsi }}</p>
+                        <p class="card-text text-light">{{ $galeri->deskripsi }}</p>
                     </div>
                     <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between">
                         <a href="{{ route('backend.galeri.edit', $galeri->id) }}" class="btn btn-warning btn-sm">

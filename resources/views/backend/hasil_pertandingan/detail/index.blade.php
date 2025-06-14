@@ -18,7 +18,7 @@
 
     {{-- Tombol Aksi --}}
     <div class="d-flex justify-content-start gap-2 mb-3">
-        <a href="{{ route('backend.detail_hasil_pertandingan.create', $hasilPertandingan->id) }}" class="btn btn-primary">
+        <a href="{{ route('backend.detail_hasil_pertandingan.create', $hasilPertandingan->id) }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>
             Tambah Hasil Peserta
         </a>
         <a href="{{ route('backend.hasil_pertandingan.index') }}" class="btn btn-secondary">
