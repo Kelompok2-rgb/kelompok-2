@@ -22,72 +22,78 @@ use App\Http\Controllers\{
     DetailHasilPertandinganController
 };
 
+// Halaman Utama
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 
-// Route untuk halaman login (halaman awal)
+// Login & Auth
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-
-// Proses login & logout
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Semua route di bawah ini hanya dapat diakses jika sudah login (auth middleware)
-Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
-
-    // Dashboard setelah login
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard.dashboard'); // Satukan ke halaman admin-dashboard yang kamu punya
-    })->name('dashboard');
-
-    // Resource routes untuk controller di backend
-    Route::resource('atlet', AtletController::class);
-    Route::resource('juri', JuriController::class);
-    Route::get('hasil_pertandingan/create', [HasilPertandinganController::class, 'create'])->name('hasil_pertandingan.create');
-    Route::resource('hasil_pertandingan', HasilPertandinganController::class)->except(['create', 'store']);
-    Route::resource('hasil_pertandingan', HasilPertandinganController::class);
-    Route::resource('kategori_pertandingan', KategoriPertandinganController::class);
-    Route::resource('jadwal_pertandingan', JadwalPertandinganController::class);
-    Route::resource('galeri', GaleriController::class);
-    Route::resource('club', ClubController::class);
-    Route::resource('pengumuman', PengumumanController::class);
-    Route::resource('anggota', AnggotaController::class);
-    Route::resource('pertandingan', PertandinganController::class);
-    Route::resource('penyelenggara_event', PenyelenggaraEventController::class);
-    Route::resource('users', UserController::class);
-    // Route peserta pertandingan (tambahkan di sini)
-    Route::get('pertandingan/{id}/peserta', [PesertaPertandinganController::class, 'index'])->name('peserta.index');
-    Route::post('pertandingan/{id}/peserta', [PesertaPertandinganController::class, 'store'])->name('peserta.store');
-    Route::delete('pertandingan/{pertandingan_id}/peserta/{atlet_id}', [PesertaPertandinganController::class, 'destroy'])->name('peserta.destroy');
-    Route::get('rekap-latihan/{anggota}', [RekapLatihanController::class, 'index'])->name('rekap_latihan.index');
-    Route::post('rekap-latihan/{anggota}', [RekapLatihanController::class, 'store'])->name('rekap_latihan.store');
-    Route::get('/detail-hasil-pertandingan/create/{pertandingan_id}', [DetailHasilPertandinganController::class, 'create'])->name('detail_hasil_pertandingan.create');
-    Route::post('/detail-hasil-pertandingan/store/{pertandingan_id}', [DetailHasilPertandinganController::class, 'store'])->name('detail_hasil_pertandingan.store');
-});
-
+// Register
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('authentikasi.register.post');
-Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
-    Route::get('/konfirmasi', [KonfirmasiController::class, 'index'])->name('konfirmasi.index');
-    Route::post('/konfirmasi/{id}/approve', [KonfirmasiController::class, 'approve'])->name('konfirmasi.approve');
-});
 
+// Password Reset
+Route::get('/forgot-password', [AuthController::class, 'showForgotForm'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'handleForgot'])->name('password.handle');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'handleReset'])->name('password.update');
 
+// Halaman Frontend Lainnya
 Route::name('frontend.')->group(function () {
-
     Route::get('/jadwalpertandingan', [FrontendController::class, 'jadwalpertandingan'])->name('indexjadwalpertandingan');
     Route::get('/kategoripertandingan', [FrontendController::class, 'kategoripertandingan'])->name('indexkategoripertandingan');
     Route::get('/galeri', [FrontendController::class, 'galeri'])->name('indexgaleri');
     Route::get('/pengumuman', [FrontendController::class, 'pengumuman'])->name('indexpengumuman');
 });
 
-// Form lupa password
-Route::get('/forgot-password', [AuthController::class, 'showForgotForm'])->name('password.request');
+// Backend Routes
+Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', fn() => view('backend.dashboard.dashboard'))->name('dashboard');
 
-// Proses form lupa password
-Route::post('/forgot-password', [AuthController::class, 'handleForgot'])->name('password.handle');
+    // Konfirmasi User
+    Route::get('/konfirmasi', [KonfirmasiController::class, 'index'])->name('konfirmasi.index');
+    Route::post('/konfirmasi/{id}/approve', [KonfirmasiController::class, 'approve'])->name('konfirmasi.approve');
 
-// Form reset password
-Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+    // Resource Controllers
+    Route::resources([
+        'atlet' => AtletController::class,
+        'juri' => JuriController::class,
+        'galeri' => GaleriController::class,
+        'club' => ClubController::class,
+        'pengumuman' => PengumumanController::class,
+        'anggota' => AnggotaController::class,
+        'pertandingan' => PertandinganController::class,
+        'penyelenggara_event' => PenyelenggaraEventController::class,
+        'users' => UserController::class,
+        'kategori_pertandingan' => KategoriPertandinganController::class,
+        'jadwal_pertandingan' => JadwalPertandinganController::class,
+    ]);
 
-// Proses reset password
-Route::post('/reset-password', [AuthController::class, 'handleReset'])->name('password.update');
+    // Hasil Pertandingan
+    Route::get('hasil_pertandingan/create', [HasilPertandinganController::class, 'create'])->name('hasil_pertandingan.create');
+    Route::resource('hasil_pertandingan', HasilPertandinganController::class)->except(['create']);
+
+    // Peserta Pertandingan
+    Route::prefix('pertandingan/{id}/peserta')->group(function () {
+        Route::get('/', [PesertaPertandinganController::class, 'index'])->name('peserta.index');
+        Route::post('/', [PesertaPertandinganController::class, 'store'])->name('peserta.store');
+        Route::delete('/{atlet_id}', [PesertaPertandinganController::class, 'destroy'])->name('peserta.destroy');
+    });
+
+    // Rekap Latihan
+    Route::get('rekap-latihan/{anggota}', [RekapLatihanController::class, 'index'])->name('rekap_latihan.index');
+    Route::post('rekap-latihan/{anggota}', [RekapLatihanController::class, 'store'])->name('rekap_latihan.store');
+
+    // Detail Hasil Pertandingan
+    Route::prefix('hasil-pertandingan/{hasil_pertandingan_id}/detail')->name('detail_hasil_pertandingan.')->group(function () {
+        Route::get('/', [DetailHasilPertandinganController::class, 'index'])->name('index');
+        Route::get('/create', [DetailHasilPertandinganController::class, 'create'])->name('create');
+        Route::post('/', [DetailHasilPertandinganController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [DetailHasilPertandinganController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [DetailHasilPertandinganController::class, 'update'])->name('update');
+        Route::delete('/{id}', [DetailHasilPertandinganController::class, 'destroy'])->name('destroy');
+    });
+});

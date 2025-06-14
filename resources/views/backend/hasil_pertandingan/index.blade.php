@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="text-center mb-4">
-        <h2>Daftar Hasil Pertandingan</h2>
+        <h2>Hasil Pertandingan</h2>
         <hr>
     </div>
 
@@ -20,27 +20,29 @@
         </a>
     </div>
 
-    <table class="table table-bordered table-striped text-center">
+    <table class="table table-bordered table-striped text-center" id="example">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
                 <th>Nama Pertandingan</th>
-                <th>Input Hasil</th>
+                <th>Hasil Pertandingan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($hasilPertandingans as $index => $hasil)
+            @foreach ($hasilPertandingans as $index => $hasil)
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $hasil->pertandingan->nama_pertandingan ?? '-' }}</td>
                     <td>
-                        <a href="{{ route('backend.detail_hasil_pertandingan.create', $hasil->pertandingan_id) }}" class="btn btn-primary btn-sm">
+                        <a href="{{ route('backend.detail_hasil_pertandingan.index', $hasil->id) }}"
+                            class="btn btn-primary btn-sm">
                             Input Hasil
                         </a>
                     </td>
                     <td>
-                        <form action="{{ route('backend.hasil_pertandingan.destroy', $hasil->id) }}" method="POST" class="d-inline"
+                        <form action="{{ route('backend.hasil_pertandingan.destroy', $hasil->id) }}" method="POST"
+                            class="d-inline"
                             onsubmit="return confirm('Yakin ingin menghapus pertandingan ini dari daftar hasil?')">
                             @csrf
                             @method('DELETE')
