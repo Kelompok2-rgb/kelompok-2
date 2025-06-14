@@ -15,7 +15,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('hasil_pertandingan_id')->constrained('hasil_pertandingans')->onDelete('cascade');
             $table->string('nama');
-            $table->float('skor');
+
+            // Kolom lemparan 1–5
+            $table->float('lemparan1')->nullable();
+            $table->float('lemparan2')->nullable();
+            $table->float('lemparan3')->nullable();
+            $table->float('lemparan4')->nullable();
+            $table->float('lemparan5')->nullable();
+
+            $table->float('skor')->nullable();
             $table->integer('rangking')->nullable();
             $table->text('catatan_juri')->nullable();
             $table->timestamps();

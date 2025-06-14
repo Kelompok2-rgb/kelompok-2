@@ -17,7 +17,7 @@
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.penyelenggara_event.create') }}" class="btn btn-primary"
             style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
-            Tambah Event
+            Tambah Penyelenggara
         </a>
 
         <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"

@@ -12,6 +12,11 @@ class DetailHasilPertandingan extends Model
     protected $fillable = [
         'hasil_pertandingan_id',
         'nama',
+        'lemparan1',
+        'lemparan2',
+        'lemparan3',
+        'lemparan4',
+        'lemparan5',
         'skor',
         'rangking',
         'catatan_juri',
@@ -21,5 +26,10 @@ class DetailHasilPertandingan extends Model
     public function hasilPertandingan()
     {
         return $this->belongsTo(HasilPertandingan::class);
+    }
+
+    public function atlet()
+    {
+        return $this->belongsTo(Atlet::class);
     }
 }
