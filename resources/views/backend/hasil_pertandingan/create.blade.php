@@ -4,7 +4,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h2>Tambah Hasil Pertandingan</h2>
+            <h2>Tambah Pertandingan ke Daftar Hasil</h2>
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -14,53 +14,22 @@
             <form action="{{ route('backend.hasil_pertandingan.store') }}" method="POST">
                 @csrf
 
-
                 <div class="mb-3">
-                    <label for="nama_pertandingan" class="form-label">Nama Pertandingan</label>
-                    <input type="text" step="0.01" class="form-control" id="nama_pertandingan" name="nama_pertandingan"
-                        value="{{ old('nama_pertandingan') }}" required>
-                    @error('skor')
+                    <label for="pertandingan_id" class="form-label">Pilih Pertandingan</label>
+                    <select name="pertandingan_id" id="pertandingan_id" class="form-control" required>
+                        <option value="">-- Pilih Pertandingan --</option>
+                        @foreach ($pertandingans as $pertandingan)
+                            <option value="{{ $pertandingan->id }}">
+                                {{ $pertandingan->nama_pertandingan }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('pertandingan_id')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label for="nama" class="form-label">Nama Atlet</label>
-                    <input type="text" step="0.01" class="form-control" id="nama" name="nama"
-                        value="{{ old('nama') }}" required>
-                    @error('skor')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="skor" class="form-label">Skor</label>
-                    <input type="number" step="0.01" class="form-control" id="skor" name="skor"
-                        value="{{ old('skor') }}" required>
-                    @error('skor')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="rangking" class="form-label">Rangking</label>
-                    <input type="number" class="form-control" id="rangking" name="rangking" value="{{ old('rangking') }}"
-                        min="1" step="1" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                    @error('rangking')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-
-                <div class="mb-3">
-                    <label for="catatan_juri" class="form-label">Catatan Juri</label>
-                    <textarea class="form-control" id="catatan_juri" name="catatan_juri">{{ old('catatan_juri') }}</textarea>
-                    @error('catatan_juri')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Tambahkan</button>
             </form>
         </div>
     </div>

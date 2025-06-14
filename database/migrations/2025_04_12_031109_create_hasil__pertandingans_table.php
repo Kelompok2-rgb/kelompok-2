@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('hasil__pertandingans', function (Blueprint $table) {
+    Schema::create('hasil_pertandingans', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('pertandingan_id')->constrained('pertandingans')->onDelete('cascade');
+    $table->timestamps();
+});
 
-        $table->id();
-        $table->string('nama_pertandingan');
-        $table->string('nama');
-        $table->string('skor');
-        $table->string('rangking');
-        $table->text('catatan_juri')->nullable();
-        $table->timestamps();
-    });
+
 }
-
     /**
      * Reverse the migrations.
      */
