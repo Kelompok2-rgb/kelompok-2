@@ -23,4 +23,9 @@ class Pertandingan extends Model
     {
         return $this->belongsToMany(Atlet::class, 'peserta_pertandingan');
     }
+
+    public function hasilPertandingan()
+    {
+        return $this->hasOne(HasilPertandingan::class);
+    }
 }

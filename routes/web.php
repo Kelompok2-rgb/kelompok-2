@@ -18,7 +18,8 @@ use App\Http\Controllers\{
     KonfirmasiController,
     UserController,
     PesertaPertandinganController,
-    RekapLatihanController
+    RekapLatihanController,
+    DetailHasilPertandinganController
 };
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
@@ -41,6 +42,8 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     // Resource routes untuk controller di backend
     Route::resource('atlet', AtletController::class);
     Route::resource('juri', JuriController::class);
+    Route::get('hasil_pertandingan/create', [HasilPertandinganController::class, 'create'])->name('hasil_pertandingan.create');
+    Route::resource('hasil_pertandingan', HasilPertandinganController::class)->except(['create', 'store']);
     Route::resource('hasil_pertandingan', HasilPertandinganController::class);
     Route::resource('kategori_pertandingan', KategoriPertandinganController::class);
     Route::resource('jadwal_pertandingan', JadwalPertandinganController::class);
@@ -57,6 +60,8 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::delete('pertandingan/{pertandingan_id}/peserta/{atlet_id}', [PesertaPertandinganController::class, 'destroy'])->name('peserta.destroy');
     Route::get('rekap-latihan/{anggota}', [RekapLatihanController::class, 'index'])->name('rekap_latihan.index');
     Route::post('rekap-latihan/{anggota}', [RekapLatihanController::class, 'store'])->name('rekap_latihan.store');
+    Route::get('/detail-hasil-pertandingan/create/{pertandingan_id}', [DetailHasilPertandinganController::class, 'create'])->name('detail_hasil_pertandingan.create');
+    Route::post('/detail-hasil-pertandingan/store/{pertandingan_id}', [DetailHasilPertandinganController::class, 'store'])->name('detail_hasil_pertandingan.store');
 });
 
 Route::get('/register', [AuthController::class, 'register'])->name('authentikasi.register');

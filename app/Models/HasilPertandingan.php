@@ -9,14 +9,16 @@ class HasilPertandingan extends Model
 {
     use HasFactory;
 
-    protected $table = 'hasil__pertandingans'; 
+    protected $fillable = ['pertandingan_id'];
 
-    protected $fillable = [
-        'nama_pertandingan',
-        'nama',
-        'skor',
-        'rangking',
-        'catatan_juri',
-    ];
+    public function pertandingan()
+    {
+        return $this->belongsTo(Pertandingan::class);
+    }
+
+    public function detailHasil()
+    {
+        return $this->hasMany(DetailHasilPertandingan::class);
+    }
 }
 

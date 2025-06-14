@@ -3,74 +3,59 @@
 namespace App\Http\Controllers;
 
 use App\Models\HasilPertandingan;
+use App\Models\Pertandingan;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 
 class HasilPertandinganController extends Controller
 {
-      public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('role:admin,juri');
     }
+
+    /**
+     * Menampilkan daftar hasil pertandingan.
+     */
     public function index()
     {
-        $hasilPertandingans = HasilPertandingan::all();
+        $hasilPertandingans = HasilPertandingan::with('pertandingan')->get();
         return view('backend.hasil_pertandingan.index', compact('hasilPertandingans'));
     }
 
+    /**
+     * Menampilkan form untuk menambahkan hasil pertandingan.
+     */
     public function create()
     {
-        return view('backend.hasil_pertandingan.create');
+        // Hanya tampilkan pertandingan yang belum ada di hasil_pertandingans
+        $pertandingans = Pertandingan::doesntHave('hasilPertandingan')->get();
+        return view('backend.hasil_pertandingan.create', compact('pertandingans'));
     }
 
-    public function store(Request $request): RedirectResponse
+    /**
+     * Menyimpan hasil pertandingan baru.
+     */
+    public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nama_pertandingan'  => 'required|string|min:2|max:255',
-            'nama' => 'required|string|max:255',
-            'skor' => 'required|numeric',
-            'rangking' => 'required|integer',
-            'catatan_juri' => 'nullable|string',
+        $request->validate([
+            'pertandingan_id' => 'required|exists:pertandingans,id',
         ]);
 
-        HasilPertandingan::create($validated);
-
-        return redirect()->route('backend.hasil_pertandingan.index')
-            ->with('success', 'Hasil pertandingan berhasil ditambahkan');
-    }
-
-    public function edit($id)
-    {
-        $hasil_pertandingan = HasilPertandingan::findOrFail($id);
-        return view('backend.hasil_pertandingan.edit', compact('hasil_pertandingan'));
-    }
-
-
-    public function update(Request $request, $id): RedirectResponse
-    {
-        $hasilPertandingan = HasilPertandingan::findOrFail($id);
-
-        $validated = $request->validate([
-            'nama_pertandingan'  => 'required|string|min:2|max:255',
-            'nama' => 'required|string|max:255',
-            'skor' => 'required|numeric',
-            'rangking' => 'nullable|integer',
-            'catatan_juri' => 'nullable|string',
+        HasilPertandingan::create([
+            'pertandingan_id' => $request->pertandingan_id,
         ]);
 
-        $hasilPertandingan->update($validated);
-
         return redirect()->route('backend.hasil_pertandingan.index')
-            ->with('success', 'Hasil pertandingan berhasil diperbarui');
+                         ->with('success', 'Pertandingan berhasil ditambahkan ke daftar hasil.');
     }
 
-    public function destroy($id): RedirectResponse
-    {
-        $hasilPertandingan = HasilPertandingan::findOrFail($id);
-        $hasilPertandingan->delete();
+    public function destroy($id)
+{
+    $hasil = HasilPertandingan::findOrFail($id);
+    $hasil->delete();
 
-        return redirect()->route('backend.hasil_pertandingan.index')
-            ->with('success', 'Hasil pertandingan berhasil dihapus');
-    }
+    return redirect()->route('backend.hasil_pertandingan.index')->with('success', 'Hasil pertandingan berhasil dihapus');
+}
+
 }
