@@ -66,7 +66,7 @@
                                             method="POST" onsubmit="return confirm('Yakin ingin menghapus peserta ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
                                         </form>
                                     </td>
                                 </tr>

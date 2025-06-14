@@ -63,12 +63,12 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('backend.pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('backend.pengumuman.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit</a>
                         <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST"
                             style="display:inline;" onsubmit="return handleDeletePengumuman()">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger btn-sm">Hapus</button>
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
                     </td>
                 </tr>

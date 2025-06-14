@@ -58,14 +58,14 @@
                     <td>{{ $detail->catatan_juri }}</td>
                     <td>
                         <a href="{{ route('backend.detail_hasil_pertandingan.edit', [$hasilPertandingan->id, $detail->id]) }}"
-                            class="btn btn-warning btn-sm">Edit</a>
+                            class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit</a>
 
                         <form action="{{ route('backend.detail_hasil_pertandingan.destroy', [$hasilPertandingan->id, $detail->id]) }}"
                             method="POST" class="d-inline"
                             onsubmit="return confirm('Hapus data ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
                     </td>
                 </tr>

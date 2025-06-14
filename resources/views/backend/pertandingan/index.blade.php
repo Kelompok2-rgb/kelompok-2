@@ -48,12 +48,12 @@
                     <td>{{ $pertandingan->tanggal }}</td>
                     <td>
                         <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}"
-                            class="btn btn-warning">Edit</a>
+                            class="btn btn-warning"><i class="fas fa-edit"></i>Edit</a>
                         <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST"
                             style="display:inline;" onsubmit="return handleDeletePertandingan()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
 
 

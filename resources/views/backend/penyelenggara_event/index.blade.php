@@ -30,29 +30,26 @@
         <thead class="table-dark">
             <tr>
                 <th>No</th>
-                <th>Nama Penyelenggara Event</th>
-                <th>Nama Event</th>
-                <th>Tanggal</th>
-                <th>Lokasi</th>
+                <th>Nama Penyelenggara</th>
+                <th>Kontak</th>
                 <th>Aksi</th>
+                
             </tr>
         </thead>
         <tbody>
-            @foreach ($penyelenggara_events as $event)
+            @foreach ($penyelenggara_events as $penyelenggara)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $event->nama_penyelenggara_event }}</td>
-                    <td>{{ $event->nama_event }}</td>
-                    <td>{{ $event->tanggal }}</td>
-                    <td>{{ $event->lokasi }}</td>
+                    <td>{{ $penyelenggara->nama_penyelenggara_event }}</td>
+                    <td>{{ $penyelenggara->kontak }}</td>
                     <td>
-                        <a href="{{ route('backend.penyelenggara_event.edit', $event->id) }}"
-                            class="btn btn-warning">Edit</a>
-                        <form action="{{ route('backend.penyelenggara_event.destroy', $event->id) }}" method="POST"
+                        <a href="{{ route('backend.penyelenggara_event.edit', $penyelenggara->id) }}"
+                            class="btn btn-warning"><i class="fas fa-edit"></i>Edit</a>
+                        <form action="{{ route('backend.penyelenggara_event.destroy', $penyelenggara->id) }}" method="POST"
                             style="display:inline;" onsubmit="return handleDeletePenyelenggara()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
 
 

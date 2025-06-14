@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('penyelenggara_event', function (Blueprint $table) {
             $table->id();
             $table->string('nama_penyelenggara_event');
-            $table->string('nama_event');
-             $table->date('tanggal');
-            $table->string('lokasi');
+            $table->string('kontak');
             $table->timestamps();
         });
     }
