@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="text-center mb-4">
-        <h2>Atlet</h2>
+        <h2>Daftar Atlet</h2>
         <hr>
     </div>
 
@@ -14,66 +14,124 @@
         </div>
     @endif
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ route('backend.atlet.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
-            Tambah Atlet
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="{{ route('backend.atlet.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Tambah Atlet
         </a>
-
-        <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
-            style="font-size: 24px; padding: 6px; height: 38px; width: 38px; display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-file-excel"></i>
-        </button>
     </div>
 
-    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Foto</th>
-                <th>Klub</th>
-                <th>Prestasi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($atlets as $index => $atlet)
-                <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
-                    <td>{{ $atlet->nama }}</td>
-                    <td class="text-center">
-                        @if ($atlet->foto)
-                            <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" width="60"
-                                class="foto-hover" style="transition: transform 0.5s;">
-                        @else
-                            Tidak ada foto
-                        @endif
-                    </td>
-                    <td>{{ $atlet->club ? $atlet->club->nama : '-' }}</td>
-                    <td>{{ $atlet->prestasi }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('backend.atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" class="d-inline"
-                            onsubmit="return handleDelete()">
+    <div class="row">
+        @forelse ($atlets as $atlet)
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if ($atlet->foto)
+                        <img src="{{ asset('storage/' . $atlet->foto) }}"
+                             alt="Foto {{ $atlet->nama }}"
+                             class="card-img-top"
+                             style="height: 400px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; cursor: pointer;"
+                             onclick="openModal('{{ asset('storage/' . $atlet->foto) }}', '{{ addslashes($atlet->nama) }}')">
+                    @else
+                        <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center text-white" style="height: 400px;">
+                            Tidak Ada Foto
+                        </div>
+                    @endif
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $atlet->nama }}</h5>
+                        <p class="mb-1"><strong>Klub:</strong> {{ $atlet->club->nama ?? '-' }}</p>
+                        <p class="mb-1"><strong>Prestasi:</strong> {{ $atlet->prestasi ?: '-' }}</p>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="{{ route('backend.atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                        <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" onsubmit="return handleDelete()" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
                         </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-12 text-center">
+                <p>Belum ada data atlet.</p>
+            </div>
+        @endforelse
+    </div>
 
+    {{-- Modal Preview --}}
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <img id="modalImage" class="modal-image mb-3">
+            <h3 id="modalTitle" class="modal-title text-white mt-3"></h3>
+        </div>
+    </div>
+
+    {{-- CSS Modal --}}
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content-wrapper {
+            text-align: center;
+            max-width: 90%;
+            margin: auto;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+
+    {{-- Script --}}
     <script>
+        function openModal(imageSrc, title) {
+            document.getElementById("imageModal").style.display = "block";
+            document.getElementById("modalImage").src = imageSrc;
+            document.getElementById("modalTitle").innerText = title;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
         function handleDelete() {
             const userRole = @json(Auth::user()->role);
             if (userRole !== 'admin') {
                 alert('Hanya admin yang dapat menghapus');
                 return false;
             }
-            return confirm('Yakin ingin menghapus?');
+            return confirm('Yakin ingin menghapus data atlet ini?');
         }
     </script>
 @endsection

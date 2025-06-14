@@ -16,7 +16,7 @@
 
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.pertandingan.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
+            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i class="fas fa-plus me-1"></i>
             Tambah Pertandingan
         </a>
 
@@ -48,12 +48,12 @@
                     <td>{{ $pertandingan->tanggal }}</td>
                     <td>
                         <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}"
-                            class="btn btn-warning">Edit</a>
+                            class="btn btn-warning"><i class="fas fa-edit"></i>Edit</a>
                         <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST"
                             style="display:inline;" onsubmit="return handleDeletePertandingan()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
 
 

@@ -16,7 +16,7 @@
 
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.club.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
+            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i class="fas fa-plus me-1"></i>
             Tambah Klub
         </a>
 
@@ -43,12 +43,12 @@
                     <td>{{ $club->lokasi }}</td>
                     <td>{{ $club->deskripsi }}</td>
                     <td>
-                        <a href="{{ route('backend.club.edit', $club->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('backend.club.edit', $club->id) }}" class="btn btn-warning"> <i class="fas fa-edit"></i>Edit</a>
                         <form action="{{ route('backend.club.destroy', $club->id) }}" method="POST" style="display:inline;"
                             onsubmit="return handleDeleteClub()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
 
 

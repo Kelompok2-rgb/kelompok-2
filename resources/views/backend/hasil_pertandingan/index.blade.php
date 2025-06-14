@@ -15,7 +15,7 @@
     @endif
 
     <div class="d-flex justify-content-start gap-2 mb-3">
-        <a href="{{ route('backend.hasil_pertandingan.create') }}" class="btn btn-primary">
+        <a href="{{ route('backend.hasil_pertandingan.create') }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>
             Tambah Pertandingan ke Daftar
         </a>
     </div>
@@ -46,7 +46,7 @@
                             onsubmit="return confirm('Yakin ingin menghapus pertandingan ini dari daftar hasil?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
                     </td>
                 </tr>

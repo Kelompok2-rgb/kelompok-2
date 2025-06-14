@@ -24,28 +24,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="nama_event" class="form-label">Nama Event</label>
-                    <input type="text" class="form-control @error('nama_event') is-invalid @enderror"
-                           name="nama_event" id="nama_event" value="{{ old('nama_event') }}">
-                    @error('nama_event')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="tanggal" class="form-label">Tanggal</label>
-                    <input type="date" class="form-control @error('tanggal') is-invalid @enderror"
-                           name="tanggal" id="tanggal" value="{{ old('tanggal') }}">
-                    @error('tanggal')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="lokasi" class="form-label">Lokasi</label>
-                    <input type="text" class="form-control @error('lokasi') is-invalid @enderror"
-                           name="lokasi" id="lokasi" value="{{ old('lokasi') }}">
-                    @error('lokasi')
+                    <label for="kontak" class="form-label">Kontak</label>
+                    <input type="number" class="form-control @error('kontak') is-invalid @enderror" id="kontak"
+                        name="kontak" value="{{ old('kontak') }}">
+                    @error('kontak')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

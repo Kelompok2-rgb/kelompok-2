@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="text-center mb-4">
-        <h2>Anggota</h2>
+        <h2>Daftar Anggota</h2>
         <hr>
     </div>
 
@@ -14,66 +14,120 @@
         </div>
     @endif
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ route('backend.anggota.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
-            Tambah Anggota
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="{{ route('backend.anggota.create') }}" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Tambah Anggota
         </a>
-
-        <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
-            style="font-size: 24px; padding: 6px; height: 38px; width: 38px; display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-file-excel"></i>
-        </button>
     </div>
 
+    <div class="row">
+        @forelse ($anggotas as $anggota)
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 shadow-sm">
+                    @if ($anggota->foto)
+                        <img src="{{ asset('storage/' . $anggota->foto) }}"
+                             class="card-img-top"
+                             alt="Foto {{ $anggota->nama }}"
+                             style="height: 400px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; cursor: pointer;"
+                             onclick="openModal('{{ asset('storage/' . $anggota->foto) }}', `{{ addslashes($anggota->nama) }}`)">
+                    @else
+                        <div class="card-img-top d-flex justify-content-center align-items-center bg-secondary text-white"
+                            style="height: 400px;">
+                            Tidak Ada Foto
+                        </div>
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">{{ $anggota->nama }}</h5>
+                        <p class="card-text mb-1"><strong>Klub:</strong> {{ $anggota->klub }}</p>
+                        <p class="card-text mb-1"><strong>Tgl Lahir:</strong> {{ $anggota->tgl_lahir }}</p>
+                        <p class="card-text mb-1"><strong>Peran:</strong> {{ $anggota->peran }}</p>
+                        <p class="card-text"><strong>WA:</strong> {{ $anggota->kontak }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="{{ route('backend.rekap_latihan.index', $anggota->id) }}" class="btn btn-sm btn-secondary">Rekap Latihan</a>
+                        <div>
+                            <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST" class="d-inline" onsubmit="return handleDeleteAnggota()">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-12 text-center">
+                <p>Belum ada data anggota.</p>
+            </div>
+        @endforelse
+    </div>
 
-    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Foto</th>
-                <th>Klub</th>
-                <th>Tanggal Lahir</th>
-                <th>Peran</th>
-                <th>Nomor WA</th>
-                <th>Rekap Latihan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($anggotas as $anggota)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $anggota->nama }}</td>
-                    <td>
-                        @if ($anggota->foto)
-                            <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto" width="70"
-                                class="foto-hover" width="60" style="transition: transform 0.5s;">
-                        @else
-                            <span>Tidak ada foto</span>
-                        @endif
-                    </td>
-                    <td>{{ $anggota->klub }}</td>
-                    <td>{{ $anggota->tgl_lahir }}</td>
-                    <td>{{ $anggota->peran }}</td>
-                    <td>{{ $anggota->kontak }}</td>
-                    <td><a href="{{ route('backend.rekap_latihan.index', $anggota->id) }}" class="btn btn-secondary">Detail</a></td>
-                    <td>
-                        <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST"
-                            style="display:inline;" onsubmit="return handleDeleteAnggota()">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    {{-- Modal Preview --}}
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <img id="modalImage" class="modal-image mb-3">
+            <h3 id="modalTitle" class="modal-title text-white mt-3"></h3>
+        </div>
+    </div>
 
+    {{-- CSS Modal --}}
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content-wrapper {
+            text-align: center;
+            max-width: 90%;
+            margin: auto;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+
+    {{-- Script --}}
     <script>
+        function openModal(imageSrc, title) {
+            document.getElementById("imageModal").style.display = "block";
+            document.getElementById("modalImage").src = imageSrc;
+            document.getElementById("modalTitle").innerText = title;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
         function handleDeleteAnggota() {
             const userRole = @json(Auth::user()->role);
             if (userRole !== 'admin') {

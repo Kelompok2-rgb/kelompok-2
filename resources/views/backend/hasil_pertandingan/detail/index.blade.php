@@ -18,7 +18,7 @@
 
     {{-- Tombol Aksi --}}
     <div class="d-flex justify-content-start gap-2 mb-3">
-        <a href="{{ route('backend.detail_hasil_pertandingan.create', $hasilPertandingan->id) }}" class="btn btn-primary">
+        <a href="{{ route('backend.detail_hasil_pertandingan.create', $hasilPertandingan->id) }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>
             Tambah Hasil Peserta
         </a>
         <a href="{{ route('backend.hasil_pertandingan.index') }}" class="btn btn-secondary">
@@ -58,14 +58,14 @@
                     <td>{{ $detail->catatan_juri }}</td>
                     <td>
                         <a href="{{ route('backend.detail_hasil_pertandingan.edit', [$hasilPertandingan->id, $detail->id]) }}"
-                            class="btn btn-warning btn-sm">Edit</a>
+                            class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit</a>
 
                         <form action="{{ route('backend.detail_hasil_pertandingan.destroy', [$hasilPertandingan->id, $detail->id]) }}"
                             method="POST" class="d-inline"
                             onsubmit="return confirm('Hapus data ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
                     </td>
                 </tr>

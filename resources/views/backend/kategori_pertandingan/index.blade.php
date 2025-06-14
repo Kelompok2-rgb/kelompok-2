@@ -16,7 +16,7 @@
 
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.kategori_pertandingan.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
+            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i class="fas fa-plus me-1"></i>
             Tambah Kategori Pertandingan
         </a>
 
@@ -45,13 +45,13 @@
                     <td>{{ $kategori->batasan }}</td>
                     <td class="text-center">
                         <a href="{{ route('backend.kategori_pertandingan.edit', $kategori->id) }}"
-                            class="btn btn-warning btn-sm me-1">Edit</a>
+                            class="btn btn-warning btn-sm me-1"><i class="fas fa-edit"></i>Edit</a>
 
                         <form action="{{ route('backend.kategori_pertandingan.destroy', $kategori->id) }}" method="POST"
                             class="d-inline" onsubmit="return handleDeleteKategoriPertandingan()">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
                         </form>
 
 
