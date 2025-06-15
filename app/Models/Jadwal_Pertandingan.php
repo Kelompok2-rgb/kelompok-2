@@ -8,15 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal_Pertandingan extends Model
 {
     use HasFactory;
+
+    protected $table = 'jadwal_pertandingans';
+
     protected $fillable = [
-    'pertandingan_id',
-    'nama_pertandingan',
-    'tanggal',  // tipe date
-    'waktu',    // tipe time
-    'lokasi',
-    'deskripsi'
-    
-];
+        'pertandingan_id',
+        'tanggal',
+        'waktu',
+        'lokasi',
+        'deskripsi',
+    ];
+
+    protected $casts = [
+        'tanggal' => 'date',
+        'waktu'   => 'datetime:H:i',
+    ];
+
+    public function pertandingan()
+    {
+        return $this->belongsTo(Pertandingan::class);
+    }
 }
-
-

@@ -29,7 +29,7 @@
 
         <div class="mb-3">
             <label class="form-label fw-bold">Nama Peserta</label>
-            <input type="text" name="nama" class="form-control" value="{{ old('nama', $detail->nama) }}" required>
+            <input type="text" name="nama" class="form-control" value="{{ old('nama', $detail->nama) }}" required readonly>
         </div>
 
         @for ($i = 1; $i <= 5; $i++)

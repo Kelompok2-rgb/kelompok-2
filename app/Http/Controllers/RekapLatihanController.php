@@ -19,8 +19,8 @@ class RekapLatihanController extends Controller
     {
         $anggota = Anggota::findOrFail($anggota_id);
         $rekap = RekapLatihan::where('anggota_id', $anggota_id)
-                             ->orderBy('tanggal', 'desc')
-                             ->get();
+            ->orderBy('tanggal', 'desc')
+            ->get();
 
         return view('backend.anggota.rekap_latihan.index', compact('anggota', 'rekap'));
     }
@@ -52,5 +52,13 @@ class RekapLatihanController extends Controller
         return redirect()
             ->route('backend.rekap_latihan.index', $anggota_id)
             ->with('success', 'Data rekap latihan berhasil ditambahkan.');
+    }
+
+    public function destroy($id)
+    {
+        $rekap = RekapLatihan::findOrFail($id);
+        $rekap->delete();
+
+        return back()->with('success', 'Data rekap latihan berhasil dihapus.');
     }
 }

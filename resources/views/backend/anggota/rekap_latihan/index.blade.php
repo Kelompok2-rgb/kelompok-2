@@ -7,15 +7,15 @@
         <h2 class="mb-4">Rekap Latihan: {{ $anggota->nama }}</h2>
 
         @if (session('success'))
-        <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-            {{ session('success') }}
-        </div>
+            <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                {{ session('success') }}
+            </div>
         @endif
 
         @if (session('error'))
-        <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-            {{ session('error') }}
-        </div>
+            <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                {{ session('error') }}
+            </div>
         @endif
 
         {{-- Form Tambah Rekap --}}
@@ -35,8 +35,10 @@
                         </div>
                         @for ($i = 1; $i <= 5; $i++)
                             <div class="col-md-2 mb-2">
-                                <label for="lemparan{{ $i }}" class="form-label">Lemparan {{ $i }}</label>
-                                <input type="number" name="lemparan{{ $i }}" step="0.01" class="form-control">
+                                <label for="lemparan{{ $i }}" class="form-label">Lemparan
+                                    {{ $i }}</label>
+                                <input type="number" name="lemparan{{ $i }}" step="0.01"
+                                    class="form-control">
                             </div>
                         @endfor
                         <div class="col-md-12 mt-3">
@@ -62,6 +64,7 @@
                                 <th>L3</th>
                                 <th>L4</th>
                                 <th>L5</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,9 +77,19 @@
                                     <td>{{ $item->lemparan3 }}</td>
                                     <td>{{ $item->lemparan4 }}</td>
                                     <td>{{ $item->lemparan5 }}</td>
+                                    <td>
+                                        <form action="{{ route('backend.rekap_latihan.destroy', $item->id) }}"
+                                            method="POST" onsubmit="return confirm('Yakin ingin menghapus rekap ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
+
                     </table>
                 @else
                     <div class="alert alert-warning">Belum ada data rekap latihan.</div>

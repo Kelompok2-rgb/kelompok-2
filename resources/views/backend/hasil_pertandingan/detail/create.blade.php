@@ -47,13 +47,13 @@
         <div class="mb-3">
             <label for="skor" class="form-label fw-bold">Skor</label>
             <input type="number" step="0.01" name="skor" id="skor" class="form-control"
-                value="{{ old('skor') }}" required>
+                value="{{ old('skor') }}">
         </div>
 
         <div class="mb-3">
             <label for="rangking" class="form-label fw-bold">Rangking</label>
             <input type="number" name="rangking" id="rangking" class="form-control"
-                value="{{ old('rangking') }}" required>
+                value="{{ old('rangking') }}">
         </div>
 
         <div class="mb-3">

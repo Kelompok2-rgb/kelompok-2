@@ -16,14 +16,12 @@
 
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.club.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i class="fas fa-plus me-1"></i>
+            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i
+                class="fas fa-plus me-1"></i>
             Tambah Klub
         </a>
 
-        <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
-            style="font-size: 24px; padding: 6px; height: 38px; width: 38px; display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-file-excel"></i>
-        </button>
+
     </div>
     <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
@@ -43,7 +41,8 @@
                     <td>{{ $club->lokasi }}</td>
                     <td>{{ $club->deskripsi }}</td>
                     <td>
-                        <a href="{{ route('backend.club.edit', $club->id) }}" class="btn btn-warning"> <i class="fas fa-edit"></i>Edit</a>
+                        <a href="{{ route('backend.club.edit', $club->id) }}" class="btn btn-warning"> <i
+                                class="fas fa-edit"></i>Edit</a>
                         <form action="{{ route('backend.club.destroy', $club->id) }}" method="POST" style="display:inline;"
                             onsubmit="return handleDeleteClub()">
                             @csrf

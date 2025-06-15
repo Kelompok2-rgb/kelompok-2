@@ -48,9 +48,11 @@
                 </div>
             </div>
         @empty
-            <div class="col-12 text-center">
-                <p>Belum ada galeri.</p>
-            </div>
+            <div class="col-12">
+                    <div class="col-12 text-center">
+                        <p>Belum ada galeri.</p>
+                    </div>
+                </div>
         @endforelse
     </div>
 

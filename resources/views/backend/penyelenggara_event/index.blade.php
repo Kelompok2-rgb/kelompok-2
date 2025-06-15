@@ -20,10 +20,6 @@
             Tambah Penyelenggara
         </a>
 
-        <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
-            style="font-size: 24px; padding: 6px; height: 38px; width: 38px; display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-file-excel"></i>
-        </button>
     </div>
 
     <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">

@@ -1,69 +1,92 @@
-@extends('backend.layouts.app')
+@extends('backend.layouts.main')
 
 @section('title', 'Tambah Atlet')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h2>Tambah Atlet</h2> 
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow border-0">
+                    <div
+                        class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i> Tambah Atlet</h4>
+                        <a href="{{ route('backend.atlet.index') }}" class="btn btn-sm btn-light">
+                            <i class="fas fa-arrow-left me-1"></i> Kembali
+                        </a>
+                    </div>
+                    <div class="card-body">
+
+                        {{-- Alert sukses --}}
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+
+                        <form action="{{ route('backend.atlet.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nama" class="form-label fw-semibold">Nama <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" id="nama" name="nama"
+                                        class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}"
+                                        placeholder="Masukkan nama atlet" required>
+                                    @error('nama')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="foto" class="form-label fw-semibold">Foto</label>
+                                    <input type="file" id="foto" name="foto"
+                                        class="form-control @error('foto') is-invalid @enderror">
+                                    @error('foto')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="prestasi" class="form-label fw-semibold">Prestasi</label>
+                                    <textarea id="prestasi" name="prestasi" class="form-control @error('prestasi') is-invalid @enderror" rows="3"
+                                        placeholder="Contoh: Juara 1 Kejurda 2023" style="--bs-placeholder-color: #6c757d;">{{ old('prestasi') }}</textarea>
+
+
+                                    @error('prestasi')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="club_id" class="form-label fw-semibold">Klub (Opsional)</label>
+                                    <select id="club_id" name="club_id"
+                                        class="form-select @error('club_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Klub --</option>
+                                        @foreach ($clubs as $club)
+                                            <option value="{{ $club->id }}"
+                                                {{ old('club_id') == $club->id ? 'selected' : '' }}>
+                                                {{ $club->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('club_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="mt-4 d-flex justify-content-end gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-1"></i> Simpan
+                                </button>
+                                <button type="reset" class="btn btn-warning">
+                                    <i class="fas fa-rotate-left me-1"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <form action="{{ route('backend.atlet.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-
-            <div class="mb-3">
-                <label for="nama" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
-                @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="foto" class="form-label">Foto</label>
-                <input type="file" class="form-control" id="foto" name="foto">
-                @error('foto') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="prestasi" class="form-label">Prestasi</label>
-                <textarea class="form-control" id="prestasi" name="prestasi">{{ old('prestasi') }}</textarea>
-                @error('prestasi') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="club_id" class="form-label">Klub (Opsional)</label>
-                <select name="club_id" id="club_id" class="form-control" onchange="toggleClubInput(this)">
-                    <option value="">-- Pilih Klub (boleh dikosongkan) --</option>
-                    @foreach ($clubs as $club)
-                        <option value="{{ $club->id }}" {{ old('club_id') == $club->id ? 'selected' : '' }}>
-                            {{ $club->nama }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('club_id') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <button type="reset" class="btn btn-warning">Reset</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    function toggleClubInput(select) {
-        const container = document.getElementById('custom-club-container');
-        if (select.value === 'custom') {
-            container.style.display = 'block';
-        } else {
-            container.style.display = 'none';
-            document.getElementById('new_club').value = '';
-        }
-    }
-
-    // Tetap tampilkan input jika sebelumnya user memilih "custom"
-    document.addEventListener('DOMContentLoaded', function () {
-        if (document.getElementById('club_id').value === 'custom') {
-            document.getElementById('custom-club-container').style.display = 'block';
-        }
-    });
-</script>
 @endsection
