@@ -47,29 +47,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
-                {{-- Lokasi --}}
-                <div class="mb-3">
-                    <label for="lokasi" class="form-label fw-bold">Lokasi</label>
-                    <input type="text" id="lokasi" name="lokasi"
-                        class="form-control @error('lokasi') is-invalid @enderror"
-                        value="{{ old('lokasi', $pertandingan->lokasi) }}" required>
-                    @error('lokasi')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                {{-- Tanggal --}}
-                <div class="mb-3">
-                    <label for="tanggal" class="form-label fw-bold">Tanggal</label>
-                    <input type="date" id="tanggal" name="tanggal"
-                        class="form-control @error('tanggal') is-invalid @enderror"
-                        value="{{ old('tanggal', $pertandingan->tanggal) }}" required>
-                    @error('tanggal')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
+           
                 {{-- Tombol Aksi --}}
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('backend.pertandingan.index') }}" class="btn btn-secondary">← Kembali</a>

@@ -12,9 +12,10 @@ class PertandinganController extends Controller
         $this->middleware('auth');
         $this->middleware('role:admin,penyelenggara');
     }
+
     public function index()
     {
-        $pertandingans = Pertandingan::orderBy('tanggal', 'desc')->get();
+        $pertandingans = Pertandingan::latest()->get(); // urut berdasarkan created_at terbaru
         return view('backend.pertandingan.index', compact('pertandingans'));
     }
 
@@ -26,41 +27,39 @@ class PertandinganController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'lokasi'  => 'required|string|min:2|max:255',
-            'nama_pertandingan'  => 'required|string|min:2|max:255',
+            'nama_pertandingan'   => 'required|string|min:2|max:255',
             'nama_penyelenggara'  => 'required|string|min:2|max:255',
-            'tanggal' => 'required|date',
         ]);
 
         Pertandingan::create($validated);
-        return redirect()->route('backend.pertandingan.index')->with('success', 'Pertandingan berhasil ditambahkan.');
+
+        return redirect()->route('backend.pertandingan.index')
+                         ->with('success', 'Pertandingan berhasil ditambahkan.');
     }
 
-    public function edit($id)
+    public function edit(Pertandingan $pertandingan)
     {
-        $pertandingan = Pertandingan::findOrFail($id);
         return view('backend.pertandingan.edit', compact('pertandingan'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Pertandingan $pertandingan)
     {
-        $pertandingan = Pertandingan::findOrFail($id);
-
         $validated = $request->validate([
-            'lokasi'  => 'required|string|min:2|max:255',
-            'nama_pertandingan'  => 'required|string|min:2|max:255',
+            'nama_pertandingan'   => 'required|string|min:2|max:255',
             'nama_penyelenggara'  => 'required|string|min:2|max:255',
-            'tanggal' => 'required|date',
         ]);
 
         $pertandingan->update($validated);
-        return redirect()->route('backend.pertandingan.index')->with('success', 'Pertandingan berhasil diperbarui.');
+
+        return redirect()->route('backend.pertandingan.index')
+                         ->with('success', 'Pertandingan berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy(Pertandingan $pertandingan)
     {
-        $pertandingan = Pertandingan::findOrFail($id);
         $pertandingan->delete();
-        return redirect()->route('backend.pertandingan.index')->with('success', 'Pertandingan berhasil dihapus.');
+
+        return redirect()->route('backend.pertandingan.index')
+                         ->with('success', 'Pertandingan berhasil dihapus.');
     }
 }

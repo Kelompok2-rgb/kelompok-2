@@ -16,13 +16,13 @@ class JadwalPertandinganController extends Controller
 
     public function index()
     {
-        $jadwalpertandingans = Jadwal_Pertandingan::all();
+        $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->latest()->get();
         return view('backend.jadwal_pertandingan.index', compact('jadwalpertandingans'));
     }
 
     public function create()
     {
-        $pertandingans = Pertandingan::select('id', 'nama_pertandingan', 'lokasi', 'tanggal')->latest()->get();
+        $pertandingans = Pertandingan::select('id', 'nama_pertandingan')->latest()->get();
         return view('backend.jadwal_pertandingan.create', compact('pertandingans'));
     }
 
@@ -30,64 +30,41 @@ class JadwalPertandinganController extends Controller
     {
         $validated = $request->validate([
             'pertandingan_id' => 'required|exists:pertandingans,id',
-            'tanggal' => 'required|date',
-            'waktu'   => 'required|string|max:255',
-            'lokasi'  => 'required|string|max:255',
-            'deskripsi' => 'nullable|string|max:1000',
+            'tanggal'         => 'required|date',
+            'waktu'           => 'required|date_format:H:i',
+            'lokasi'          => 'required|string|max:255',
+            'deskripsi'       => 'nullable|string|max:1000',
         ]);
 
-        // Ambil data pertandingan berdasarkan ID dari request
-        $pertandingan = Pertandingan::findOrFail($validated['pertandingan_id']);
-
-        $dataToSave = [
-            'pertandingan_id' => $pertandingan->id,
-            'nama_pertandingan' => $pertandingan->nama_pertandingan,
-            'tanggal' => $validated['tanggal'],
-            'waktu' => $validated['waktu'],
-            'lokasi' => $validated['lokasi'],
-            'deskripsi' => $validated['deskripsi'] ?? null,
-        ];
-
-        Jadwal_Pertandingan::create($dataToSave);
+        Jadwal_Pertandingan::create($validated);
 
         return redirect()->route('backend.jadwal_pertandingan.index')
-            ->with('success', 'Jadwal pertandingan berhasil ditambahkan');
+            ->with('success', 'Jadwal pertandingan berhasil ditambahkan.');
     }
 
-   public function edit($id)
-{
-    $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
-    $pertandingans = Pertandingan::all(); // Atau sesuai model kamu
+    public function edit($id)
+    {
+        $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
+        $pertandingans = Pertandingan::select('id', 'nama_pertandingan')->get();
 
-    return view('backend.jadwal_pertandingan.edit', compact('jadwalpertandingan', 'pertandingans'));
-}
+        return view('backend.jadwal_pertandingan.edit', compact('jadwalpertandingan', 'pertandingans'));
+    }
 
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'pertandingan_id' => 'required|exists:pertandingans,id',
-            'tanggal' => 'required|date',
-            'waktu'   => 'required|string|max:255',
-            'lokasi'  => 'required|string|max:255',
-            'deskripsi' => 'nullable|string|max:1000',
+            'tanggal'         => 'required|date',
+            'waktu'           => 'required|date_format:H:i',
+            'lokasi'          => 'required|string|max:255',
+            'deskripsi'       => 'nullable|string|max:1000',
         ]);
 
         $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
-        $pertandingan = Pertandingan::findOrFail($validated['pertandingan_id']);
-
-        $dataToUpdate = [
-            'pertandingan_id' => $pertandingan->id,
-            'nama_pertandingan' => $pertandingan->nama_pertandingan,
-            'tanggal' => $validated['tanggal'],
-            'waktu' => $validated['waktu'],
-            'lokasi' => $validated['lokasi'],
-            'deskripsi' => $validated['deskripsi'] ?? null,
-        ];
-
-        $jadwalpertandingan->update($dataToUpdate);
+        $jadwalpertandingan->update($validated);
 
         return redirect()->route('backend.jadwal_pertandingan.index')
-            ->with('success', 'Jadwal pertandingan berhasil diperbarui');
+            ->with('success', 'Jadwal pertandingan berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -96,6 +73,6 @@ class JadwalPertandinganController extends Controller
         $jadwalpertandingan->delete();
 
         return redirect()->route('backend.jadwal_pertandingan.index')
-            ->with('success', 'Jadwal pertandingan berhasil dihapus');
+            ->with('success', 'Jadwal pertandingan berhasil dihapus.');
     }
 }

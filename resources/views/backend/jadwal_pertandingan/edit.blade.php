@@ -3,102 +3,86 @@
 @section('title', 'Edit Jadwal Pertandingan')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h2>Edit Jadwal Pertandingan</h2>
+    <div class="container mt-4 mb-5">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Edit Jadwal Pertandingan</h3>
+                <hr>
+
+                @if (session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('backend.jadwal_pertandingan.update', $jadwalpertandingan->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    {{-- Nama Pertandingan --}}
+                    <div class="mb-3">
+                        <label for="pertandingan_id" class="form-label fw-bold">Nama Pertandingan</label>
+                        <select class="form-select @error('pertandingan_id') is-invalid @enderror" id="pertandingan_id" name="pertandingan_id" required>
+                            <option value="">-- Pilih Pertandingan --</option>
+                            @foreach ($pertandingans as $pertandingan)
+                                <option value="{{ $pertandingan->id }}"
+                                    {{ old('pertandingan_id', $jadwalpertandingan->pertandingan_id) == $pertandingan->id ? 'selected' : '' }}>
+                                    {{ $pertandingan->nama_pertandingan }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('pertandingan_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    {{-- Lokasi --}}
+                    <div class="mb-3">
+                        <label for="lokasi" class="form-label fw-bold">Lokasi</label>
+                        <input type="text" class="form-control @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi"
+                            value="{{ old('lokasi', $jadwalpertandingan->lokasi) }}" required>
+                        @error('lokasi') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    {{-- Tanggal --}}
+                    <div class="mb-3">
+                        <label for="tanggal" class="form-label fw-bold">Tanggal</label>
+                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal"
+                            value="{{ old('tanggal', $jadwalpertandingan->tanggal) }}" required>
+                        @error('tanggal') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    {{-- Waktu --}}
+                    <div class="mb-3">
+                        <label for="waktu" class="form-label fw-bold">Waktu</label>
+                        <input type="time" class="form-control @error('waktu') is-invalid @enderror" id="waktu" name="waktu"
+                            value="{{ old('waktu', $jadwalpertandingan->waktu) }}" required>
+                        @error('waktu') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    {{-- Deskripsi --}}
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label fw-bold">Deskripsi</label>
+                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', $jadwalpertandingan->deskripsi) }}</textarea>
+                        @error('deskripsi') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    {{-- Tombol --}}
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ route('backend.jadwal_pertandingan.index') }}" class="btn btn-secondary">← Kembali</a>
+                        <div>
+                            <button type="reset" class="btn btn-warning me-2">Reset</button>
+                            <button type="submit" class="btn btn-success">💾 Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form action="{{ route('backend.jadwal_pertandingan.update', $jadwalpertandingan->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-
-           <div class="col-md-6 mb-3">
-  <label for="pertandingan_id" class="form-label">Nama Pertandingan</label>
-<select class="form-control" id="pertandingan_id" name="pertandingan_id" required>
-    <option value="">-- Pilih Pertandingan --</option>
-    @foreach ($pertandingans as $pertandingan)
-        <option value="{{ $pertandingan->id }}"
-            {{ old('pertandingan_id', $jadwalpertandingan->pertandingan_id) == $pertandingan->id ? 'selected' : '' }}>
-            {{ $pertandingan->nama_pertandingan }}
-        </option>
-    @endforeach
-</select>
-@error('pertandingan_id')
-    <small class="text-danger">{{ $message }}</small>
-@enderror
-
-</div>
-
-
-                <div class="col-md-6 mb-3">
-                    <label for="lokasi" class="form-label">Lokasi</label>
-                    <input type="text" class="form-control" id="lokasi" name="lokasi" 
-                           value="{{ old('lokasi', $jadwalpertandingan->lokasi) }}" required>
-                    @error('lokasi') 
-                        <small class="text-danger">{{ $message }}</small> 
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="tanggal" class="form-label">Tanggal</label>
-                    <input type="date" class="form-control" id="tanggal" name="tanggal" 
-                           value="{{ old('tanggal', $jadwalpertandingan->tanggal) }}" required>
-                    @error('tanggal') 
-                        <small class="text-danger">{{ $message }}</small> 
-                    @enderror
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label for="waktu" class="form-label">Waktu</label>
-                    <input type="time" class="form-control" id="waktu" name="waktu" 
-                           value="{{ old('waktu', $jadwalpertandingan->waktu) }}" required>
-                    @error('waktu') 
-                        <small class="text-danger">{{ $message }}</small> 
-                    @enderror
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', $jadwalpertandingan->deskripsi) }}</textarea>
-                @error('deskripsi') 
-                    <small class="text-danger">{{ $message }}</small> 
-                @enderror
-            </div>
-
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Update</button>
-                <button type="reset" class="btn btn-warning">Reset</button>
-                <a href="{{ route('backend.jadwal_pertandingan.index') }}" class="btn btn-secondary">Kembali</a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<style>
-    /* Style untuk date picker dan time picker */
-    input[type="date"]::-webkit-calendar-picker-indicator,
-    input[type="time"]::-webkit-calendar-picker-indicator {
-        background-color: white;
-        padding: 5px;
-        border-radius: 4px;
-    }
-</style>
 @endsection

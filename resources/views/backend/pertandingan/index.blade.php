@@ -20,20 +20,14 @@
             Tambah Pertandingan
         </a>
 
-        <button onclick="exportTableToExcel()" class="btn btn-success" title="Ekspor Excel"
-            style="font-size: 24px; padding: 6px; height: 38px; width: 38px; display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-file-excel"></i>
-        </button>
     </div>
     <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
-                <th>Lokasi</th>
                 <th>Nama Pertandingan</th>
                 <th>Nama Penyelenggara</th>
                 <th>Nama Peserta</th>
-                <th>Tanggal</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -41,11 +35,9 @@
             @foreach ($pertandingans as $pertandingan)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pertandingan->lokasi }}</td>
                     <td>{{ $pertandingan->nama_pertandingan }}</td>
                     <td>{{ $pertandingan->nama_penyelenggara }}</td>
                     <td><a href="{{ route('backend.peserta.index', $pertandingan->id) }}" class="btn btn-secondary">Kelola Peserta</a></td>
-                    <td>{{ $pertandingan->tanggal }}</td>
                     <td>
                         <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}"
                             class="btn btn-warning"><i class="fas fa-edit"></i>Edit</a>
