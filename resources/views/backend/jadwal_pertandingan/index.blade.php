@@ -8,7 +8,7 @@
         <hr>
     </div>
 
-     @if (session('success'))
+    @if (session('success'))
         <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
             {{ session('success') }}
         </div>
@@ -18,7 +18,6 @@
         <a href="{{ route('backend.jadwal_pertandingan.create') }}" class="btn btn-primary">
             <i class="fa fa-plus me-1"></i> Tambah Jadwal Pertandingan
         </a>
-      
     </div>
 
     <div class="table-responsive">
@@ -49,12 +48,13 @@
                                    class="btn btn-warning btn-sm">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
+
                                 <form action="{{ route('backend.jadwal_pertandingan.destroy', $jadwal->id) }}"
                                       method="POST"
-                                      onsubmit="return handleDeleteJadwal()">
+                                      id="form-delete-{{ $jadwal->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $jadwal->id }})">
                                         <i class="fa fa-trash"></i> Hapus
                                     </button>
                                 </form>
@@ -66,23 +66,21 @@
         </table>
     </div>
 
-    @push('scripts')
-        <script>
-            function handleDeleteJadwal() {
-                const userRole = @json(Auth::user()->role);
-                if (userRole !== 'admin' && userRole !== 'penyelenggara') {
-                    alert('Hanya admin atau penyelenggara yang dapat menghapus');
-                    return false;
-                }
-                return confirm('Yakin ingin menghapus jadwal ini?');
+    {{-- SCRIPT LANGSUNG TANPA @push --}}
+    <script>
+        function confirmDelete(id) {
+            const userRole = @json(Auth::user()->role);
+
+            if (userRole !== 'admin' && userRole !== 'penyelenggara') {
+                alert('Hanya admin atau penyelenggara yang dapat menghapus.');
+                return;
             }
 
-            function exportTableToExcel() {
-                // Kode ekspor Excel dapat disisipkan di sini, atau gunakan library seperti SheetJS
-                alert('Fitur ekspor belum diimplementasikan.');
+            if (confirm('Yakin ingin menghapus jadwal ini?')) {
+                document.getElementById('form-delete-' + id).submit();
             }
-        </script>
-    @endpush
+        }
+    </script>
 
     <style>
         td {

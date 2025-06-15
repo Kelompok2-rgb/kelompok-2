@@ -26,7 +26,19 @@ class DetailHasilPertandinganController extends Controller
     public function create($hasilPertandinganId)
     {
         $hasilPertandingan = HasilPertandingan::findOrFail($hasilPertandinganId);
-        $pesertas = PesertaPertandingan::where('pertandingan_id', $hasilPertandingan->pertandingan_id)->get();
+
+        // Ambil nama-nama peserta yang sudah diinput
+        $sudahInput = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)
+                        ->pluck('nama')
+                        ->toArray();
+
+        // Ambil peserta yang belum diinput (berdasarkan nama atlet)
+        $pesertas = PesertaPertandingan::where('pertandingan_id', $hasilPertandingan->pertandingan_id)
+            ->whereHas('atlet', function ($query) use ($sudahInput) {
+                $query->whereNotIn('nama', $sudahInput);
+            })
+            ->with('atlet')
+            ->get();
 
         return view('backend.hasil_pertandingan.detail.create', compact('hasilPertandingan', 'pesertas'));
     }
@@ -41,9 +53,18 @@ class DetailHasilPertandinganController extends Controller
             'lemparan4'    => 'nullable|numeric',
             'lemparan5'    => 'nullable|numeric',
             'skor'         => 'nullable|numeric',
-            'rangking'     => 'required|integer',
+            'rangking'     => 'nullable|integer',
             'catatan_juri' => 'nullable|string',
         ]);
+
+        // Cegah input duplikat untuk nama yang sama di pertandingan ini
+        $sudahAda = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)
+            ->where('nama', $request->nama)
+            ->exists();
+
+        if ($sudahAda) {
+            return back()->withErrors(['nama' => 'Peserta ini sudah pernah diinput.'])->withInput();
+        }
 
         DetailHasilPertandingan::create([
             'hasil_pertandingan_id' => $hasilPertandinganId,
@@ -59,7 +80,7 @@ class DetailHasilPertandinganController extends Controller
         ]);
 
         return redirect()->route('backend.detail_hasil_pertandingan.index', $hasilPertandinganId)
-            ->with('success', 'Hasil peserta berhasil disimpan.');
+            ->with('success', 'Hasil pertandingan berhasil disimpan.');
     }
 
     public function edit($pertandingan_id, $id)
@@ -82,7 +103,7 @@ class DetailHasilPertandinganController extends Controller
             'lemparan4'    => 'nullable|numeric',
             'lemparan5'    => 'nullable|numeric',
             'skor'         => 'nullable|numeric',
-            'rangking'     => 'required|integer',
+            'rangking'     => 'nullable|integer',
             'catatan_juri' => 'nullable|string',
         ]);
 
@@ -99,7 +120,7 @@ class DetailHasilPertandinganController extends Controller
         ]);
 
         return redirect()->route('backend.detail_hasil_pertandingan.index', $pertandingan_id)
-            ->with('success', 'Hasil peserta berhasil diperbarui.');
+            ->with('success', 'Hasil pertandingan berhasil diperbarui.');
     }
 
     public function destroy($pertandingan_id, $id)
@@ -108,6 +129,6 @@ class DetailHasilPertandinganController extends Controller
         $detail->delete();
 
         return redirect()->route('backend.detail_hasil_pertandingan.index', $pertandingan_id)
-            ->with('success', 'Hasil peserta berhasil dihapus.');
+            ->with('success', 'Hasil pertandingan berhasil dihapus.');
     }
 }

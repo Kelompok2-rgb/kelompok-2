@@ -30,8 +30,8 @@
                     {{-- Nama Pertandingan --}}
                     <div class="mb-3">
                         <label for="pertandingan_id" class="form-label fw-bold">Nama Pertandingan</label>
-                        <select class="form-select @error('pertandingan_id') is-invalid @enderror" id="pertandingan_id" name="pertandingan_id" required>
-                            <option value="">-- Pilih Pertandingan --</option>
+
+                        <select class="form-select" id="pertandingan_id" name="pertandingan_id_disabled" disabled>
                             @foreach ($pertandingans as $pertandingan)
                                 <option value="{{ $pertandingan->id }}"
                                     {{ old('pertandingan_id', $jadwalpertandingan->pertandingan_id) == $pertandingan->id ? 'selected' : '' }}>
@@ -39,38 +39,50 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('pertandingan_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+                        <!-- Input hidden agar value tetap terkirim ke server -->
+                        <input type="hidden" name="pertandingan_id"
+                            value="{{ old('pertandingan_id', $jadwalpertandingan->pertandingan_id) }}">
                     </div>
+
 
                     {{-- Lokasi --}}
                     <div class="mb-3">
                         <label for="lokasi" class="form-label fw-bold">Lokasi</label>
-                        <input type="text" class="form-control @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi"
-                            value="{{ old('lokasi', $jadwalpertandingan->lokasi) }}" required>
-                        @error('lokasi') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        <input type="text" class="form-control @error('lokasi') is-invalid @enderror" id="lokasi"
+                            name="lokasi" value="{{ old('lokasi', $jadwalpertandingan->lokasi) }}" required>
+                        @error('lokasi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Tanggal --}}
                     <div class="mb-3">
                         <label for="tanggal" class="form-label fw-bold">Tanggal</label>
-                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal"
-                            value="{{ old('tanggal', $jadwalpertandingan->tanggal) }}" required>
-                        @error('tanggal') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal"
+                            name="tanggal" value="{{ old('tanggal', $jadwalpertandingan->tanggal) }}" required>
+                        @error('tanggal')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Waktu --}}
                     <div class="mb-3">
                         <label for="waktu" class="form-label fw-bold">Waktu</label>
-                        <input type="time" class="form-control @error('waktu') is-invalid @enderror" id="waktu" name="waktu"
-                            value="{{ old('waktu', $jadwalpertandingan->waktu) }}" required>
-                        @error('waktu') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        <input type="time" class="form-control @error('waktu') is-invalid @enderror" id="waktu"
+                            name="waktu" value="{{ old('waktu', $jadwalpertandingan->waktu) }}" required>
+                        @error('waktu')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Deskripsi --}}
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label fw-bold">Deskripsi</label>
                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', $jadwalpertandingan->deskripsi) }}</textarea>
-                        @error('deskripsi') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        @error('deskripsi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     {{-- Tombol --}}

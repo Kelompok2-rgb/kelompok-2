@@ -86,6 +86,8 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     // Rekap Latihan
     Route::get('rekap-latihan/{anggota}', [RekapLatihanController::class, 'index'])->name('rekap_latihan.index');
     Route::post('rekap-latihan/{anggota}', [RekapLatihanController::class, 'store'])->name('rekap_latihan.store');
+    Route::delete('rekap-latihan/{id}', [RekapLatihanController::class, 'destroy'])->name('rekap_latihan.destroy');
+
 
     // Detail Hasil Pertandingan
     Route::prefix('hasil-pertandingan/{hasil_pertandingan_id}/detail')->name('detail_hasil_pertandingan.')->group(function () {

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->float('lemparan3')->nullable();
             $table->float('lemparan4')->nullable();
             $table->float('lemparan5')->nullable();
-
             $table->float('skor')->nullable();
             $table->integer('rangking')->nullable();
             $table->text('catatan_juri')->nullable();
