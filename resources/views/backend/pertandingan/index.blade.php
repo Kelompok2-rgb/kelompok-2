@@ -26,7 +26,8 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Pertandingan</th>
-                    <th>Nama Penyelenggara</th>
+                    <th>Penyelenggara</th>
+                    <th>Juri</th>
                     <th>Peserta</th>
                     <th>Aksi</th>
                 </tr>
@@ -36,9 +37,8 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $pertandingan->nama_pertandingan }}</td>
-                        <td>
-                            {{ $pertandingan->penyelenggaraEvent->nama_penyelenggara_event ?? '-' }}
-                        </td>
+                        <td>{{ $pertandingan->penyelenggaraEvent->nama_penyelenggara_event ?? '-' }}</td>
+                        <td>{{ $pertandingan->juri->nama_juri ?? '-' }}</td>
                         <td>
                             <a href="{{ route('backend.peserta.index', $pertandingan->id) }}" class="btn btn-secondary btn-sm">
                                 Kelola Peserta
@@ -49,7 +49,7 @@
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                             <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST"
-                                  style="display:inline;" onsubmit="return handleDeletePertandingan();">
+                                  style="display:inline;" onsubmit="return confirmDelete();">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -64,12 +64,7 @@
     </div>
 
     <script>
-        function handleDeletePertandingan() {
-            const userRole = @json(Auth::user()->role);
-            if (userRole !== 'admin' && userRole !== 'penyelenggara') {
-                alert('Hanya admin dan penyelenggara yang dapat menghapus.');
-                return false;
-            }
+        function confirmDelete() {
             return confirm('Yakin ingin menghapus pertandingan ini?');
         }
     </script>

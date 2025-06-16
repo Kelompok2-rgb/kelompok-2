@@ -9,19 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::create('juris', function (Blueprint $table) {
-
-        $table->id();
-        $table->string('nama');
-        $table->date('tanggal_lahir');
-        $table->string('sertifikat');
-        
-       
-        $table->timestamps();
-    });
-}
+    public function up(): void
+    {
+        Schema::create('juris', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_juri'); // GANTI dari 'nama' jadi 'nama_juri'
+            $table->date('tanggal_lahir');
+            $table->string('sertifikat');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
@@ -31,8 +28,3 @@ return new class extends Migration
         Schema::dropIfExists('juris');
     }
 };
-
-
-
-
-

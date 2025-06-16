@@ -8,21 +8,19 @@
         <hr>
     </div>
 
-    @if (session('success'))
+   @if (session('success'))
         <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
             {{ session('success') }}
         </div>
     @endif
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ route('backend.juri.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i class="fas fa-plus me-1"></i>
-            Tambah Juri
+    <div class="mb-3">
+        <a href="{{ route('backend.juri.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Tambah Juri
         </a>
-
     </div>
 
-    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
+    <table id="example" class="table table-bordered table-striped text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -35,9 +33,9 @@
         <tbody>
             @foreach ($juris as $juri)
                 <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
-                    <td>{{ $juri->nama }}</td>
-                    <td>{{ $juri->tanggal_lahir }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $juri->nama_juri }}</td>
+                    <td>{{ \Carbon\Carbon::parse($juri->tanggal_lahir)->format('d-m-Y') }}</td>
                     <td>
                         @if ($juri->sertifikat)
                             <a href="{{ asset('storage/' . $juri->sertifikat) }}" target="_blank">Lihat Sertifikat</a>
@@ -45,20 +43,25 @@
                             <span class="text-muted">Tidak ada</span>
                         @endif
                     </td>
-                    <td class="text-center">
-                        <a href="{{ route('backend.juri.edit', $juri->id) }}" class="btn btn-warning btn-sm me-1"><i class="fas fa-edit"></i>Edit</a>
-                        <form action="{{ route('backend.juri.destroy', $juri->id) }}" method="POST" class="d-inline"
-                            onsubmit="return handleDeleteJuri()">
+                    <td>
+                        <a href="{{ route('backend.juri.edit', $juri->id) }}" class="btn btn-warning btn-sm me-1 mb-1">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form action="{{ route('backend.juri.destroy', $juri->id) }}" method="POST"
+                            class="d-inline" onsubmit="return handleDeleteJuri();">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
                         </form>
-
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
     <script>
         function handleDeleteJuri() {
             const userRole = @json(Auth::user()->role);
@@ -66,11 +69,7 @@
                 alert('Hanya admin yang dapat menghapus');
                 return false;
             }
-            return confirm('Yakin ingin menghapus?');
+            return confirm('Yakin ingin menghapus data juri ini?');
         }
     </script>
-
-
-
-
 @endsection

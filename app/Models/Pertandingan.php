@@ -11,7 +11,8 @@ class Pertandingan extends Model
 
     protected $fillable = [
         'nama_pertandingan',
-         'penyelenggara_event_id',
+        'penyelenggara_event_id',
+        'juri_id', // tambahkan ini
     ];
 
     /**
@@ -27,9 +28,13 @@ class Pertandingan extends Model
         return $this->hasOne(HasilPertandingan::class);
     }
 
-   public function penyelenggaraEvent()
-{
-    return $this->belongsTo(PenyelenggaraEvent::class);
-}
+    public function penyelenggaraEvent()
+    {
+        return $this->belongsTo(PenyelenggaraEvent::class);
+    }
 
+    public function juri()
+    {
+        return $this->belongsTo(Juri::class);
+    }
 }

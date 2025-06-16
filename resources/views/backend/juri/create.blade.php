@@ -24,12 +24,13 @@
                         @csrf
 
                         <div class="row g-3">
-                            {{-- Nama --}}
+                            {{-- Nama Juri --}}
                             <div class="col-md-6">
-                                <label for="nama" class="form-label fw-semibold">Nama <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
-                                    name="nama" placeholder="Contoh: Budi Santosa" value="{{ old('nama') }}" required>
-                                @error('nama')
+                                <label for="nama_juri" class="form-label fw-semibold">Nama Juri <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control @error('nama_juri') is-invalid @enderror"
+                                    id="nama_juri" name="nama_juri" placeholder="Contoh: Budi Santosa"
+                                    value="{{ old('nama_juri') }}" required>
+                                @error('nama_juri')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -38,7 +39,7 @@
                             <div class="col-md-6">
                                 <label for="tanggal_lahir" class="form-label fw-semibold">Tanggal Lahir <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                    id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
+                                    id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
                                 @error('tanggal_lahir')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -63,7 +64,6 @@
                                 <i class="fas fa-rotate-left me-1"></i> Reset
                             </button>
                         </div>
-
                     </form>
 
                 </div>

@@ -41,12 +41,10 @@
                                     Nama Pertandingan <span class="text-danger">*</span>
                                 </label>
                                 <input type="text"
-                                       class="form-control @error('nama_pertandingan') is-invalid @enderror"
-                                       id="nama_pertandingan"
-                                       name="nama_pertandingan"
-                                       value="{{ old('nama_pertandingan') }}"
-                                       placeholder="Contoh: Kejuaraan Nasional Atletik 2025"
-                                       required>
+                                    class="form-control @error('nama_pertandingan') is-invalid @enderror"
+                                    id="nama_pertandingan" name="nama_pertandingan"
+                                    value="{{ old('nama_pertandingan') }}"
+                                    placeholder="Contoh: Kejuaraan Nasional Atletik 2025" required>
                                 @error('nama_pertandingan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -58,9 +56,7 @@
                                     Nama Penyelenggara <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-select @error('penyelenggara_event_id') is-invalid @enderror"
-                                        id="penyelenggara_event_id"
-                                        name="penyelenggara_event_id"
-                                        required>
+                                    id="penyelenggara_event_id" name="penyelenggara_event_id" required>
                                     <option value="" disabled selected>-- Pilih Penyelenggara --</option>
                                     @foreach ($penyelenggaras as $penyelenggara)
                                         <option value="{{ $penyelenggara->id }}"
@@ -73,8 +69,29 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            {{-- Juri --}}
+                            <div class="col-md-12">
+                                <label for="juri_id" class="form-label fw-semibold">
+                                    Juri <span class="text-danger">*</span>
+                                </label>
+                                <select id="juri_id" name="juri_id"
+                                    class="form-select @error('juri_id') is-invalid @enderror" required>
+                                    <option value="" disabled selected>-- Pilih Juri --</option>
+                                    @foreach ($juris as $juri)
+                                        <option value="{{ $juri->id }}"
+                                            {{ old('juri_id') == $juri->id ? 'selected' : '' }}>
+                                            {{ $juri->nama_juri }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('juri_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
+                        {{-- Tombol --}}
                         <div class="mt-4 d-flex justify-content-end gap-2">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save me-1"></i> Simpan

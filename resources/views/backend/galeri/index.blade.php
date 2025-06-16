@@ -27,7 +27,7 @@
                     <img src="{{ asset('uploads/' . $galeri->gambar) }}"
                          class="card-img-top"
                          alt="gambar"
-                         style="height: 400px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; cursor: pointer;"
+                         style="height: 200px; object-fit: cover; border-top-left-radius: 5px; border-top-right-radius: 5px; cursor: pointer;"
                          onclick="openModal('{{ asset('uploads/' . $galeri->gambar) }}', `{{ addslashes($galeri->judul) }}`)">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $galeri->judul }}</h5>

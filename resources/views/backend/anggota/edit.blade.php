@@ -3,60 +3,65 @@
 @section('title', 'Edit Anggota')
 
 @section('content')
-    <div class="container mt-4 mb-5">
-        <div class="card shadow border-0">
-            <div class="card-body">
-                <h3 class="card-title text-center mb-4">Edit Data Anggota</h3>
-                <hr>
+<div class="container mt-4 mb-5">
+    <div class="card shadow border-0">
+        <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-user-edit me-2"></i> Edit Anggota</h4>
+            <a href="{{ route('backend.anggota.index') }}" class="btn btn-sm btn-light">
+                <i class="fas fa-arrow-left me-1"></i> Kembali
+            </a>
+        </div>
 
-                @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
+        <div class="card-body">
+            {{-- Tampilkan error validasi --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Periksa kembali input Anda:</strong>
+                    <ul class="mb-0 mt-1">
+                        @foreach ($errors->all() as $error)
+                            <li>• {{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                <form action="{{ route('backend.anggota.update', $anggota->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+            <form action="{{ route('backend.anggota.update', $anggota->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
+                <div class="row g-3">
                     {{-- Nama --}}
-                    <div class="mb-3">
-                        <label for="nama" class="form-label fw-bold">Nama <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
-                            value="{{ old('nama', $anggota->nama) }}" required>
+                    <div class="col-md-6">
+                        <label for="nama" class="form-label fw-semibold">Nama <span class="text-danger">*</span></label>
+                        <input type="text" id="nama" name="nama"
+                               class="form-control @error('nama') is-invalid @enderror"
+                               value="{{ old('nama', $anggota->nama) }}" required>
                         @error('nama') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    {{-- Foto --}}
-                    <div class="mb-3">
-                        <label for="foto" class="form-label fw-bold">Foto <span class="text-danger">*</span></label><br>
-                        @if ($anggota->foto && file_exists(public_path('storage/' . $anggota->foto)))
-                            <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto Anggota" class="img-thumbnail mb-2" style="max-width: 120px;">
-                        @else
-                            <p class="text-muted">Tidak ada foto</p>
-                        @endif
-                        <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto" name="foto">
-                        @error('foto') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div>
-
                     {{-- Klub --}}
-                    <div class="mb-3">
-                        <label for="klub" class="form-label fw-bold">Klub</label>
-                        <input type="text" class="form-control @error('klub') is-invalid @enderror" id="klub"
-                            name="klub" value="{{ old('klub', $anggota->klub) }}">
+                    <div class="col-md-6">
+                        <label for="klub" class="form-label fw-semibold">Klub</label>
+                        <input type="text" id="klub" name="klub"
+                               class="form-control @error('klub') is-invalid @enderror"
+                               value="{{ old('klub', $anggota->klub) }}">
                         @error('klub') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
                     {{-- Tanggal Lahir --}}
-                    <div class="mb-3">
-                        <label for="tgl_lahir" class="form-label fw-bold">Tanggal Lahir <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir"
-                            name="tgl_lahir" value="{{ old('tgl_lahir', $anggota->tgl_lahir) }}">
+                    <div class="col-md-6">
+                        <label for="tgl_lahir" class="form-label fw-semibold">Tanggal Lahir <span class="text-danger">*</span></label>
+                        <input type="date" id="tgl_lahir" name="tgl_lahir"
+                               class="form-control @error('tgl_lahir') is-invalid @enderror"
+                               value="{{ old('tgl_lahir', $anggota->tgl_lahir) }}" required>
                         @error('tgl_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
                     {{-- Peran --}}
-                    <div class="mb-3">
-                        <label for="peran" class="form-label fw-bold">Peran <span class="text-danger">*</span></label>
-                        <select class="form-select @error('peran') is-invalid @enderror" id="peran" name="peran">
+                    <div class="col-md-6">
+                        <label for="peran" class="form-label fw-semibold">Peran <span class="text-danger">*</span></label>
+                        <select id="peran" name="peran"
+                                class="form-select @error('peran') is-invalid @enderror" required>
                             <option value="">-- Pilih Peran --</option>
                             <option value="Atlet" {{ old('peran', $anggota->peran) == 'Atlet' ? 'selected' : '' }}>Atlet</option>
                             <option value="Pengurus" {{ old('peran', $anggota->peran) == 'Pengurus' ? 'selected' : '' }}>Pengurus</option>
@@ -66,23 +71,72 @@
                     </div>
 
                     {{-- Kontak --}}
-                    <div class="mb-3">
-                        <label for="kontak" class="form-label fw-bold">Nomor WA <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control @error('kontak') is-invalid @enderror" id="kontak"
-                            name="kontak" value="{{ old('kontak', $anggota->kontak) }}">
+                    <div class="col-md-6">
+                        <label for="kontak" class="form-label fw-semibold">Nomor WA <span class="text-danger">*</span></label>
+                        <input type="number" id="kontak" name="kontak"
+                               class="form-control @error('kontak') is-invalid @enderror"
+                               value="{{ old('kontak', $anggota->kontak) }}" required>
                         @error('kontak') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
 
-                    {{-- Tombol --}}
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ route('backend.anggota.index') }}" class="btn btn-secondary">← Kembali</a>
-                        <div>
-                            <button type="reset" class="btn btn-warning me-2">Reset</button>
-                            <button type="submit" class="btn btn-success">💾 Simpan</button>
-                        </div>
+                    {{-- Ganti Foto --}}
+                    <div class="col-md-6">
+                        <label for="foto" class="form-label fw-semibold">Ganti Foto</label>
+                        <input type="file" id="foto" name="foto"
+                               class="form-control @error('foto') is-invalid @enderror"
+                               accept="image/jpeg,image/png,image/jpg" onchange="previewFoto(this)">
+                        <small class="text-light">Format Gambar: (jpg, jpeg, png).</small>
+                        @error('foto') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
-                </form>
-            </div>
+
+                    {{-- Preview Foto --}}
+                    <div class="col-12 mt-3">
+                        <label class="form-label fw-semibold">Preview Foto:</label><br>
+                        <img id="preview-image"
+                             src="{{ $anggota->foto && file_exists(public_path('storage/' . $anggota->foto)) ? asset('storage/' . $anggota->foto) : '#' }}"
+                             alt="Preview Foto"
+                             class="img-fluid rounded border"
+                             style="max-height: 300px; {{ $anggota->foto ? '' : 'display: none;' }}">
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-end gap-2">
+                    <button type="reset" class="btn btn-warning" onclick="resetPreview()">
+                        <i class="fas fa-rotate-left me-1"></i> Reset
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save me-1"></i> Update
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
+{{-- Script Preview Foto --}}
+<script>
+    function previewFoto(input) {
+        const preview = document.getElementById('preview-image');
+        const file = input.files[0];
+
+        if (file && file.type.match('image.*')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+
+    function resetPreview() {
+        const preview = document.getElementById('preview-image');
+        preview.src = "{{ $anggota->foto && file_exists(public_path('storage/' . $anggota->foto)) ? asset('storage/' . $anggota->foto) : '#' }}";
+        preview.style.display = "{{ $anggota->foto ? 'block' : 'none' }}";
+        document.getElementById('foto').value = "";
+    }
+</script>
 @endsection

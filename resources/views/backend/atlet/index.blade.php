@@ -28,10 +28,10 @@
                         <img src="{{ asset('storage/' . $atlet->foto) }}"
                              alt="Foto {{ $atlet->nama }}"
                              class="card-img-top"
-                             style="height: 400px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; cursor: pointer;"
+                             style="height: 200px; object-fit: cover; border-top-left-radius: 5px; border-top-right-radius: 5px; cursor: pointer;"
                              onclick="openModal('{{ asset('storage/' . $atlet->foto) }}', '{{ addslashes($atlet->nama) }}')">
                     @else
-                        <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center text-white" style="height: 400px;">
+                        <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center text-white" style="height: 200px;">
                             Tidak Ada Foto
                         </div>
                     @endif
