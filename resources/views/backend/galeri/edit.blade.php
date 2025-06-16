@@ -43,7 +43,7 @@
 
                     {{-- Upload Gambar Baru --}}
                     <div class="col-md-6">
-                        <label for="gambar" class="form-label fw-semibold">Ganti Gambar</label>
+                        <label for="gambar" class="form-label fw-semibold">Ganti Gambar <span class="text-danger">*</span></label>
                         <input type="file" name="gambar" id="gambar"
                                class="form-control @error('gambar') is-invalid @enderror"
                                accept="image/*" onchange="previewGambar(this)">

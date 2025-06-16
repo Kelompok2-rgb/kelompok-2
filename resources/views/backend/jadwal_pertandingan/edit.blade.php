@@ -29,7 +29,7 @@
 
                     {{-- Nama Pertandingan --}}
                     <div class="mb-3">
-                        <label for="pertandingan_id" class="form-label fw-bold">Nama Pertandingan</label>
+                        <label for="pertandingan_id" class="form-label fw-bold">Nama Pertandingan <span class="text-danger">*</span></label>
 
                         <select class="form-select" id="pertandingan_id" name="pertandingan_id_disabled" disabled>
                             @foreach ($pertandingans as $pertandingan)
@@ -48,7 +48,7 @@
 
                     {{-- Lokasi --}}
                     <div class="mb-3">
-                        <label for="lokasi" class="form-label fw-bold">Lokasi</label>
+                        <label for="lokasi" class="form-label fw-bold">Lokasi <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('lokasi') is-invalid @enderror" id="lokasi"
                             name="lokasi" value="{{ old('lokasi', $jadwalpertandingan->lokasi) }}" required>
                         @error('lokasi')
@@ -58,7 +58,7 @@
 
                     {{-- Tanggal --}}
                     <div class="mb-3">
-                        <label for="tanggal" class="form-label fw-bold">Tanggal</label>
+                        <label for="tanggal" class="form-label fw-bold">Tanggal <span class="text-danger">*</span></label>
                         <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal"
                             name="tanggal" value="{{ old('tanggal', $jadwalpertandingan->tanggal) }}" required>
                         @error('tanggal')
@@ -68,7 +68,7 @@
 
                     {{-- Waktu --}}
                     <div class="mb-3">
-                        <label for="waktu" class="form-label fw-bold">Waktu</label>
+                        <label for="waktu" class="form-label fw-bold">Waktu <span class="text-danger">*</span></label>
                         <input type="time" class="form-control @error('waktu') is-invalid @enderror" id="waktu"
                             name="waktu" value="{{ old('waktu', $jadwalpertandingan->waktu) }}" required>
                         @error('waktu')

@@ -33,7 +33,7 @@
 
                 {{-- Nama Penyelenggara --}}
                 <div class="mb-3">
-                    <label for="nama_penyelenggara_event" class="form-label fw-bold">Nama Penyelenggara</label>
+                    <label for="nama_penyelenggara_event" class="form-label fw-bold">Nama Penyelenggara <span class="text-danger">*</span></label>
                     <input type="text" id="nama_penyelenggara_event" name="nama_penyelenggara_event"
                         class="form-control @error('nama_penyelenggara_event') is-invalid @enderror"
                         value="{{ old('nama_penyelenggara_event', $penyelenggara_event->nama_penyelenggara_event) }}" required>
@@ -43,7 +43,7 @@
                 </div>
 
                  <div class="mb-3">
-                    <label for="kontak" class="form-label">Kontak</label>
+                    <label for="kontak" class="form-label">Kontak <span class="text-danger">*</span></label>
                     <input type="number" class="form-control @error('kontak') is-invalid @enderror" id="kontak"
                         name="kontak" value="{{ old('kontak', $penyelenggara_event->kontak) }}">
                     @error('kontak')

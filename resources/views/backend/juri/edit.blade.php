@@ -15,7 +15,7 @@
 
                     {{-- Nama --}}
                     <div class="mb-3">
-                        <label for="nama" class="form-label fw-bold">Nama</label>
+                        <label for="nama" class="form-label fw-bold">Nama <span class="text-danger">*</span></label>
                         <input type="text" name="nama" id="nama"
                             class="form-control @error('nama') is-invalid @enderror"
                             value="{{ old('nama', $juri->nama) }}" required>
@@ -26,7 +26,7 @@
 
                     {{-- Sertifikat --}}
                     <div class="mb-3">
-                        <label for="sertifikat" class="form-label fw-bold">Sertifikat (PDF)</label><br>
+                        <label for="sertifikat" class="form-label fw-bold">Sertifikat (PDF) <span class="text-danger">*</span></label><br>
                         @if ($juri->sertifikat && file_exists(public_path('storage/' . $juri->sertifikat)))
                             <a href="{{ asset('storage/' . $juri->sertifikat) }}" target="_blank" class="d-block mb-2 text-success">
                                 📄 Lihat Sertifikat Lama
@@ -44,7 +44,7 @@
 
                     {{-- Tanggal Lahir --}}
                     <div class="mb-3">
-                        <label for="tanggal_lahir" class="form-label fw-bold">Tanggal Lahir</label>
+                        <label for="tanggal_lahir" class="form-label fw-bold">Tanggal Lahir <span class="text-danger">*</span></label>
                         <input type="date" name="tanggal_lahir" id="tanggal_lahir"
                             class="form-control @error('tanggal_lahir') is-invalid @enderror"
                             value="{{ old('tanggal_lahir', $juri->tanggal_lahir) }}">

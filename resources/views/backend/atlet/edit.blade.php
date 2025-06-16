@@ -15,14 +15,14 @@
 
                     {{-- Nama --}}
                     <div class="mb-3">
-                        <label class="form-label fw-bold">Nama:</label>
+                        <label class="form-label fw-bold">Nama:  <span class="text-danger">*</span></label>
                         <input type="text" name="nama" class="form-control" value="{{ old('nama', $atlet->nama) }}" required>
                         @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     {{-- Foto --}}
                     <div class="mb-3">
-                        <label class="form-label fw-bold">Foto:</label><br>
+                        <label class="form-label fw-bold">Foto:  <span class="text-danger">*</span></label><br>
                         @if ($atlet->foto)
                             <img src="{{ asset('storage/' . $atlet->foto) }}" alt="Foto Atlet" class="img-thumbnail mb-2" style="max-width: 120px;">
                         @endif

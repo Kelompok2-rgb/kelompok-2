@@ -14,49 +14,54 @@
         </div>
     @endif
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ route('backend.pertandingan.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i class="fas fa-plus me-1"></i>
-            Tambah Pertandingan
+    <div class="mb-3">
+        <a href="{{ route('backend.pertandingan.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Tambah Pertandingan
         </a>
-
     </div>
-    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Nama Pertandingan</th>
-                <th>Nama Penyelenggara</th>
-                <th>Nama Peserta</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pertandingans as $pertandingan)
+
+    <div class="table-responsive">
+        <table id="example" class="table table-bordered table-striped text-center tableExportArea">
+            <thead class="table-dark">
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pertandingan->nama_pertandingan }}</td>
-                    <td>{{ $pertandingan->nama_penyelenggara }}</td>
-                    <td><a href="{{ route('backend.peserta.index', $pertandingan->id) }}" class="btn btn-secondary">Kelola Peserta</a></td>
-                    <td>
-                        <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}"
-                            class="btn btn-warning"><i class="fas fa-edit"></i>Edit</a>
-                        <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST"
-                            style="display:inline;" onsubmit="return handleDeletePertandingan()">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
-                        </form>
-
-
-                    </td>
+                    <th>No</th>
+                    <th>Nama Pertandingan</th>
+                    <th>Nama Penyelenggara</th>
+                    <th>Peserta</th>
+                    <th>Aksi</th>
                 </tr>
-
-            @endforeach
-        </tbody>
-
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach ($pertandingans as $pertandingan)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pertandingan->nama_pertandingan }}</td>
+                        <td>
+                            {{ $pertandingan->penyelenggaraEvent->nama_penyelenggara_event ?? '-' }}
+                        </td>
+                        <td>
+                            <a href="{{ route('backend.peserta.index', $pertandingan->id) }}" class="btn btn-secondary btn-sm">
+                                Kelola Peserta
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST"
+                                  style="display:inline;" onsubmit="return handleDeletePertandingan();">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
     <script>
         function handleDeletePertandingan() {
@@ -65,7 +70,7 @@
                 alert('Hanya admin dan penyelenggara yang dapat menghapus.');
                 return false;
             }
-            return confirm('Yakin ingin menghapus?');
+            return confirm('Yakin ingin menghapus pertandingan ini?');
         }
     </script>
 @endsection

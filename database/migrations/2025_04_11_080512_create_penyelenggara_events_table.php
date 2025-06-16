@@ -9,15 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('penyelenggara_event', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_penyelenggara_event');
-            $table->string('kontak');
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('penyelenggara_events', function (Blueprint $table) {
+        $table->id(); // ini = bigIncrements() = unsignedBigInteger auto increment
+        $table->string('nama_penyelenggara_event');
+        $table->string('kontak');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
