@@ -16,8 +16,7 @@ class RekapLatihan extends Model
         'lemparan1',
         'lemparan2',
         'lemparan3',
-        'lemparan4',
-        'lemparan5',
+
     ];
 
     public function anggota()

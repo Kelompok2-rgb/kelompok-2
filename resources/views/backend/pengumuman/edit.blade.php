@@ -69,7 +69,7 @@
                         <input type="file" name="foto" id="foto"
                                class="form-control @error('foto') is-invalid @enderror"
                                accept="image/jpeg,image/png,image/jpg" onchange="previewFoto(this)">
-                        <small class="text-muted">Format Gambar: (jpg, jpeg, png).</small>
+                        <small class="text-light">Format Gambar: (jpg, jpeg, png).</small>
                         @error('foto')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

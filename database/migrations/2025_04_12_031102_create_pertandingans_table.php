@@ -20,6 +20,11 @@ return new class extends Migration
                   ->constrained('penyelenggara_events')
                   ->onDelete('cascade');
 
+            // Relasi ke tabel juris
+            $table->foreignId('juri_id')
+                  ->constrained('juris')
+                  ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

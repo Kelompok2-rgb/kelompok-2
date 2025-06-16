@@ -12,12 +12,10 @@ class CreateRekapLatihansTable extends Migration
             $table->id();
             $table->foreignId('anggota_id')->constrained()->onDelete('cascade');
             $table->date('tanggal');
-            $table->string('jarak');
+            $table->unsignedTinyInteger('jarak');
             $table->decimal('lemparan1', 5, 2)->nullable();
             $table->decimal('lemparan2', 5, 2)->nullable();
             $table->decimal('lemparan3', 5, 2)->nullable();
-            $table->decimal('lemparan4', 5, 2)->nullable();
-            $table->decimal('lemparan5', 5, 2)->nullable();
             $table->timestamps();
         });
     }

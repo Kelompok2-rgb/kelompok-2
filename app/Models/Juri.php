@@ -10,8 +10,8 @@ class Juri extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
-        'tanggal_lahir', 
+        'nama_juri',       // GANTI dari 'nama' ke 'nama_juri'
+        'tanggal_lahir',
         'sertifikat',
     ];
 }

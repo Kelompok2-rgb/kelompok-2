@@ -28,11 +28,11 @@
                         <img src="{{ asset('storage/' . $anggota->foto) }}"
                              class="card-img-top"
                              alt="Foto {{ $anggota->nama }}"
-                             style="height: 400px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; cursor: pointer;"
+                             style="height: 200px; object-fit: cover; border-top-left-radius: 5px; border-top-right-radius: 5px; cursor: pointer;"
                              onclick="openModal('{{ asset('storage/' . $anggota->foto) }}', `{{ addslashes($anggota->nama) }}`)">
                     @else
                         <div class="card-img-top d-flex justify-content-center align-items-center bg-secondary text-white"
-                            style="height: 400px;">
+                            style="height: 200px;">
                             Tidak Ada Foto
                         </div>
                     @endif
@@ -42,17 +42,15 @@
                         <p class="card-text mb-1"><strong>Tgl Lahir:</strong> {{ $anggota->tgl_lahir }}</p>
                         <p class="card-text mb-1"><strong>Peran:</strong> {{ $anggota->peran }}</p>
                         <p class="card-text"><strong>WA:</strong> {{ $anggota->kontak }}</p>
+                        <a href="{{ route('backend.rekap_latihan.index', $anggota->id) }}" class="btn btn-sm btn-secondary">Rekap Latihan</a>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                        <a href="{{ route('backend.rekap_latihan.index', $anggota->id) }}" class="btn btn-sm btn-secondary">Rekap Latihan</a>
-                        <div>
-                            <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Edit</a>
                             <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST" class="d-inline" onsubmit="return handleDeleteAnggota()">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>

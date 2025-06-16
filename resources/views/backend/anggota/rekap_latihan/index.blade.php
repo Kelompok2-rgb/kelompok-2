@@ -30,10 +30,16 @@
                             <input type="date" name="tanggal" class="form-control" required>
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="jarak" class="form-label">Jarak(m)</label>
-                            <input type="text" name="jarak" class="form-control" required>
+                            <label for="jarak" class="form-label">Jarak (m)</label>
+                            <select name="jarak" class="form-select" required>
+                                <option value="" disabled selected>Pilih jarak</option>
+                                @for ($i = 3; $i <= 9; $i++)
+                                    <option value="{{ $i }}">{{ $i }} meter</option>
+                                @endfor
+                            </select>
                         </div>
-                        @for ($i = 1; $i <= 5; $i++)
+
+                        @for ($i = 1; $i <= 3; $i++)
                             <div class="col-md-2 mb-2">
                                 <label for="lemparan{{ $i }}" class="form-label">Lemparan
                                     {{ $i }}</label>
@@ -62,8 +68,7 @@
                                 <th>L1</th>
                                 <th>L2</th>
                                 <th>L3</th>
-                                <th>L4</th>
-                                <th>L5</th>
+
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -75,8 +80,7 @@
                                     <td>{{ $item->lemparan1 }}</td>
                                     <td>{{ $item->lemparan2 }}</td>
                                     <td>{{ $item->lemparan3 }}</td>
-                                    <td>{{ $item->lemparan4 }}</td>
-                                    <td>{{ $item->lemparan5 }}</td>
+
                                     <td>
                                         <form action="{{ route('backend.rekap_latihan.destroy', $item->id) }}"
                                             method="POST" onsubmit="return confirm('Yakin ingin menghapus rekap ini?');">
