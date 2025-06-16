@@ -166,53 +166,53 @@
 
         <!-- Stats Section -->
         <section id="stats" class="stats section light-background">
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-person color-blue flex-shrink-0"></i>
-                    <div>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahAnggota }}"
-                            data-purecounter-duration="1" class="purecounter"></span>
-                        <p>Anggota</p>
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row gy-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-person color-blue flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahAnggota }}"
+                                    data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Anggota</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-people color-orange flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahKlub }}"
+                                    data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Klub</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-trophy color-green flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahAtlet }}"
+                                    data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Atlet</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-award color-pink flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahJuri }}"
+                                    data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Juri</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-people color-orange flex-shrink-0"></i>
-                    <div>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahKlub }}"
-                            data-purecounter-duration="1" class="purecounter"></span>
-                        <p>Klub</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-trophy color-green flex-shrink-0"></i>
-                    <div>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahAtlet }}"
-                            data-purecounter-duration="1" class="purecounter"></span>
-                        <p>Atlet</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item d-flex align-items-center w-100 h-100">
-                    <i class="bi bi-award color-pink flex-shrink-0"></i>
-                    <div>
-                        <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahJuri }}"
-                            data-purecounter-duration="1" class="purecounter"></span>
-                        <p>Juri</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- /Stats Section -->
+        <!-- /Stats Section -->
 
         <!-- Services Section -->
         <section id="rules" class="services section">
@@ -552,7 +552,7 @@
                 <div class="isotope-layout" data-default-filter="*" data-layout="masonry"
                     data-sort="original-order">
 
-                   <div class="text-center">Belum ada Portfolio</div>
+                    <div class="text-center">Belum ada Portfolio</div>
 
                 </div>
 
@@ -1012,9 +1012,15 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-4 col-md-3 footer-links">
-                 <img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" alt="">
+                <div class="col-lg-4 col-md-3 footer-links text-end">
+                    <img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" alt="Logo porlempika"
+                        class="img-fluid" style="max-width: 100px;">
+                        <img src="{{ asset('frontend/assets/images/Logo_pnp.png') }}" alt="Logo pnp"
+                        class="img-fluid" style="max-width: 100px;">
+                        <img src="{{ asset('frontend/assets/images/koni.png') }}" alt="Logo koni"
+                        class="img-fluid" style="max-width: 100px;">
                 </div>
+
 
 
             </div>

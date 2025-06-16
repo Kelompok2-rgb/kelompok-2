@@ -28,7 +28,7 @@
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $item->judul }}</h5>
-                            <small class="text-muted">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</small>
+                            <small class="text-light">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</small>
                             <p class="card-text mt-2">{{ Str::limit($item->isi, 100) }}</p>
 
                             <div class="d-flex justify-content-between">
@@ -39,14 +39,14 @@
                                 <div>
                                     <a href="{{ route('backend.pengumuman.edit', $item->id) }}"
                                         class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <form action="{{ route('backend.pengumuman.destroy', $item->id) }}" method="POST"
                                         style="display:inline;" onsubmit="return handleDeletePengumuman()">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fas fa-trash"></i> Hapus
                                         </button>
                                     </form>
                                 </div>

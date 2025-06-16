@@ -9,11 +9,12 @@ use App\Models\Galeri;
 
 class GaleriController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('role:admin,penyelenggara');
     }
+
     public function index()
     {
         $galeris = Galeri::paginate(10);
@@ -28,18 +29,18 @@ class GaleriController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'judul' => 'required|string|max:255',
+            'judul'     => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $fileName = time() . '.' . $request->gambar->extension();
-        $request->gambar->move(public_path('uploads'), $fileName);
+        $fileName = time() . '.' . $request->file('gambar')->extension();
+        $request->file('gambar')->move(public_path('uploads'), $fileName);
 
         Galeri::create([
-            'judul' => $validated['judul'],
+            'judul'     => $validated['judul'],
             'deskripsi' => $validated['deskripsi'] ?? null,
-            'gambar' => $fileName,
+            'gambar'    => $fileName,
         ]);
 
         return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil ditambahkan');
@@ -56,22 +57,24 @@ class GaleriController extends Controller
         $galeri = Galeri::findOrFail($id);
 
         $validated = $request->validate([
-            'judul' => 'required|string|max:255',
+            'judul'     => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $galeri->judul = $validated['judul'];
         $galeri->deskripsi = $validated['deskripsi'] ?? $galeri->deskripsi;
 
         if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
             $oldPath = public_path('uploads/' . $galeri->gambar);
-            if (File::exists($oldPath)) {
+            if ($galeri->gambar && File::exists($oldPath)) {
                 File::delete($oldPath);
             }
 
-            $fileName = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('uploads'), $fileName);
+            // Simpan gambar baru
+            $fileName = time() . '.' . $request->file('gambar')->extension();
+            $request->file('gambar')->move(public_path('uploads'), $fileName);
             $galeri->gambar = $fileName;
         }
 
@@ -84,8 +87,9 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::findOrFail($id);
 
+        // Hapus file gambar dari storage
         $path = public_path('uploads/' . $galeri->gambar);
-        if (File::exists($path)) {
+        if ($galeri->gambar && File::exists($path)) {
             File::delete($path);
         }
 

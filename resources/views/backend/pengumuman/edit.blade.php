@@ -3,91 +3,126 @@
 @section('title', 'Edit Pengumuman')
 
 @section('content')
-    <div class="container mt-4 mb-5">
-        <div class="card shadow border-0">
-            <div class="card-body">
-                <h3 class="card-title text-center mb-4">Edit Pengumuman</h3>
-                <hr>
+<div class="container mt-4 mb-5">
+    <div class="card shadow border-0">
+        <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-edit me-2"></i> Edit Pengumuman</h4>
+            <a href="{{ route('backend.pengumuman.index') }}" class="btn btn-sm btn-light">
+                <i class="fas fa-arrow-left me-1"></i> Kembali
+            </a>
+        </div>
 
-                {{-- Tampilkan error validasi --}}
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <strong>Periksa kembali input Anda:</strong>
-                        <ul class="mb-0 mt-1">
-                            @foreach ($errors->all() as $error)
-                                <li>• {{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+        <div class="card-body">
+            {{-- Tampilkan error validasi --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Periksa kembali input Anda:</strong>
+                    <ul class="mb-0 mt-1">
+                        @foreach ($errors->all() as $error)
+                            <li>• {{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                <form action="{{ route('backend.pengumuman.update', $pengumuman->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+            <form action="{{ route('backend.pengumuman.update', $pengumuman->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
+                <div class="row g-3">
                     {{-- Judul --}}
-                    <div class="mb-3">
-                        <label for="judul" class="form-label fw-bold">Judul</label>
+                    <div class="col-md-6">
+                        <label for="judul" class="form-label fw-semibold">Judul Pengumuman <span class="text-danger">*</span></label>
                         <input type="text" name="judul" id="judul"
-                            class="form-control @error('judul') is-invalid @enderror"
-                            value="{{ old('judul', $pengumuman->judul) }}" required>
+                               class="form-control @error('judul') is-invalid @enderror"
+                               value="{{ old('judul', $pengumuman->judul) }}" required>
                         @error('judul')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    {{-- Isi --}}
-                    <div class="mb-3">
-                        <label for="isi" class="form-label fw-bold">Isi Pengumuman</label>
-                        <textarea name="isi" id="isi" rows="5"
-                            class="form-control @error('isi') is-invalid @enderror" required>{{ old('isi', $pengumuman->isi) }}</textarea>
-                        @error('isi')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
                     {{-- Tanggal --}}
-                    <div class="mb-3">
-                        <label for="tanggal" class="form-label fw-bold">Tanggal</label>
+                    <div class="col-md-6">
+                        <label for="tanggal" class="form-label fw-semibold">Tanggal <span class="text-danger">*</span></label>
                         <input type="date" name="tanggal" id="tanggal"
-                            class="form-control @error('tanggal') is-invalid @enderror"
-                            value="{{ old('tanggal', $pengumuman->tanggal) }}" required>
+                               class="form-control @error('tanggal') is-invalid @enderror"
+                               value="{{ old('tanggal', $pengumuman->tanggal) }}" required>
                         @error('tanggal')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    {{-- Foto Baru --}}
-                    <div class="mb-3">
-                        <label for="foto" class="form-label fw-bold">Ganti Foto (Opsional)</label>
+                    {{-- Isi --}}
+                    <div class="col-12">
+                        <label for="isi" class="form-label fw-semibold">Isi Pengumuman <span class="text-danger">*</span></label>
+                        <textarea name="isi" id="isi" rows="5"
+                                  class="form-control @error('isi') is-invalid @enderror"
+                                  placeholder="Masukkan isi pengumuman" required>{{ old('isi', $pengumuman->isi) }}</textarea>
+                        @error('isi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Ganti Foto --}}
+                    <div class="col-12">
+                        <label for="foto" class="form-label fw-semibold">Ganti Foto</label>
                         <input type="file" name="foto" id="foto"
-                            class="form-control @error('foto') is-invalid @enderror"
-                            accept="image/*">
-                        <small class="text-muted">Biarkan kosong jika tidak ingin mengganti. Maksimal ukuran 2MB.</small>
+                               class="form-control @error('foto') is-invalid @enderror"
+                               accept="image/jpeg,image/png,image/jpg" onchange="previewFoto(this)">
+                        <small class="text-muted">Format Gambar: (jpg, jpeg, png).</small>
                         @error('foto')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    {{-- Foto Lama --}}
-                    @if ($pengumuman->foto)
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Foto Saat Ini:</label><br>
-                            <img src="{{ asset('storage/pengumuman/' . $pengumuman->foto) }}" alt="Foto Pengumuman"
-                                class="img-fluid rounded" style="max-width: 300px;">
-                        </div>
-                    @endif
-
-                    {{-- Tombol Aksi --}}
-                    <div class="d-flex justify-content-between">
-                        <a href="{{ route('backend.pengumuman.index') }}" class="btn btn-secondary">← Kembali</a>
-                        <div>
-                            <button type="reset" class="btn btn-warning me-2">Reset</button>
-                            <button type="submit" class="btn btn-success">💾 Update</button>
-                        </div>
+                    {{-- Preview Foto --}}
+                    <div class="col-12 mt-3">
+                        <label class="form-label fw-semibold">Preview Foto:</label><br>
+                        <img id="preview-image"
+                             src="{{ $pengumuman->foto ? asset('uploads/pengumuman/' . $pengumuman->foto) : '#' }}"
+                             alt="Preview Foto"
+                             class="img-fluid rounded border"
+                             style="max-height: 300px; {{ $pengumuman->foto ? '' : 'display: none;' }}">
                     </div>
-                </form>
-            </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-end gap-2">
+                    <button type="reset" class="btn btn-warning" onclick="resetPreview()">
+                        <i class="fas fa-rotate-left me-1"></i> Reset
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save me-1"></i> Update
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
+{{-- Script Preview Foto --}}
+<script>
+    function previewFoto(input) {
+        const preview = document.getElementById('preview-image');
+        const file = input.files[0];
+
+        if (file && file.type.match('image.*')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+
+    function resetPreview() {
+        const preview = document.getElementById('preview-image');
+        preview.src = "{{ $pengumuman->foto ? asset('uploads/pengumuman/' . $pengumuman->foto) : '#' }}";
+        preview.style.display = "{{ $pengumuman->foto ? 'block' : 'none' }}";
+        document.getElementById('foto').value = "";
+    }
+</script>
 @endsection
