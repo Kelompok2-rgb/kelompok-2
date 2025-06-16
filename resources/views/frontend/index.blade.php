@@ -542,7 +542,7 @@
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
             <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
+            <div class="container section-title my-3" data-aos="fade-up">
                 <h2>Portfolio</h2>
                 <p>CHECK OUR PORTFOLIO</p>
             </div><!-- End Section Title -->
@@ -552,197 +552,7 @@
                 <div class="isotope-layout" data-default-filter="*" data-layout="masonry"
                     data-sort="original-order">
 
-                    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-product">Product</li>
-                        <li data-filter=".filter-branding">Branding</li>
-                        <li data-filter=".filter-books">Books</li>
-                    </ul><!-- End Portfolio Filters -->
-
-                    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>App 1</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/app-1.jpg" title="App 1"
-                                        data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Product 1</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/product-1.jpg" title="Product 1"
-                                        data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Branding 1</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/branding-1.jpg" title="Branding 1"
-                                        data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Books 1</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/books-1.jpg" title="Branding 1"
-                                        data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>App 2</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/app-2.jpg" title="App 2"
-                                        data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Product 2</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/product-2.jpg" title="Product 2"
-                                        data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Branding 2</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/branding-2.jpg" title="Branding 2"
-                                        data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Books 2</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/books-2.jpg" title="Branding 2"
-                                        data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>App 3</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/app-3.jpg" title="App 3"
-                                        data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Product 3</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/product-3.jpg" title="Product 3"
-                                        data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Branding 3</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/branding-3.jpg" title="Branding 2"
-                                        data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Books 3</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                    <a href="assets/img/portfolio/books-3.jpg" title="Branding 3"
-                                        data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                    </div><!-- End Portfolio Container -->
+                   <div class="text-center">Belum ada Portfolio</div>
 
                 </div>
 
@@ -977,43 +787,6 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <!-- Ganti icon dengan foto -->
-                            <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
-                                class="flex-shrink-0 rounded-circle me-3"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-
-                            <div>
-                                <h4 class="title">
-                                    <p>Bendahara</p>
-                                </h4>
-                                <p class="description">
-                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                    atau hewan di sekitar tempat anda berlatih.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <!-- Ganti icon dengan foto -->
-                            <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
-                                class="flex-shrink-0 rounded-circle me-3"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-
-                            <div>
-                                <h4 class="title">
-                                    <p>Bendahara</p>
-                                </h4>
-                                <p class="description">
-                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                    atau hewan di sekitar tempat anda berlatih.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
 
@@ -1044,7 +817,7 @@
                                     data-aos="fade-up" data-aos-delay="200">
                                     <i class="bi bi-geo-alt"></i>
                                     <h3>Alamat</h3>
-                                    <p>A108 Adam Street, New York, NY 535022</p>
+                                    <p>Komp Sinar Limau Manis D13, Kel. Koto Luar, Kec. Pauh.</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -1053,7 +826,7 @@
                                     data-aos="fade-up" data-aos-delay="300">
                                     <i class="bi bi-telephone"></i>
                                     <h3>Admin</h3>
-                                    <p>+1 5589 55488 55</p>
+                                    <p>082170657217</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -1062,7 +835,7 @@
                                     data-aos="fade-up" data-aos-delay="400">
                                     <i class="bi bi-envelope"></i>
                                     <h3>Email Kami</h3>
-                                    <p>info@example.com</p>
+                                    <p>porlempikapadang@gmail.com</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -1207,13 +980,12 @@
                         <span class="sitename">Porlempika</span>
                     </a>
                     <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        <p> Komp Sinar Limau Manis D13, Kel. Koto Luar, Kec. Pauh.</p>
+                        <p class="mt-3"><strong>Phone:</strong> <span>+682170657217</span></p>
+                        <p><strong>Email:</strong> <span>porlempikapadang@gmail.com</span></p>
                     </div>
                     <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-twitter"></i></a>
                         <a href=""><i class="bi bi-facebook"></i></a>
                         <a href=""><i class="bi bi-instagram"></i></a>
                         <a href=""><i class="bi bi-linkedin"></i></a>
@@ -1238,6 +1010,10 @@
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Seminar & Diskusi</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Pengembangan SDM</a></li>
                     </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-3 footer-links">
+                 <img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" alt="">
                 </div>
 
 

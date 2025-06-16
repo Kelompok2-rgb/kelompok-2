@@ -141,14 +141,12 @@
                                                     <span>*setelah mengisi data dan sebelum klik button signup, silahkan
                                                         di screenshoot, kemudian dikirim ke wa admin</span>
                                                     <!-- Button WhatsApp -->
-                                                    <a href="https://wa.me/6282286233862" target="_blank">
+                                                    <a href="https://wa.me/6282170657217" target="_blank">
                                                         <div class=""><i class='bx bxl-whatsapp'></i> admin</div>
                                                     </a>
 
                                                 </div>
                                             </div>
-
-
 
 
                                             <div class="col-12">
