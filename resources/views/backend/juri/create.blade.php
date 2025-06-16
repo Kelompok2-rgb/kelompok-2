@@ -36,7 +36,7 @@
 
                             {{-- Tanggal Lahir --}}
                             <div class="col-md-6">
-                                <label for="tanggal_lahir" class="form-label fw-semibold">Tanggal Lahir</label>
+                                <label for="tanggal_lahir" class="form-label fw-semibold">Tanggal Lahir <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
                                     id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
                                 @error('tanggal_lahir')

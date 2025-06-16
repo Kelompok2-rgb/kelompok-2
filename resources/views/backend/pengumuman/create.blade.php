@@ -39,7 +39,7 @@
                                 <label for="judul" class="form-label fw-semibold">Judul Pengumuman <span class="text-danger">*</span></label>
                                 <input type="text" name="judul" id="judul"
                                     class="form-control @error('judul') is-invalid @enderror"
-                                    value="{{ old('judul') }}" placeholder="Masukkan judul" required>
+                                    value="{{ old('judul') }}" placeholder="Masukkan judul pengumuman" required>
                                 @error('judul')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -59,21 +59,28 @@
                                 <label for="isi" class="form-label fw-semibold">Isi Pengumuman <span class="text-danger">*</span></label>
                                 <textarea name="isi" id="isi" rows="5"
                                     class="form-control @error('isi') is-invalid @enderror"
-                                    placeholder="Masukkan isi pengumuman">{{ old('isi') }}</textarea>
+                                    placeholder="Tulis isi pengumuman...">{{ old('isi') }}</textarea>
                                 @error('isi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-12">
-                                <label for="foto" class="form-label fw-semibold">Foto (Opsional)</label>
+                                <label for="foto" class="form-label fw-semibold">Foto <span class="text-danger">*</span></label>
                                 <input type="file" name="foto" id="foto"
                                     class="form-control @error('foto') is-invalid @enderror"
-                                    accept="image/jpeg,image/png,image/jpg">
-                                <small class="text-muted">Hanya gambar (jpg, jpeg, png). Maks 2MB.</small>
+                                    accept="image/jpeg,image/png,image/jpg" onchange="previewImage(event)">
+                                <small class="text-light">Format Gambar: (jpg, jpeg, png).</small>
                                 @error('foto')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+
+                                {{-- Preview Gambar --}}
+                                <div class="mt-3">
+                                    <img id="preview-image" src="#" alt="Preview Gambar"
+                                         class="img-fluid rounded border"
+                                         style="display: none; max-height: 300px;">
+                                </div>
                             </div>
                         </div>
 
@@ -81,7 +88,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save me-1"></i> Simpan
                             </button>
-                            <button type="reset" class="btn btn-warning">
+                            <button type="reset" class="btn btn-warning" onclick="resetPreview()">
                                 <i class="fas fa-rotate-left me-1"></i> Reset
                             </button>
                         </div>
@@ -92,4 +99,38 @@
         </div>
     </div>
 </div>
+
+{{-- Script preview gambar --}}
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('preview-image');
+
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+
+            if (!file.type.match('image.*')) {
+                preview.style.display = 'none';
+                return;
+            }
+
+            if (window.FileReader) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Browser Anda tidak mendukung pratinjau gambar.");
+            }
+        }
+    }
+
+    function resetPreview() {
+        const preview = document.getElementById('preview-image');
+        preview.src = '#';
+        preview.style.display = 'none';
+    }
+</script>
 @endsection

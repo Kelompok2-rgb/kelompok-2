@@ -19,7 +19,7 @@
 
                     {{-- Nama --}}
                     <div class="mb-3">
-                        <label for="nama" class="form-label fw-bold">Nama</label>
+                        <label for="nama" class="form-label fw-bold">Nama <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
                             value="{{ old('nama', $anggota->nama) }}" required>
                         @error('nama') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -27,7 +27,7 @@
 
                     {{-- Foto --}}
                     <div class="mb-3">
-                        <label for="foto" class="form-label fw-bold">Foto</label><br>
+                        <label for="foto" class="form-label fw-bold">Foto <span class="text-danger">*</span></label><br>
                         @if ($anggota->foto && file_exists(public_path('storage/' . $anggota->foto)))
                             <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto Anggota" class="img-thumbnail mb-2" style="max-width: 120px;">
                         @else
@@ -47,7 +47,7 @@
 
                     {{-- Tanggal Lahir --}}
                     <div class="mb-3">
-                        <label for="tgl_lahir" class="form-label fw-bold">Tanggal Lahir</label>
+                        <label for="tgl_lahir" class="form-label fw-bold">Tanggal Lahir <span class="text-danger">*</span></label>
                         <input type="date" class="form-control @error('tgl_lahir') is-invalid @enderror" id="tgl_lahir"
                             name="tgl_lahir" value="{{ old('tgl_lahir', $anggota->tgl_lahir) }}">
                         @error('tgl_lahir') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -55,7 +55,7 @@
 
                     {{-- Peran --}}
                     <div class="mb-3">
-                        <label for="peran" class="form-label fw-bold">Peran</label>
+                        <label for="peran" class="form-label fw-bold">Peran <span class="text-danger">*</span></label>
                         <select class="form-select @error('peran') is-invalid @enderror" id="peran" name="peran">
                             <option value="">-- Pilih Peran --</option>
                             <option value="Atlet" {{ old('peran', $anggota->peran) == 'Atlet' ? 'selected' : '' }}>Atlet</option>
@@ -67,7 +67,7 @@
 
                     {{-- Kontak --}}
                     <div class="mb-3">
-                        <label for="kontak" class="form-label fw-bold">Nomor WA</label>
+                        <label for="kontak" class="form-label fw-bold">Nomor WA <span class="text-danger">*</span></label>
                         <input type="number" class="form-control @error('kontak') is-invalid @enderror" id="kontak"
                             name="kontak" value="{{ old('kontak', $anggota->kontak) }}">
                         @error('kontak') <div class="invalid-feedback">{{ $message }}</div> @enderror

@@ -35,7 +35,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="foto" class="form-label fw-semibold">Foto</label>
+                                    <label for="foto" class="form-label fw-semibold">Foto <span class="text-danger">*</span></label>
                                     <input type="file" id="foto" name="foto"
                                         class="form-control @error('foto') is-invalid @enderror">
                                     @error('foto')
@@ -54,7 +54,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="tgl_lahir" class="form-label fw-semibold">Tanggal Lahir</label>
+                                    <label for="tgl_lahir" class="form-label fw-semibold">Tanggal Lahir <span class="text-danger">*</span></label>
                                     <input type="date" id="tgl_lahir" name="tgl_lahir"
                                         class="form-control @error('tgl_lahir') is-invalid @enderror"
                                         value="{{ old('tgl_lahir') }}">
@@ -79,7 +79,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="kontak" class="form-label fw-semibold">Nomor WA</label>
+                                    <label for="kontak" class="form-label fw-semibold">Nomor WA <span class="text-danger">*</span></label>
                                     <input type="text" id="kontak" name="kontak"
                                         class="form-control @error('kontak') is-invalid @enderror"
                                         value="{{ old('kontak') }}" placeholder="08xxxxxxxxxx">

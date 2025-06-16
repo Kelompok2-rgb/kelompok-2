@@ -14,7 +14,6 @@
                 </div>
 
                 <div class="card-body">
-
                     {{-- Pesan sukses --}}
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
@@ -25,39 +24,55 @@
                         <div class="alert alert-danger">
                             <ul class="mb-0">
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                    <li>• {{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
 
                     {{-- Form Tambah Pertandingan --}}
-                    <form action="{{ route('backend.pertandingan.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('backend.pertandingan.store') }}" method="POST">
                         @csrf
 
                         <div class="row g-3">
                             {{-- Nama Pertandingan --}}
                             <div class="col-md-6">
-                                <label for="nama_pertandingan" class="form-label fw-semibold">Nama Pertandingan <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('nama_pertandingan') is-invalid @enderror"
-                                    id="nama_pertandingan" name="nama_pertandingan" value="{{ old('nama_pertandingan') }}"
-                                    placeholder="Contoh: Kejuaraan Nasional Atletik 2025" required>
+                                <label for="nama_pertandingan" class="form-label fw-semibold">
+                                    Nama Pertandingan <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                       class="form-control @error('nama_pertandingan') is-invalid @enderror"
+                                       id="nama_pertandingan"
+                                       name="nama_pertandingan"
+                                       value="{{ old('nama_pertandingan') }}"
+                                       placeholder="Contoh: Kejuaraan Nasional Atletik 2025"
+                                       required>
                                 @error('nama_pertandingan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            {{-- Nama Penyelenggara --}}
+                            {{-- Penyelenggara Event --}}
                             <div class="col-md-6">
-                                <label for="nama_penyelenggara" class="form-label fw-semibold">Nama Penyelenggara <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('nama_penyelenggara') is-invalid @enderror"
-                                    id="nama_penyelenggara" name="nama_penyelenggara" value="{{ old('nama_penyelenggara') }}"
-                                    placeholder="Contoh: KONI Indonesia" required>
-                                @error('nama_penyelenggara')
+                                <label for="penyelenggara_event_id" class="form-label fw-semibold">
+                                    Nama Penyelenggara <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select @error('penyelenggara_event_id') is-invalid @enderror"
+                                        id="penyelenggara_event_id"
+                                        name="penyelenggara_event_id"
+                                        required>
+                                    <option value="" disabled selected>-- Pilih Penyelenggara --</option>
+                                    @foreach ($penyelenggaras as $penyelenggara)
+                                        <option value="{{ $penyelenggara->id }}"
+                                            {{ old('penyelenggara_event_id') == $penyelenggara->id ? 'selected' : '' }}>
+                                            {{ $penyelenggara->nama_penyelenggara_event }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('penyelenggara_event_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
                         </div>
 
                         <div class="mt-4 d-flex justify-content-end gap-2">
@@ -69,7 +84,6 @@
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

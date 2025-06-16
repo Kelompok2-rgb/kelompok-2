@@ -9,7 +9,7 @@ class PenyelenggaraEvent extends Model
 {
     use HasFactory;
 
-    protected $table = 'penyelenggara_event'; 
+    protected $table = 'penyelenggara_events'; // ← ubah jadi plural
 
     protected $fillable = [
         'nama_penyelenggara_event',

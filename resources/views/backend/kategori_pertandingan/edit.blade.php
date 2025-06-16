@@ -15,7 +15,7 @@
 
                     {{-- Nama Kategori --}}
                     <div class="mb-3">
-                        <label for="nama" class="form-label fw-bold">Nama Kategori</label>
+                        <label for="nama" class="form-label fw-bold">Nama Kategori <span class="text-danger">*</span></label>
                         <input type="text" name="nama" id="nama" 
                             class="form-control @error('nama') is-invalid @enderror" 
                             value="{{ old('nama', $kategoripertandingan->nama) }}" required>
@@ -26,7 +26,7 @@
 
                     {{-- Aturan --}}
                     <div class="mb-3">
-                        <label for="aturan" class="form-label fw-bold">Aturan</label>
+                        <label for="aturan" class="form-label fw-bold">Aturan <span class="text-danger">*</span></label>
                         <input type="text" name="aturan" id="aturan" 
                             class="form-control @error('aturan') is-invalid @enderror" 
                             value="{{ old('aturan', $kategoripertandingan->aturan) }}" required>
@@ -37,7 +37,7 @@
 
                     {{-- Batasan --}}
                     <div class="mb-3">
-                        <label for="batasan" class="form-label fw-bold">Batasan</label>
+                        <label for="batasan" class="form-label fw-bold">Batasan <span class="text-danger">*</span></label>
                         <input type="text" name="batasan" id="batasan" 
                             class="form-control @error('batasan') is-invalid @enderror" 
                             value="{{ old('batasan', $kategoripertandingan->batasan) }}" required>

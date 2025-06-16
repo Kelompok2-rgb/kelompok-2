@@ -30,18 +30,27 @@ class PengumumanController extends Controller
             'judul'   => 'required|string|max:255',
             'isi'     => 'required|string',
             'tanggal' => 'required|date',
-            'foto'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        // Simpan foto
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/pengumuman'), $filename);
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+            $folder = public_path('uploads/pengumuman');
+            if (!file_exists($folder)) {
+                mkdir($folder, 0755, true);
+            }
+
+            $file->move($folder, $filename);
             $validated['foto'] = $filename;
         }
 
         Pengumuman::create($validated);
-        return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil ditambahkan.');
+
+        return redirect()->route('backend.pengumuman.index')
+                         ->with('success', 'Pengumuman berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -58,35 +67,46 @@ class PengumumanController extends Controller
             'judul'   => 'required|string|max:255',
             'isi'     => 'required|string',
             'tanggal' => 'required|date',
-            'foto'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto'    => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        // Jika ada foto baru diupload
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
+            // Hapus foto lama
             if ($pengumuman->foto && file_exists(public_path('uploads/pengumuman/' . $pengumuman->foto))) {
                 unlink(public_path('uploads/pengumuman/' . $pengumuman->foto));
             }
 
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/pengumuman'), $filename);
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+            $folder = public_path('uploads/pengumuman');
+            if (!file_exists($folder)) {
+                mkdir($folder, 0755, true);
+            }
+
+            $file->move($folder, $filename);
             $validated['foto'] = $filename;
         }
 
         $pengumuman->update($validated);
-        return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil diperbarui.');
+
+        return redirect()->route('backend.pengumuman.index')
+                         ->with('success', 'Pengumuman berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $pengumuman = Pengumuman::findOrFail($id);
 
-        // Hapus file jika ada
+        // Hapus foto jika ada
         if ($pengumuman->foto && file_exists(public_path('uploads/pengumuman/' . $pengumuman->foto))) {
             unlink(public_path('uploads/pengumuman/' . $pengumuman->foto));
         }
 
         $pengumuman->delete();
-        return redirect()->route('backend.pengumuman.index')->with('success', 'Pengumuman berhasil dihapus.');
+
+        return redirect()->route('backend.pengumuman.index')
+                         ->with('success', 'Pengumuman berhasil dihapus.');
     }
 }

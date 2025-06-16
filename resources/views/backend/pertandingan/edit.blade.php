@@ -28,7 +28,9 @@
 
                 {{-- Nama Pertandingan --}}
                 <div class="mb-3">
-                    <label for="nama_pertandingan" class="form-label fw-bold">Nama Pertandingan</label>
+                    <label for="nama_pertandingan" class="form-label fw-bold">
+                        Nama Pertandingan <span class="text-danger">*</span>
+                    </label>
                     <input type="text" id="nama_pertandingan" name="nama_pertandingan"
                         class="form-control @error('nama_pertandingan') is-invalid @enderror"
                         value="{{ old('nama_pertandingan', $pertandingan->nama_pertandingan) }}" required>
@@ -39,21 +41,32 @@
 
                 {{-- Nama Penyelenggara --}}
                 <div class="mb-3">
-                    <label for="nama_penyelenggara" class="form-label fw-bold">Nama Penyelenggara</label>
-                    <input type="text" id="nama_penyelenggara" name="nama_penyelenggara"
-                        class="form-control @error('nama_penyelenggara') is-invalid @enderror"
-                        value="{{ old('nama_penyelenggara', $pertandingan->nama_penyelenggara) }}" required>
-                    @error('nama_penyelenggara')
+                    <label for="penyelenggara_event_id" class="form-label fw-bold">
+                        Nama Penyelenggara <span class="text-danger">*</span>
+                    </label>
+                    <select id="penyelenggara_event_id" name="penyelenggara_event_id"
+                        class="form-select @error('penyelenggara_event_id') is-invalid @enderror" required>
+                        <option value="" disabled>-- Pilih Penyelenggara --</option>
+                        @foreach ($penyelenggaras as $penyelenggara)
+                            <option value="{{ $penyelenggara->id }}"
+                                {{ old('penyelenggara_event_id', $pertandingan->penyelenggara_event_id) == $penyelenggara->id ? 'selected' : '' }}>
+                                {{ $penyelenggara->nama_penyelenggara_event }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('penyelenggara_event_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-           
+
                 {{-- Tombol Aksi --}}
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('backend.pertandingan.index') }}" class="btn btn-secondary">← Kembali</a>
                     <div>
                         <button type="reset" class="btn btn-warning me-2">Reset</button>
-                        <button type="submit" class="btn btn-success">💾 Update</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save me-1"></i> Update
+                        </button>
                     </div>
                 </div>
             </form>

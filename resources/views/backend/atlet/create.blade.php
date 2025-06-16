@@ -37,7 +37,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="foto" class="form-label fw-semibold">Foto</label>
+                                    <label for="foto" class="form-label fw-semibold">Foto  <span class="text-danger">*</span></label>
                                     <input type="file" id="foto" name="foto"
                                         class="form-control @error('foto') is-invalid @enderror">
                                     @error('foto')

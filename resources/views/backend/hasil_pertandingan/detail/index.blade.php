@@ -61,7 +61,7 @@
                         <td class="text-nowrap">
                             <a href="{{ route('backend.detail_hasil_pertandingan.edit', [$hasilPertandingan->id, $detail->id]) }}"
                                 class="btn btn-warning btn-sm me-1">
-                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-edit"></i> Edit
                             </a>
                             <form
                                 action="{{ route('backend.detail_hasil_pertandingan.destroy', [$hasilPertandingan->id, $detail->id]) }}"
@@ -69,7 +69,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash"></i> Hapus
                                 </button>
                             </form>
                         </td>

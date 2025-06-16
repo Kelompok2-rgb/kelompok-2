@@ -15,7 +15,7 @@
 
                     {{-- Nama Klub --}}
                     <div class="mb-3">
-                        <label for="nama" class="form-label fw-bold">Nama Klub</label>
+                        <label for="nama" class="form-label fw-bold">Nama Klub <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
                             value="{{ old('nama', $club->nama) }}" required>
                         @error('nama')
@@ -25,7 +25,7 @@
 
                     {{-- Lokasi --}}
                     <div class="mb-3">
-                        <label for="lokasi" class="form-label fw-bold">Lokasi</label>
+                        <label for="lokasi" class="form-label fw-bold">Lokasi <span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi"
                             value="{{ old('lokasi', $club->lokasi) }}" required>
                         @error('lokasi')

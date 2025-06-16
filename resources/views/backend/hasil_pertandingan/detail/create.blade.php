@@ -25,7 +25,7 @@
         @csrf
 
         <div class="mb-3">
-            <label for="nama" class="form-label fw-bold">Nama Peserta</label>
+            <label for="nama" class="form-label fw-bold">Nama Peserta <span class="text-danger">*</span></label>
             <select name="nama" id="nama" class="form-control" required>
                 <option value="">-- Pilih Peserta --</option>
                 @foreach($pesertas as $peserta)
