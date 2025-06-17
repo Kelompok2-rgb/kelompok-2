@@ -19,7 +19,8 @@ use App\Http\Controllers\{
     UserController,
     PesertaPertandinganController,
     RekapLatihanController,
-    DetailHasilPertandinganController
+    DetailHasilPertandinganController,
+    OutputController
 };
 
 // Halaman Utama
@@ -97,5 +98,16 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         Route::get('/{id}/edit', [DetailHasilPertandinganController::class, 'edit'])->name('edit');
         Route::put('/{id}', [DetailHasilPertandinganController::class, 'update'])->name('update');
         Route::delete('/{id}', [DetailHasilPertandinganController::class, 'destroy'])->name('destroy');
+    });
+
+    // Output (Cetak)
+    Route::prefix('output')->name('output.')->group(function () {
+        Route::get('/anggota', [OutputController::class, 'output_anggota'])->name('anggota');
+        Route::get('/anggota/cetak/{id}', [OutputController::class, 'cetak_kartu'])->name('anggota.cetak');
+        Route::get('/anggota/export/excel', [OutputController::class, 'exportExcel'])->name('anggota.excel');
+        Route::get('/anggota/export/pdf', [OutputController::class, 'exportPDF'])->name('anggota.pdf');
+
+        Route::get('/atlet', [OutputController::class, 'output_atlet'])->name('atlet');
+        Route::get('/hasil-pertandingan', [OutputController::class, 'output_hasilpertandingan'])->name('hasilpertandingan');
     });
 });

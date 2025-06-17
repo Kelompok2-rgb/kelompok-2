@@ -204,7 +204,7 @@
                 <a href="{{ $canAccess ? route('backend.penyelenggara_event.index') : '#' }}"
                     title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
                     @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
-                    <div class=""><i class='bx bx-briefcase'></i></div>
+                    <div class="parent-icon"><i class='bx bx-briefcase'></i></div>
                     <div class="menu-title">Penyelenggara Event</div>
                 </a>
             </li>
@@ -219,16 +219,35 @@
                 <a href="{{ $canAccess ? route('backend.users.index') : '#' }}"
                     title="{{ $canAccess ? 'Manajemen User' : 'Anda tidak memiliki akses' }}"
                     @unless ($canAccess) style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endunless>
-                    <div><i class='bx bx-user-pin'></i></div>
+                    <div class="parent-icon"><i class='bx bx-user-pin'></i></div>
                     <div class="menu-title">User</div>
                 </a>
             </li>
         @endauth
 
+        @auth
+            @php
+                $canAccess = Auth::user()->role === 'admin';
+            @endphp
 
+            @if ($canAccess)
+                <li class="has-submenu">
+                    <a>
+                        <div class="parent-icon"><i class='bx bx-printer'></i></div>
+                        <div class="menu-title">Output</div>
+                    </a>
+                    <ul class="ps-3">
+                        <li><a href="{{ route('backend.output.anggota') }}"><i class="bx bx-id-card"></i> Cetak Anggota</a></li>
+                        <li><a href="{{ route('backend.output.atlet') }}"><i class="bx bx-run"></i> Cetak Data Atlet</a></li>
+                        <li><a href="{{ route('backend.output.hasilpertandingan') }}"><i class="bx bx-bar-chart-alt"></i>
+                                Cetak Hasil Pertandingan</a></li>
 
+                    </ul>
+
+                </li>
+            @endif
+        @endauth
 
     </ul>
     <!--end navigation-->
 </div>
-<!--end sidebar wrapper -->
