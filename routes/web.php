@@ -19,10 +19,14 @@ use App\Http\Controllers\{
     UserController,
     PesertaPertandinganController,
     RekapLatihanController,
-    DetailHasilPertandinganController
+    DetailHasilPertandinganController,
+    OutputController
 };
 
-// Halaman Utama
+// ==============================
+// FRONTEND
+// ==============================
+
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 
 // Login & Auth
@@ -40,7 +44,7 @@ Route::post('/forgot-password', [AuthController::class, 'handleForgot'])->name('
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [AuthController::class, 'handleReset'])->name('password.update');
 
-// Halaman Frontend Lainnya
+// Halaman Lain
 Route::name('frontend.')->group(function () {
     Route::get('/jadwalpertandingan', [FrontendController::class, 'jadwalpertandingan'])->name('indexjadwalpertandingan');
     Route::get('/kategoripertandingan', [FrontendController::class, 'kategoripertandingan'])->name('indexkategoripertandingan');
@@ -48,10 +52,14 @@ Route::name('frontend.')->group(function () {
     Route::get('/pengumuman', [FrontendController::class, 'pengumuman'])->name('indexpengumuman');
 });
 
-// Backend Routes
+
+// ==============================
+// BACKEND
+// ==============================
+
 Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
     // Dashboard
-    Route::get('/dashboard', fn() => view('backend.dashboard.dashboard'))->name('dashboard');
+    Route::view('/dashboard', 'backend.dashboard.dashboard')->name('dashboard');
 
     // Konfirmasi User
     Route::get('/konfirmasi', [KonfirmasiController::class, 'index'])->name('konfirmasi.index');
@@ -77,17 +85,18 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     Route::resource('hasil_pertandingan', HasilPertandinganController::class)->except(['create']);
 
     // Peserta Pertandingan
-    Route::prefix('pertandingan/{id}/peserta')->group(function () {
-        Route::get('/', [PesertaPertandinganController::class, 'index'])->name('peserta.index');
-        Route::post('/', [PesertaPertandinganController::class, 'store'])->name('peserta.store');
-        Route::delete('/{atlet_id}', [PesertaPertandinganController::class, 'destroy'])->name('peserta.destroy');
+    Route::prefix('pertandingan/{id}/peserta')->name('peserta.')->group(function () {
+        Route::get('/', [PesertaPertandinganController::class, 'index'])->name('index');
+        Route::post('/', [PesertaPertandinganController::class, 'store'])->name('store');
+        Route::delete('/{atlet_id}', [PesertaPertandinganController::class, 'destroy'])->name('destroy');
     });
 
     // Rekap Latihan
-    Route::get('rekap-latihan/{anggota}', [RekapLatihanController::class, 'index'])->name('rekap_latihan.index');
-    Route::post('rekap-latihan/{anggota}', [RekapLatihanController::class, 'store'])->name('rekap_latihan.store');
-    Route::delete('rekap-latihan/{id}', [RekapLatihanController::class, 'destroy'])->name('rekap_latihan.destroy');
-
+    Route::prefix('rekap-latihan')->name('rekap_latihan.')->group(function () {
+        Route::get('/{anggota}', [RekapLatihanController::class, 'index'])->name('index');
+        Route::post('/{anggota}', [RekapLatihanController::class, 'store'])->name('store');
+        Route::delete('/{id}', [RekapLatihanController::class, 'destroy'])->name('destroy');
+    });
 
     // Detail Hasil Pertandingan
     Route::prefix('hasil-pertandingan/{hasil_pertandingan_id}/detail')->name('detail_hasil_pertandingan.')->group(function () {
@@ -97,5 +106,23 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         Route::get('/{id}/edit', [DetailHasilPertandinganController::class, 'edit'])->name('edit');
         Route::put('/{id}', [DetailHasilPertandinganController::class, 'update'])->name('update');
         Route::delete('/{id}', [DetailHasilPertandinganController::class, 'destroy'])->name('destroy');
+    });
+
+    // Output (Cetak / Export)
+    Route::prefix('output')->name('output.')->group(function () {
+        // Anggota
+        Route::get('/anggota', [OutputController::class, 'output_anggota'])->name('anggota');
+        Route::get('/anggota/cetak/{id}', [OutputController::class, 'cetak_kartu'])->name('anggota.cetak');
+        Route::get('/anggota/export/excel', [OutputController::class, 'exportExcel'])->name('anggota.excel');
+        Route::get('/anggota/export/pdf', [OutputController::class, 'exportPDF'])->name('anggota.pdf');
+
+        // Atlet
+        Route::get('/atlet', [OutputController::class, 'output_atlet'])->name('atlet');
+        Route::get('/atlet/{id}/cetak-nomor', [OutputController::class, 'cetak_nomor_peserta'])->name('nomorpeserta');
+
+
+
+        // Hasil Pertandingan
+        Route::get('/hasil-pertandingan', [OutputController::class, 'output_hasilpertandingan'])->name('hasilpertandingan');
     });
 });

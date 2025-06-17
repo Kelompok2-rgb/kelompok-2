@@ -1015,10 +1015,11 @@
                 <div class="col-lg-4 col-md-3 footer-links text-end">
                     <img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" alt="Logo porlempika"
                         class="img-fluid" style="max-width: 100px;">
-                        <img src="{{ asset('frontend/assets/images/Logo_pnp.png') }}" alt="Logo pnp"
-                        class="img-fluid" style="max-width: 100px;">
-                        <img src="{{ asset('frontend/assets/images/koni.png') }}" alt="Logo koni"
-                        class="img-fluid" style="max-width: 100px;">
+                    <img src="{{ asset('frontend/assets/images/koni.png') }}" alt="Logo koni" class="img-fluid"
+                        style="max-width: 100px;">
+                    <img src="{{ asset('frontend/assets/images/Logo_pnp.png') }}" alt="Logo pnp" class="img-fluid"
+                        style="max-width: 100px;">
+
                 </div>
 
 
