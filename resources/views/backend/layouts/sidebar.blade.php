@@ -237,8 +237,8 @@
                         <div class="menu-title">Output</div>
                     </a>
                     <ul class="ps-3">
-                        <li><a href="{{ route('backend.output.anggota') }}"><i class="bx bx-id-card"></i> Cetak Anggota</a></li>
-                        <li><a href="{{ route('backend.output.atlet') }}"><i class="bx bx-run"></i> Cetak Data Atlet</a></li>
+                        <li><a href="{{ route('backend.output.anggota') }}"><i class="bx bx-id-card"></i> Cetak Data Anggota</a></li>
+                        <li><a href="{{ route('backend.output.atlet') }}"><i class="bx bx-run"></i> Cetak Nomor Atlet</a></li>
                         <li><a href="{{ route('backend.output.hasilpertandingan') }}"><i class="bx bx-bar-chart-alt"></i>
                                 Cetak Hasil Pertandingan</a></li>
 
