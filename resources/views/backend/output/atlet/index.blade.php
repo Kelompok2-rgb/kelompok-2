@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="text-center mb-4">
-        <h2>Output Data Atlet</h2>
+        <h2>Data Atlet</h2>
         <hr>
     </div>
 
@@ -39,7 +39,7 @@
             </div>
         @empty
             <div class="col-12 text-center">
-                <p class="text-muted">Belum ada data atlet.</p>
+                <p class="text-light">Belum ada data atlet.</p>
             </div>
         @endforelse
     </div>

@@ -25,7 +25,7 @@ class Pertandingan extends Model
 
     public function hasilPertandingan()
     {
-        return $this->hasOne(HasilPertandingan::class);
+        return $this->hasMany(HasilPertandingan::class);
     }
 
     public function penyelenggaraEvent()
@@ -37,4 +37,10 @@ class Pertandingan extends Model
     {
         return $this->belongsTo(Juri::class);
     }
+
+    public function jadwalPertandingan()
+{
+    return $this->hasOne(Jadwal_Pertandingan::class, 'pertandingan_id');
+}
+
 }

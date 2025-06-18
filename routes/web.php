@@ -108,21 +108,25 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         Route::delete('/{id}', [DetailHasilPertandinganController::class, 'destroy'])->name('destroy');
     });
 
-    // Output (Cetak / Export)
+    // ==============================
+    // OUTPUT (CETAK / EXPORT)
+    // ==============================
+
     Route::prefix('output')->name('output.')->group(function () {
-        // Anggota
+
+        // Output Anggota
         Route::get('/anggota', [OutputController::class, 'output_anggota'])->name('anggota');
         Route::get('/anggota/cetak/{id}', [OutputController::class, 'cetak_kartu'])->name('anggota.cetak');
         Route::get('/anggota/export/excel', [OutputController::class, 'exportExcel'])->name('anggota.excel');
         Route::get('/anggota/export/pdf', [OutputController::class, 'exportPDF'])->name('anggota.pdf');
 
-        // Atlet
+        // Output Atlet
         Route::get('/atlet', [OutputController::class, 'output_atlet'])->name('atlet');
         Route::get('/atlet/{id}/cetak-nomor', [OutputController::class, 'cetak_nomor_peserta'])->name('nomorpeserta');
 
-
-
-        // Hasil Pertandingan
+        // Output Hasil Pertandingan
         Route::get('/hasil-pertandingan', [OutputController::class, 'output_hasilpertandingan'])->name('hasilpertandingan');
+        Route::get('/hasil-pertandingan/{id}/cetak-pdf', [OutputController::class, 'cetakHasilPDF'])->name('hasilpertandingan.pdf');
+        Route::get('/hasil-pertandingan/{id}/export-excel', [OutputController::class, 'exportHasilExcel'])->name('hasilpertandingan.excel');
     });
 });
