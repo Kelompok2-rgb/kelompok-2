@@ -20,5 +20,10 @@ class HasilPertandingan extends Model
     {
         return $this->hasMany(DetailHasilPertandingan::class);
     }
+
+    public function atlet()
+    {
+        return $this->belongsTo(Atlet::class);
+    }
 }
 

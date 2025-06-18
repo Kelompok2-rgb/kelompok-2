@@ -13,15 +13,19 @@ return new class extends Migration
     {
         Schema::create('jadwal_pertandingans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pertandingan_id'); // FK ke tabel pertandingan
+
+            // Relasi ke pertandingan
+            $table->foreignId('pertandingan_id')
+                  ->constrained('pertandingans')
+                  ->onDelete('cascade');
+
+            // Kolom data jadwal
             $table->date('tanggal');
             $table->time('waktu');
             $table->string('lokasi');
             $table->text('deskripsi')->nullable();
-            $table->timestamps();
 
-            // Foreign Key Constraint
-            $table->foreign('pertandingan_id')->references('id')->on('pertandingans')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
