@@ -45,12 +45,15 @@ Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])-
 Route::post('/reset-password', [AuthController::class, 'handleReset'])->name('password.update');
 
 // Halaman Lain
-Route::name('frontend.')->group(function () {
-    Route::get('/jadwalpertandingan', [FrontendController::class, 'jadwalpertandingan'])->name('indexjadwalpertandingan');
-    Route::get('/kategoripertandingan', [FrontendController::class, 'kategoripertandingan'])->name('indexkategoripertandingan');
-    Route::get('/galeri', [FrontendController::class, 'galeri'])->name('indexgaleri');
-    Route::get('/pengumuman', [FrontendController::class, 'pengumuman'])->name('indexpengumuman');
+// AJAX untuk frontend (akses via tab fitur, tanpa reload)
+Route::prefix('ajax')->name('ajax.')->group(function () {
+    Route::get('/jadwal', [FrontendController::class, 'ajaxJadwal'])->name('jadwal');
+    Route::get('/kategori', [FrontendController::class, 'ajaxKategori'])->name('kategori');
+    Route::get('/galeri', [FrontendController::class, 'ajaxGaleri'])->name('galeri');
+    Route::get('/pengumuman', [FrontendController::class, 'ajaxPengumuman'])->name('pengumuman');
 });
+
+
 
 
 // ==============================

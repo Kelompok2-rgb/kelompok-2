@@ -57,7 +57,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto">
+            <a href="#" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">Porlempika</h1>
@@ -73,16 +73,10 @@
                     <li class="dropdown"><a href="#"><span>Menu</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ route('frontend.indexjadwalpertandingan') }}#jadwal_pertandingan">Jadwal
-                                    Pertandingan</a></li>
-                            <li><a href="{{ route('frontend.indexkategoripertandingan') }}#kategori_pertandingan">Kategori
-                                    Pertandingan</a>
-                            </li>
-                            <li><a href="{{ route('frontend.indexgaleri') }}#galeri">Galeri</a></li>
-                            <li><a href="{{ route('frontend.indexpengumuman') }}#pengumuman">Pengumuman</a></li>
-
-
-
+                            <li><a href="#fitur">Jadwal Pertandingan</a></li>
+                            <li><a href="#fitur">Kategori Pertandingan</a></li>
+                            <li><a href="#fitur">Galeri</a></li>
+                            <li><a href="#fitur">Pengumuman</a></li>
                         </ul>
                     </li>
                     <li><a href="#contact">Contact</a></li>
@@ -374,7 +368,7 @@
         </section><!-- /Clients Section -->
 
         <!-- Features Section -->
-        <section id="features" class="features section">
+        <section id="fitur" class="features section">
 
             <div class="container">
 
@@ -409,132 +403,248 @@
 
                     <div class="tab-pane fade active show" id="features-tab-1">
                         <div class="row">
-                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                                <h3>PERATURAN KEJUARAAN OLAHRAGA LEMPAR PISAU DAN KAPAK </h3>
-                                <p class="fst-italic">
-                                    Tata Cara Dan Urutan Melempar
-                                </p>
-                                <ul>
-                                    <li><i class="bi bi-check2-all"></i>
-                                        <spab>Atlet diberikan kesempatan 9 kali melempar untuk pemanasan, point tidak
-                                            dihitung.</spab>
-                                    </li>
-                                    <li><i class="bi bi-check2-all"></i> <span> Ketika pertandingan dimulai, Juri akan
-                                            memberikan isyarat untuk memulai melempar, berhenti melempar dan mundur ke
-                                            jarak selanjutnya serta memberitahukan ronde lemparan </span>.</li>
-                                    <li><i class="bi bi-check2-all"></i> <span>Ketika melempar, kaki atlet tidak boleh
-                                            melewati garis jarak.</span></li>
-                                </ul>
-                                <p>
-                                    Peserta dilarang menggunakan doping dalam bentuk apapun sesuai dengan ketentuan anti
-                                    doping yang diatur dalam World Anti Doping Code (the “Code”), Lembaga Anti Doping
-                                    Indonesia dan peraturan Anti Doping Komite Olahraga Nasional Indonesia
-                                </p>
-                            </div>
-                            <div class="col-lg-6 order-1 order-lg-2 text-center">
-                                <img src="{{ asset('frontend/assets/images/porlempika.png') }}" alt=""
-                                    class="img-fluid">
+                            <div>
+
+                                <div class="text-center mb-4">
+                                    <h2>Jadwal Pertandingan</h2>
+                                    <hr>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped text-center tableExportArea">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Pertandingan</th>
+                                                <th>Tanggal</th>
+                                                <th>Waktu</th>
+                                                <th>Lokasi</th>
+                                                <th>Deskripsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($jadwalpertandingans as $jadwal)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $jadwal->pertandingan->nama_pertandingan ?? '-' }}</td>
+                                                    <td>{{ optional($jadwal->tanggal)->format('d/m/Y') }}</td>
+                                                    <td>{{ optional(\Carbon\Carbon::parse($jadwal->waktu))->format('H:i') }}
+                                                    </td>
+                                                    <td>{{ $jadwal->lokasi }}</td>
+                                                    <td>{{ \Illuminate\Support\Str::limit($jadwal->deskripsi, 50) }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
-                    </div><!-- End Tab Content Item -->
+
+                        {{-- Inline Style untuk membatasi panjang konten kolom --}}
+                        <style>
+                            td {
+                                max-width: 200px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                        </style>
+                    </div>
+
 
                     <div class="tab-pane fade" id="features-tab-2">
                         <div class="row">
-                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                                <h3>PERATURAN KEJUARAAN OLAHRAGA LEMPAR PISAU DAN KAPAK</h3>
-                                <p>
-                                    Peserta dilarang menggunakan doping dalam bentuk apapun sesuai dengan ketentuan anti
-                                    doping yang diatur dalam World Anti Doping Code (the “Code”), Lembaga Anti Doping
-                                    Indonesia dan peraturan Anti Doping Komite Olahraga Nasional Indonesia
-                                </p>
+                            <div>
 
-                                <ul>
-                                    <li><i class="bi bi-check2-all"></i>
-                                        <spab>Atlet diberikan kesempatan 9 kali melempar untuk pemanasan, point tidak
-                                            dihitung.</spab>
-                                    </li>
-                                    <li><i class="bi bi-check2-all"></i> <span> Ketika pertandingan dimulai, Juri akan
-                                            memberikan isyarat untuk memulai melempar, berhenti melempar dan mundur ke
-                                            jarak selanjutnya serta memberitahukan ronde lemparan </span>.</li>
-                                    <li><i class="bi bi-check2-all"></i> <span>Ketika melempar, kaki atlet tidak boleh
-                                            melewati garis jarak.</span></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6 order-1 order-lg-2 text-center">
-                                <img src="{{ asset('frontend/assets/images/porlempika.png') }}" alt=""
-                                    class="img-fluid">
+                                <div class="text-center mb-4">
+                                    <h2>Kategori Pertandingan</h2>
+                                    <hr>
+                                </div>
+
+
+                                <table id="example"
+                                    class="table table-bordered table-striped mt-3 text-center tableExportArea">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Kategori</th>
+                                            <th>Aturan</th>
+                                            <th>Batasan</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($kategoripertandingans as $index => $kategori)
+                                            <tr>
+                                                <td class="text-center">{{ $index + 1 }}</td>
+                                                <td>{{ $kategori->nama }}</td>
+                                                <td>{{ $kategori->aturan }}</td>
+                                                <td>{{ $kategori->batasan }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
 
                             </div>
+
                         </div>
                     </div><!-- End Tab Content Item -->
 
                     <div class="tab-pane fade" id="features-tab-3">
                         <div class="row">
-                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                                <h3>Voluptatibus commodi ut accusamus ea repudiandae ut autem dolor ut assumenda</h3>
-                                <p>
-                                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate
-                                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                    non proident, sunt in
-                                    culpa qui officia deserunt mollit anim id est laborum
-                                </p>
-                                <ul>
-                                    <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat.</span></li>
-                                    <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit
-                                            in voluptate velit.</span></li>
-                                    <li><i class="bi bi-check2-all"></i> <span>Provident mollitia neque rerum
-                                            asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</span>
-                                    </li>
-                                </ul>
-                                <p class="fst-italic">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore
-                                    magna aliqua.
-                                </p>
+                            <div>
+                                <div class="text-center mb-4">
+                                    <h2>Galeri</h2>
+                                    <hr>
+                                </div>
+
+                                @if ($galeris->isEmpty())
+                                    <div class="col-12 text-center">
+                                        <p>Belum ada galeri.</p>
+                                    </div>
+                                @else
+                                    <div id="galeriCarousel" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            @foreach ($galeris as $index => $galeri)
+                                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                                    <div class="d-flex flex-column align-items-center">
+                                                        <img src="{{ asset('uploads/' . $galeri->gambar) }}"
+                                                            class="d-block rounded" alt="{{ $galeri->judul }}"
+                                                            style="max-height: 450px; object-fit: cover; width: 100%; max-width: 800px;">
+                                                        <div class="mt-3 text-center text-dark">
+                                                            <h5 class="fw-bold">{{ $galeri->judul }}</h5>
+                                                            <p>{{ $galeri->deskripsi }}</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        {{-- Controls --}}
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#galeriCarousel" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Sebelumnya</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#galeriCarousel" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Berikutnya</span>
+                                        </button>
+                                    </div>
+                                @endif
+
+                                <style>
+                                    .carousel-inner {
+                                        background-color: #ffffff;
+                                        border-radius: 12px;
+                                        padding: 20px;
+                                    }
+
+                                    .carousel-item {
+                                        transition: transform 0.6s ease, opacity 0.6s ease;
+                                    }
+
+                                    .carousel-control-prev-icon,
+                                    .carousel-control-next-icon {
+                                        background-color: rgba(0, 0, 0, 0.5);
+                                        border-radius: 50%;
+                                    }
+
+                                    .carousel-caption {
+                                        background-color: rgba(0, 0, 0, 0.5);
+                                        border-radius: 10px;
+                                    }
+                                </style>
+
                             </div>
-                            <div class="col-lg-6 order-1 order-lg-2 text-center">
-                                <img src="assets/img/working-3.jpg" alt="" class="img-fluid">
-                            </div>
+
                         </div>
                     </div><!-- End Tab Content Item -->
 
                     <div class="tab-pane fade" id="features-tab-4">
                         <div class="row">
-                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                                <h3>Omnis fugiat ea explicabo sunt dolorum asperiores sequi inventore rerum</h3>
-                                <p>
-                                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate
-                                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                    non proident, sunt in
-                                    culpa qui officia deserunt mollit anim id est laborum
-                                </p>
-                                <p class="fst-italic">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore
-                                    magna aliqua.
-                                </p>
-                                <ul>
-                                    <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat.</span></li>
-                                    <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit
-                                            in voluptate velit.</span></li>
-                                    <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                            trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-                                </ul>
+                            <div class="container py-5">
+                                <h2 class="text-center">
+                                   Pengumuman
+                                </h2>
+                                <hr class="mb-5">
+                                <div class="text-center mb-4">
+                                    <h2>Galeri</h2>
+                                    <hr>
+                                </div>
+
+                                @if ($pengumumans->isEmpty())
+                                    <div class="text-center">
+                                        <p class="text-muted">Belum ada pengumuman.</p>
+                                    </div>
+                                @else
+                                    <div id="pengumumanCarousel" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            @foreach ($pengumumans as $index => $item)
+                                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                    <div class="row g-4 align-items-center">
+                                                        {{-- Kolom Informasi --}}
+                                                        <div class="col-md-6">
+                                                            <div class="p-3" style="word-wrap: break-word;">
+                                                                <h3 class="fw-bold text-dark">{{ $item->judul }}</h3>
+                                                                <p class="text-muted mb-2">
+                                                                    <i class="bi bi-calendar-event me-1"></i>
+                                                                    {{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}
+                                                                </p>
+                                                                <hr>
+                                                                <div class="text-secondary overflow-auto"
+                                                                    style="max-height: 280px; text-align: justify; word-break: break-word;">
+                                                                    {!! nl2br(e($item->isi)) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {{-- Kolom Gambar --}}
+                                                        <div class="col-md-6 text-center">
+                                                            @if ($item->foto)
+                                                                <img src="{{ asset('uploads/pengumuman/' . $item->foto) }}"
+                                                                    class="img-fluid rounded shadow-sm"
+                                                                    alt="Foto Pengumuman"
+                                                                    style="max-height: 350px; object-fit: cover; width: 100%;">
+                                                            @else
+                                                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center rounded"
+                                                                    style="height: 300px;">
+                                                                    Tidak ada foto
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        {{-- Navigasi Carousel --}}
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#pengumumanCarousel" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2"
+                                                aria-hidden="true"></span>
+                                            <span class="visually-hidden">Sebelumnya</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#pengumumanCarousel" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon bg-dark rounded-circle p-2"
+                                                aria-hidden="true"></span>
+                                            <span class="visually-hidden">Berikutnya</span>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
-                            <div class="col-lg-6 order-1 order-lg-2 text-center">
-                                <img src="assets/img/working-4.jpg" alt="" class="img-fluid">
-                            </div>
-                        </div>
-                    </div><!-- End Tab Content Item -->
+
+
+                        </div><!-- End Tab Content Item -->
+
+                    </div>
 
                 </div>
-
-            </div>
 
         </section><!-- /Features Section -->
 
@@ -544,7 +654,7 @@
             <!-- Section Title -->
             <div class="container section-title my-3" data-aos="fade-up">
                 <h2>Portfolio</h2>
-                <p>CHECK OUR PORTFOLIO</p>
+                <p>Cek Portofolio Kami</p>
             </div><!-- End Section Title -->
 
             <div class="container">
@@ -976,7 +1086,7 @@
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
-                    <a href="index.html" class="logo d-flex align-items-center">
+                    <a href="#" class="logo d-flex align-items-center">
                         <span class="sitename">Porlempika</span>
                     </a>
                     <div class="footer-contact pt-3">
@@ -1112,6 +1222,36 @@
             }
         })();
     </script>
+    <script>
+        $(document).ready(function() {
+            // Default tab saat load pertama
+            $('#features-tab-content').load("{{ route('ajax.jadwal') }}");
+
+            // Saat tab diklik
+            $('[data-bs-target]').on('click', function() {
+                const targetId = $(this).data('bs-target');
+                let url = '';
+
+                switch (targetId) {
+                    case '#features-tab-1':
+                        url = "{{ route('ajax.jadwal') }}";
+                        break;
+                    case '#features-tab-2':
+                        url = "{{ route('ajax.kategori') }}";
+                        break;
+                    case '#features-tab-3':
+                        url = "{{ route('ajax.galeri') }}";
+                        break;
+                    case '#features-tab-4':
+                        url = "{{ route('ajax.pengumuman') }}";
+                        break;
+                }
+
+                $('#features-tab-content').load(url);
+            });
+        });
+    </script>
+
 
 </body>
 
