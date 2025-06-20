@@ -90,7 +90,7 @@
         @auth
             <li>
                 @php
-                    $allowedRoles = ['admin', 'juri'];
+                    $allowedRoles = ['juri'];
                     $canAccess = in_array(Auth::user()->role, $allowedRoles);
                 @endphp
 
