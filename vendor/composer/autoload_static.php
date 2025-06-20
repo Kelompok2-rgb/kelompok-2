@@ -667,6 +667,8 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
     );
 
     public static $classMap = array (
+        'App\\Exports\\AnggotaExport' => __DIR__ . '/../..' . '/app/Exports/AnggotaExport.php',
+        'App\\Exports\\HasilPertandinganExport' => __DIR__ . '/../..' . '/app/Exports/HasilPertandinganExport.php',
         'App\\Http\\Controllers\\AnggotaController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnggotaController.php',
         'App\\Http\\Controllers\\AtletController' => __DIR__ . '/../..' . '/app/Http/Controllers/AtletController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',

@@ -28,14 +28,9 @@ class GaleriController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'judul'     => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'gambar'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+        $validated = $this->validateGaleri($request);
 
-        $fileName = time() . '.' . $request->file('gambar')->extension();
-        $request->file('gambar')->move(public_path('uploads'), $fileName);
+        $fileName = $this->handleUpload($request);
 
         Galeri::create([
             'judul'     => $validated['judul'],
@@ -56,26 +51,14 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::findOrFail($id);
 
-        $validated = $request->validate([
-            'judul'     => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'gambar'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+        $validated = $this->validateGaleri($request, true);
 
         $galeri->judul = $validated['judul'];
         $galeri->deskripsi = $validated['deskripsi'] ?? $galeri->deskripsi;
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
-            $oldPath = public_path('uploads/' . $galeri->gambar);
-            if ($galeri->gambar && File::exists($oldPath)) {
-                File::delete($oldPath);
-            }
-
-            // Simpan gambar baru
-            $fileName = time() . '.' . $request->file('gambar')->extension();
-            $request->file('gambar')->move(public_path('uploads'), $fileName);
-            $galeri->gambar = $fileName;
+            $this->deleteOldImage($galeri->gambar);
+            $galeri->gambar = $this->handleUpload($request);
         }
 
         $galeri->save();
@@ -87,11 +70,7 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::findOrFail($id);
 
-        // Hapus file gambar dari storage
-        $path = public_path('uploads/' . $galeri->gambar);
-        if ($galeri->gambar && File::exists($path)) {
-            File::delete($path);
-        }
+        $this->deleteOldImage($galeri->gambar);
 
         $galeri->delete();
 
@@ -102,5 +81,31 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::findOrFail($id);
         return view('backend.galeri.show', compact('galeri'));
+    }
+
+    // ===== Helper Methods =====
+
+    private function validateGaleri(Request $request, bool $isUpdate = false): array
+    {
+        return $request->validate([
+            'judul'     => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'gambar'    => ($isUpdate ? 'nullable' : 'required') . '|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+    }
+
+    private function handleUpload(Request $request): string
+    {
+        $fileName = time() . '.' . $request->file('gambar')->extension();
+        $request->file('gambar')->move(public_path('uploads'), $fileName);
+        return $fileName;
+    }
+
+    private function deleteOldImage(?string $fileName): void
+    {
+        $path = public_path('uploads/' . $fileName);
+        if ($fileName && File::exists($path)) {
+            File::delete($path);
+        }
     }
 }
