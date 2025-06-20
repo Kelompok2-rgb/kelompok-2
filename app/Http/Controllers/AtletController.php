@@ -30,18 +30,10 @@ class AtletController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|max:2048',
-            'prestasi' => 'nullable|string',
-            'club_id' => 'nullable',
-            
-        ]);
-
-        
+        $validated = $this->validateAtlet($request);
 
         if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('foto', 'public');
+            $validated['foto'] = $this->handleFotoUpload($request);
         }
 
         Atlet::create($validated);
@@ -60,21 +52,11 @@ class AtletController extends Controller
     {
         $atlet = Atlet::findOrFail($id);
 
-        $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|max:2048',
-            'prestasi' => 'nullable|string',
-            'club_id' => 'nullable',
-            
-        ]);
-
-     
+        $validated = $this->validateAtlet($request);
 
         if ($request->hasFile('foto')) {
-            if ($atlet->foto && Storage::disk('public')->exists($atlet->foto)) {
-                Storage::disk('public')->delete($atlet->foto);
-            }
-            $validated['foto'] = $request->file('foto')->store('foto', 'public');
+            $this->deleteOldFoto($atlet->foto);
+            $validated['foto'] = $this->handleFotoUpload($request);
         }
 
         $atlet->update($validated);
@@ -86,12 +68,34 @@ class AtletController extends Controller
     {
         $atlet = Atlet::findOrFail($id);
 
-        if ($atlet->foto && Storage::disk('public')->exists($atlet->foto)) {
-            Storage::disk('public')->delete($atlet->foto);
-        }
+        $this->deleteOldFoto($atlet->foto);
 
         $atlet->delete();
 
         return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil dihapus');
+    }
+
+    // ===== Helper Methods =====
+
+    private function validateAtlet(Request $request): array
+    {
+        return $request->validate([
+            'nama' => 'required|string|max:255',
+            'foto' => 'nullable|image|max:2048',
+            'prestasi' => 'nullable|string',
+            'club_id' => 'nullable',
+        ]);
+    }
+
+    private function handleFotoUpload(Request $request): string
+    {
+        return $request->file('foto')->store('foto', 'public');
+    }
+
+    private function deleteOldFoto(?string $path): void
+    {
+        if ($path && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
     }
 }

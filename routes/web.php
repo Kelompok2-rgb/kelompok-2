@@ -126,10 +126,27 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         // Output Atlet
         Route::get('/atlet', [OutputController::class, 'output_atlet'])->name('atlet');
         Route::get('/atlet/{id}/cetak-nomor', [OutputController::class, 'cetak_nomor_peserta'])->name('nomorpeserta');
+        Route::get('/atlet/export/excel', [OutputController::class, 'exportAtletExcel'])->name('atlet.excel');
+        Route::get('/atlet/export/pdf', [OutputController::class, 'exportAtletPDF'])->name('atlet.pdf');
 
         // Output Hasil Pertandingan
         Route::get('/hasil-pertandingan', [OutputController::class, 'output_hasilpertandingan'])->name('hasilpertandingan');
         Route::get('/hasil-pertandingan/{id}/cetak-pdf', [OutputController::class, 'cetakHasilPDF'])->name('hasilpertandingan.pdf');
         Route::get('/hasil-pertandingan/{id}/export-excel', [OutputController::class, 'exportHasilExcel'])->name('hasilpertandingan.excel');
+
+        // Output Klub
+        Route::get('/club', [OutputController::class, 'output_club'])->name('club');
+        Route::get('/club/export/excel', [OutputController::class, 'exportClubExcel'])->name('club.excel');
+        Route::get('/club/export/pdf', [OutputController::class, 'exportClubPDF'])->name('club.pdf');
+
+        // Output Juri
+        Route::get('/juri', [OutputController::class, 'output_juri'])->name('juri');
+        Route::get('/juri/export/excel', [OutputController::class, 'exportJuriExcel'])->name('juri.excel');
+        Route::get('/juri/export/pdf', [OutputController::class, 'exportJuriPDF'])->name('juri.pdf');
+
+        // ===== Penyelenggara Event =====
+        Route::get('/penyelenggara', [OutputController::class, 'output_penyelenggara'])->name('penyelenggara');
+        Route::get('/penyelenggara/export/excel', [OutputController::class, 'exportPenyelenggaraExcel'])->name('penyelenggara.excel');
+        Route::get('/penyelenggara/export/pdf', [OutputController::class, 'exportPenyelenggaraPDF'])->name('penyelenggara.pdf');
     });
 });
