@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Data Anggota</title>
-    <style>
+    <title>Data Atlet</title>
+     <style>
         body {
             font-family: sans-serif;
             font-size: 12px;
@@ -28,27 +27,31 @@
     </style>
 </head>
 <body>
-    <h2>Data Anggota</h2>
+    <h2>Data Atlet</h2>
     <table>
         <thead>
             <tr>
                 <th>No</th>
+                <th>Foto</th>
                 <th>Nama</th>
                 <th>Klub</th>
-                <th>Tanggal Lahir</th>
-                <th>Peran</th>
-                <th>WA</th>
+                <th>Prestasi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($anggotas as $index => $anggota)
+            @foreach ($atlets as $atlet)
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $anggota->nama }}</td>
-                    <td>{{ $anggota->klub }}</td>
-                    <td>{{ $anggota->tgl_lahir }}</td>
-                    <td>{{ $anggota->peran }}</td>
-                    <td>{{ $anggota->kontak }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>
+                        @if($atlet->foto)
+                            <img src="{{ public_path('storage/' . $atlet->foto) }}" alt="Foto">
+                        @else
+                            Tidak Ada
+                        @endif
+                    </td>
+                    <td>{{ $atlet->nama }}</td>
+                    <td>{{ $atlet->club->nama ?? '-' }}</td>
+                    <td>{{ $atlet->prestasi }}</td>
                 </tr>
             @endforeach
         </tbody>
