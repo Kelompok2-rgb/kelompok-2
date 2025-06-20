@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Storage;
 class AnggotaController extends Controller
 {
     public function __construct()
-{
-    $this->middleware('auth');
-    $this->middleware('role:admin,klub,anggota');
-}
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin,klub,anggota');
+    }
 
     public function index()
     {
@@ -28,19 +28,9 @@ class AnggotaController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'klub' => 'nullable|string|max:255',
-            'tgl_lahir' => 'required|date',
-            'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
-            'kontak' => 'required|digits_between:8,15',
-            
-        ]);
+        $validated = $this->validateAnggota($request);
 
-        if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('foto', 'public');
-        }
+        $validated['foto'] = $this->handleFotoUpload($request);
 
         Anggota::create($validated);
 
@@ -57,21 +47,11 @@ class AnggotaController extends Controller
     {
         $anggota = Anggota::findOrFail($id);
 
-        $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'klub' => 'nullable|string|max:255',
-            'tgl_lahir' => 'required|date',
-            'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
-            'kontak' => 'required|digits_between:8,15',
-            
-        ]);
+        $validated = $this->validateAnggota($request);
 
         if ($request->hasFile('foto')) {
-            if ($anggota->foto && Storage::disk('public')->exists($anggota->foto)) {
-                Storage::disk('public')->delete($anggota->foto);
-            }
-            $validated['foto'] = $request->file('foto')->store('foto', 'public');
+            $this->deleteOldFoto($anggota->foto);
+            $validated['foto'] = $this->handleFotoUpload($request);
         }
 
         $anggota->update($validated);
@@ -83,12 +63,38 @@ class AnggotaController extends Controller
     {
         $anggota = Anggota::findOrFail($id);
 
-        if ($anggota->foto && Storage::disk('public')->exists($anggota->foto)) {
-            Storage::disk('public')->delete($anggota->foto);
-        }
+        $this->deleteOldFoto($anggota->foto);
 
         $anggota->delete();
 
         return redirect()->route('backend.anggota.index')->with('success', 'Anggota berhasil dihapus');
+    }
+
+    // ===== Helper Methods =====
+
+    private function validateAnggota(Request $request): array
+    {
+        return $request->validate([
+            'nama' => 'required|string|max:255',
+            'foto' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
+            'klub' => 'nullable|string|max:255',
+            'tgl_lahir' => 'required|date',
+            'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
+            'kontak' => 'required|digits_between:8,15',
+        ]);
+    }
+
+    private function handleFotoUpload(Request $request): ?string
+    {
+        return $request->hasFile('foto')
+            ? $request->file('foto')->store('foto', 'public')
+            : null;
+    }
+
+    private function deleteOldFoto(?string $path): void
+    {
+        if ($path && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
     }
 }

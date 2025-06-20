@@ -13,6 +13,7 @@ class ClubController extends Controller
         $this->middleware('auth');
         $this->middleware('role:admin,klub');
     }
+
     public function index()
     {
         $clubs = Club::all();
@@ -26,11 +27,7 @@ class ClubController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama' => 'required|string|min:2|max:255',
-            'lokasi' => 'required|string|min:2|max:255',
-            'deskripsi' => 'nullable|string|max:255',
-        ]);
+        $validated = $this->validateClub($request);
 
         Club::create($validated);
 
@@ -47,11 +44,7 @@ class ClubController extends Controller
     {
         $club = Club::findOrFail($id);
 
-        $validated = $request->validate([
-            'nama' => 'required|string|min:2|max:255',
-            'lokasi' => 'required|string|min:2|max:255',
-            'deskripsi' => 'nullable|string|max:255',
-        ]);
+        $validated = $this->validateClub($request);
 
         $club->update($validated);
 
@@ -64,5 +57,16 @@ class ClubController extends Controller
         $club->delete();
 
         return redirect()->route('backend.club.index')->with('success', 'Club berhasil dihapus');
+    }
+
+    // ===== Helper Methods =====
+
+    private function validateClub(Request $request): array
+    {
+        return $request->validate([
+            'nama' => 'required|string|min:2|max:255',
+            'lokasi' => 'required|string|min:2|max:255',
+            'deskripsi' => 'nullable|string|max:255',
+        ]);
     }
 }
