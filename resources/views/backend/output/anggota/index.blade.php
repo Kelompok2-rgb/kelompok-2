@@ -10,7 +10,7 @@
     <div class="mb-3 d-flex justify-content-between">
         <h5>Total Anggota: {{ $anggotas->count() }}</h5>
         <div>
-            <a href="{{ route('backend.output.anggota.excel') }}" class="btn btn-primary">
+            <a href="{{ route('backend.output.anggota.excel') }}" class="btn btn-success">
                 <i class="fas fa-file-excel"></i> Export Excel
             </a>
             <a href="{{ route('backend.output.anggota.pdf') }}" class="btn btn-danger">
