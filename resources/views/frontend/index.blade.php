@@ -569,7 +569,7 @@
                         <div class="row">
                             <div class="container py-5">
                                 <h2 class="text-center">
-                                   Pengumuman
+                                    Pengumuman
                                 </h2>
                                 <hr class="mb-5">
                                 <div class="text-center mb-4">
@@ -928,8 +928,12 @@
                                     <i class="bi bi-geo-alt"></i>
                                     <h3>Alamat</h3>
                                     <p>Komp Sinar Limau Manis D13, Kel. Koto Luar, Kec. Pauh.</p>
+                                    <a href="{{ url('/cek-rute') }}" class="btn btn-primary mt-2">
+                                        📍 Cek Rute ke Lokasi
+                                    </a>
                                 </div>
                             </div><!-- End Info Item -->
+
 
                             <div class="col-md-6">
                                 <div class="info-item d-flex flex-column justify-content-center align-items-center"

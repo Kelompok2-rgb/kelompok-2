@@ -20,12 +20,17 @@ use App\Http\Controllers\{
     PesertaPertandinganController,
     RekapLatihanController,
     DetailHasilPertandinganController,
-    OutputController
+    OutputController,
+    RuteController
 };
 
 // ==============================
 // FRONTEND
 // ==============================
+
+Route::get('/cek-rute', function () {
+    return view('frontend.cek-rute');
+});
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 
