@@ -154,4 +154,14 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         Route::get('/penyelenggara/export/excel', [OutputController::class, 'exportPenyelenggaraExcel'])->name('penyelenggara.excel');
         Route::get('/penyelenggara/export/pdf', [OutputController::class, 'exportPenyelenggaraPDF'])->name('penyelenggara.pdf');
     });
+
+    // ==============================
+    // Page Setting - Hero Section
+    // ==============================
+    Route::prefix('page-setting/hero')->name('hero.')->group(function () {
+        Route::get('/', [App\Http\Controllers\HeroSectionController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\HeroSectionController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\HeroSectionController::class, 'store'])->name('store');
+        Route::delete('/{id}', [App\Http\Controllers\HeroSectionController::class, 'destroy'])->name('destroy');
+    });
 });

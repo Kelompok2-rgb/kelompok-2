@@ -93,23 +93,29 @@
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section dark-background">
+       <section id="hero" class="hero section dark-background">
 
-            <img src="{{ asset('frontend/assets/images/porlempika.png') }}" alt="" data-aos="fade-in">
+    @if ($hero && $hero->image)
+        <img src="{{ asset($hero->image) }}" alt="Hero Image" data-aos="fade-in">
+    @endif
 
+    <div class="container d-flex flex-column align-items-center">
+        <h2 data-aos="fade-up" data-aos-delay="100">
+            {{ $hero->judul ?? 'Judul Belum Diatur' }}
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="200">
+            {{ $hero->deskripsi ?? 'Deskripsi belum tersedia.' }}
+        </p>
+        <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+            <a href="#about" class="btn-get-started">Get Started</a>
+            <a href="#about" class="glightbox btn-watch-video d-flex align-items-center">
+                <i class="bi bi-play-circle"></i><span>Watch Video</span>
+            </a>
+        </div>
+    </div>
 
-            <div class="container d-flex flex-column align-items-center">
-                <h2 data-aos="fade-up" data-aos-delay="100">Berbeda. Bersatu. Berjaya.</h2>
-                <p data-aos="fade-up" data-aos-delay="200">Sistem Informasi Pengelolaan Persatuan Lempar Pisau & Kapak
-                    Kota Padang</p>
-                <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#about" class="btn-get-started">Get Started</a>
-                    <a href="#" class="glightbox btn-watch-video d-flex align-items-center"><i
-                            class="bi bi-play-circle"></i><span>Watch Video</span></a>
-                </div>
-            </div>
+</section><!-- /Hero Section -->
 
-        </section><!-- /Hero Section -->
 
 
 
