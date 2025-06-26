@@ -12,6 +12,8 @@ use App\Models\Kategori_pertandingan;
 use App\Models\Pengumuman;
 use Illuminate\Support\Facades\View;
 use App\Models\HeroSection;
+use App\Models\AboutSection;
+
 
 
 class FrontendController extends Controller
@@ -35,6 +37,7 @@ class FrontendController extends Controller
    public function index()
 {
     $hero = HeroSection::latest()->first();
+    $about = AboutSection::latest()->first();
     $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->get();
     $kategoripertandingans = Kategori_pertandingan::all();
     $galeris = Galeri::latest()->get();

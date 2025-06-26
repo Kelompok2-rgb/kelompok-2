@@ -273,7 +273,7 @@
 
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('backend.about.index') }}">
                                 <i class="bx bx-info-circle"></i> About Section
                             </a>
                         </li>

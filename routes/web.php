@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AuthController,
+    AboutSectionController,
     ClubController,
     JuriController,
     AtletController,
@@ -21,7 +22,7 @@ use App\Http\Controllers\{
     RekapLatihanController,
     DetailHasilPertandinganController,
     OutputController,
-    RuteController
+    HeroSectionController
 };
 
 // ==============================
@@ -158,10 +159,23 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     // ==============================
     // Page Setting - Hero Section
     // ==============================
-    Route::prefix('page-setting/hero')->name('hero.')->group(function () {
-        Route::get('/', [App\Http\Controllers\HeroSectionController::class, 'index'])->name('index');
-        Route::get('/create', [App\Http\Controllers\HeroSectionController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\HeroSectionController::class, 'store'])->name('store');
-        Route::delete('/{id}', [App\Http\Controllers\HeroSectionController::class, 'destroy'])->name('destroy');
-    });
+  Route::prefix('page-setting/hero')->name('hero.')->group(function () {
+    Route::get('/', [HeroSectionController::class, 'index'])->name('index');
+    Route::get('/create', [HeroSectionController::class, 'create'])->name('create');
+    Route::post('/store', [HeroSectionController::class, 'store'])->name('store');
+    Route::delete('/{id}', [HeroSectionController::class, 'destroy'])->name('destroy');
+});
+
+
+
+    // ==============================
+    // Page Setting - About Section
+    // ==============================
+    Route::prefix('page-setting/about')->name('about.')->group(function () {
+    Route::get('/', [AboutSectionController::class, 'index'])->name('index');
+    Route::get('/create', [AboutSectionController::class, 'create'])->name('create');
+    Route::post('/store', [AboutSectionController::class, 'store'])->name('store');
+    Route::delete('/{id}', [AboutSectionController::class, 'destroy'])->name('destroy');
+});
+
 });

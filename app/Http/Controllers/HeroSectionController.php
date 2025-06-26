@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class HeroSectionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin');
+    }
     // Tampilkan semua data hero section
     public function index()
     {
