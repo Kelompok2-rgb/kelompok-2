@@ -11,6 +11,10 @@ use App\Models\Juri;
 use App\Models\Kategori_pertandingan;
 use App\Models\Pengumuman;
 use Illuminate\Support\Facades\View;
+use App\Models\HeroSection;
+use App\Models\AboutSection;
+
+
 
 class FrontendController extends Controller
 {
@@ -30,20 +34,25 @@ class FrontendController extends Controller
     /**
      * Tampilkan halaman utama frontend beserta data langsung tanpa AJAX.
      */
-    public function index()
-    {
-        $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->get();
-        $kategoripertandingans = Kategori_pertandingan::all();
-        $galeris = Galeri::latest()->get();
-        $pengumumans = Pengumuman::latest()->get();
+   public function index()
+{
+    $hero = HeroSection::latest()->first();
+    $about = AboutSection::latest()->first();
+    $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->get();
+    $kategoripertandingans = Kategori_pertandingan::all();
+    $galeris = Galeri::latest()->get();
+    $pengumumans = Pengumuman::latest()->get();
 
-        return view('frontend.index', compact(
-            'jadwalpertandingans',
-            'kategoripertandingans',
-            'galeris',
-            'pengumumans'
-        ));
-    }
+    return view('frontend.index', compact(
+        'hero',
+        'about',
+        'jadwalpertandingans',
+        'kategoripertandingans',
+        'galeris',
+        'pengumumans'
+    ));
+}
+
 
     // ============================
     // OPSIONAL: AJAX Tab Content

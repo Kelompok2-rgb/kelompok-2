@@ -245,16 +245,53 @@
                                 Cetak Hasil Pertandingan</a></li>
                         <li><a href="{{ route('backend.output.club') }}"><i class="bx bx-building-house"></i>
                                 Cetak Data Klub</a></li>
-                                <li><a href="{{ route('backend.output.juri') }}"><i class="bx bx-id-card"></i>
+                        <li><a href="{{ route('backend.output.juri') }}"><i class="bx bx-id-card"></i>
                                 Cetak Data Juri</a></li>
-                                 <li><a href="{{ route('backend.output.penyelenggara') }}"><i class='bx bx-briefcase'></i>
+                        <li><a href="{{ route('backend.output.penyelenggara') }}"><i class='bx bx-briefcase'></i>
                                 Cetak Data Penyelenggara Event</a></li>
-
                     </ul>
-
                 </li>
             @endif
         @endauth
+
+        @auth
+            @php
+                $canAccessPageSetting = Auth::user()->role === 'admin';
+            @endphp
+
+            @if ($canAccessPageSetting)
+                <li class="has-submenu">
+                    <a>
+                        <div class="parent-icon"><i class='bx bx-cog'></i></div>
+                        <div class="menu-title">Page-Setting</div>
+                    </a>
+                    <ul class="ps-3">
+                        <li>
+                            <a href="{{ route('backend.hero.index') }}">
+                                <i class="bx bx-photo-album"></i> Hero Section
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="{{ route('backend.about.index') }}">
+                                <i class="bx bx-info-circle"></i> About Section
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="bx bx-list-check"></i> Rules Section
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="bx bx-group"></i> Client Logos
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+        @endauth
+
 
     </ul>
     <!--end navigation-->

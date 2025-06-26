@@ -95,68 +95,73 @@
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
 
-            <img src="{{ asset('frontend/assets/images/porlempika.png') }}" alt="" data-aos="fade-in">
+    {{-- Tampilkan gambar jika ada --}}
+    @if (!empty($hero?->image))
+        <img src="{{ asset($hero->image) }}" alt="Hero Image" data-aos="fade-in">
+    @endif
+
+    <div class="container d-flex flex-column align-items-center text-center">
+        <h2 data-aos="fade-up" data-aos-delay="100">
+            {{ $hero->judul ?? 'Judul Belum Diatur' }}
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="200">
+            {{ $hero->deskripsi ?? 'Deskripsi belum tersedia.' }}
+        </p>
+        <div class="d-flex mt-4 justify-content-center" data-aos="fade-up" data-aos-delay="300">
+            <a href="#about" class="btn-get-started me-2">Get Started</a>
+            <a href="#about" class="glightbox btn-watch-video d-flex align-items-center">
+                <i class="bi bi-play-circle me-2"></i><span>Watch Video</span>
+            </a>
+        </div>
+    </div>
+
+</section>
 
 
-            <div class="container d-flex flex-column align-items-center">
-                <h2 data-aos="fade-up" data-aos-delay="100">Berbeda. Bersatu. Berjaya.</h2>
-                <p data-aos="fade-up" data-aos-delay="200">Sistem Informasi Pengelolaan Persatuan Lempar Pisau & Kapak
-                    Kota Padang</p>
-                <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#about" class="btn-get-started">Get Started</a>
-                    <a href="#" class="glightbox btn-watch-video d-flex align-items-center"><i
-                            class="bi bi-play-circle"></i><span>Watch Video</span></a>
-                </div>
-            </div>
-
-        </section><!-- /Hero Section -->
 
 
 
         <!-- About Section -->
-        <section id="about" class="about section">
+   @if(isset($about))
+    <section id="about" class="about section">
+        <div class="container">
+            <div class="row gy-4">
+                {{-- Kolom kiri --}}
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <h1>{{ $about->judul ?? 'Judul belum tersedia' }}</h1>
 
-            <div class="container">
+                    {{-- Gambar pertama --}}
+                    @if (!empty($about->image))
+                        <img src="{{ asset($about->image) }}" class="img-fluid rounded-4 mb-4" alt="Gambar About Kiri">
+                    @endif
 
-                <div class="row gy-4">
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <h1>Porlempika</h1>
-                        <img src="{{ asset('frontend/assets/images/thumbnail.png') }}" class="img-fluid rounded-4 mb-4"
-                            alt="">
-                        <p>Porlempika terus berupaya mempopulerkan lempar pisau dan kapak sebagai olahraga yang aman,
-                            kompetitif, dan menghibur. Dengan slogan "Berbeda, Bersatu, Berjaya!", federasi ini
-                            mendorong kolaborasi antar-komunitas dan atlet dari berbagai daerah. Melalui kejuaraan
-                            nasional dan pelatihan, Porlempika berkomitmen untuk meningkatkan prestasi atlet Indonesia
-                            di kancah internasional sekaligus melestarikan olahraga yang unik ini.</p>
-
-                    </div>
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
-                        <div class="content ps-0 ps-lg-5">
-
-
-                            <p>
-                                Porlempika (Perkumpulan Olahraga Lempar Pisau dan Kapak Indonesia) adalah organisasi
-                                resmi yang mewadahi olahraga lempar pisau dan kapak di Indonesia. Federasi ini dibentuk
-                                pada tahun 2017 sebagai hasil pengembangan dari komunitas D'Lempar Pisau Indonesia, yang
-                                awalnya digagas oleh mahasiswa Seni Rupa ITB pada akhir 1980-an. Porlempika bertujuan
-                                untuk memajukan olahraga ini secara profesional, termasuk mengatur regulasi,
-                                mengoordinasikan kegiatan, dan memperjuangkan pengakuan dari Komite Olahraga Nasional
-                                Indonesia (KONI). Saat ini, Porlempika memiliki jaringan luas dengan 13 Pengurus Daerah,
-                                27 Pengurus Cabang, dan 37 klub di seluruh Indonesia.
-                            </p>
-
-                            <div class="position-relative mt-4">
-                                <img src="{{ asset('frontend/assets/images/porlempika.png') }}"
-                                    class="img-fluid rounded-4" alt="">
-                                <a href="#" class="glightbox pulsating-play-btn"></a>
-                            </div>
-                        </div>
-                    </div>
+                    {{-- Deskripsi 1 --}}
+                    <p>{{ $about->deskripsi_singkat ?? 'Deskripsi singkat belum tersedia' }}</p>
                 </div>
 
-            </div>
+                {{-- Kolom kanan --}}
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+                    <div class="content ps-0 ps-lg-5">
+                        {{-- Deskripsi 2 --}}
+                        <p>{{ $about->deskripsi_lengkap ?? 'Deskripsi lengkap belum tersedia' }}</p>
 
-        </section><!-- /About Section -->
+                        {{-- Gambar 2 + tombol video --}}
+                        @if (!empty($about->second_image))
+                            <div class="position-relative mt-4">
+                                <img src="{{ asset($about->second_image) }}" class="img-fluid rounded-4" alt="Gambar About Kanan">
+                                @if (!empty($about->video_link))
+                                    <a href="{{ $about->video_link }}" class="glightbox pulsating-play-btn" target="_blank"></a>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endif
+
+
 
         <!-- Stats Section -->
         <section id="stats" class="stats section light-background">

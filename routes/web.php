@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AuthController,
+    AboutSectionController,
     ClubController,
     JuriController,
     AtletController,
@@ -21,7 +22,7 @@ use App\Http\Controllers\{
     RekapLatihanController,
     DetailHasilPertandinganController,
     OutputController,
-    RuteController
+    HeroSectionController
 };
 
 // ==============================
@@ -154,4 +155,27 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
         Route::get('/penyelenggara/export/excel', [OutputController::class, 'exportPenyelenggaraExcel'])->name('penyelenggara.excel');
         Route::get('/penyelenggara/export/pdf', [OutputController::class, 'exportPenyelenggaraPDF'])->name('penyelenggara.pdf');
     });
+
+    // ==============================
+    // Page Setting - Hero Section
+    // ==============================
+  Route::prefix('page-setting/hero')->name('hero.')->group(function () {
+    Route::get('/', [HeroSectionController::class, 'index'])->name('index');
+    Route::get('/create', [HeroSectionController::class, 'create'])->name('create');
+    Route::post('/store', [HeroSectionController::class, 'store'])->name('store');
+    Route::delete('/{id}', [HeroSectionController::class, 'destroy'])->name('destroy');
+});
+
+
+
+    // ==============================
+    // Page Setting - About Section
+    // ==============================
+    Route::prefix('page-setting/about')->name('about.')->group(function () {
+    Route::get('/', [AboutSectionController::class, 'index'])->name('index');
+    Route::get('/create', [AboutSectionController::class, 'create'])->name('create');
+    Route::post('/store', [AboutSectionController::class, 'store'])->name('store');
+    Route::delete('/{id}', [AboutSectionController::class, 'destroy'])->name('destroy');
+});
+
 });
