@@ -8,26 +8,26 @@ use Illuminate\Support\Facades\Storage;
 
 class HeroSectionController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('role:admin');
     }
-    // Tampilkan semua data hero section
+
+    // Tampilkan semua hero
     public function index()
     {
         $heros = HeroSection::all();
         return view('backend.page_setting.hero.index', compact('heros'));
     }
 
-    // Tampilkan form tambah hero section
+    // Tampilkan form tambah hero
     public function create()
     {
         return view('backend.page_setting.hero.create');
     }
 
-    // Simpan hero section (dengan logika: hapus data lama)
+    // Simpan data baru, hapus lama jika ada
     public function store(Request $request)
     {
         $request->validate([
@@ -39,18 +39,14 @@ class HeroSectionController extends Controller
         // Hapus data lama
         $oldData = HeroSection::first();
         if ($oldData) {
-            // Hapus file gambar dari storage jika ada
             if ($oldData->image && Storage::disk('public')->exists(str_replace('storage/', '', $oldData->image))) {
                 Storage::disk('public')->delete(str_replace('storage/', '', $oldData->image));
             }
-
-            HeroSection::truncate(); // kosongkan tabel
+            HeroSection::truncate();
         }
 
-        // Upload gambar baru
-        $path = $request->file('image')->store('uploads', 'public');
+        $path = $request->file('image')->store('uploads/heros', 'public');
 
-        // Simpan ke database
         HeroSection::create([
             'image' => 'storage/' . $path,
             'judul' => $request->judul,
@@ -60,12 +56,46 @@ class HeroSectionController extends Controller
         return redirect()->route('backend.hero.index')->with('success', 'Hero Section berhasil ditambahkan!');
     }
 
-    // Hapus hero section secara manual
+    // Tampilkan form edit
+    public function edit($id)
+    {
+        $hero = HeroSection::findOrFail($id);
+        return view('backend.page_setting.hero.edit', compact('hero'));
+    }
+
+    // Update data hero
+    public function update(Request $request, $id)
+    {
+        $hero = HeroSection::findOrFail($id);
+
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        // Jika ada file baru diupload, ganti
+        if ($request->hasFile('image')) {
+            if ($hero->image && Storage::disk('public')->exists(str_replace('storage/', '', $hero->image))) {
+                Storage::disk('public')->delete(str_replace('storage/', '', $hero->image));
+            }
+
+            $path = $request->file('image')->store('uploads/heros', 'public');
+            $hero->image = 'storage/' . $path;
+        }
+
+        $hero->judul = $validated['judul'];
+        $hero->deskripsi = $validated['deskripsi'];
+        $hero->save();
+
+        return redirect()->route('backend.hero.index')->with('success', 'Hero Section berhasil diperbarui!');
+    }
+
+    // Hapus
     public function destroy($id)
     {
         $hero = HeroSection::findOrFail($id);
 
-        // Hapus file gambar
         if ($hero->image && Storage::disk('public')->exists(str_replace('storage/', '', $hero->image))) {
             Storage::disk('public')->delete(str_replace('storage/', '', $hero->image));
         }

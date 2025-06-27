@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anggota;
-use App\Models\Atlet;
 use App\Models\Club;
-use App\Models\Galeri;
-use App\Models\Jadwal_Pertandingan;
 use App\Models\Juri;
-use App\Models\Kategori_pertandingan;
+use App\Models\Atlet;
+use App\Models\Galeri;
+use App\Models\Anggota;
+use App\Models\ClientLogo;
 use App\Models\Pengumuman;
-use Illuminate\Support\Facades\View;
 use App\Models\HeroSection;
+use App\Models\RuleSection;
 use App\Models\AboutSection;
+use App\Models\Jadwal_Pertandingan;
+use Illuminate\Support\Facades\View;
+use App\Models\Kategori_pertandingan;
 
 
 
@@ -42,6 +44,8 @@ class FrontendController extends Controller
     $kategoripertandingans = Kategori_pertandingan::all();
     $galeris = Galeri::latest()->get();
     $pengumumans = Pengumuman::latest()->get();
+    $rules = RuleSection::all();
+    $clientlogos = ClientLogo::latest()->get();
 
     return view('frontend.index', compact(
         'hero',
@@ -49,7 +53,9 @@ class FrontendController extends Controller
         'jadwalpertandingans',
         'kategoripertandingans',
         'galeris',
-        'pengumumans'
+        'pengumumans',
+          'rules',
+          'clientlogos'
     ));
 }
 

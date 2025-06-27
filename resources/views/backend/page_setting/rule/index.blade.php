@@ -1,6 +1,6 @@
 @extends('backend.layouts.main')
-@section('title', 'Halaman Hero Section')
-@section('navHero', 'active') {{-- Sesuaikan dengan nama nav di sidebar jika ada --}}
+@section('title', 'Halaman Rule Section')
+@section('navRule', 'active') {{-- Sesuaikan dengan nama nav di sidebar jika ada --}}
 
 @section('content')
     <div class="container-fluid mt-4">
@@ -9,9 +9,9 @@
                 <div class="card shadow border-0">
                     <div
                         class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0"><i class="fas fa-photo-video me-2"></i> Hero Section</h4>
-                        <a href="{{ route('backend.hero.create') }}" class="btn btn-sm btn-light">
-                            <i class="fas fa-plus me-1"></i> Tambah Hero
+                        <h4 class="mb-0"><i class="fas fa-gavel me-2"></i> Rule Section</h4>
+                        <a href="{{ route('backend.rule.create') }}" class="btn btn-sm btn-light">
+                            <i class="fas fa-plus me-1"></i> Tambah Rule
                         </a>
                     </div>
 
@@ -36,39 +36,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($heros as $hero)
+                                    @foreach ($rules as $rule)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ asset($hero->image) }}" alt="Hero Image" width="100"
+                                                <img src="{{ asset($rule->gambar) }}" alt="Rule Image" width="100"
                                                     class="rounded shadow-sm">
                                             </td>
-                                            <td>{{ $hero->judul }}</td>
-                                            <td class="text-start">{{ $hero->deskripsi }}</td>
+                                            <td>{{ $rule->judul }}</td>
+                                            <td class="text-start">{{ Str::limit($rule->deskripsi, 150) }}</td>
                                             <td>
                                                 <div class="d-inline-flex align-items-center gap-1">
-                                                    <a href="{{ route('backend.hero.edit', $hero->id) }}"
-                                                        class="btn btn-warning btn-sm">
-                                                        <i class="fas fa-edit"></i> Edit
-                                                    </a>
-                                                    <form action="{{ route('backend.hero.destroy', $hero->id) }}"
-                                                        method="POST"
-                                                        onsubmit="return confirm('Yakin ingin menghapus Hero ini?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">
-                                                            <i class="fas fa-trash"></i> Hapus
-                                                        </button>
-                                                    </form>
+                                                <a href="{{ route('backend.rule.edit', $rule->id) }}" class="btn btn-warning btn-sm me-1 mb-1">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <form action="{{ route('backend.rule.destroy', $rule->id) }}" method="POST"
+                                                    onsubmit="return confirm('Yakin ingin menghapus Rule ini?');"
+                                                    class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </button>
+                                                </form>
                                                 </div>
-
                                             </td>
                                         </tr>
                                     @endforeach
 
-                                    @if ($heros->isEmpty())
+                                    @if ($rules->isEmpty())
                                         <tr>
-                                            <td colspan="5">Belum ada data Hero Section</td>
+                                            <td colspan="5">Belum ada data Rule Section</td>
                                         </tr>
                                     @endif
                                 </tbody>
@@ -83,14 +81,11 @@
 
     <div class="container-fluid mt-4">
         <div class="row justify-content-center">
-
-            <hr>
             <div class="alert alert-info" role="alert">
                 <i class="fas fa-info-circle me-1"></i>
-                Halaman ini digunakan untuk mengelola tampilan bagian atas (hero section) pada halaman utama website.
-                Hanya satu data yang ditampilkan, dan data lama akan otomatis terhapus jika Anda menambahkan data baru.
+                Halaman ini digunakan untuk mengelola standar kompetisi (rule section) yang akan ditampilkan di halaman
+                utama website.
             </div>
-
         </div>
     </div>
 @endsection

@@ -65,15 +65,20 @@
                                                 @endif
                                             </td>
                                             <td>
+                                                <div class="d-inline-flex align-items-center gap-1">
+                                                <a href="{{ route('backend.about.edit', $about->id) }}" class="btn btn-warning btn-sm me-1 mb-1">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
                                                 <form action="{{ route('backend.about.destroy', $about->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger">
+                                                    <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash"></i> Hapus
                                                     </button>
                                                 </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty

@@ -65,20 +65,7 @@
     <script src="{{ asset('dashboard/assets/js/app.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/index.js') }}"></script>
 
-    <!-- Inline Script -->
-    <script>
-        $(document).ready(function() {
-            $('#Transaction-History').DataTable({
-                lengthMenu: [
-                    [6, 10, 20, -1],
-                    [6, 10, 20, 'Todos']
-                ]
-            });
-
-            new PerfectScrollbar('.product-list');
-            new PerfectScrollbar('.customers-list');
-        });
-    </script>
+  
    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>

@@ -49,6 +49,27 @@
         }
     </style>
 
+    <style>
+        .img-text-wrapper {
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .img-text-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .img-text-wrapper p {
+            max-width: 100%;
+            text-align: justify;
+            word-break: break-word;
+            margin-top: 10px;
+        }
+    </style>
+
+
 
 </head>
 
@@ -69,6 +90,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#rules">Rules</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     <li><a href="#team">Team</a></li>
                     <li class="dropdown"><a href="#"><span>Menu</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -79,7 +101,7 @@
                             <li><a href="#fitur">Pengumuman</a></li>
                         </ul>
                     </li>
-                    <li><a href="#contact">Contact</a></li>
+
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -95,72 +117,75 @@
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
 
-    {{-- Tampilkan gambar jika ada --}}
-    @if (!empty($hero?->image))
-        <img src="{{ asset($hero->image) }}" alt="Hero Image" data-aos="fade-in">
-    @endif
+            {{-- Tampilkan gambar jika ada --}}
+            @if (!empty($hero?->image))
+                <img src="{{ asset($hero->image) }}" alt="Hero Image" data-aos="fade-in">
+            @endif
 
-    <div class="container d-flex flex-column align-items-center text-center">
-        <h2 data-aos="fade-up" data-aos-delay="100">
-            {{ $hero->judul ?? 'Judul Belum Diatur' }}
-        </h2>
-        <p data-aos="fade-up" data-aos-delay="200">
-            {{ $hero->deskripsi ?? 'Deskripsi belum tersedia.' }}
-        </p>
-        <div class="d-flex mt-4 justify-content-center" data-aos="fade-up" data-aos-delay="300">
-            <a href="#about" class="btn-get-started me-2">Get Started</a>
-            <a href="#about" class="glightbox btn-watch-video d-flex align-items-center">
-                <i class="bi bi-play-circle me-2"></i><span>Watch Video</span>
-            </a>
-        </div>
-    </div>
+            <div class="container d-flex flex-column align-items-center text-center">
+                <h2 data-aos="fade-up" data-aos-delay="100">
+                    {{ $hero->judul ?? 'Judul Belum Diatur' }}
+                </h2>
+                <p data-aos="fade-up" data-aos-delay="200">
+                    {{ $hero->deskripsi ?? 'Deskripsi belum tersedia.' }}
+                </p>
+                <div class="d-flex mt-4 justify-content-center" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#about" class="btn-get-started me-2">Get Started</a>
+                    <a href="#about" class="glightbox btn-watch-video d-flex align-items-center">
+                        <i class="bi bi-play-circle me-2"></i><span>Watch Video</span>
+                    </a>
+                </div>
+            </div>
 
-</section>
-
-
-
+        </section>
 
 
         <!-- About Section -->
-   @if(isset($about))
-    <section id="about" class="about section">
-        <div class="container">
-            <div class="row gy-4">
-                {{-- Kolom kiri --}}
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <h1>{{ $about->judul ?? 'Judul belum tersedia' }}</h1>
+        @if (isset($about))
+            <section id="about" class="about section">
+                <div class="container">
+                    <div class="row gy-4 align-items-start">
+                        {{-- Kolom Kiri --}}
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                            <h2 class="mb-3">{{ $about->judul ?? 'Judul belum tersedia' }}</h2>
 
-                    {{-- Gambar pertama --}}
-                    @if (!empty($about->image))
-                        <img src="{{ asset($about->image) }}" class="img-fluid rounded-4 mb-4" alt="Gambar About Kiri">
-                    @endif
+                            <div class="img-text-wrapper">
+                                @if (!empty($about->image))
+                                    <img src="{{ asset($about->image) }}" alt="Gambar About Kiri"
+                                        class="img-fluid rounded-4 mb-3">
+                                @endif
 
-                    {{-- Deskripsi 1 --}}
-                    <p>{{ $about->deskripsi_singkat ?? 'Deskripsi singkat belum tersedia' }}</p>
-                </div>
-
-                {{-- Kolom kanan --}}
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
-                    <div class="content ps-0 ps-lg-5">
-                        {{-- Deskripsi 2 --}}
-                        <p>{{ $about->deskripsi_lengkap ?? 'Deskripsi lengkap belum tersedia' }}</p>
-
-                        {{-- Gambar 2 + tombol video --}}
-                        @if (!empty($about->second_image))
-                            <div class="position-relative mt-4">
-                                <img src="{{ asset($about->second_image) }}" class="img-fluid rounded-4" alt="Gambar About Kanan">
-                                @if (!empty($about->video_link))
-                                    <a href="{{ $about->video_link }}" class="glightbox pulsating-play-btn" target="_blank"></a>
+                                @if (!empty($about->deskripsi_singkat))
+                                    <p>{{ $about->deskripsi_singkat }}</p>
                                 @endif
                             </div>
-                        @endif
+                        </div>
+
+                        {{-- Kolom Kanan --}}
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+                            <div class="content ps-0 ps-lg-4">
+                                @if (!empty($about->deskripsi_lengkap))
+                                    <div class="mb-3">
+                                        <p style="text-align: justify;">{{ $about->deskripsi_lengkap }}</p>
+                                    </div>
+                                @endif
+
+                                @if (!empty($about->second_image))
+                                    <div class="position-relative">
+                                        <img src="{{ asset($about->second_image) }}" class="img-fluid rounded-4"
+                                            alt="Gambar About Kanan">
+                                        @if (!empty($about->video_link))
+                                            <a href="{{ $about->video_link }}" class="glightbox pulsating-play-btn"
+                                                target="_blank"></a>
+                                        @endif
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-@endif
-
+            </section>
+        @endif
 
 
         <!-- Stats Section -->
@@ -210,167 +235,69 @@
                 </div>
             </div>
         </section>
-
         <!-- /Stats Section -->
 
         <!-- Services Section -->
         <section id="rules" class="services section">
-
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Porlempika</h2>
-                <p>Standar Kompetisi<br></p>
-            </div><!-- End Section Title -->
+                <p>Standar Kompetisi</p>
+            </div>
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
                 <div class="row gy-5">
-
-                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="service-item text-center"> <!-- Tambah text-center supaya isi rata tengah -->
-                            <div class="img mb-3"> <!-- kasih margin bawah agar jarak -->
-                                <img src="{{ asset('frontend/assets/images/pisau.png') }}" class="img-fluid"
-                                    alt="">
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon mb-2">
-                                    <i class=""></i>
-                                    <!-- ukuran icon bisa diatur -->
+                    @foreach ($rules as $rule)
+                        <div class="col-xl-3 col-md-6" data-aos="zoom-in"
+                            data-aos-delay="{{ 200 + $loop->index * 100 }}">
+                            <div class="service-item text-center">
+                                <div class="img mb-3">
+                                    <img src="{{ asset($rule->gambar) }}" class="img-fluid"
+                                        alt="{{ $rule->judul }}">
                                 </div>
-                                <a href="#" class="stretched-link">
-                                    <h3>Pisau</h3>
-                                </a>
-                                <p style="text-align: justify;"> Dalam olahraga lempar pisau, standar internasional
-                                    mengatur bahwa panjang pisau yang digunakan berkisar antara 10 hingga 16 inci
-                                    (sekitar 25,4 hingga 40,6 cm), dengan berat antara 340 hingga 680 gram. Pisau harus
-                                    memiliki desain yang seimbang agar dapat dilempar dengan baik, dan biasanya dilempar
-                                    dengan memegang bagian gagangnya. Gaya lemparan harus konsisten dan akurat untuk
-                                    mencapai target dengan sudut yang tepat.</p>
+                                <div class="details position-relative">
+                                    <h3>{{ $rule->judul }}</h3>
+                                    {{-- Deskripsi tidak ditampilkan di sini --}}
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#detailModal{{ $rule->id }}">
+                                        Show Detail
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-
-                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="service-item text-center">
-                            <div class="img mb-3">
-                                <img src="{{ asset('frontend/assets/images/kapak.png') }}" class="img-fluid"
-                                    alt="">
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon mb-2">
-                                    <i class=""></i>
+                        <!-- Modal Detail -->
+                        <div class="modal fade" id="detailModal{{ $rule->id }}" tabindex="-1"
+                            aria-labelledby="modalLabel{{ $rule->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalLabel{{ $rule->id }}">
+                                            {{ $rule->judul }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-start">
+                                        <img src="{{ asset($rule->gambar) }}" class="img-fluid mb-3"
+                                            alt="{{ $rule->judul }}">
+                                        <p style="text-align: justify;">{!! nl2br(e($rule->deskripsi)) !!}</p>
+                                    </div>
                                 </div>
-                                <a href="#" class="stretched-link">
-                                    <h3>Kapak</h3>
-                                </a>
-                                <p style="text-align: justify;">Kapak yang digunakan dalam kompetisi memiliki panjang
-                                    gagang antara 13 hingga 17 inci (sekitar 33 hingga 43 cm) dan berat total antara 1,5
-                                    hingga 2,5 pon (sekitar 680 hingga 1.130 gram). Kepala kapak biasanya memiliki
-                                    panjang antara 5 hingga 7 inci dan tinggi antara 1,5 hingga 4 inci. Kapak harus
-                                    terbuat dari satu bagian logam yang utuh tanpa modifikasi tambahan, selain dari
-                                    penajaman bilahnya. Kapak ini dirancang agar seimbang dan stabil saat dilempar dari
-                                    jarak tertentu.</p>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-
-                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="service-item text-center">
-                            <div class="img mb-3">
-                                <img src="{{ asset('frontend/assets/images/jarak.png') }}" class="img-fluid"
-                                    alt="">
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon mb-2">
-                                    <i class=""></i>
-                                </div>
-                                <a href="#" class="stretched-link">
-                                    <h3>Jarak</h3>
-                                </a>
-                                <p style="text-align: justify;">Jarak lempar dalam olahraga ini disesuaikan dengan
-                                    jenis alat yang digunakan. Untuk pisau, jarak minimal yang digunakan adalah 4 meter,
-                                    dan bisa ditambah dalam kelipatan 3 meter untuk kategori lanjutan. Sementara itu,
-                                    untuk kapak, jarak standar antara garis lempar dan target adalah 12 kaki atau
-                                    sekitar 3,66 meter. Penentuan jarak ini penting untuk memastikan rotasi alat yang
-                                    tepat sebelum mengenai target.</p>
-                            </div>
+                    @if ($rules->isEmpty())
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Belum ada data Standar Kompetisi yang ditambahkan.</p>
                         </div>
-                    </div>
-
-
-                    <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="service-item text-center">
-                            <div class="img mb-3">
-                                <img src="{{ asset('frontend/assets/images/target.png') }}" class="img-fluid"
-                                    alt="">
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon mb-2">
-                                    <i class=""></i>
-                                </div>
-                                <a href="#" class="stretched-link">
-                                    <h3>Target</h3>
-                                </a>
-                                <p style="text-align: justify;">Target untuk lempar pisau umumnya memiliki diameter
-                                    sekitar 1 meter, dengan pusat target diletakkan pada ketinggian sekitar 1,25 meter
-                                    dari permukaan tanah. Sementara itu, target untuk lempar kapak memiliki diameter
-                                    sekitar 24 inci (61 cm), dengan pusat atau bullseye berada pada ketinggian 60 inci
-                                    (152,4 cm). Target dilengkapi dengan zona skor seperti lingkaran pusat (bullseye)
-                                    dan area tambahan seperti "killshots" untuk tingkat kesulitan yang lebih tinggi
-                                    dalam penilaian.</p>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    @endif
                 </div>
-
             </div>
+        </section>
 
-        </section><!-- /Services Section -->
 
-        <!-- Clients Section -->
-        <section id="clients" class="clients section light-background">
 
-            <div class="container" data-aos="fade-up">
-
-                <div class="row gy-4">
-
-                    <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" class="img-fluid"
-                            alt="">
-                    </div><!-- End Client Item -->
-
-                    <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="{{ asset('dashboard/assets/images/logokel2.jpg') }}" class="img-fluid"
-                            alt="">
-                    </div><!-- End Client Item -->
-
-                    <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="{{ asset('frontend/assets/images/Logo_pnp.png') }} " class="img-fluid"
-                            alt="">
-                    </div><!-- End Client Item -->
-
-                    <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="{{ asset('frontend/assets/images/Logo_satgaspnp.png') }} "class="img-fluid"
-                            alt="">
-                    </div><!-- End Client Item -->
-
-                    <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="{{ asset('frontend/assets/images/menwa.png') }}" class="img-fluid" alt="">
-                    </div><!-- End Client Item -->
-
-                    <div class="col-xl-2 col-md-3 col-6 client-logo">
-                        <img src="{{ asset('frontend/assets/images/koni.png') }}"class="img-fluid" alt="">
-                    </div><!-- End Client Item -->
-
-                </div>
-
-            </div>
-
-        </section><!-- /Clients Section -->
 
         <!-- Features Section -->
         <section id="fitur" class="features section">
@@ -417,7 +344,7 @@
 
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped text-center tableExportArea">
-                                        <thead class="table-dark">
+                                        <thead style="background-color: #fd7e14; color: rgb(255, 60, 0);">
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama Pertandingan</th>
@@ -471,7 +398,7 @@
 
                                 <table id="example"
                                     class="table table-bordered table-striped mt-3 text-center tableExportArea">
-                                    <thead class="table-dark">
+                                    <thead style="background-color: #fd7e14; color: rgb(255, 60, 0);">
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Kategori</th>
@@ -572,15 +499,12 @@
 
                     <div class="tab-pane fade" id="features-tab-4">
                         <div class="row">
-                            <div class="container py-5">
-                                <h2 class="text-center">
-                                    Pengumuman
-                                </h2>
-                                <hr class="mb-5">
+                            <div>
                                 <div class="text-center mb-4">
-                                    <h2>Galeri</h2>
+                                    <h2>Pengumuman</h2>
                                     <hr>
                                 </div>
+
 
                                 @if ($pengumumans->isEmpty())
                                     <div class="text-center">
@@ -673,6 +597,39 @@
 
             </div>
         </section>
+
+        <!-- Clients Section -->
+        <section id="clients" class="clients section light-background py-5">
+            <div class="container" data-aos="fade-up">
+                <div class="row gy-4 justify-content-center">
+
+                    @forelse ($clientlogos as $logo)
+                        <div class="col-xl-2 col-md-3 col-6 client-logo text-center">
+                            @php
+                                $imagePath = public_path($logo->logo);
+                                $imageUrl = asset($logo->logo);
+                                $fallbackUrl = asset('frontend/assets/images/default-logo.png');
+                            @endphp
+
+                            <img src="{{ file_exists($imagePath) ? $imageUrl : $fallbackUrl }}"
+                                class="img-fluid rounded shadow-sm" alt="Logo Mitra"
+                                style="max-height: 80px; object-fit: contain;">
+                        </div>
+                    @empty
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Belum ada logo mitra ditambahkan.</p>
+                        </div>
+                    @endforelse
+
+                </div>
+            </div>
+        </section>
+        <!-- /Clients Section -->
+
+
+
+
+        <div class="py-5"></div>
 
         <!-- Testimonials Section -->
         <section id="testimonials" class="testimonials section dark-background">
