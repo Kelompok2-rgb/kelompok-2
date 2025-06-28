@@ -613,7 +613,7 @@
 
                             <img src="{{ file_exists($imagePath) ? $imageUrl : $fallbackUrl }}"
                                 class="img-fluid rounded shadow-sm" alt="Logo Mitra"
-                                style="max-height: 80px; object-fit: contain;">
+                                style="max-height: 120px; object-fit: contain;">
                         </div>
                     @empty
                         <div class="col-12 text-center">
@@ -764,108 +764,46 @@
 
         </section><!-- /Testimonials Section -->
 
-
-        <section id="anggota">
-            @yield('content')
-        </section>
-
-
-        <!-- Services 2 Section -->
-        <section id="services-2" class="services-2 section light-background">
-
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>Porlempika</h2>
-                <p>Susunan organisasi</p>
-            </div><!-- End Section Title -->
-
+        <!-- Structure Section -->
+        <style>
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0.5rem 1rem rgb(0, 0, 0);
+                transition: all 0.3s ease;
+            }
+        </style>
+        <section id="structure" class="services-2 section light-background py-5">
             <div class="container">
-
-                <div class="row gy-4">
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <!-- Ganti icon dengan foto -->
-                            <img src="{{ asset('frontend/assets/images/zahadi.jpg') }}" alt="Foto Ketua"
-                                class="flex-shrink-0 rounded-circle me-3"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-
-                            <div>
-                                <h4 class="title">
-                                    <p>Ketua</p>
-                                </h4>
-                                <p class="description">
-                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                    atau hewan di sekitar tempat anda berlatih.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <!-- Ganti icon dengan foto -->
-                            <img src="{{ asset('frontend/assets/images/yara.jpg') }}" alt="Foto Ketua"
-                                class="flex-shrink-0 rounded-circle me-3"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-
-                            <div>
-                                <h4 class="title">
-                                    <p>Wakil Ketua</p>
-                                </h4>
-                                <p class="description">
-                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                    atau hewan di sekitar tempat anda berlatih.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <!-- Ganti icon dengan foto -->
-                            <img src="{{ asset('frontend/assets/images/vani.jpg') }}" alt="Foto Ketua"
-                                class="flex-shrink-0 rounded-circle me-3"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-
-                            <div>
-                                <h4 class="title">
-                                    <p>Sekretaris</p>
-                                </h4>
-                                <p class="description">
-                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                    atau hewan di sekitar tempat anda berlatih.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item d-flex position-relative h-100">
-                            <!-- Ganti icon dengan foto -->
-                            <img src="{{ asset('frontend/assets/images/dapi.jpg') }}" alt="Foto Ketua"
-                                class="flex-shrink-0 rounded-circle me-3"
-                                style="width: 100px; height: 100px; object-fit: cover;">
-
-                            <div>
-                                <h4 class="title">
-                                    <p>Bendahara</p>
-                                </h4>
-                                <p class="description">
-                                    Selalu waspada terhadap lingkungan sekitar anda, yakinkan tidak ada anak-anak
-                                    atau hewan di sekitar tempat anda berlatih.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-
+                <!-- Section Title -->
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Porlempika</h2>
+                    <p>Susunan Organisasi</p>
                 </div>
 
+                <div class="row gy-4">
+                    @forelse ($structures as $structure)
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="d-flex align-items-start shadow-sm p-3 rounded-4 bg-white h-100 hover-lift">
+                                <img src="{{ asset($structure->photo && file_exists(public_path($structure->photo)) ? $structure->photo : 'frontend/assets/images/default-profile.png') }}"
+                                    alt="Foto {{ $structure->position }}" class="rounded-circle me-3 flex-shrink-0"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+
+                                <div>
+                                    <h5 class="fw-bold mb-1">{{ $structure->name }}</h5>
+                                    <p class="text-primary mb-2" style="font-size: 0.95rem;">
+                                        {{ $structure->position }}</p>
+                                    <p class="text-muted small mb-0">{{ $structure->description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Belum ada data struktur organisasi ditambahkan.</p>
+                        </div>
+                    @endforelse
+                </div>
             </div>
-
-        </section><!-- /Services 2 Section -->
-
+        </section>
 
 
 
@@ -889,7 +827,7 @@
                                     data-aos="fade-up" data-aos-delay="200">
                                     <i class="bi bi-geo-alt"></i>
                                     <h3>Alamat</h3>
-                                    <p>Komp Sinar Limau Manis D13, Kel. Koto Luar, Kec. Pauh.</p>
+                                   <p>Alamat: {{ $contact->address ?? '-' }}</p>
                                     <a href="{{ url('/cek-rute') }}" class="btn btn-primary mt-2">
                                         📍 Cek Rute ke Lokasi
                                     </a>
@@ -902,7 +840,7 @@
                                     data-aos="fade-up" data-aos-delay="300">
                                     <i class="bi bi-telephone"></i>
                                     <h3>Admin</h3>
-                                    <p>082170657217</p>
+                                    <p>{{ $contact->phone ?? '-' }}</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -911,7 +849,7 @@
                                     data-aos="fade-up" data-aos-delay="400">
                                     <i class="bi bi-envelope"></i>
                                     <h3>Email Kami</h3>
-                                    <p>porlempikapadang@gmail.com</p>
+                                   <p>{{ $contact->email ?? '-' }}</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -1056,9 +994,9 @@
                         <span class="sitename">Porlempika</span>
                     </a>
                     <div class="footer-contact pt-3">
-                        <p> Komp Sinar Limau Manis D13, Kel. Koto Luar, Kec. Pauh.</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+682170657217</span></p>
-                        <p><strong>Email:</strong> <span>porlempikapadang@gmail.com</span></p>
+                        <p>{{ $contact->address ?? '-' }}</p>
+                        <p class="mt-3"><strong>Phone:</strong> <span>{{ $contact->phone ?? '-' }}</span></p>
+                        <p><strong>Email:</strong> <span>{{ $contact->email ?? '-' }}</span></p>
                     </div>
                     <div class="social-links d-flex mt-4">
                         <a href=""><i class="bi bi-twitter"></i></a>
@@ -1092,8 +1030,6 @@
                     <img src="{{ asset('dashboard/assets/images/logoporlempika.png') }}" alt="Logo porlempika"
                         class="img-fluid" style="max-width: 100px;">
                     <img src="{{ asset('frontend/assets/images/koni.png') }}" alt="Logo koni" class="img-fluid"
-                        style="max-width: 100px;">
-                    <img src="{{ asset('frontend/assets/images/Logo_pnp.png') }}" alt="Logo pnp" class="img-fluid"
                         style="max-width: 100px;">
 
                 </div>

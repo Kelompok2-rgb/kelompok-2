@@ -151,6 +151,8 @@
                         <li><a href="{{ route('backend.about.index') }}"><i class="bx bx-info-circle"></i> About Section</a></li>
                         <li><a href="{{ route('backend.rule.index') }}"><i class="bx bx-list-check"></i> Rules Section</a></li>
                         <li><a href="{{ route('backend.clientlogos.index') }}"><i class="bx bx-group"></i> Client Logos</a></li>
+                        <li><a href="{{ route('backend.organization.index') }}"><i class="bx bx-group"></i> Structure Organitation</a></li>
+                        <li><a href="{{ route('backend.contact.index') }}"><i class="bx bx-group"></i> Contact</a></li>
                     </ul>
                 </li>
             @endif

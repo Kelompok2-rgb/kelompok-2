@@ -24,7 +24,9 @@ use App\Http\Controllers\{
     OutputController,
     HeroSectionController,
     RuleSectionController,
-    ClientLogoController
+    ClientLogoController,
+    OrganizationalStructureController,
+    ContactController
 };
 
 // ==============================
@@ -204,6 +206,27 @@ Route::prefix('page-setting/clientlogo')->name('clientlogos.')->group(function (
     Route::get('/{id}/edit', [ClientLogoController::class, 'edit'])->name('edit');
     Route::put('/{id}', [ClientLogoController::class, 'update'])->name('update');
     Route::delete('/{id}', [ClientLogoController::class, 'destroy'])->name('destroy');
+});
+
+
+// Page Setting - organization Section
+// ==============================
+Route::prefix('page-setting/organization')->name('organization.')->group(function () {
+    Route::get('/', [OrganizationalStructureController::class, 'index'])->name('index');
+    Route::get('/create', [OrganizationalStructureController::class, 'create'])->name('create');
+    Route::post('/store', [OrganizationalStructureController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [OrganizationalStructureController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [OrganizationalStructureController::class, 'update'])->name('update');
+    Route::delete('/{id}', [OrganizationalStructureController::class, 'destroy'])->name('destroy');
+});
+
+// Page Setting - Contact Section
+// ==============================
+Route::prefix('page-setting/contact')->name('contact.')->group(function () {
+    Route::get('/', [ContactController::class, 'index'])->name('index');
+    Route::post('/', [ContactController::class, 'store'])->name('store'); // untuk create/update karena data cuma 1
+    Route::get('/edit', [ContactController::class, 'edit'])->name('edit');
+    Route::put('/', [ContactController::class, 'update'])->name('update');
 });
 
 
