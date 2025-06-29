@@ -634,135 +634,71 @@
         <!-- Testimonials Section -->
         <section id="testimonials" class="testimonials section dark-background">
 
-            <img src="{{ asset('frontend/assets/images/thumbnail.png') }}" class="testimonials-bg" alt="">
+            {{-- Background image --}}
+            <img src="{{ asset($testimonialBg ?? 'frontend/assets/images/thumbnail.png') }}" class="testimonials-bg"
+                alt="">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                <div class="swiper init-swiper">
-                    <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              }
-            }
-          </script>
-                    <div class="swiper-wrapper">
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="{{ asset('frontend/assets/images/muhammad_ali.jpg') }}"
-                                    class="testimonial-img" alt="">
-                                <h3>Muhammad Ali</h3>
-                                <h4>Petinju Legendaris</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Saya membenci setiap menit latihan, tapi saya berkata: Jangan menyerah.
-                                        Deritalah sekarang dan hiduplah sebagai juara seumur hidup</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="{{ asset('frontend/assets/images/Serena_Williams.jpg') }}"
-                                    class="testimonial-img" alt="">
-                                <h3>Serena Williams</h3>
-                                <h4>Petenis Profesional</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Seorang juara tidak ditentukan dari seberapa sering ia menang, tapi dari
-                                        bagaimana ia bangkit setiap kali terjatuh.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="{{ asset('frontend/assets/images/jordan.jpg') }}" class="testimonial-img"
-                                    alt="">
-                                <h3>Michael Jordan</h3>
-                                <h4>Pebasket NBA</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Saya gagal lebih dari 9.000 kali dalam karier saya. Saya kalah di hampir 300
-                                        pertandingan... Dan karena itulah saya berhasil</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="{{ asset('frontend/assets/images/Usain_Bolt.jpg') }}"
-                                    class="testimonial-img" alt="">
-                                <h3>Usain Bolt</h3>
-                                <h4>Pelari Olimpiade</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Jangan terlalu memikirkan bagaimana kamu memulai, fokuslah pada bagaimana kamu
-                                        akan mengakhiri.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="{{ asset('frontend/assets/images/Khabib_Nurmagomedov.jpg') }}"
-                                    class="testimonial-img" alt="">
-                                <h3>Khabib Nurmagomedov</h3>
-                                <h4>Petarung MMA (Juara Dunia UFC)</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Jika kamu punya tujuan dan mimpi, jangan pernah menyerah untuk
-                                        mencapainya.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
+                @if ($testimonials->isEmpty())
+                    <div class="text-center py-5">
+                        <h4 class="text-light">Belum ada data testimonial.</h4>
                     </div>
-                    <div class="swiper-pagination"></div>
-                </div>
+                @else
+                    <div class="swiper init-swiper">
+                        <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  }
+                }
+                </script>
+
+                        <div class="swiper-wrapper">
+                            @foreach ($testimonials as $testimonial)
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        @php
+                                            $testimonialImg = 'uploads/testimonials/' . $testimonial->image;
+                                            $imageUrl = file_exists(public_path($testimonialImg))
+                                                ? asset($testimonialImg)
+                                                : asset('frontend/assets/images/default-avatar.png');
+                                        @endphp
+                                        <img src="{{ $imageUrl }}" class="testimonial-img"
+                                            alt="{{ $testimonial->name }}">
+                                        <h3>{{ $testimonial->name }}</h3>
+                                        <h4>{{ $testimonial->profession }}</h4>
+                                        <div class="stars">
+                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                        </div>
+                                        <p>
+                                            <i class="bi bi-quote quote-icon-left"></i>
+                                            <span>{{ $testimonial->quote }}</span>
+                                            <i class="bi bi-quote quote-icon-right"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="swiper-pagination"></div>
+                    </div>
+                @endif
 
             </div>
+        </section>
 
-        </section><!-- /Testimonials Section -->
+
 
         <!-- Structure Section -->
         <style>
@@ -827,7 +763,7 @@
                                     data-aos="fade-up" data-aos-delay="200">
                                     <i class="bi bi-geo-alt"></i>
                                     <h3>Alamat</h3>
-                                   <p>Alamat: {{ $contact->address ?? '-' }}</p>
+                                    <p>Alamat: {{ $contact->address ?? '-' }}</p>
                                     <a href="{{ url('/cek-rute') }}" class="btn btn-primary mt-2">
                                         📍 Cek Rute ke Lokasi
                                     </a>
@@ -849,7 +785,7 @@
                                     data-aos="fade-up" data-aos-delay="400">
                                     <i class="bi bi-envelope"></i>
                                     <h3>Email Kami</h3>
-                                   <p>{{ $contact->email ?? '-' }}</p>
+                                    <p>{{ $contact->email ?? '-' }}</p>
                                 </div>
                             </div><!-- End Info Item -->
 

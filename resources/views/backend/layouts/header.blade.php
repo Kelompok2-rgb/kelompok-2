@@ -1,16 +1,15 @@
-
 <header>
     <div class="topbar d-flex align-items-center">
         <nav class="navbar navbar-expand gap-3">
             {{-- Tombol Hamburger --}}
             <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
 
-            {{-- Bagian Judul atau teks berjalan --}}
+            {{-- Judul berjalan --}}
             <div class="search-bar flex-grow-1">
                 <h3 id="typing-text"></h3>
             </div>
 
-            {{-- Notifikasi dan menu lainnya --}}
+            {{-- Notifikasi --}}
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center gap-1">
                     @auth
@@ -28,7 +27,7 @@
                 </ul>
             </div>
 
-            {{-- Info User --}}
+            {{-- Info User & Dropdown --}}
             @php
                 $role = Auth::user()->role;
                 $roleImages = [
@@ -52,13 +51,22 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
+                    @if ($role === 'admin')
+                        <li><h6 class="dropdown-header">Page Settings</h6></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.hero.index') }}"><i class="bx bx-photo-album"></i> Hero Section</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.about.index') }}"><i class="bx bx-info-circle"></i> About Section</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.rule.index') }}"><i class="bx bx-list-check"></i> Rules Section</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.clientlogos.index') }}"><i class="bx bx-images"></i> Client Logos</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.organization.index') }}"><i class="bx bx-sitemap"></i> Structure Organization</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.testimonials.index') }}"><i class="bx bx-comment-detail"></i> Testimonials</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.contact.index') }}"><i class="bx bx-envelope"></i> Contact</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                    @endif
                     <li>
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
-                            <button type="submit" class="dropdown-item d-flex align-items-center"
-                                    style="background: none; border: none;">
-                                <i class="bx bx-log-out-circle"></i>
-                                <span>Logout</span>
+                            <button type="submit" class="dropdown-item">
+                                <i class="bx bx-log-out-circle"></i> Logout
                             </button>
                         </form>
                     </li>
@@ -68,14 +76,11 @@
     </div>
 </header>
 
-{{-- Tambahkan script toggle sidebar --}}
+{{-- Toggle sidebar --}}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const toggleBtn = document.querySelector(".mobile-toggle-menu");
         const wrapper = document.querySelector(".wrapper");
-
-        toggleBtn.addEventListener("click", function () {
-            wrapper.classList.toggle("toggled");
-        });
+        toggleBtn.addEventListener("click", () => wrapper.classList.toggle("toggled"));
     });
 </script>

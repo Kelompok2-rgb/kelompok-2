@@ -42,11 +42,13 @@
                     <td>{{ ucfirst($user->role) }}</td>
                     <td>{{ $user->is_approved ? 'Disetujui' : 'Belum Disetujui' }}</td>
                     <td>
-                        <form action="{{ route('backend.users.destroy', $user->id) }}" method="POST"
-                            style="display:inline;" onsubmit="return handleDeleteUser('{{ $user->role }}')">
+                        <form action="{{ route('backend.users.destroy', $user->id) }}" method="POST" style="display:inline;"
+                            onsubmit="return handleDeleteUser('{{ $user->role }}')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
                         </form>
                     </td>
                 </tr>

@@ -12,6 +12,7 @@ use App\Models\ClientLogo;
 use App\Models\Pengumuman;
 use App\Models\HeroSection;
 use App\Models\RuleSection;
+use App\Models\Testimonial;
 use App\Models\AboutSection;
 use App\Models\Jadwal_Pertandingan;
 use Illuminate\Support\Facades\View;
@@ -50,6 +51,7 @@ class FrontendController extends Controller
         $clientlogos = ClientLogo::latest()->get();
         $structures = OrganizationalStructure::all();
         $contact = Contact::first();
+        $testimonials = Testimonial::all();
 
         return view('frontend.index', compact(
             'hero',
@@ -61,7 +63,8 @@ class FrontendController extends Controller
             'rules',
             'clientlogos',
             'structures',
-            'contact'
+            'contact',
+            'testimonials'
         ));
     }
 

@@ -3,26 +3,29 @@
 @section('title', 'Edit Contact')
 
 @section('content')
-    <div class="container mt-4 mb-5">
-        <div class="card shadow border-0">
-            <div class="card-body">
-                <h3 class="card-title text-center mb-4">Edit Contact</h3>
-                <hr>
+<div class="container mt-4 mb-5">
+    <div class="card shadow border-0">
+        <div class="card-header bg-gradient-primary text-white">
+            <h4 class="mb-0"><i class="fas fa-address-book me-2"></i> Edit Contact</h4>
+        </div>
+        <div class="card-body">
 
-                {{-- Tampilkan pesan sukses jika ada --}}
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+            {{-- Pesan sukses --}}
+            @if (session('success'))
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-1"></i> {{ session('success') }}
+                </div>
+            @endif
 
-                <form action="{{ route('backend.contact.update') }}" method="POST">
-                    @csrf
-                    @method('PUT')
+            {{-- Form --}}
+            <form action="{{ route('backend.contact.update', $contact->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
+                <div class="row g-3">
                     {{-- Alamat --}}
-                    <div class="mb-3">
-                        <label for="address" class="form-label fw-bold">Alamat <span class="text-danger">*</span></label>
+                    <div class="col-12">
+                        <label for="address" class="form-label fw-semibold">Alamat <span class="text-danger">*</span></label>
                         <textarea name="address" id="address" rows="3"
                             class="form-control @error('address') is-invalid @enderror" required>{{ old('address', $contact->address ?? '') }}</textarea>
                         @error('address')
@@ -31,8 +34,8 @@
                     </div>
 
                     {{-- Telepon --}}
-                    <div class="mb-3">
-                        <label for="phone" class="form-label fw-bold">Telepon <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label fw-semibold">Telepon <span class="text-danger">*</span></label>
                         <input type="text" name="phone" id="phone"
                             class="form-control @error('phone') is-invalid @enderror"
                             value="{{ old('phone', $contact->phone ?? '') }}" required>
@@ -42,8 +45,8 @@
                     </div>
 
                     {{-- Email --}}
-                    <div class="mb-3">
-                        <label for="email" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" id="email"
                             class="form-control @error('email') is-invalid @enderror"
                             value="{{ old('email', $contact->email ?? '') }}" required>
@@ -53,8 +56,8 @@
                     </div>
 
                     {{-- Latitude --}}
-                    <div class="mb-3">
-                        <label for="latitude" class="form-label fw-bold">Latitude</label>
+                    <div class="col-md-6">
+                        <label for="latitude" class="form-label fw-semibold">Latitude</label>
                         <input type="text" name="latitude" id="latitude"
                             class="form-control @error('latitude') is-invalid @enderror"
                             value="{{ old('latitude', $contact->latitude ?? '') }}">
@@ -64,8 +67,8 @@
                     </div>
 
                     {{-- Longitude --}}
-                    <div class="mb-3">
-                        <label for="longitude" class="form-label fw-bold">Longitude</label>
+                    <div class="col-md-6">
+                        <label for="longitude" class="form-label fw-semibold">Longitude</label>
                         <input type="text" name="longitude" id="longitude"
                             class="form-control @error('longitude') is-invalid @enderror"
                             value="{{ old('longitude', $contact->longitude ?? '') }}">
@@ -73,18 +76,25 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
 
-                    {{-- Tombol --}}
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ route('backend.contact.index') }}" class="btn btn-secondary">← Kembali</a>
-                        <div>
-                            <button type="reset" class="btn btn-warning me-2">Reset</button>
-                            <button type="submit" class="btn btn-success">💾 Simpan</button>
-                        </div>
+                {{-- Tombol --}}
+                <div class="mt-4 d-flex justify-content-between">
+                    <a href="{{ route('backend.contact.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Kembali
+                    </a>
+                    <div>
+                        <button type="reset" class="btn btn-warning me-2">
+                            <i class="fas fa-rotate-left me-1"></i> Reset
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save me-1"></i> Simpan
+                        </button>
                     </div>
+                </div>
 
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection

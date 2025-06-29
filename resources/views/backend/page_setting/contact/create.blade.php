@@ -3,7 +3,7 @@
 @section('navContact', 'active')
 
 @section('content')
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 mb-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card shadow border-0">
@@ -15,9 +15,12 @@
                 </div>
 
                 <div class="card-body">
+
                     {{-- Pesan sukses --}}
                     @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-1"></i> {{ session('success') }}
+                        </div>
                     @endif
 
                     {{-- Form --}}
@@ -36,7 +39,7 @@
                             </div>
 
                             {{-- Telepon --}}
-                            <div class="col-12">
+                            <div class="col-md-6">
                                 <label for="phone" class="form-label fw-semibold">Telepon <span class="text-danger">*</span></label>
                                 <input type="text" name="phone" id="phone"
                                     class="form-control @error('phone') is-invalid @enderror"
@@ -47,7 +50,7 @@
                             </div>
 
                             {{-- Email --}}
-                            <div class="col-12">
+                            <div class="col-md-6">
                                 <label for="email" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
                                 <input type="email" name="email" id="email"
                                     class="form-control @error('email') is-invalid @enderror"
@@ -58,7 +61,7 @@
                             </div>
 
                             {{-- Latitude --}}
-                            <div class="col-12">
+                            <div class="col-md-6">
                                 <label for="latitude" class="form-label fw-semibold">Latitude</label>
                                 <input type="text" name="latitude" id="latitude"
                                     class="form-control @error('latitude') is-invalid @enderror"
@@ -69,7 +72,7 @@
                             </div>
 
                             {{-- Longitude --}}
-                            <div class="col-12">
+                            <div class="col-md-6">
                                 <label for="longitude" class="form-label fw-semibold">Longitude</label>
                                 <input type="text" name="longitude" id="longitude"
                                     class="form-control @error('longitude') is-invalid @enderror"
@@ -81,16 +84,16 @@
                         </div>
 
                         <div class="mt-4 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-1"></i> Simpan
-                            </button>
                             <button type="reset" class="btn btn-warning">
                                 <i class="fas fa-rotate-left me-1"></i> Reset
                             </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save me-1"></i> Simpan
+                            </button>
                         </div>
                     </form>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>

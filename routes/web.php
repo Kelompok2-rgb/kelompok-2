@@ -26,7 +26,8 @@ use App\Http\Controllers\{
     RuleSectionController,
     ClientLogoController,
     OrganizationalStructureController,
-    ContactController
+    ContactController,
+    TestimonialController
 };
 
 // ==============================
@@ -224,9 +225,23 @@ Route::prefix('page-setting/organization')->name('organization.')->group(functio
 // ==============================
 Route::prefix('page-setting/contact')->name('contact.')->group(function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
-    Route::post('/', [ContactController::class, 'store'])->name('store'); // untuk create/update karena data cuma 1
-    Route::get('/edit', [ContactController::class, 'edit'])->name('edit');
-    Route::put('/', [ContactController::class, 'update'])->name('update');
+    Route::get('/create', [ContactController::class, 'create'])->name('create');
+    Route::post('/store', [ContactController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [ContactController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [ContactController::class, 'update'])->name('update');
+    Route::delete('/{id}', [ContactController::class, 'destroy'])->name('destroy');
+});
+
+
+// Page Setting - Testimonial Section
+// ==================================
+Route::prefix('page-setting/testimonials')->name('testimonials.')->group(function () {
+    Route::get('/', [TestimonialController::class, 'index'])->name('index');
+    Route::get('/create', [TestimonialController::class, 'create'])->name('create');
+    Route::post('/', [TestimonialController::class, 'store'])->name('store');
+    Route::get('/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('edit');
+    Route::put('/{testimonial}', [TestimonialController::class, 'update'])->name('update');
+    Route::delete('/{testimonial}', [TestimonialController::class, 'destroy'])->name('destroy');
 });
 
 

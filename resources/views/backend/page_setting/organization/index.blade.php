@@ -40,7 +40,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <img src="{{ asset($structure->photo) }}" alt="Foto Struktur"
-                                                width="80" class="rounded-circle shadow-sm">
+                                                width="80" class="shadow-sm">
                                         </td>
                                         <td>{{ $structure->name }}</td>
                                         <td>{{ $structure->position }}</td>

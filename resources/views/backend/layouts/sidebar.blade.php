@@ -104,7 +104,7 @@
             </li>
         @endauth
 
-          {{-- USERS --}}
+        {{-- USERS --}}
         @auth
             @php $canAccess = Auth::user()->role === 'admin'; @endphp
             <li>
@@ -126,39 +126,25 @@
                         <div class="menu-title">Output</div>
                     </a>
                     <ul>
-                        <li><a href="{{ route('backend.output.anggota') }}"><i class="bx bx-id-card"></i> Cetak Anggota</a></li>
+                        <li><a href="{{ route('backend.output.anggota') }}"><i class="bx bx-id-card"></i> Cetak Anggota</a>
+                        </li>
                         <li><a href="{{ route('backend.output.atlet') }}"><i class="bx bx-run"></i> Cetak Atlet</a></li>
-                        <li><a href="{{ route('backend.output.hasilpertandingan') }}"><i class="bx bx-bar-chart-alt"></i> Cetak Hasil Pertandingan</a></li>
-                        <li><a href="{{ route('backend.output.club') }}"><i class="bx bx-building-house"></i> Cetak Klub</a></li>
-                        <li><a href="{{ route('backend.output.juri') }}"><i class="bx bx-user-voice"></i> Cetak Juri</a></li>
-                        <li><a href="{{ route('backend.output.penyelenggara') }}"><i class="bx bx-briefcase"></i> Cetak Penyelenggara</a></li>
+                        <li><a href="{{ route('backend.output.hasilpertandingan') }}"><i class="bx bx-bar-chart-alt"></i>
+                                Cetak Hasil Pertandingan</a></li>
+                        <li><a href="{{ route('backend.output.club') }}"><i class="bx bx-building-house"></i> Cetak
+                                Klub</a></li>
+                        <li><a href="{{ route('backend.output.juri') }}"><i class="bx bx-user-voice"></i> Cetak Juri</a>
+                        </li>
+                        <li><a href="{{ route('backend.output.penyelenggara') }}"><i class="bx bx-briefcase"></i> Cetak
+                                Penyelenggara</a></li>
                     </ul>
                 </li>
             @endif
         @endauth
 
-        {{-- PAGE SETTING (DROPDOWN) --}}
-        @auth
-            @php $canAccess = Auth::user()->role === 'admin'; @endphp
-            @if ($canAccess)
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class='bx bx-cog'></i></div>
-                        <div class="menu-title">Page Setting</div>
-                    </a>
-                    <ul>
-                        <li><a href="{{ route('backend.hero.index') }}"><i class="bx bx-photo-album"></i> Hero Section</a></li>
-                        <li><a href="{{ route('backend.about.index') }}"><i class="bx bx-info-circle"></i> About Section</a></li>
-                        <li><a href="{{ route('backend.rule.index') }}"><i class="bx bx-list-check"></i> Rules Section</a></li>
-                        <li><a href="{{ route('backend.clientlogos.index') }}"><i class="bx bx-group"></i> Client Logos</a></li>
-                        <li><a href="{{ route('backend.organization.index') }}"><i class="bx bx-group"></i> Structure Organitation</a></li>
-                        <li><a href="{{ route('backend.contact.index') }}"><i class="bx bx-group"></i> Contact</a></li>
-                    </ul>
-                </li>
-            @endif
-        @endauth
+    
 
-      
+
 
     </ul>
     <!--end navigation-->
