@@ -27,9 +27,13 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'address'   => 'required|string|max:255',
+           'address'   => 'required|string|max:255',
             'phone'     => 'required|string|max:20',
             'email'     => 'required|email|max:100',
+            'x' => 'nullable|url',
+            'fb' => 'nullable|url',
+            'ig' => 'nullable|url',
+            'ln' => 'nullable|url',
             'latitude'  => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
         ]);
@@ -56,9 +60,15 @@ class ContactController extends Controller
             'address'   => 'required|string|max:255',
             'phone'     => 'required|string|max:20',
             'email'     => 'required|email|max:100',
+            'x' => 'nullable|url',
+            'fb' => 'nullable|url',
+            'ig' => 'nullable|url',
+            'ln' => 'nullable|url',
             'latitude'  => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
         ]);
+
+
 
         $contact->update($validated);
 

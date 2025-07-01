@@ -64,8 +64,12 @@
                     <div class="d-flex justify-content-between mt-4">
                         <a href="{{ route('backend.organization.index') }}" class="btn btn-secondary">← Kembali</a>
                         <div>
-                            <button type="reset" class="btn btn-warning me-2">Reset</button>
-                            <button type="submit" class="btn btn-success">💾 Simpan</button>
+                           <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Simpan
+                            </button>
+                            <button type="reset" class="btn btn-warning">
+                                <i class="fas fa-rotate-left me-1"></i> Reset
+                            </button>
                         </div>
                     </div>
 

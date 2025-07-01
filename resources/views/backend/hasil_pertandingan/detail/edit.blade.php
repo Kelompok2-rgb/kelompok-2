@@ -20,16 +20,19 @@
         </div>
     @endif
 
-    <form action="{{ route('backend.detail_hasil_pertandingan.update', [
-        'hasil_pertandingan_id' => $detail->hasil_pertandingan_id,
-        'id' => $detail->id,
-    ]) }}" method="POST" class="border p-4 rounded shadow-sm bg-light">
+    <form
+        action="{{ route('backend.detail_hasil_pertandingan.update', [
+            'hasil_pertandingan_id' => $detail->hasil_pertandingan_id,
+            'id' => $detail->id,
+        ]) }}"
+        method="POST" class="border p-4 rounded shadow-sm bg-light">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
             <label class="form-label fw-bold">Nama Peserta</label>
-            <input type="text" name="nama" class="form-control" value="{{ old('nama', $detail->nama) }}" required readonly>
+            <input type="text" name="nama" class="form-control" value="{{ old('nama', $detail->nama) }}" required
+                readonly>
         </div>
 
         @for ($i = 1; $i <= 5; $i++)
@@ -59,7 +62,12 @@
             <a href="{{ route('backend.detail_hasil_pertandingan.index', $detail->hasil_pertandingan_id) }}"
                 class="btn btn-secondary">← Kembali</a>
 
-            <button type="submit" class="btn btn-success">💾 Simpan Perubahan</button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save me-1"></i> Simpan
+            </button>
+            <button type="reset" class="btn btn-warning">
+                <i class="fas fa-rotate-left me-1"></i> Reset
+            </button>
         </div>
     </form>
 @endsection

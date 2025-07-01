@@ -15,5 +15,10 @@ class Contact extends Model
         'email',
         'latitude',
         'longitude',
+        'x',
+        'fb',
+        'ig',
+        'ln'
     ];
+    
 }

@@ -27,7 +27,8 @@ use App\Http\Controllers\{
     ClientLogoController,
     OrganizationalStructureController,
     ContactController,
-    TestimonialController
+    TestimonialController,
+    PortfolioController
 };
 
 // ==============================
@@ -190,61 +191,68 @@ Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function
     // Page Setting - Rule Section
     // ==============================
     Route::prefix('page-setting/rule')->name('rule.')->group(function () {
-    Route::get('/', [RuleSectionController::class, 'index'])->name('index');
-    Route::get('/create', [RuleSectionController::class, 'create'])->name('create');
-    Route::post('/store', [RuleSectionController::class, 'store'])->name('store');
-    Route::get('/{id}/edit', [RuleSectionController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [RuleSectionController::class, 'update'])->name('update');
-    Route::delete('/{id}', [RuleSectionController::class, 'destroy'])->name('destroy');
-});
+        Route::get('/', [RuleSectionController::class, 'index'])->name('index');
+        Route::get('/create', [RuleSectionController::class, 'create'])->name('create');
+        Route::post('/store', [RuleSectionController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [RuleSectionController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [RuleSectionController::class, 'update'])->name('update');
+        Route::delete('/{id}', [RuleSectionController::class, 'destroy'])->name('destroy');
+    });
 
-// Page Setting - Client Logo Section
-// ==============================
-Route::prefix('page-setting/clientlogo')->name('clientlogos.')->group(function () {
-    Route::get('/', [ClientLogoController::class, 'index'])->name('index');
-    Route::get('/create', [ClientLogoController::class, 'create'])->name('create');
-    Route::post('/store', [ClientLogoController::class, 'store'])->name('store');
-    Route::get('/{id}/edit', [ClientLogoController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [ClientLogoController::class, 'update'])->name('update');
-    Route::delete('/{id}', [ClientLogoController::class, 'destroy'])->name('destroy');
-});
-
-
-// Page Setting - organization Section
-// ==============================
-Route::prefix('page-setting/organization')->name('organization.')->group(function () {
-    Route::get('/', [OrganizationalStructureController::class, 'index'])->name('index');
-    Route::get('/create', [OrganizationalStructureController::class, 'create'])->name('create');
-    Route::post('/store', [OrganizationalStructureController::class, 'store'])->name('store');
-    Route::get('/{id}/edit', [OrganizationalStructureController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [OrganizationalStructureController::class, 'update'])->name('update');
-    Route::delete('/{id}', [OrganizationalStructureController::class, 'destroy'])->name('destroy');
-});
-
-// Page Setting - Contact Section
-// ==============================
-Route::prefix('page-setting/contact')->name('contact.')->group(function () {
-    Route::get('/', [ContactController::class, 'index'])->name('index');
-    Route::get('/create', [ContactController::class, 'create'])->name('create');
-    Route::post('/store', [ContactController::class, 'store'])->name('store');
-    Route::get('/{id}/edit', [ContactController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [ContactController::class, 'update'])->name('update');
-    Route::delete('/{id}', [ContactController::class, 'destroy'])->name('destroy');
-});
+    // Page Setting - Client Logo Section
+    // ==============================
+    Route::prefix('page-setting/clientlogo')->name('clientlogos.')->group(function () {
+        Route::get('/', [ClientLogoController::class, 'index'])->name('index');
+        Route::get('/create', [ClientLogoController::class, 'create'])->name('create');
+        Route::post('/store', [ClientLogoController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [ClientLogoController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [ClientLogoController::class, 'update'])->name('update');
+        Route::delete('/{id}', [ClientLogoController::class, 'destroy'])->name('destroy');
+    });
 
 
-// Page Setting - Testimonial Section
-// ==================================
-Route::prefix('page-setting/testimonials')->name('testimonials.')->group(function () {
-    Route::get('/', [TestimonialController::class, 'index'])->name('index');
-    Route::get('/create', [TestimonialController::class, 'create'])->name('create');
-    Route::post('/', [TestimonialController::class, 'store'])->name('store');
-    Route::get('/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('edit');
-    Route::put('/{testimonial}', [TestimonialController::class, 'update'])->name('update');
-    Route::delete('/{testimonial}', [TestimonialController::class, 'destroy'])->name('destroy');
-});
+    // Page Setting - organization Section
+    // ==============================
+    Route::prefix('page-setting/organization')->name('organization.')->group(function () {
+        Route::get('/', [OrganizationalStructureController::class, 'index'])->name('index');
+        Route::get('/create', [OrganizationalStructureController::class, 'create'])->name('create');
+        Route::post('/store', [OrganizationalStructureController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [OrganizationalStructureController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [OrganizationalStructureController::class, 'update'])->name('update');
+        Route::delete('/{id}', [OrganizationalStructureController::class, 'destroy'])->name('destroy');
+    });
+
+    // Page Setting - Contact Section
+    // ==============================
+    Route::prefix('page-setting/contact')->name('contact.')->group(function () {
+        Route::get('/', [ContactController::class, 'index'])->name('index');
+        Route::get('/create', [ContactController::class, 'create'])->name('create');
+        Route::post('/store', [ContactController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [ContactController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [ContactController::class, 'update'])->name('update');
+        Route::delete('/{id}', [ContactController::class, 'destroy'])->name('destroy');
+    });
 
 
+    // Page Setting - Testimonial Section
+    // ==================================
+    Route::prefix('page-setting/testimonials')->name('testimonials.')->group(function () {
+        Route::get('/', [TestimonialController::class, 'index'])->name('index');
+        Route::get('/create', [TestimonialController::class, 'create'])->name('create');
+        Route::post('/', [TestimonialController::class, 'store'])->name('store');
+        Route::get('/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('edit');
+        Route::put('/{testimonial}', [TestimonialController::class, 'update'])->name('update');
+        Route::delete('/{testimonial}', [TestimonialController::class, 'destroy'])->name('destroy');
+    });
 
-
+    // Page Setting - Testimonial Section
+    // ==================================
+    Route::prefix('page-setting/portfolio')->name('portfolio.')->group(function () {
+        Route::get('/', [PortfolioController::class, 'index'])->name('index');
+        Route::get('/create', [PortfolioController::class, 'create'])->name('create');
+        Route::post('/', [PortfolioController::class, 'store'])->name('store');
+        Route::get('/{testimonial}/edit', [PortfolioController::class, 'edit'])->name('edit');
+        Route::put('/{testimonial}', [PortfolioController::class, 'update'])->name('update');
+        Route::delete('/{testimonial}', [PortfolioController::class, 'destroy'])->name('destroy');
+    });
 });

@@ -48,7 +48,11 @@
                             </div>
                         @endfor
                         <div class="col-md-12 mt-3">
-                            <button type="submit" class="btn btn-success">Simpan Rekap</button>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Simpan
+                            </button>
+                        
                         </div>
                     </div>
                 </form>

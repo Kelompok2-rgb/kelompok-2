@@ -8,6 +8,7 @@ use App\Models\Atlet;
 use App\Models\Galeri;
 use App\Models\Anggota;
 use App\Models\Contact;
+use App\Models\Portfolio;
 use App\Models\ClientLogo;
 use App\Models\Pengumuman;
 use App\Models\HeroSection;
@@ -52,6 +53,7 @@ class FrontendController extends Controller
         $structures = OrganizationalStructure::all();
         $contact = Contact::first();
         $testimonials = Testimonial::all();
+        $portfolios = Portfolio::all();
 
         return view('frontend.index', compact(
             'hero',
@@ -64,7 +66,9 @@ class FrontendController extends Controller
             'clientlogos',
             'structures',
             'contact',
-            'testimonials'
+            'testimonials',
+            'portfolios'
+
         ));
     }
 

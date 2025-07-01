@@ -28,15 +28,16 @@
             <label for="nama" class="form-label fw-bold">Nama Peserta <span class="text-danger">*</span></label>
             <select name="nama" id="nama" class="form-control" required>
                 <option value="">-- Pilih Peserta --</option>
-                @foreach($pesertas as $peserta)
-                    <option value="{{ $peserta->atlet->nama }}" {{ old('nama') == $peserta->atlet->nama ? 'selected' : '' }}>
+                @foreach ($pesertas as $peserta)
+                    <option value="{{ $peserta->atlet->nama }}"
+                        {{ old('nama') == $peserta->atlet->nama ? 'selected' : '' }}>
                         {{ $peserta->atlet->nama }}
                     </option>
                 @endforeach
             </select>
         </div>
 
-        @for($i = 1; $i <= 5; $i++)
+        @for ($i = 1; $i <= 5; $i++)
             <div class="mb-3">
                 <label for="lemparan{{ $i }}" class="form-label fw-bold">Lemparan {{ $i }}</label>
                 <input type="number" step="0.01" name="lemparan{{ $i }}" id="lemparan{{ $i }}"
@@ -52,8 +53,7 @@
 
         <div class="mb-3">
             <label for="rangking" class="form-label fw-bold">Rangking</label>
-            <input type="number" name="rangking" id="rangking" class="form-control"
-                value="{{ old('rangking') }}">
+            <input type="number" name="rangking" id="rangking" class="form-control" value="{{ old('rangking') }}">
         </div>
 
         <div class="mb-3">
@@ -64,7 +64,12 @@
         <div class="d-flex justify-content-between">
             <a href="{{ route('backend.detail_hasil_pertandingan.index', $hasilPertandingan->id) }}"
                 class="btn btn-secondary">← Kembali</a>
-            <button type="submit" class="btn btn-success">💾 Simpan</button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save me-1"></i> Simpan
+            </button>
+            <button type="reset" class="btn btn-warning">
+                <i class="fas fa-rotate-left me-1"></i> Reset
+            </button>
         </div>
     </form>
 @endsection

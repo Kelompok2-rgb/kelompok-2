@@ -94,8 +94,8 @@
 
                         {{-- Tombol --}}
                         <div class="mt-4 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save me-1"></i> Simpan Perubahan
+                           <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Simpan
                             </button>
                             <button type="reset" class="btn btn-warning">
                                 <i class="fas fa-rotate-left me-1"></i> Reset

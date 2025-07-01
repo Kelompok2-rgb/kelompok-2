@@ -29,6 +29,10 @@
                                     <th>Alamat</th>
                                     <th>Telepon</th>
                                     <th>Email</th>
+                                    <th>Twitter</th>
+                                    <th>Facebook</th>
+                                    <th>Instagram</th>
+                                    <th>Linkedln</th>
                                     <th>Latitude</th>
                                     <th>Longitude</th>
                                     <th>Aksi</th>
@@ -40,6 +44,10 @@
                                         <td class="text-start">{{ $contact->address }}</td>
                                         <td>{{ $contact->phone }}</td>
                                         <td>{{ $contact->email }}</td>
+                                        <td>{{ $contact->x }}</td>
+                                        <td>{{ $contact->fb }}</td>
+                                        <td>{{ $contact->ig }}</td>
+                                        <td>{{ $contact->ln }}</td>
                                         <td>{{ $contact->latitude }}</td>
                                         <td>{{ $contact->longitude }}</td>
                                         <td>
@@ -60,7 +68,7 @@
                                     </tr>
                                 @else
                                     <tr>
-                                        <td colspan="6">Belum ada data Contact</td>
+                                        <td colspan="10">Belum ada data Contact</td>
                                     </tr>
                                 @endif
                             </tbody>

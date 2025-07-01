@@ -60,6 +60,7 @@
                         <li><a class="dropdown-item" href="{{ route('backend.organization.index') }}"><i class="bx bx-sitemap"></i> Structure Organization</a></li>
                         <li><a class="dropdown-item" href="{{ route('backend.testimonials.index') }}"><i class="bx bx-comment-detail"></i> Testimonials</a></li>
                         <li><a class="dropdown-item" href="{{ route('backend.contact.index') }}"><i class="bx bx-envelope"></i> Contact</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.portfolio.index') }}"><i class="bx bx-envelope"></i> Portfolio</a></li>
                         <li><hr class="dropdown-divider"></li>
                     @endif
                     <li>

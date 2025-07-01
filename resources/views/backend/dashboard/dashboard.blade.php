@@ -13,7 +13,7 @@
                     </div>
                     <div>
                         <h4 class="mb-1">Selamat Datang, {{ Auth::user()->name ?? Auth::user()->email }}</h4>
-                        <p class="mb-0 text-muted">Anda login sebagai <strong>{{ ucfirst(Auth::user()->role) }}</strong>.</p>
+                        <p class="mb-0 text-light">Anda login sebagai <strong>{{ ucfirst(Auth::user()->role) }}</strong>.</p>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     </div>
                     <div>
                         <h5 class="mb-0">{{ \App\Models\Atlet::count() }}</h5>
-                        <small class="text-muted">Total Atlet</small>
+                        <small class="text-light">Total Atlet</small>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div>
                         <h5 class="mb-0">{{ \App\Models\Club::count() }}</h5>
-                        <small class="text-muted">Total Klub</small>
+                        <small class="text-light">Total Klub</small>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div>
                         <h5 class="mb-0">{{ \App\Models\Pertandingan::count() }}</h5>
-                        <small class="text-muted">Total Pertandingan</small>
+                        <small class="text-light">Total Pertandingan</small>
                     </div>
                 </div>
             </div>

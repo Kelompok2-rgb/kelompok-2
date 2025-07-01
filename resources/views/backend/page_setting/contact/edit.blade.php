@@ -36,7 +36,7 @@
                     {{-- Telepon --}}
                     <div class="col-md-6">
                         <label for="phone" class="form-label fw-semibold">Telepon <span class="text-danger">*</span></label>
-                        <input type="text" name="phone" id="phone"
+                        <input type="number" name="phone" id="phone"
                             class="form-control @error('phone') is-invalid @enderror"
                             value="{{ old('phone', $contact->phone ?? '') }}" required>
                         @error('phone')
@@ -51,6 +51,50 @@
                             class="form-control @error('email') is-invalid @enderror"
                             value="{{ old('email', $contact->email ?? '') }}" required>
                         @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- X --}}
+                     <div class="col-md-6">
+                        <label for="x" class="form-label fw-semibold">Twitter <span class="text-danger">*</span></label>
+                        <input type="url" name="x" id="x"
+                            class="form-control @error('x') is-invalid @enderror"
+                            value="{{ old('x', $contact->x ?? '') }}">
+                        @error('x')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                     {{-- FB --}}
+                     <div class="col-md-6">
+                        <label for="fb" class="form-label fw-semibold">Facebook <span class="text-danger">*</span></label>
+                        <input type="url" name="fb" id="fb"
+                            class="form-control @error('fb') is-invalid @enderror"
+                            value="{{ old('fb', $contact->fb ?? '') }}">
+                        @error('fb')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- IG --}}
+                     <div class="col-md-6">
+                        <label for="ig" class="form-label fw-semibold">Instagram <span class="text-danger">*</span></label>
+                        <input type="url" name="ig" id="ig"
+                            class="form-control @error('ig') is-invalid @enderror"
+                            value="{{ old('ig', $contact->ig ?? '') }}">
+                        @error('ig')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- LN --}}
+                     <div class="col-md-6">
+                        <label for="ln" class="form-label fw-semibold">Linkedln <span class="text-danger">*</span></label>
+                        <input type="url" name="ln" id="ln"
+                            class="form-control @error('ln') is-invalid @enderror"
+                            value="{{ old('ln', $contact->ln ?? '') }}">
+                        @error('ln')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

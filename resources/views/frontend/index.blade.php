@@ -579,24 +579,97 @@
 
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio section">
-            <!-- Section Title -->
-            <div class="container section-title my-3" data-aos="fade-up">
-                <h2>Portfolio</h2>
-                <p>Cek Portofolio Kami</p>
-            </div><!-- End Section Title -->
+<section id="portfolio" class="portfolio section py-5">
+    <!-- Section Title -->
+    <div class="container section-title my-3" data-aos="fade-up">
+        <h2>Portfolio</h2>
+        <p>Cek Portofolio Kami</p>
+    </div>
 
-            <div class="container">
-
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry"
-                    data-sort="original-order">
-
-                    <div class="text-center">Belum ada Portfolio</div>
-
-                </div>
-
+    <div class="container">
+        @if ($portfolios->isEmpty())
+            <div class="text-center py-5">
+                <h4>Belum ada Portfolio</h4>
             </div>
-        </section>
+        @else
+            <div class="portfolio-grid">
+                @foreach ($portfolios as $portfolio)
+                    @php
+                        $portfolioImg = $portfolio->image && file_exists(public_path($portfolio->image))
+                            ? asset($portfolio->image)
+                            : asset('frontend/assets/images/default-image.png');
+                    @endphp
+                    <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+                        <img src="{{ $portfolioImg }}" class="img-fluid portfolio-img"
+                            alt="{{ $portfolio->title }}"
+                            data-bs-toggle="modal" data-bs-target="#portfolioModal{{ $portfolio->id }}">
+                        
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="portfolioModal{{ $portfolio->id }}" tabindex="-1"
+                        aria-labelledby="portfolioModalLabel{{ $portfolio->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">{{ $portfolio->title }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ $portfolioImg }}" class="img-fluid rounded mb-3"
+                                        alt="{{ $portfolio->title }}">
+                                    <h6 class="text-muted">{{ $portfolio->category }}</h6>
+                                    <p>{{ $portfolio->description }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+</section>
+
+
+<style>
+   .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.portfolio-item img:hover {
+    transform: scale(1.05);
+}
+.portfolio-item h5 {
+    margin-top: 8px;
+    font-size: 1rem;
+    text-align: center;
+}
+.modal-body {
+    max-height: 75vh;
+    overflow-y: auto;
+}
+.modal-body p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+</style>
+
+
 
         <!-- Clients Section -->
         <section id="clients" class="clients section light-background py-5">
