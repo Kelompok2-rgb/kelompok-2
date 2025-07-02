@@ -69,8 +69,11 @@
       background-color: #0056b3;
     }
   </style>
+
   <script>
     const ORS_API_KEY = "{{ config('services.ors.key') }}";
+    // ambil dari database melalui Blade
+    const destination = [{{ $contact->longitude ?? 100.4599084 }}, {{ $contact->latitude ?? -0.9315817 }}];
   </script>
 </head>
 <body>
@@ -81,19 +84,19 @@
   <h2>🔍 Cari Rute ke Sekretariat Porlempika</h2>
   <input type="text" id="alamat" placeholder="Ketik nama lokasi, contoh: Masjid, Pasar" oninput="cariSaran()" autocomplete="off" />
   <ul id="suggestions"></ul>
-  <div id="info">📍 Tujuan: Komp Sinar Limau Manis D13, Kel. Koto Luar, Kec. Pauh.</div>
+  <div id="info">📍 Tujuan: {{ $contact->address ?? 'Komp Sinar Limau Manis D13, Kel. Koto Luar, Kec. Pauh.' }}</div>
   <a href="{{ url('/') }}" class="btn-kembali">⬅ Kembali ke Menu Awal</a>
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-const map = L.map('map').setView([-0.9315817, 100.4599084], 13);
+const map = L.map('map').setView([destination[1], destination[0]], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-const destination = [100.4599084, -0.9315817];
-L.marker([destination[1], destination[0]]).addTo(map).bindPopup("Sekretariat Porlempika").openPopup();
+L.marker([destination[1], destination[0]]).addTo(map)
+  .bindPopup("Sekretariat Porlempika").openPopup();
 
 let userMarker, ruteLayer;
 

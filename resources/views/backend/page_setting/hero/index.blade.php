@@ -46,15 +46,22 @@
                                             <td>{{ $hero->judul }}</td>
                                             <td class="text-start">{{ $hero->deskripsi }}</td>
                                             <td>
-                                                <form action="{{ route('backend.hero.destroy', $hero->id) }}" method="POST"
-                                                    onsubmit="return confirm('Yakin ingin menghapus Hero ini?');"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-trash"></i> Hapus
-                                                    </button>
-                                                </form>
+                                                <div class="d-inline-flex align-items-center gap-1">
+                                                    <a href="{{ route('backend.hero.edit', $hero->id) }}"
+                                                        class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <form action="{{ route('backend.hero.destroy', $hero->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Yakin ingin menghapus Hero ini?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                            <i class="fas fa-trash"></i> Hapus
+                                                        </button>
+                                                    </form>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -76,7 +83,7 @@
 
     <div class="container-fluid mt-4">
         <div class="row justify-content-center">
-          
+
             <hr>
             <div class="alert alert-info" role="alert">
                 <i class="fas fa-info-circle me-1"></i>

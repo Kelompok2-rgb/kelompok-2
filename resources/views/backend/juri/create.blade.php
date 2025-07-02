@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="mt-4 d-flex justify-content-end gap-2">
-                            <button type="submit" class="btn btn-primary">
+                           <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save me-1"></i> Simpan
                             </button>
                             <button type="reset" class="btn btn-warning">

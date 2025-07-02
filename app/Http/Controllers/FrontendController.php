@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anggota;
-use App\Models\Atlet;
 use App\Models\Club;
-use App\Models\Galeri;
-use App\Models\Jadwal_Pertandingan;
 use App\Models\Juri;
-use App\Models\Kategori_pertandingan;
+use App\Models\Atlet;
+use App\Models\Galeri;
+use App\Models\Anggota;
+use App\Models\Contact;
+use App\Models\Portfolio;
+use App\Models\ClientLogo;
 use App\Models\Pengumuman;
-use Illuminate\Support\Facades\View;
 use App\Models\HeroSection;
+use App\Models\RuleSection;
+use App\Models\Testimonial;
 use App\Models\AboutSection;
+use App\Models\Jadwal_Pertandingan;
+use Illuminate\Support\Facades\View;
+use App\Models\Kategori_pertandingan;
+use App\Models\OrganizationalStructure;
 
 
 
@@ -34,24 +40,37 @@ class FrontendController extends Controller
     /**
      * Tampilkan halaman utama frontend beserta data langsung tanpa AJAX.
      */
-   public function index()
-{
-    $hero = HeroSection::latest()->first();
-    $about = AboutSection::latest()->first();
-    $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->get();
-    $kategoripertandingans = Kategori_pertandingan::all();
-    $galeris = Galeri::latest()->get();
-    $pengumumans = Pengumuman::latest()->get();
+    public function index()
+    {
+        $hero = HeroSection::latest()->first();
+        $about = AboutSection::latest()->first();
+        $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->get();
+        $kategoripertandingans = Kategori_pertandingan::all();
+        $galeris = Galeri::latest()->get();
+        $pengumumans = Pengumuman::latest()->get();
+        $rules = RuleSection::all();
+        $clientlogos = ClientLogo::latest()->get();
+        $structures = OrganizationalStructure::all();
+        $contact = Contact::first();
+        $testimonials = Testimonial::all();
+        $portfolios = Portfolio::all();
 
-    return view('frontend.index', compact(
-        'hero',
-        'about',
-        'jadwalpertandingans',
-        'kategoripertandingans',
-        'galeris',
-        'pengumumans'
-    ));
-}
+        return view('frontend.index', compact(
+            'hero',
+            'about',
+            'jadwalpertandingans',
+            'kategoripertandingans',
+            'galeris',
+            'pengumumans',
+            'rules',
+            'clientlogos',
+            'structures',
+            'contact',
+            'testimonials',
+            'portfolios'
+
+        ));
+    }
 
 
     // ============================

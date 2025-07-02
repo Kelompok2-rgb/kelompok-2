@@ -87,12 +87,12 @@
                 </div>
 
                 <div class="mt-4 d-flex justify-content-end gap-2">
-                    <button type="reset" class="btn btn-warning" onclick="resetPreview()">
-                        <i class="fas fa-rotate-left me-1"></i> Reset
-                    </button>
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-save me-1"></i> Update
-                    </button>
+                    <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Simpan
+                            </button>
+                            <button type="reset" class="btn btn-warning">
+                                <i class="fas fa-rotate-left me-1"></i> Reset
+                            </button>
                 </div>
             </form>
         </div>

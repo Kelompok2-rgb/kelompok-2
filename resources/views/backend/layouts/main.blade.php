@@ -65,6 +65,8 @@
         }
     </style>
 
+    
+
 
     <title>Backend-Porlempika</title>
 </head>
@@ -194,26 +196,7 @@
             new PerfectScrollbar('.customers-list');
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const images = document.querySelectorAll('.foto-hover');
 
-            images.forEach(img => {
-                let timer;
-
-                img.addEventListener('mouseenter', () => {
-                    timer = setTimeout(() => {
-                        img.classList.add('enlarged');
-                    }, 1000); // tunggu 1 detik
-                });
-
-                img.addEventListener('mouseleave', () => {
-                    clearTimeout(timer); // batalkan jika belum 3 detik
-                    img.classList.remove('enlarged'); // kecilkan kembali
-                });
-            });
-        });
-    </script>
     <script>
         const text = "Berbeda | Bersatu | Berjaya | Porlempika Kota Padang";
         const typingSpeed = 200; // ms per karakter
@@ -240,28 +223,7 @@
         document.addEventListener('DOMContentLoaded', typeWriter);
     </script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-    <script>
-        function exportTableToExcel() {
-            // Ambil tabel asli
-            const originalTable = document.querySelector('.tableExportArea');
 
-            // Clone tabel supaya tidak merubah tabel asli di halaman
-            const cloneTable = originalTable.cloneNode(true);
-
-            // Hapus kolom aksi (kolom terakhir) di setiap baris (header dan body)
-            cloneTable.querySelectorAll('tr').forEach(row => {
-                if (row.cells.length > 0) {
-                    row.deleteCell(row.cells.length - 1); // hapus kolom terakhir
-                }
-            });
-
-            // Buat workbook dari clone tabel yang sudah tanpa kolom aksi
-            const workbook = XLSX.utils.table_to_book(cloneTable, {
-                sheet: "Anggota"
-            });
-            XLSX.writeFile(workbook, 'anggota.xlsx');
-        }
-    </script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
@@ -270,9 +232,10 @@
     <script>
         new DataTable('#example');
     </script>
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.js"></script>
+    <script>
+        $('#menu').metisMenu(); // aktifkan metismenu
+    </script>
 
 
 </body>
