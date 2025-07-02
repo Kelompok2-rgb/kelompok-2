@@ -104,6 +104,75 @@
             </li>
         @endauth
 
+        {{-- PENYELENGGARA --}}
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.penyelenggara_event.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-briefcase'></i></div>
+                    <div class="menu-title">Penyelenggara Event</div>
+                </a>
+            </li>
+        @endauth
+
+        {{-- JADWAL PERTANDINGAN --}}
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.jadwal_pertandingan.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-calendar'></i></div>
+                    <div class="menu-title">Jadwal Pertandingan</div>
+                </a>
+            </li>
+        @endauth
+
+        {{-- HASIL PERTANDINGAN --}}
+        @auth
+            <li>
+                @php
+                    $allowedRoles = ['juri'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.hasil_pertandingan.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-medal'></i></div>
+                    <div class="menu-title">Hasil Pertandingan</div>
+                </a>
+            </li>
+        @endauth
+
+        {{-- KATEGORI PERTANDINGAN --}}
+         @auth
+            <li>
+                @php
+                    $allowedRoles = ['admin', 'penyelenggara'];
+                    $canAccess = in_array(Auth::user()->role, $allowedRoles);
+                @endphp
+
+                <a href="{{ $canAccess ? route('backend.kategori_pertandingan.index') : '#' }}"
+                    title="{{ $canAccess ? '' : 'Anda tidak memiliki akses' }}"
+                    @if (!$canAccess) onclick="return false;" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" @endif>
+                    <div class="parent-icon"><i class='bx bx-category'></i></div>
+                    <div class="menu-title">Kategori Pertandingan</div>
+                </a>
+            </li>
+        @endauth
+
+
         {{-- USERS --}}
         @auth
             @php $canAccess = Auth::user()->role === 'admin'; @endphp
