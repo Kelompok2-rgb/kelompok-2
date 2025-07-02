@@ -579,95 +579,100 @@
 
 
         <!-- Portfolio Section -->
-<section id="portfolio" class="portfolio section py-5">
-    <!-- Section Title -->
-    <div class="container section-title my-3" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Cek Portofolio Kami</p>
-    </div>
-
-    <div class="container">
-        @if ($portfolios->isEmpty())
-            <div class="text-center py-5">
-                <h4>Belum ada Portfolio</h4>
+        <section id="portfolio" class="portfolio section py-5">
+            <!-- Section Title -->
+            <div class="container section-title my-3" data-aos="fade-up">
+                <h2>Portfolio</h2>
+                <p>Cek Portofolio Kami</p>
             </div>
-        @else
-            <div class="portfolio-grid">
-                @foreach ($portfolios as $portfolio)
-                    @php
-                        $portfolioImg = $portfolio->image && file_exists(public_path($portfolio->image))
-                            ? asset($portfolio->image)
-                            : asset('frontend/assets/images/default-image.png');
-                    @endphp
-                    <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
-                        <img src="{{ $portfolioImg }}" class="img-fluid portfolio-img"
-                            alt="{{ $portfolio->title }}"
-                            data-bs-toggle="modal" data-bs-target="#portfolioModal{{ $portfolio->id }}">
-                        
-                    </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="portfolioModal{{ $portfolio->id }}" tabindex="-1"
-                        aria-labelledby="portfolioModalLabel{{ $portfolio->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">{{ $portfolio->title }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="{{ $portfolioImg }}" class="img-fluid rounded mb-3"
-                                        alt="{{ $portfolio->title }}">
-                                    <h6 class="text-muted">{{ $portfolio->category }}</h6>
-                                    <p>{{ $portfolio->description }}</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Tutup</button>
+            <div class="container">
+                @if ($portfolios->isEmpty())
+                    <div class="text-center py-5">
+                        <h4>Belum ada Portfolio</h4>
+                    </div>
+                @else
+                    <div class="portfolio-grid">
+                        @foreach ($portfolios as $portfolio)
+                            @php
+                                $portfolioImg =
+                                    $portfolio->image && file_exists(public_path($portfolio->image))
+                                        ? asset($portfolio->image)
+                                        : asset('frontend/assets/images/default-image.png');
+                            @endphp
+                            <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ $portfolioImg }}" class="img-fluid portfolio-img"
+                                    alt="{{ $portfolio->title }}" data-bs-toggle="modal"
+                                    data-bs-target="#portfolioModal{{ $portfolio->id }}">
+
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="portfolioModal{{ $portfolio->id }}" tabindex="-1"
+                                aria-labelledby="portfolioModalLabel{{ $portfolio->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ $portfolio->title }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="{{ $portfolioImg }}" class="img-fluid rounded mb-3"
+                                                alt="{{ $portfolio->title }}">
+                                            <h6 class="text-muted">{{ $portfolio->category }}</h6>
+                                            <p>{{ $portfolio->description }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Tutup</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
             </div>
-        @endif
-    </div>
-</section>
+        </section>
 
 
-<style>
-   .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-.portfolio-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-.portfolio-item img:hover {
-    transform: scale(1.05);
-}
-.portfolio-item h5 {
-    margin-top: 8px;
-    font-size: 1rem;
-    text-align: center;
-}
-.modal-body {
-    max-height: 75vh;
-    overflow-y: auto;
-}
-.modal-body p {
-    word-wrap: break-word;
-    white-space: pre-wrap;
-}
+        <style>
+            .portfolio-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
 
-</style>
+            .portfolio-item img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .portfolio-item img:hover {
+                transform: scale(1.05);
+            }
+
+            .portfolio-item h5 {
+                margin-top: 8px;
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            .modal-body {
+                max-height: 75vh;
+                overflow-y: auto;
+            }
+
+            .modal-body p {
+                word-wrap: break-word;
+                white-space: pre-wrap;
+            }
+        </style>
 
 
 
@@ -866,40 +871,61 @@
                     </div>
 
                     <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-                            data-aos-delay="500">
-                            <div class="row gy-4">
-
-                                <div class="col-md-6">
-                                    <input type="text" name="name" class="form-control"
-                                        placeholder="Your Name" required="">
+                        <div class="card shadow border-0 p-4" data-aos="fade-up" data-aos-delay="500">
+                            <h4 class="mb-4"><i class="fas fa-envelope me-2"></i> <strong>Kirim Saranmu Disini </strong></h4>
+                            <form action="{{ route('contact.send') }}" method="POST">
+                                @csrf
+                                <div class="row gy-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" name="name" class="form-control"
+                                                id="floatingName" placeholder="Your Name" required>
+                                            <label for="floatingName"><i class="fas fa-user me-1"></i> Nama
+                                                Anda</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" name="email" class="form-control"
+                                                id="floatingEmail" placeholder="Your Email" required>
+                                            <label for="floatingEmail"><i class="fas fa-envelope me-1"></i> Email
+                                                Anda</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="text" name="subject" class="form-control"
+                                                id="floatingSubject" placeholder="Subject" required>
+                                            <label for="floatingSubject"><i class="fas fa-tag me-1"></i>
+                                                Subjek</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <textarea name="message" class="form-control" placeholder="Message" id="floatingMessage" style="height: 120px;"
+                                                required></textarea>
+                                            <label for="floatingMessage"><i class="fas fa-comment-dots me-1"></i>
+                                                Pesan</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center mt-3">
+                                        @if (session('success'))
+                                            <div class="alert alert-success alert-dismissible fade show"
+                                                role="alert">
+                                                <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        @endif
+                                        <button type="submit" class="btn btn-primary px-4 py-2">
+                                            <i class="fas fa-paper-plane me-1"></i> Kirim Pesan
+                                        </button>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-6 ">
-                                    <input type="email" class="form-control" name="email"
-                                        placeholder="Your Email" required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="subject" placeholder="Subject"
-                                        required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
-                                </div>
-
-                                <div class="col-md-12 text-center">
-                                    <div class="loading">Loading</div>
-                                    <div class="error-message"></div>
-                                    <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                    <button type="submit">Send Message</button>
-                                </div>
-
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div><!-- End Contact Form -->
+
 
                 </div>
 

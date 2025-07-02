@@ -28,7 +28,9 @@ use App\Http\Controllers\{
     OrganizationalStructureController,
     ContactController,
     TestimonialController,
-    PortfolioController
+    PortfolioController,
+    ContactFormController
+    
 };
 
 // ==============================
@@ -38,6 +40,8 @@ use App\Http\Controllers\{
 Route::get('/cek-rute', function () {
     return view('frontend.cek-rute');
 });
+
+Route::post('/contact', [ContactFormController::class, 'send'])->name('contact.send');
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 
