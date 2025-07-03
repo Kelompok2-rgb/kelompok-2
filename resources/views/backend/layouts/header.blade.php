@@ -43,7 +43,7 @@
 
             <div class="user-box dropdown px-3">
                 <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret"
-                   href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{ asset('dashboard/assets/images/' . $image) }}" class="user-img" alt="user">
                     <div class="user-info">
                         <p class="user-name mb-0">{{ Auth::user()->email }}</p>
@@ -52,16 +52,28 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     @if ($role === 'admin')
-                        <li><h6 class="dropdown-header">Page Settings</h6></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.hero.index') }}"><i class="bx bx-photo-album"></i> Hero Section</a></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.about.index') }}"><i class="bx bx-info-circle"></i> About Section</a></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.rule.index') }}"><i class="bx bx-list-check"></i> Rules Section</a></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.clientlogos.index') }}"><i class="bx bx-images"></i> Client Logos</a></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.organization.index') }}"><i class="bx bx-sitemap"></i> Structure Organization</a></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.testimonials.index') }}"><i class="bx bx-comment-detail"></i> Testimonials</a></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.contact.index') }}"><i class="bx bx-envelope"></i> Contact</a></li>
-                        <li><a class="dropdown-item" href="{{ route('backend.portfolio.index') }}"><i class="bx bx-envelope"></i> Portfolio</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <h6 class="dropdown-header">Page Settings</h6>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('backend.hero.index') }}"><i
+                                    class="bx bx-photo-album"></i> Hero Section</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.about.index') }}"><i
+                                    class="bx bx-info-circle"></i> About Section</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.rule.index') }}"><i
+                                    class="bx bx-list-check"></i> Rules Section</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.clientlogos.index') }}"><i
+                                    class="bx bx-images"></i> Client Logos</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.organization.index') }}"><i
+                                    class="bx bx-sitemap"></i> Structure Organization</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.testimonials.index') }}"><i
+                                    class="bx bx-comment-detail"></i> Testimonials</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.contact.index') }}"><i
+                                    class="bx bx-envelope"></i> Contact</a></li>
+                        <li><a class="dropdown-item" href="{{ route('backend.portfolio.index') }}">
+                                <i class="bx bx-briefcase"></i> Portfolio</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                     @endif
                     <li>
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
@@ -79,7 +91,7 @@
 
 {{-- Toggle sidebar --}}
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const toggleBtn = document.querySelector(".mobile-toggle-menu");
         const wrapper = document.querySelector(".wrapper");
         toggleBtn.addEventListener("click", () => wrapper.classList.toggle("toggled"));
