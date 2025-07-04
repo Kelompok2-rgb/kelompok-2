@@ -3,25 +3,25 @@
 @section('title', 'Kategori Pertandingan')
 
 @section('content')
-    <div class="text-center mb-4">
-        <h2>Kategori Pertandingan</h2>
-        <hr>
-    </div>
+<div class="text-center mb-4">
+    <h2>Kategori Pertandingan</h2>
+    <hr>
+</div>
 
-    @if (session('success'))
+ @if (session('success'))
         <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
             {{ session('success') }}
         </div>
     @endif
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ route('backend.kategori_pertandingan.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i class="fas fa-plus me-1"></i>
-            Tambah Kategori Pertandingan
-        </a>
-    </div>
+<div class="mb-3">
+    <a href="{{ route('backend.kategori_pertandingan.create') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i> Tambah Kategori Pertandingan
+    </a>
+</div>
 
-    <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
+<div class="table-responsive">
+    <table id="example" class="table table-bordered table-striped text-center tableExportArea">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
@@ -33,39 +33,44 @@
         </thead>
         <tbody>
             @foreach ($kategoripertandingans as $index => $kategori)
+                @php
+                    // hanya admin & penyelenggara yg boleh edit/hapus
+                    $canEditDelete = Auth::user()->role === 'admin' || Auth::user()->role === 'penyelenggara';
+                @endphp
                 <tr>
-                    <td class="text-center">{{ $index + 1 }}</td>
+                    <td>{{ $index + 1 }}</td>
                     <td>{{ $kategori->nama }}</td>
-                    <td>{{ $kategori->aturan }}</td>
-                    <td>{{ $kategori->batasan }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('backend.kategori_pertandingan.edit', $kategori->id) }}"
-                            class="btn btn-warning btn-sm me-1"><i class="fas fa-edit"></i>Edit</a>
+                    <td>{{ Str::limit($kategori->aturan, 50) }}</td>
+                    <td>{{ Str::limit($kategori->batasan, 50) }}</td>
+                    <td class="text-nowrap">
+                        <a href="{{ $canEditDelete ? route('backend.kategori_pertandingan.edit', $kategori->id) : '#' }}"
+                           class="btn btn-warning btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                           title="{{ !$canEditDelete ? 'Hanya admin atau penyelenggara yang dapat edit' : 'Edit data' }}">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
 
-                        <form action="{{ route('backend.kategori_pertandingan.destroy', $kategori->id) }}" method="POST"
-                            class="d-inline" onsubmit="return handleDeleteKategoriPertandingan()">
+                        <form action="{{ route('backend.kategori_pertandingan.destroy', $kategori->id) }}"
+                              method="POST"
+                              style="display:inline;"
+                              onsubmit="return {{ $canEditDelete ? 'confirmDelete()' : 'false' }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Hapus</button>
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                                    title="{{ !$canEditDelete ? 'Hanya admin atau penyelenggara yang dapat hapus' : 'Hapus data' }}">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
                         </form>
-
-
-
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+</div>
 
-    <script>
-        function handleDeleteKategoriPertandingan() {
-            const userRole = @json(Auth::user()->role);
-            if (userRole !== 'admin' && userRole !== 'penyelenggara') {
-                alert('Hanya admin atau penyelenggara yang dapat menghapus.');
-                return false;
-            }
-            return confirm('Yakin mau hapus?');
-        }
-    </script>
-
+<script>
+    function confirmDelete() {
+        return confirm('Yakin ingin menghapus kategori pertandingan ini?');
+    }
+</script>
 @endsection

@@ -6,6 +6,7 @@ use App\Models\Pertandingan;
 use App\Models\Atlet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class PesertaPertandinganController extends Controller
 {
@@ -17,33 +18,34 @@ class PesertaPertandinganController extends Controller
     // Menampilkan daftar peserta untuk suatu pertandingan
     public function index($pertandingan_id)
     {
+        $user = Auth::user();
         $pertandingan = Pertandingan::with(['atlets', 'penyelenggaraEvent'])->findOrFail($pertandingan_id);
 
         $this->authorizePenyelenggara($pertandingan);
 
         $semuaAtlet = Atlet::all();
 
-        return view('backend.pertandingan.peserta.index', compact('pertandingan', 'semuaAtlet'));
+        return view('backend.pertandingan.peserta.index', compact('pertandingan', 'semuaAtlet', 'user'));
     }
 
     // Menyimpan peserta baru
-    public function store(Request $request, $pertandingan_id)
+    public function store(Request $request, $pertandingan_id): RedirectResponse
     {
         $pertandingan = Pertandingan::with('penyelenggaraEvent')->findOrFail($pertandingan_id);
 
         $this->authorizePenyelenggara($pertandingan);
 
-        $request->validate([
+        $validated = $request->validate([
             'atlet_id' => 'required|exists:atlets,id',
         ]);
 
         // Cegah duplikat peserta
-        if ($pertandingan->atlets()->where('atlet_id', $request->atlet_id)->exists()) {
+        if ($pertandingan->atlets()->where('atlet_id', $validated['atlet_id'])->exists()) {
             return redirect()->back()->with('error', 'Atlet ini sudah terdaftar sebagai peserta.');
         }
 
-        // Jika pivot ada user_id gunakan ini
-        $pertandingan->atlets()->attach($request->atlet_id, [
+        // Insert ke tabel pivot peserta_pertandingans
+        $pertandingan->atlets()->attach($validated['atlet_id'], [
             'user_id' => Auth::id() // jika tabel pivot punya user_id
         ]);
 
@@ -51,7 +53,7 @@ class PesertaPertandinganController extends Controller
     }
 
     // Menghapus peserta dari pertandingan
-    public function destroy($pertandingan_id, $atlet_id)
+    public function destroy($pertandingan_id, $atlet_id): RedirectResponse
     {
         $pertandingan = Pertandingan::with('penyelenggaraEvent')->findOrFail($pertandingan_id);
 
@@ -62,8 +64,8 @@ class PesertaPertandinganController extends Controller
         return redirect()->back()->with('success', 'Peserta berhasil dihapus.');
     }
 
-    // Helper authorize
-    private function authorizePenyelenggara(Pertandingan $pertandingan)
+    // ===== Helper authorize =====
+    private function authorizePenyelenggara(Pertandingan $pertandingan): void
     {
         $user = Auth::user();
 

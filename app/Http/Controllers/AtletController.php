@@ -18,13 +18,14 @@ class AtletController extends Controller
 
     public function index()
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
 
+        // Admin bisa melihat semua data
         if ($user->role === 'admin') {
             $atlets = Atlet::with('club')->get();
         } else {
-            $atlets = Atlet::with('club')->where('user_id', $user->id)->get();
+            // Klub bisa melihat semua data, tapi tidak bisa edit/hapus data orang lain
+            $atlets = Atlet::with('club')->get();
         }
 
         return view('backend.atlet.index', compact('atlets'));
@@ -97,10 +98,10 @@ class AtletController extends Controller
     private function validateAtlet(Request $request): array
     {
         return $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|max:2048',
+            'nama'     => 'required|string|max:255',
+            'foto'     => 'nullable|image|max:2048',
             'prestasi' => 'nullable|string',
-            'club_id' => 'nullable',
+            'club_id'  => 'nullable|exists:clubs,id',
         ]);
     }
 
@@ -120,13 +121,14 @@ class AtletController extends Controller
 
     private function authorizeAtlet(Atlet $atlet): void
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
 
+        // Admin bebas
         if ($user->role === 'admin') {
             return;
         }
 
+        // Jika bukan admin, hanya boleh edit/hapus data miliknya
         if ($atlet->user_id !== $user->id) {
             abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }

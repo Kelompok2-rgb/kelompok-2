@@ -42,15 +42,37 @@
                         <p class="card-text mb-1"><strong>Tgl Lahir:</strong> {{ $anggota->tgl_lahir }}</p>
                         <p class="card-text mb-1"><strong>Peran:</strong> {{ $anggota->peran }}</p>
                         <p class="card-text"><strong>WA:</strong> {{ $anggota->kontak }}</p>
-                        <a href="{{ route('backend.rekap_latihan.index', $anggota->id) }}" class="btn btn-sm btn-secondary">Rekap Latihan</a>
+
+                        @php
+                            $canEditDelete = Auth::user()->role === 'admin' || Auth::id() === $anggota->user_id;
+                        @endphp
+
+                        @if($canEditDelete)
+                            <a href="{{ route('backend.rekap_latihan.index', $anggota->id) }}"
+                               class="btn btn-sm btn-secondary">Rekap Latihan</a>
+                        @else
+                            <button class="btn btn-sm btn-secondary" disabled
+                                    title="Hanya admin atau pemilik data yang dapat akses rekap">Rekap Latihan</button>
+                        @endif
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                            <a href="{{ route('backend.anggota.edit', $anggota->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i>Edit</a>
-                            <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST" class="d-inline" onsubmit="return handleDeleteAnggota()">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
-                            </form>
+                        <a href="{{ $canEditDelete ? route('backend.anggota.edit', $anggota->id) : '#' }}"
+                           class="btn btn-sm btn-warning {{ !$canEditDelete ? 'disabled' : '' }}"
+                           title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat edit' : 'Edit data' }}">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form action="{{ route('backend.anggota.destroy', $anggota->id) }}" method="POST"
+                              class="d-inline"
+                              onsubmit="return {{ $canEditDelete ? 'confirmDelete()' : 'false' }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="btn btn-sm btn-danger {{ !$canEditDelete ? 'disabled' : '' }}"
+                                    title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat hapus' : 'Hapus data' }}">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -84,25 +106,21 @@
             overflow-y: auto;
             background-color: rgba(0, 0, 0, 0.9);
         }
-
         .modal-content-wrapper {
             text-align: center;
             max-width: 90%;
             margin: auto;
         }
-
         .modal-image {
             max-width: 100%;
             max-height: 75vh;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
-
         .modal-title {
             font-size: 1.8rem;
             font-weight: bold;
         }
-
         .close {
             position: absolute;
             top: 20px;
@@ -126,13 +144,8 @@
             document.getElementById("imageModal").style.display = "none";
         }
 
-        function handleDeleteAnggota() {
-            const userRole = @json(Auth::user()->role);
-            if (userRole !== 'admin') {
-                alert('Hanya admin yang dapat menghapus');
-                return false;
-            }
-            return confirm('Yakin ingin menghapus?');
+        function confirmDelete() {
+            return confirm('Yakin ingin menghapus data ini?');
         }
     </script>
 @endsection

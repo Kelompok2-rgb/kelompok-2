@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Data Atlet</title>
-     <style>
+    <style>
         body {
             font-family: sans-serif;
             font-size: 12px;
@@ -16,6 +16,7 @@
             border: 1px solid #000;
             padding: 6px;
             text-align: center;
+            vertical-align: middle;
         }
         th {
             background-color: #f2f2f2;
@@ -23,6 +24,12 @@
         h2 {
             text-align: center;
             margin-bottom: 0;
+        }
+        .foto {
+            width: 3cm;
+            height: 3cm;
+            object-fit: cover;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -44,7 +51,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         @if($atlet->foto)
-                            <img src="{{ public_path('storage/' . $atlet->foto) }}" alt="Foto">
+                            <img src="{{ public_path('storage/' . $atlet->foto) }}" alt="Foto" class="foto">
                         @else
                             Tidak Ada
                         @endif

@@ -21,15 +21,10 @@ class DetailHasilPertandinganController extends Controller
 
         $hasilPertandingan = HasilPertandingan::with('pertandingan')->findOrFail($hasilPertandinganId);
 
-        if ($user->role === 'admin') {
-            $detailHasil = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)->get();
-        } else {
-            $detailHasil = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)
-                ->where('user_id', $user->id)
-                ->get();
-        }
+        // Semua user lihat semua data hasil untuk pertandingan ini
+        $detailHasil = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)->get();
 
-        return view('backend.hasil_pertandingan.detail.index', compact('hasilPertandingan', 'detailHasil'));
+        return view('backend.hasil_pertandingan.detail.index', compact('hasilPertandingan', 'detailHasil', 'user'));
     }
 
     public function create($hasilPertandinganId)
@@ -41,7 +36,7 @@ class DetailHasilPertandinganController extends Controller
                         ->pluck('nama')
                         ->toArray();
 
-        // Ambil peserta yang belum diinput (berdasarkan nama atlet)
+        // Ambil peserta yang belum diinput
         $pesertas = PesertaPertandingan::where('pertandingan_id', $hasilPertandingan->pertandingan_id)
             ->whereHas('atlet', function ($query) use ($sudahInput) {
                 $query->whereNotIn('nama', $sudahInput);
@@ -66,7 +61,7 @@ class DetailHasilPertandinganController extends Controller
             'catatan_juri' => 'nullable|string',
         ]);
 
-        // Cegah input duplikat untuk nama yang sama di pertandingan ini
+        // Cegah duplikat nama di hasil ini
         $sudahAda = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)
             ->where('nama', $request->nama)
             ->exists();
@@ -86,24 +81,24 @@ class DetailHasilPertandinganController extends Controller
             'skor'         => $request->skor,
             'rangking'     => $request->rangking,
             'catatan_juri' => $request->catatan_juri,
-            'user_id'      => Auth::id(), // simpan user yang input
+            'user_id'      => Auth::id(),
         ]);
 
         return redirect()->route('backend.detail_hasil_pertandingan.index', $hasilPertandinganId)
             ->with('success', 'Hasil pertandingan berhasil disimpan.');
     }
 
-    public function edit($pertandingan_id, $id)
+    public function edit($hasilPertandinganId, $id)
     {
         $detail = DetailHasilPertandingan::findOrFail($id);
         $this->authorizeDetail($detail);
 
-        $hasilPertandingan = HasilPertandingan::findOrFail($pertandingan_id);
+        $hasilPertandingan = HasilPertandingan::findOrFail($hasilPertandinganId);
 
         return view('backend.hasil_pertandingan.detail.edit', compact('detail', 'hasilPertandingan'));
     }
 
-    public function update(Request $request, $pertandingan_id, $id)
+    public function update(Request $request, $hasilPertandinganId, $id)
     {
         $detail = DetailHasilPertandingan::findOrFail($id);
         $this->authorizeDetail($detail);
@@ -132,22 +127,21 @@ class DetailHasilPertandinganController extends Controller
             'catatan_juri' => $request->catatan_juri,
         ]);
 
-        return redirect()->route('backend.detail_hasil_pertandingan.index', $pertandingan_id)
+        return redirect()->route('backend.detail_hasil_pertandingan.index', $hasilPertandinganId)
             ->with('success', 'Hasil pertandingan berhasil diperbarui.');
     }
 
-    public function destroy($pertandingan_id, $id)
+    public function destroy($hasilPertandinganId, $id)
     {
         $detail = DetailHasilPertandingan::findOrFail($id);
         $this->authorizeDetail($detail);
 
         $detail->delete();
 
-        return redirect()->route('backend.detail_hasil_pertandingan.index', $pertandingan_id)
+        return redirect()->route('backend.detail_hasil_pertandingan.index', $hasilPertandinganId)
             ->with('success', 'Hasil pertandingan berhasil dihapus.');
     }
 
-    // ===== Helper untuk cek hak akses =====
     private function authorizeDetail(DetailHasilPertandingan $detail)
     {
         $user = Auth::user();

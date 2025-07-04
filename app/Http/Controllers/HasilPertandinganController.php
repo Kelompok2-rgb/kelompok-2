@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HasilPertandingan;
 use App\Models\Pertandingan;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class HasilPertandinganController extends Controller
@@ -18,46 +19,41 @@ class HasilPertandinganController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
-            $hasilPertandingans = HasilPertandingan::with('pertandingan')->get();
-        } else {
-            $hasilPertandingans = HasilPertandingan::with('pertandingan')
-                                    ->where('user_id', $user->id)
-                                    ->get();
-        }
+        $hasilPertandingans = $user->role === 'admin'
+            ? HasilPertandingan::with('pertandingan')->latest()->get()
+            : HasilPertandingan::with('pertandingan')
+                ->where('user_id', $user->id)
+                ->latest()
+                ->get();
 
-        return view('backend.hasil_pertandingan.index', compact('hasilPertandingans'));
+        return view('backend.hasil_pertandingan.index', compact('hasilPertandingans', 'user'));
     }
 
     public function create()
     {
         $user = Auth::user();
 
-        // admin bisa input semua pertandingan
-        if ($user->role === 'admin') {
-            $pertandingans = Pertandingan::doesntHave('hasilPertandingan')->get();
-        } else {
-            // jika juri, bisa input pertandingan yang belum ada hasil & sesuai otorisasi (misalnya di sini contoh semua pertandingan)
-            $pertandingans = Pertandingan::doesntHave('hasilPertandingan')->get();
-        }
+        $pertandingans = $user->role === 'admin'
+            ? Pertandingan::doesntHave('hasilPertandingan')->get()
+            : Pertandingan::doesntHave('hasilPertandingan')->get(); // nanti bisa difilter by juri jika tabel mendukung
 
         return view('backend.hasil_pertandingan.create', compact('pertandingans'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $this->validateHasil($request);
 
         HasilPertandingan::create([
             'pertandingan_id' => $validated['pertandingan_id'],
-            'user_id' => Auth::id(),
+            'user_id'         => Auth::id(),
         ]);
 
         return redirect()->route('backend.hasil_pertandingan.index')
-                         ->with('success', 'Pertandingan berhasil ditambahkan ke daftar hasil.');
+            ->with('success', 'Pertandingan berhasil ditambahkan ke daftar hasil.');
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $hasil = HasilPertandingan::findOrFail($id);
 
@@ -66,10 +62,10 @@ class HasilPertandinganController extends Controller
         $hasil->delete();
 
         return redirect()->route('backend.hasil_pertandingan.index')
-                         ->with('success', 'Hasil pertandingan berhasil dihapus');
+            ->with('success', 'Hasil pertandingan berhasil dihapus.');
     }
 
-    // ===== Helper Method =====
+    // ===== Helper Methods =====
 
     private function validateHasil(Request $request): array
     {

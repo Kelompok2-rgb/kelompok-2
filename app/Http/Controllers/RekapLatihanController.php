@@ -6,6 +6,7 @@ use App\Models\Anggota;
 use App\Models\RekapLatihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class RekapLatihanController extends Controller
 {
@@ -17,6 +18,8 @@ class RekapLatihanController extends Controller
     // Menampilkan halaman input & daftar rekap dalam satu halaman
     public function index($anggota_id)
     {
+        $user = Auth::user();
+
         $anggota = Anggota::findOrFail($anggota_id);
 
         $this->authorizeAnggota($anggota);
@@ -25,17 +28,17 @@ class RekapLatihanController extends Controller
             ->orderBy('tanggal', 'desc')
             ->get();
 
-        return view('backend.anggota.rekap_latihan.index', compact('anggota', 'rekap'));
+        return view('backend.anggota.rekap_latihan.index', compact('anggota', 'rekap', 'user'));
     }
 
     // Menyimpan data rekap baru
-    public function store(Request $request, $anggota_id)
+    public function store(Request $request, $anggota_id): RedirectResponse
     {
         $anggota = Anggota::findOrFail($anggota_id);
 
         $this->authorizeAnggota($anggota);
 
-        $request->validate([
+        $validated = $request->validate([
             'tanggal'   => 'required|date',
             'jarak'     => 'required|string|max:255',
             'lemparan1' => 'required|numeric',
@@ -46,14 +49,15 @@ class RekapLatihanController extends Controller
         ]);
 
         RekapLatihan::create([
+            'tanggal'    => $validated['tanggal'],
+            'jarak'      => $validated['jarak'],
+            'lemparan1'  => $validated['lemparan1'],
+            'lemparan2'  => $validated['lemparan2'] ?? null,
+            'lemparan3'  => $validated['lemparan3'] ?? null,
+            'lemparan4'  => $validated['lemparan4'] ?? null,
+            'lemparan5'  => $validated['lemparan5'] ?? null,
             'anggota_id' => $anggota_id,
-            'tanggal'    => $request->tanggal,
-            'jarak'      => $request->jarak,
-            'lemparan1'  => $request->lemparan1,
-            'lemparan2'  => $request->lemparan2,
-            'lemparan3'  => $request->lemparan3,
-            'lemparan4'  => $request->lemparan4,
-            'lemparan5'  => $request->lemparan5,
+            'user_id'    => Auth::id(), // ✅ pastikan user_id ikut disimpan
         ]);
 
         return redirect()
@@ -61,7 +65,7 @@ class RekapLatihanController extends Controller
             ->with('success', 'Data rekap latihan berhasil ditambahkan.');
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $rekap = RekapLatihan::findOrFail($id);
         $anggota = $rekap->anggota;
@@ -74,8 +78,7 @@ class RekapLatihanController extends Controller
     }
 
     // ===== Helper Authorization =====
-
-    private function authorizeAnggota(Anggota $anggota)
+    private function authorizeAnggota(Anggota $anggota): void
     {
         $user = Auth::user();
 
@@ -83,7 +86,6 @@ class RekapLatihanController extends Controller
             return;
         }
 
-        // misalnya anggota memiliki user_id
         if ($anggota->user_id !== $user->id) {
             abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }

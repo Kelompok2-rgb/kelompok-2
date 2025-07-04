@@ -19,13 +19,11 @@ class JuriController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
-            $juris = Juri::all();
-        } else {
-            $juris = Juri::where('user_id', $user->id)->get();
-        }
+        $juris = $user->role === 'admin'
+            ? Juri::latest()->get()
+            : Juri::where('user_id', $user->id)->latest()->get();
 
-        return view('backend.juri.index', compact('juris'));
+        return view('backend.juri.index', compact('juris', 'user'));
     }
 
     public function create()
@@ -35,14 +33,10 @@ class JuriController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama_juri' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'sertifikat' => 'required|mimes:pdf|max:2048',
-        ]);
+        $validated = $this->validateJuri($request);
 
         if ($request->hasFile('sertifikat')) {
-            $validated['sertifikat'] = $request->file('sertifikat')->store('sertifikat', 'public');
+            $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         }
 
         $validated['user_id'] = Auth::id();
@@ -67,17 +61,11 @@ class JuriController extends Controller
 
         $this->authorizeJuri($juri);
 
-        $validated = $request->validate([
-            'nama_juri' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'sertifikat' => 'nullable|mimes:pdf|max:2048',
-        ]);
+        $validated = $this->validateJuri($request, false);
 
         if ($request->hasFile('sertifikat')) {
-            if ($juri->sertifikat && Storage::disk('public')->exists($juri->sertifikat)) {
-                Storage::disk('public')->delete($juri->sertifikat);
-            }
-            $validated['sertifikat'] = $request->file('sertifikat')->store('sertifikat', 'public');
+            $this->deleteOldSertifikat($juri->sertifikat);
+            $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         }
 
         $juri->update($validated);
@@ -91,9 +79,7 @@ class JuriController extends Controller
 
         $this->authorizeJuri($juri);
 
-        if ($juri->sertifikat && Storage::disk('public')->exists($juri->sertifikat)) {
-            Storage::disk('public')->delete($juri->sertifikat);
-        }
+        $this->deleteOldSertifikat($juri->sertifikat);
 
         $juri->delete();
 
@@ -101,6 +87,27 @@ class JuriController extends Controller
     }
 
     // ===== Helper Methods =====
+
+    private function validateJuri(Request $request, bool $isStore = true): array
+    {
+        return $request->validate([
+            'nama_juri'     => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat'    => ($isStore ? 'required' : 'nullable') . '|mimes:pdf|max:2048',
+        ]);
+    }
+
+    private function handleSertifikatUpload(Request $request): string
+    {
+        return $request->file('sertifikat')->store('sertifikat', 'public');
+    }
+
+    private function deleteOldSertifikat(?string $path): void
+    {
+        if ($path && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
+    }
 
     private function authorizeJuri(Juri $juri): void
     {

@@ -16,13 +16,11 @@
 
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="{{ route('backend.club.create') }}" class="btn btn-primary"
-            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;"><i
-                class="fas fa-plus me-1"></i>
-            Tambah Klub
+            style="font-size: 17px; padding: 6px 12px; height: 38px; display: flex; align-items: center;">
+            <i class="fas fa-plus me-1"></i> Tambah Klub
         </a>
-
-
     </div>
+
     <table id="example" class="table table-bordered table-striped mt-3 text-center tableExportArea">
         <thead class="table-dark">
             <tr>
@@ -35,23 +33,33 @@
         </thead>
         <tbody>
             @foreach ($clubs as $club)
+                @php
+                    $canEditDelete = Auth::user()->role === 'admin' || Auth::id() === $club->user_id;
+                @endphp
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $club->nama }}</td>
                     <td>{{ $club->lokasi }}</td>
                     <td>{{ $club->deskripsi }}</td>
                     <td>
-                        <a href="{{ route('backend.club.edit', $club->id) }}" class="btn btn-warning"> <i
-                                class="fas fa-edit"></i>Edit</a>
-                        <form action="{{ route('backend.club.destroy', $club->id) }}" method="POST" style="display:inline;"
-                            onsubmit="return handleDeleteClub()">
+                        <a href="{{ $canEditDelete ? route('backend.club.edit', $club->id) : '#' }}"
+                           class="btn btn-warning {{ !$canEditDelete ? 'disabled' : '' }}"
+                           title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat edit' : 'Edit data' }}">
+                           <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form action="{{ route('backend.club.destroy', $club->id) }}"
+                              method="POST"
+                              style="display:inline;"
+                              onsubmit="return {{ $canEditDelete ? 'confirmDelete()' : 'false' }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                            <button type="submit"
+                                    class="btn btn-danger {{ !$canEditDelete ? 'disabled' : '' }}"
+                                    title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat hapus' : 'Hapus data' }}">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
                         </form>
-
-
-
                     </td>
                 </tr>
             @endforeach
@@ -59,14 +67,8 @@
     </table>
 
     <script>
-        function handleDeleteClub() {
-            const userRole = @json(Auth::user()->role);
-            if (userRole !== 'admin') {
-                alert('Hanya admin yang dapat menghapus');
-                return false;
-            }
-            return confirm('Yakin ingin menghapus?');
+        function confirmDelete() {
+            return confirm('Yakin ingin menghapus data klub ini?');
         }
     </script>
-
 @endsection

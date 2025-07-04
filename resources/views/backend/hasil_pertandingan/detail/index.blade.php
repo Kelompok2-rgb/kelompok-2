@@ -10,9 +10,8 @@
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-                <i class="fas fa-check-circle me-1"></i> {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                {{ session('success') }}
             </div>
         @endif
 
@@ -27,18 +26,17 @@
             </a>
         </div>
 
-
         {{-- Tabel --}}
         <table class="table table-bordered table-striped text-center" id="example">
             <thead class="table-dark">
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Lemparan 1</th>
-                    <th>Lemparan 2</th>
-                    <th>Lemparan 3</th>
-                    <th>Lemparan 4</th>
-                    <th>Lemparan 5</th>
+                    <th>L1</th>
+                    <th>L2</th>
+                    <th>L3</th>
+                    <th>L4</th>
+                    <th>L5</th>
                     <th>Skor</th>
                     <th>Rangking</th>
                     <th>Catatan Juri</th>
@@ -47,6 +45,9 @@
             </thead>
             <tbody>
                 @foreach ($detailHasil as $index => $detail)
+                    @php
+                        $canEditDelete = Auth::user()->role === 'admin' || Auth::id() === $detail->user_id;
+                    @endphp
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $detail->nama }}</td>
@@ -59,16 +60,20 @@
                         <td>{{ $detail->rangking }}</td>
                         <td>{{ $detail->catatan_juri }}</td>
                         <td class="text-nowrap">
-                            <a href="{{ route('backend.detail_hasil_pertandingan.edit', [$hasilPertandingan->id, $detail->id]) }}"
-                                class="btn btn-warning btn-sm me-1">
+                            <a href="{{ $canEditDelete ? route('backend.detail_hasil_pertandingan.edit', [$hasilPertandingan->id, $detail->id]) : '#' }}"
+                                class="btn btn-warning btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                                title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat edit' : 'Edit data' }}">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                             <form
                                 action="{{ route('backend.detail_hasil_pertandingan.destroy', [$hasilPertandingan->id, $detail->id]) }}"
-                                method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                method="POST" class="d-inline"
+                                onsubmit="return {{ $canEditDelete ? 'confirmDelete()' : 'false' }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
+                                <button type="submit"
+                                    class="btn btn-danger btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                                    title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat hapus' : 'Hapus data' }}">
                                     <i class="fas fa-trash"></i> Hapus
                                 </button>
                             </form>
@@ -78,4 +83,10 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        function confirmDelete() {
+            return confirm('Yakin ingin menghapus data hasil ini?');
+        }
+    </script>
 @endsection

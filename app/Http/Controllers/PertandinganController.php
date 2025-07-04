@@ -7,6 +7,7 @@ use App\Models\Pertandingan;
 use App\Models\PenyelenggaraEvent;
 use App\Models\Juri;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class PertandinganController extends Controller
 {
@@ -19,43 +20,37 @@ class PertandinganController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
-            $pertandingans = Pertandingan::with(['penyelenggaraEvent', 'juri'])->latest()->get();
-        } else {
-            $pertandingans = Pertandingan::whereHas('penyelenggaraEvent', function ($query) use ($user) {
-                    $query->where('user_id', $user->id);
-                })
-                ->with(['penyelenggaraEvent', 'juri'])
-                ->latest()
-                ->get();
-        }
+        $pertandingans = $user->role === 'admin'
+            ? Pertandingan::with(['penyelenggaraEvent', 'juri'])->latest()->get()
+            : Pertandingan::whereHas('penyelenggaraEvent', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->with(['penyelenggaraEvent', 'juri'])
+            ->latest()
+            ->get();
 
-        return view('backend.pertandingan.index', compact('pertandingans'));
+        return view('backend.pertandingan.index', compact('pertandingans', 'user'));
     }
 
     public function create()
     {
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
-            $penyelenggaras = PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get();
-        } else {
-            $penyelenggaras = PenyelenggaraEvent::where('user_id', $user->id)->orderBy('nama_penyelenggara_event')->get();
-        }
+        $penyelenggaras = $user->role === 'admin'
+            ? PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get()
+            : PenyelenggaraEvent::where('user_id', $user->id)->orderBy('nama_penyelenggara_event')->get();
 
         $juris = Juri::orderBy('nama_juri')->get();
 
         return view('backend.pertandingan.create', compact('penyelenggaras', 'juris'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $this->validatePertandingan($request);
-
         $user = Auth::user();
 
         if ($user->role !== 'admin') {
-            // Pastikan penyelenggara yg dipilih benar-benar milik user ini
             $penyelenggara = PenyelenggaraEvent::where('id', $validated['penyelenggara_event_id'])
                 ->where('user_id', $user->id)
                 ->first();
@@ -65,7 +60,6 @@ class PertandinganController extends Controller
             }
         }
 
-        // Jika di tabel pertandingan ada `user_id`, masukkan otomatis
         $validated['user_id'] = $user->id;
 
         Pertandingan::create($validated);
@@ -79,25 +73,23 @@ class PertandinganController extends Controller
         $this->authorizePenyelenggara($pertandingan);
 
         $user = Auth::user();
-        if ($user->role === 'admin') {
-            $penyelenggaras = PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get();
-        } else {
-            $penyelenggaras = PenyelenggaraEvent::where('user_id', $user->id)->orderBy('nama_penyelenggara_event')->get();
-        }
+
+        $penyelenggaras = $user->role === 'admin'
+            ? PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get()
+            : PenyelenggaraEvent::where('user_id', $user->id)->orderBy('nama_penyelenggara_event')->get();
 
         $juris = Juri::orderBy('nama_juri')->get();
 
         return view('backend.pertandingan.edit', compact('pertandingan', 'penyelenggaras', 'juris'));
     }
 
-    public function update(Request $request, Pertandingan $pertandingan)
+    public function update(Request $request, Pertandingan $pertandingan): RedirectResponse
     {
         $this->authorizePenyelenggara($pertandingan);
 
         $validated = $this->validatePertandingan($request);
-
-        // Non admin harus cek apakah penyelenggara yang diupdate miliknya
         $user = Auth::user();
+
         if ($user->role !== 'admin') {
             $penyelenggara = PenyelenggaraEvent::where('id', $validated['penyelenggara_event_id'])
                 ->where('user_id', $user->id)
@@ -114,7 +106,7 @@ class PertandinganController extends Controller
             ->with('success', 'Pertandingan berhasil diperbarui.');
     }
 
-    public function destroy(Pertandingan $pertandingan)
+    public function destroy(Pertandingan $pertandingan): RedirectResponse
     {
         $this->authorizePenyelenggara($pertandingan);
 

@@ -17,15 +17,8 @@ class AnggotaController extends Controller
 
     public function index()
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-
-        if ($user->role === 'admin') {
-            $anggotas = Anggota::all();
-        } else {
-            $anggotas = Anggota::where('user_id', $user->id)->get();
-        }
-
+        // Semua role bisa melihat semua data anggota
+        $anggotas = Anggota::all();
         return view('backend.anggota.index', compact('anggotas'));
     }
 
@@ -38,11 +31,12 @@ class AnggotaController extends Controller
     {
         $validated = $this->validateAnggota($request);
         $validated['foto'] = $this->handleFotoUpload($request);
-        $validated['user_id'] = Auth::id(); // simpan user yang input
+        $validated['user_id'] = Auth::id(); // Simpan user yang input
 
         Anggota::create($validated);
 
-        return redirect()->route('backend.anggota.index')->with('success', 'Anggota berhasil ditambahkan');
+        return redirect()->route('backend.anggota.index')
+                         ->with('success', 'Anggota berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -69,7 +63,8 @@ class AnggotaController extends Controller
 
         $anggota->update($validated);
 
-        return redirect()->route('backend.anggota.index')->with('success', 'Anggota berhasil diperbarui');
+        return redirect()->route('backend.anggota.index')
+                         ->with('success', 'Anggota berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
@@ -79,23 +74,23 @@ class AnggotaController extends Controller
         $this->authorizeAnggota($anggota);
 
         $this->deleteOldFoto($anggota->foto);
-
         $anggota->delete();
 
-        return redirect()->route('backend.anggota.index')->with('success', 'Anggota berhasil dihapus');
+        return redirect()->route('backend.anggota.index')
+                         ->with('success', 'Anggota berhasil dihapus');
     }
 
-    // ===== Helper Methods =====
+    // ============= Helper Methods =============
 
     private function validateAnggota(Request $request): array
     {
         return $request->validate([
-            'nama' => 'required|string|max:255',
-            'foto' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
-            'klub' => 'nullable|string|max:255',
+            'nama'      => 'required|string|max:255',
+            'foto'      => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
+            'klub'      => 'nullable|string|max:255',
             'tgl_lahir' => 'required|date',
-            'peran' => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
-            'kontak' => 'required|digits_between:8,15',
+            'peran'     => 'required|in:Atlet,Pengurus,Atlet & Pengurus',
+            'kontak'    => 'required|digits_between:8,15',
         ]);
     }
 
@@ -115,13 +110,14 @@ class AnggotaController extends Controller
 
     private function authorizeAnggota(Anggota $anggota): void
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
 
+        // Admin bebas akses semua
         if ($user->role === 'admin') {
             return;
         }
 
+        // Selain admin hanya bisa edit / hapus data miliknya sendiri
         if ($anggota->user_id !== $user->id) {
             abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }

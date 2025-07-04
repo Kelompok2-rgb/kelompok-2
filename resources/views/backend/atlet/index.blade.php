@@ -42,12 +42,27 @@
                         <p class="mb-1"><strong>Prestasi:</strong> {{ $atlet->prestasi ?: '-' }}</p>
                     </div>
 
+                    @php
+                        $canEditDelete = Auth::user()->role === 'admin' || Auth::id() === $atlet->user_id;
+                    @endphp
+
                     <div class="card-footer d-flex justify-content-between">
-                        <a href="{{ route('backend.atlet.edit', $atlet->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                        <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST" onsubmit="return handleDelete()" class="d-inline">
+                        <a href="{{ $canEditDelete ? route('backend.atlet.edit', $atlet->id) : '#' }}"
+                           class="btn btn-warning btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                           title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat edit' : 'Edit data' }}">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form action="{{ route('backend.atlet.destroy', $atlet->id) }}" method="POST"
+                              class="d-inline"
+                              onsubmit="return {{ $canEditDelete ? 'confirmDelete()' : 'false' }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                                    title="{{ !$canEditDelete ? 'Hanya admin atau pemilik data yang dapat hapus' : 'Hapus data' }}">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -82,26 +97,22 @@
             overflow-y: auto;
             background-color: rgba(0, 0, 0, 0.9);
         }
-
         .modal-content-wrapper {
             text-align: center;
             max-width: 90%;
             margin: auto;
         }
-
         .modal-image {
             max-width: 100%;
             max-height: 75vh;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
-
         .modal-title {
             font-size: 1.8rem;
             font-weight: bold;
             color: white;
         }
-
         .close {
             position: absolute;
             top: 20px;
@@ -125,12 +136,7 @@
             document.getElementById("imageModal").style.display = "none";
         }
 
-        function handleDelete() {
-            const userRole = @json(Auth::user()->role);
-            if (userRole !== 'admin') {
-                alert('Hanya admin yang dapat menghapus');
-                return false;
-            }
+        function confirmDelete() {
             return confirm('Yakin ingin menghapus data atlet ini?');
         }
     </script>

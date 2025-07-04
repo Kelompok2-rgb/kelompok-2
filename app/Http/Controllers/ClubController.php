@@ -18,11 +18,8 @@ class ClubController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role === 'admin') {
-            $clubs = Club::all();
-        } else {
-            $clubs = Club::where('user_id', $user->id)->get();
-        }
+        // semua user bisa lihat semua data club
+        $clubs = Club::all();
 
         return view('backend.club.index', compact('clubs'));
     }
