@@ -6,6 +6,7 @@ use App\Models\Atlet;
 use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AtletController extends Controller
@@ -13,12 +14,19 @@ class AtletController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,klub,atlet');
     }
 
     public function index()
     {
-        $atlets = Atlet::with('club')->get();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            $atlets = Atlet::with('club')->get();
+        } else {
+            $atlets = Atlet::with('club')->where('user_id', $user->id)->get();
+        }
+
         return view('backend.atlet.index', compact('atlets'));
     }
 
@@ -36,6 +44,8 @@ class AtletController extends Controller
             $validated['foto'] = $this->handleFotoUpload($request);
         }
 
+        $validated['user_id'] = Auth::id();
+
         Atlet::create($validated);
 
         return redirect()->route('backend.atlet.index')->with('success', 'Atlet berhasil ditambahkan');
@@ -44,6 +54,9 @@ class AtletController extends Controller
     public function edit($id)
     {
         $atlet = Atlet::findOrFail($id);
+
+        $this->authorizeAtlet($atlet);
+
         $clubs = Club::all();
         return view('backend.atlet.edit', compact('atlet', 'clubs'));
     }
@@ -51,6 +64,8 @@ class AtletController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $atlet = Atlet::findOrFail($id);
+
+        $this->authorizeAtlet($atlet);
 
         $validated = $this->validateAtlet($request);
 
@@ -67,6 +82,8 @@ class AtletController extends Controller
     public function destroy($id): RedirectResponse
     {
         $atlet = Atlet::findOrFail($id);
+
+        $this->authorizeAtlet($atlet);
 
         $this->deleteOldFoto($atlet->foto);
 
@@ -87,15 +104,31 @@ class AtletController extends Controller
         ]);
     }
 
-    private function handleFotoUpload(Request $request): string
+    private function handleFotoUpload(Request $request): ?string
     {
-        return $request->file('foto')->store('foto', 'public');
+        return $request->hasFile('foto')
+            ? $request->file('foto')->store('foto', 'public')
+            : null;
     }
 
     private function deleteOldFoto(?string $path): void
     {
         if ($path && Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
+        }
+    }
+
+    private function authorizeAtlet(Atlet $atlet): void
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($atlet->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }
     }
 }

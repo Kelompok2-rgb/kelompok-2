@@ -16,6 +16,7 @@ class Anggota extends Model
         'tgl_lahir',
         'peran',
         'kontak',
+        'user_id'
       
     ];
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggota;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AnggotaController extends Controller
@@ -12,12 +13,19 @@ class AnggotaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,klub,anggota');
     }
 
     public function index()
     {
-        $anggotas = Anggota::all();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            $anggotas = Anggota::all();
+        } else {
+            $anggotas = Anggota::where('user_id', $user->id)->get();
+        }
+
         return view('backend.anggota.index', compact('anggotas'));
     }
 
@@ -29,8 +37,8 @@ class AnggotaController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $this->validateAnggota($request);
-
         $validated['foto'] = $this->handleFotoUpload($request);
+        $validated['user_id'] = Auth::id(); // simpan user yang input
 
         Anggota::create($validated);
 
@@ -40,12 +48,17 @@ class AnggotaController extends Controller
     public function edit($id)
     {
         $anggota = Anggota::findOrFail($id);
+
+        $this->authorizeAnggota($anggota);
+
         return view('backend.anggota.edit', compact('anggota'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $anggota = Anggota::findOrFail($id);
+
+        $this->authorizeAnggota($anggota);
 
         $validated = $this->validateAnggota($request);
 
@@ -62,6 +75,8 @@ class AnggotaController extends Controller
     public function destroy($id): RedirectResponse
     {
         $anggota = Anggota::findOrFail($id);
+
+        $this->authorizeAnggota($anggota);
 
         $this->deleteOldFoto($anggota->foto);
 
@@ -95,6 +110,20 @@ class AnggotaController extends Controller
     {
         if ($path && Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
+        }
+    }
+
+    private function authorizeAnggota(Anggota $anggota): void
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($anggota->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }
     }
 }

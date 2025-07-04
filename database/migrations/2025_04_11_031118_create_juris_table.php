@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_juri'); // GANTI dari 'nama' jadi 'nama_juri'
             $table->date('tanggal_lahir');
             $table->string('sertifikat');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class Atlet extends Model
         'foto',
         'prestasi',
         'club_id', // tambahkan ini
+        'user_id'
     ];
 
     /**
