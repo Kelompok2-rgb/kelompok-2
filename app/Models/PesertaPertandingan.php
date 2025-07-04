@@ -11,7 +11,7 @@ class PesertaPertandingan extends Model
 
     protected $table = 'peserta_pertandingan'; // Nama tabel
 
-    protected $fillable = ['pertandingan_id', 'atlet_id'];
+    protected $fillable = ['pertandingan_id', 'atlet_id', 'user_id'];
 
     public function atlet()
     {

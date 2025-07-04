@@ -16,6 +16,7 @@ class RekapLatihan extends Model
         'lemparan1',
         'lemparan2',
         'lemparan3',
+        'user_id'
 
     ];
 

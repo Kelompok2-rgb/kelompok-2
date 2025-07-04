@@ -17,6 +17,7 @@ class Jadwal_Pertandingan extends Model
         'waktu',
         'lokasi',
         'deskripsi',
+        'user_id'
     ];
 
     protected $casts = [

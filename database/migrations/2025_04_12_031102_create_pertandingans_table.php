@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pertandingans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pertandingan');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             // Relasi ke tabel penyelenggara_events
             $table->foreignId('penyelenggara_event_id')

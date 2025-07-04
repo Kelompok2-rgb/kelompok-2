@@ -13,6 +13,7 @@ public function up()
         $table->string('judul');
         $table->text('deskripsi')->nullable();
         $table->string('gambar');
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->timestamps();
     });
     

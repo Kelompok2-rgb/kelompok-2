@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Galeri;
 
 class GaleriController extends Controller
@@ -12,12 +13,18 @@ class GaleriController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,penyelenggara');
     }
 
     public function index()
     {
-        $galeris = Galeri::paginate(10);
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            $galeris = Galeri::paginate(10);
+        } else {
+            $galeris = Galeri::where('user_id', $user->id)->paginate(10);
+        }
+
         return view('backend.galeri.index', compact('galeris'));
     }
 
@@ -36,6 +43,7 @@ class GaleriController extends Controller
             'judul'     => $validated['judul'],
             'deskripsi' => $validated['deskripsi'] ?? null,
             'gambar'    => $fileName,
+            'user_id'   => Auth::id(),
         ]);
 
         return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil ditambahkan');
@@ -44,12 +52,15 @@ class GaleriController extends Controller
     public function edit($id)
     {
         $galeri = Galeri::findOrFail($id);
+        $this->authorizeGaleri($galeri);
+
         return view('backend.galeri.edit', compact('galeri'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $galeri = Galeri::findOrFail($id);
+        $this->authorizeGaleri($galeri);
 
         $validated = $this->validateGaleri($request, true);
 
@@ -69,6 +80,7 @@ class GaleriController extends Controller
     public function destroy($id): RedirectResponse
     {
         $galeri = Galeri::findOrFail($id);
+        $this->authorizeGaleri($galeri);
 
         $this->deleteOldImage($galeri->gambar);
 
@@ -106,6 +118,19 @@ class GaleriController extends Controller
         $path = public_path('uploads/' . $fileName);
         if ($fileName && File::exists($path)) {
             File::delete($path);
+        }
+    }
+
+    private function authorizeGaleri(Galeri $galeri): void
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($galeri->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }
     }
 }

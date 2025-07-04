@@ -20,6 +20,7 @@ class DetailHasilPertandingan extends Model
         'skor',
         'rangking',
         'catatan_juri',
+        'user_id'
     ];
 
     // Relasi ke tabel hasil_pertandingans

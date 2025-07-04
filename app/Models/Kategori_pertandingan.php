@@ -12,7 +12,8 @@ class Kategori_Pertandingan extends Model
     protected $fillable = [
         'nama',
         'aturan',
-        'batasan'
+        'batasan',
+        'user_id'
     ];
 }
 

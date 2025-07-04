@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('hasil_pertandingans', function (Blueprint $table) {
     $table->id();
     $table->foreignId('pertandingan_id')->constrained('pertandingans')->onDelete('cascade');
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
     $table->timestamps();
 });
 

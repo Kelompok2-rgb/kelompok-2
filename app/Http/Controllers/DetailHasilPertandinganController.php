@@ -6,19 +6,28 @@ use App\Models\DetailHasilPertandingan;
 use App\Models\HasilPertandingan;
 use App\Models\PesertaPertandingan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DetailHasilPertandinganController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,juri');
     }
 
     public function index($hasilPertandinganId)
     {
+        $user = Auth::user();
+
         $hasilPertandingan = HasilPertandingan::with('pertandingan')->findOrFail($hasilPertandinganId);
-        $detailHasil = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)->get();
+
+        if ($user->role === 'admin') {
+            $detailHasil = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)->get();
+        } else {
+            $detailHasil = DetailHasilPertandingan::where('hasil_pertandingan_id', $hasilPertandinganId)
+                ->where('user_id', $user->id)
+                ->get();
+        }
 
         return view('backend.hasil_pertandingan.detail.index', compact('hasilPertandingan', 'detailHasil'));
     }
@@ -77,6 +86,7 @@ class DetailHasilPertandinganController extends Controller
             'skor'         => $request->skor,
             'rangking'     => $request->rangking,
             'catatan_juri' => $request->catatan_juri,
+            'user_id'      => Auth::id(), // simpan user yang input
         ]);
 
         return redirect()->route('backend.detail_hasil_pertandingan.index', $hasilPertandinganId)
@@ -85,8 +95,10 @@ class DetailHasilPertandinganController extends Controller
 
     public function edit($pertandingan_id, $id)
     {
-        $hasilPertandingan = HasilPertandingan::findOrFail($pertandingan_id);
         $detail = DetailHasilPertandingan::findOrFail($id);
+        $this->authorizeDetail($detail);
+
+        $hasilPertandingan = HasilPertandingan::findOrFail($pertandingan_id);
 
         return view('backend.hasil_pertandingan.detail.edit', compact('detail', 'hasilPertandingan'));
     }
@@ -94,6 +106,7 @@ class DetailHasilPertandinganController extends Controller
     public function update(Request $request, $pertandingan_id, $id)
     {
         $detail = DetailHasilPertandingan::findOrFail($id);
+        $this->authorizeDetail($detail);
 
         $request->validate([
             'nama'         => 'required|string|max:255',
@@ -126,9 +139,24 @@ class DetailHasilPertandinganController extends Controller
     public function destroy($pertandingan_id, $id)
     {
         $detail = DetailHasilPertandingan::findOrFail($id);
+        $this->authorizeDetail($detail);
+
         $detail->delete();
 
         return redirect()->route('backend.detail_hasil_pertandingan.index', $pertandingan_id)
             ->with('success', 'Hasil pertandingan berhasil dihapus.');
+    }
+
+    // ===== Helper untuk cek hak akses =====
+    private function authorizeDetail(DetailHasilPertandingan $detail)
+    {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($detail->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
+        }
     }
 }

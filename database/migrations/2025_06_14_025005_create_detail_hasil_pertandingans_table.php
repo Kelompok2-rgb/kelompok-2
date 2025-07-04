@@ -25,6 +25,7 @@ return new class extends Migration
             $table->float('skor')->nullable();
             $table->integer('rangking')->nullable();
             $table->text('catatan_juri')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
