@@ -100,7 +100,7 @@ class GaleriController extends Controller
         return $request->validate([
             'judul'     => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar'    => ($isUpdate ? 'nullable' : 'required') . '|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar'    => ($isUpdate ? 'nullable' : 'required') . '|image|mimes:jpg,jpeg,png|max:10000',
         ]);
     }
 

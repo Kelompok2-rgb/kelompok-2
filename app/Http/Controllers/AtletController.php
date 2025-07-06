@@ -99,7 +99,7 @@ class AtletController extends Controller
     {
         return $request->validate([
             'nama'     => 'required|string|max:255',
-            'foto'     => 'nullable|image|max:2048',
+            'foto'     => 'nullable|image|max:10000',
             'prestasi' => 'nullable|string',
             'club_id'  => 'nullable|exists:clubs,id',
         ]);

@@ -31,7 +31,7 @@ class HeroSectionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|max:15000',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
         ]);
@@ -71,7 +71,7 @@ class HeroSectionController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:15000',
         ]);
 
         // Jika ada file baru diupload, ganti

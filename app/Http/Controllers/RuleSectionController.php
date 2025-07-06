@@ -39,7 +39,7 @@ class RuleSectionController extends Controller
         $validated = $request->validate([
             'judul'     => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar'    => 'required|image|max:2048',
+            'gambar'    => 'required|image|max:15000',
         ]);
 
         // Upload gambar
@@ -74,7 +74,7 @@ class RuleSectionController extends Controller
         $validated = $request->validate([
             'judul'     => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar'    => 'nullable|image|max:2048',
+            'gambar'    => 'nullable|image|max:15000',
         ]);
 
         // Jika upload gambar baru

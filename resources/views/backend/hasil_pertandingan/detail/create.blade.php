@@ -61,15 +61,20 @@
             <textarea name="catatan_juri" id="catatan_juri" class="form-control" rows="3">{{ old('catatan_juri') }}</textarea>
         </div>
 
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('backend.detail_hasil_pertandingan.index', $hasilPertandingan->id) }}"
-                class="btn btn-secondary">← Kembali</a>
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save me-1"></i> Simpan
-            </button>
-            <button type="reset" class="btn btn-warning">
-                <i class="fas fa-rotate-left me-1"></i> Reset
-            </button>
+        <div class="mt-4 d-flex justify-content-between">
+            <div>
+                <a href="{{ route('backend.detail_hasil_pertandingan.index', $hasilPertandingan->id) }}"
+                    class="btn btn-secondary">← Kembali</a>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Simpan
+                </button>
+                <button type="reset" class="btn btn-warning">
+                    <i class="fas fa-rotate-left me-1"></i> Reset
+                </button>
+            </div>
         </div>
+
     </form>
 @endsection

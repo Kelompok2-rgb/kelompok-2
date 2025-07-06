@@ -86,7 +86,7 @@ class AnggotaController extends Controller
     {
         return $request->validate([
             'nama'      => 'required|string|max:255',
-            'foto'      => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
+            'foto'      => 'sometimes|image|mimes:jpg,jpeg,png|max:10000',
             'klub'      => 'nullable|string|max:255',
             'tgl_lahir' => 'required|date',
             'peran'     => 'required|in:Atlet,Pengurus,Atlet & Pengurus',

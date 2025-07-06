@@ -31,8 +31,8 @@ class AboutSectionController extends Controller
             'judul' => 'required|string|max:255',
             'deskripsi_singkat' => 'required|string',
             'deskripsi_lengkap' => 'required|string',
-            'image' => 'required|image|max:2048',
-            'second_image' => 'required|image|max:2048',
+            'image' => 'required|image|max:15000',
+            'second_image' => 'required|image|max:15000',
             'video_link' => 'required|url',
         ]);
 
@@ -74,8 +74,8 @@ class AboutSectionController extends Controller
             'judul' => 'required|string|max:255',
             'deskripsi_singkat' => 'required|string',
             'deskripsi_lengkap' => 'required|string',
-            'image' => 'nullable|image|max:2048',
-            'second_image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:15000',
+            'second_image' => 'nullable|image|max:15000',
             'video_link' => 'required|url',
         ]);
 
