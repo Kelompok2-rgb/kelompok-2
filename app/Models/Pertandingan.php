@@ -13,6 +13,7 @@ class Pertandingan extends Model
         'nama_pertandingan',
         'penyelenggara_event_id',
         'juri_id', // tambahkan ini
+        'user_id'
     ];
 
     /**

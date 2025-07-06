@@ -33,6 +33,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-4 mb-4">
             <div class="card shadow border-0 h-100">
                 <div class="card-body d-flex align-items-center">
@@ -46,6 +47,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-4 mb-4">
             <div class="card shadow border-0 h-100">
                 <div class="card-body d-flex align-items-center">
@@ -55,6 +57,48 @@
                     <div>
                         <h5 class="mb-0">{{ \App\Models\Pertandingan::count() }}</h5>
                         <small class="text-light">Total Pertandingan</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="bx bx-user-check fs-1 text-primary"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0">{{ \App\Models\Anggota::count() }}</h5>
+                        <small class="text-light">Total Anggota</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="bx bx-microphone fs-1 text-danger"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0">{{ \App\Models\Juri::count() }}</h5>
+                        <small class="text-light">Total Juri</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="bx bx-briefcase-alt fs-1 text-secondary"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0">{{ \App\Models\PenyelenggaraEvent::count() }}</h5>
+                        <small class="text-light">Total Penyelenggara</small>
                     </div>
                 </div>
             </div>

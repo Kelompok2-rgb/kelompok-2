@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unique(['pertandingan_id', 'atlet_id']);
             $table->foreignId('pertandingan_id')->constrained()->onDelete('cascade');
             $table->foreignId('atlet_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

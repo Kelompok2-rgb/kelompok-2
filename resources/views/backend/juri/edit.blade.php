@@ -14,7 +14,7 @@
                     @method('PUT')
 
                     {{-- Nama Juri --}}
-                    <div class="col-md-6">
+                    <div class="col-mb-3">
                         <label for="nama_juri" class="form-label fw-semibold">Nama Juri <span
                                 class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('nama_juri') is-invalid @enderror" id="nama_juri"

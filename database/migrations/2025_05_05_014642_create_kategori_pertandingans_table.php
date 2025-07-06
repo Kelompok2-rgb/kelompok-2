@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('aturan');
             $table->string('batasan');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

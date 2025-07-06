@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PenyelenggaraEvent;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class PenyelenggaraEventController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,penyelenggara');
     }
 
     public function index()
     {
-        // Mengurutkan berdasarkan waktu dibuat, terbaru di atas
-        $penyelenggara_events = PenyelenggaraEvent::orderBy('created_at', 'desc')->get();
+        $user = Auth::user();
 
-        return view('backend.penyelenggara_event.index', compact('penyelenggara_events'));
+        $penyelenggara_events = $user->role === 'admin'
+            ? PenyelenggaraEvent::latest()->get()
+            : PenyelenggaraEvent::where('user_id', $user->id)->latest()->get();
+
+        return view('backend.penyelenggara_event.index', compact('penyelenggara_events', 'user'));
     }
 
     public function create()
@@ -26,12 +30,10 @@ class PenyelenggaraEventController extends Controller
         return view('backend.penyelenggara_event.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama_penyelenggara_event' => 'required|string|max:255',
-            'kontak' => 'required|digits_between:8,15',
-        ]);
+        $validated = $this->validateEvent($request);
+        $validated['user_id'] = Auth::id();
 
         PenyelenggaraEvent::create($validated);
 
@@ -42,31 +44,54 @@ class PenyelenggaraEventController extends Controller
     public function edit($id)
     {
         $penyelenggara_event = PenyelenggaraEvent::findOrFail($id);
+        $this->authorizeEvent($penyelenggara_event);
 
         return view('backend.penyelenggara_event.edit', compact('penyelenggara_event'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        $event = PenyelenggaraEvent::findOrFail($id);
+        $penyelenggara_event = PenyelenggaraEvent::findOrFail($id);
+        $this->authorizeEvent($penyelenggara_event);
 
-        $validated = $request->validate([
-            'nama_penyelenggara_event' => 'required|string|max:255',
-            'kontak' => 'required|digits_between:8,15',
-        ]);
+        $validated = $this->validateEvent($request);
 
-        $event->update($validated);
+        $penyelenggara_event->update($validated);
 
         return redirect()->route('backend.penyelenggara_event.index')
             ->with('success', 'Penyelenggara Event berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        $event = PenyelenggaraEvent::findOrFail($id);
-        $event->delete();
+        $penyelenggara_event = PenyelenggaraEvent::findOrFail($id);
+        $this->authorizeEvent($penyelenggara_event);
+
+        $penyelenggara_event->delete();
 
         return redirect()->route('backend.penyelenggara_event.index')
             ->with('success', 'Penyelenggara Event berhasil dihapus.');
+    }
+
+    // ===== Helper Methods =====
+    private function validateEvent(Request $request): array
+    {
+        return $request->validate([
+            'nama_penyelenggara_event' => 'required|string|max:255',
+            'kontak'                   => 'required|digits_between:8,15',
+        ]);
+    }
+
+    private function authorizeEvent(PenyelenggaraEvent $event): void
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($event->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
+        }
     }
 }

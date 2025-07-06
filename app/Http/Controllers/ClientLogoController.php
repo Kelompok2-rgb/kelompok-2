@@ -28,7 +28,7 @@ class ClientLogoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'logo' => 'required|image|mimes:jpg,jpeg,png,svg|max:2048',
+            'logo' => 'required|image|mimes:jpg,jpeg,png,svg|max:15000',
         ]);
 
         $path = $request->file('logo')->store('uploads/client_logos', 'public');
@@ -52,7 +52,7 @@ return view('backend.page_setting.clientlogos.edit', compact('clientlogo'));
         $logo = ClientLogo::findOrFail($id);
 
         $request->validate([
-            'logo' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:15000',
         ]);
 
         // Hapus gambar lama jika ada upload baru

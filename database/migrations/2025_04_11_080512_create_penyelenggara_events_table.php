@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id(); // ini = bigIncrements() = unsignedBigInteger auto increment
         $table->string('nama_penyelenggara_event');
         $table->string('kontak');
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->timestamps();
     });
 }

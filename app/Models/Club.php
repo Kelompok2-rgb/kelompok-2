@@ -12,5 +12,6 @@ class Club extends Model
         'nama',
         'lokasi',
         'deskripsi', 
+        'user_id'
     ];
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('foto');
             $table->string('prestasi')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             // Kolom relasi ke tabel clubs (boleh kosong)
             $table->foreignId('club_id')->nullable()->constrained('clubs')->onDelete('set null');

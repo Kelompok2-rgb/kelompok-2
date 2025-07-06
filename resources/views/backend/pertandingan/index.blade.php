@@ -34,6 +34,10 @@
             </thead>
             <tbody>
                 @foreach ($pertandingans as $pertandingan)
+                    @php
+                        $canEditDelete = Auth::user()->role === 'admin' ||
+                            (Auth::user()->role === 'penyelenggara' && Auth::id() === optional($pertandingan->penyelenggaraEvent)->user_id);
+                    @endphp
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $pertandingan->nama_pertandingan }}</td>
@@ -44,15 +48,21 @@
                                 Kelola Peserta
                             </a>
                         </td>
-                        <td>
-                            <a href="{{ route('backend.pertandingan.edit', $pertandingan->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-edit"></i> Edit
+                        <td class="text-nowrap">
+                            <a href="{{ $canEditDelete ? route('backend.pertandingan.edit', $pertandingan->id) : '#' }}"
+                               class="btn btn-warning btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                               title="{{ !$canEditDelete ? 'Hanya admin atau penyelenggara event ini yang dapat edit' : 'Edit data' }}">
+                               <i class="fas fa-edit"></i> Edit
                             </a>
-                            <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}" method="POST"
-                                  style="display:inline;" onsubmit="return confirmDelete();">
+
+                            <form action="{{ route('backend.pertandingan.destroy', $pertandingan->id) }}"
+                                  method="POST" style="display:inline;"
+                                  onsubmit="return {{ $canEditDelete ? 'confirmDelete()' : 'false' }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
+                                        title="{{ !$canEditDelete ? 'Hanya admin atau penyelenggara event ini yang dapat hapus' : 'Hapus data' }}">
                                     <i class="fas fa-trash"></i> Hapus
                                 </button>
                             </form>

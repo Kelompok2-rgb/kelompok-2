@@ -9,7 +9,7 @@ class HasilPertandingan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pertandingan_id'];
+    protected $fillable = ['pertandingan_id','user_id'];
 
     public function pertandingan()
     {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori_Pertandingan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
 class KategoriPertandinganController extends Controller
@@ -11,12 +12,17 @@ class KategoriPertandinganController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,penyelenggara');
     }
+
     public function index()
     {
-        $kategoripertandingans = Kategori_Pertandingan::all();
-        return view('backend.kategori_pertandingan.index', compact('kategoripertandingans'));
+        $user = Auth::user();
+
+        $kategoripertandingans = $user->role === 'admin'
+            ? Kategori_Pertandingan::latest()->get()
+            : Kategori_Pertandingan::where('user_id', $user->id)->latest()->get();
+
+        return view('backend.kategori_pertandingan.index', compact('kategoripertandingans', 'user'));
     }
 
     public function create()
@@ -26,12 +32,8 @@ class KategoriPertandinganController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // Validasi input
-        $validated = $request->validate([
-            'nama'    => 'required|string|max:255',
-            'aturan'  => 'required|string|max:255',
-            'batasan' => 'required|string|max:255',
-        ]);
+        $validated = $this->validateKategori($request);
+        $validated['user_id'] = Auth::id();
 
         Kategori_Pertandingan::create($validated);
 
@@ -41,22 +43,20 @@ class KategoriPertandinganController extends Controller
 
     public function edit($id)
     {
-        $kategoripertandingan = Kategori_Pertandingan::findOrFail($id);
-        return view('backend.kategori_pertandingan.edit', compact('kategoripertandingan'));
+        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $this->authorizeKategori($kategori);
+
+        return view('backend.kategori_pertandingan.edit', compact('kategori'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $kategoripertandingan = Kategori_Pertandingan::findOrFail($id);
+        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $this->authorizeKategori($kategori);
 
-        // Validasi input
-        $validated = $request->validate([
-            'nama'    => 'required|string|max:255',
-            'aturan'  => 'required|string|max:255',
-            'batasan' => 'required|string|max:255',
-        ]);
+        $validated = $this->validateKategori($request);
 
-        $kategoripertandingan->update($validated);
+        $kategori->update($validated);
 
         return redirect()->route('backend.kategori_pertandingan.index')
                          ->with('success', 'Kategori pertandingan berhasil diperbarui');
@@ -64,10 +64,35 @@ class KategoriPertandinganController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $kategoripertandingan = Kategori_Pertandingan::findOrFail($id);
-        $kategoripertandingan->delete();
+        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $this->authorizeKategori($kategori);
+
+        $kategori->delete();
 
         return redirect()->route('backend.kategori_pertandingan.index')
                          ->with('success', 'Kategori pertandingan berhasil dihapus');
+    }
+
+    // ===== Helper Methods =====
+
+    private function validateKategori(Request $request): array
+    {
+        return $request->validate([
+            'nama'    => 'required|string|max:255',
+            'aturan'  => 'required|string|max:255',
+            'batasan' => 'required|string|max:255',
+        ]);
+    }
+
+    private function authorizeKategori(Kategori_Pertandingan $kategori): void
+    {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($kategori->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
+        }
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Jadwal_Pertandingan;
 use App\Models\Pertandingan;
 
@@ -11,13 +13,20 @@ class JadwalPertandinganController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,penyelenggara');
     }
 
     public function index()
     {
-        $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->latest()->get();
-        return view('backend.jadwal_pertandingan.index', compact('jadwalpertandingans'));
+        $user = Auth::user();
+
+        $jadwalpertandingans = $user->role === 'admin'
+            ? Jadwal_Pertandingan::with('pertandingan')->latest()->get()
+            : Jadwal_Pertandingan::with('pertandingan')
+                ->where('user_id', $user->id)
+                ->latest()
+                ->get();
+
+        return view('backend.jadwal_pertandingan.index', compact('jadwalpertandingans', 'user'));
     }
 
     public function create()
@@ -26,15 +35,10 @@ class JadwalPertandinganController extends Controller
         return view('backend.jadwal_pertandingan.create', compact('pertandingans'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'pertandingan_id' => 'required|exists:pertandingans,id',
-            'tanggal'         => 'required|date',
-            'waktu'           => 'required|date_format:H:i',
-            'lokasi'          => 'required|string|max:255',
-            'deskripsi'       => 'nullable|string|max:1000',
-        ]);
+        $validated = $this->validateJadwal($request);
+        $validated['user_id'] = Auth::id();
 
         Jadwal_Pertandingan::create($validated);
 
@@ -45,34 +49,60 @@ class JadwalPertandinganController extends Controller
     public function edit($id)
     {
         $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
-        $pertandingans = Pertandingan::select('id', 'nama_pertandingan')->get();
+        $this->authorizeJadwal($jadwalpertandingan);
+
+        $pertandingans = Pertandingan::select('id', 'nama_pertandingan')->latest()->get();
 
         return view('backend.jadwal_pertandingan.edit', compact('jadwalpertandingan', 'pertandingans'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        $validated = $request->validate([
-            'pertandingan_id' => 'required|exists:pertandingans,id',
-            'tanggal'         => 'required|date',
-            'waktu'           => 'required|date_format:H:i',
-            'lokasi'          => 'required|string|max:255',
-            'deskripsi'       => 'nullable|string|max:1000',
-        ]);
-
         $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
+        $this->authorizeJadwal($jadwalpertandingan);
+
+        $validated = $this->validateJadwal($request);
+
         $jadwalpertandingan->update($validated);
 
         return redirect()->route('backend.jadwal_pertandingan.index')
             ->with('success', 'Jadwal pertandingan berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
+        $this->authorizeJadwal($jadwalpertandingan);
+
         $jadwalpertandingan->delete();
 
         return redirect()->route('backend.jadwal_pertandingan.index')
             ->with('success', 'Jadwal pertandingan berhasil dihapus.');
+    }
+
+    // ===== Helper Methods =====
+
+    private function validateJadwal(Request $request): array
+    {
+        return $request->validate([
+            'pertandingan_id' => 'required|exists:pertandingans,id',
+            'tanggal'         => 'required|date',
+            'waktu'           => 'required|date_format:H:i',
+            'lokasi'          => 'required|string|max:255',
+            'deskripsi'       => 'nullable|string|max:1000',
+        ]);
+    }
+
+    private function authorizeJadwal(Jadwal_Pertandingan $jadwal): void
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($jadwal->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
+        }
     }
 }

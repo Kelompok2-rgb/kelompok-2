@@ -13,5 +13,6 @@ class Juri extends Model
         'nama_juri',       // GANTI dari 'nama' ke 'nama_juri'
         'tanggal_lahir',
         'sertifikat',
+        'user_id'
     ];
 }

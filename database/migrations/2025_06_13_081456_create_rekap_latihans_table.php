@@ -16,6 +16,7 @@ class CreateRekapLatihansTable extends Migration
             $table->decimal('lemparan1', 5, 2)->nullable();
             $table->decimal('lemparan2', 5, 2)->nullable();
             $table->decimal('lemparan3', 5, 2)->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

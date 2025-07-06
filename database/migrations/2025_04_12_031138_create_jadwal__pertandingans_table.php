@@ -16,15 +16,15 @@ return new class extends Migration
 
             // Relasi ke pertandingan
             $table->foreignId('pertandingan_id')
-                  ->constrained('pertandingans')
-                  ->onDelete('cascade');
+                ->constrained('pertandingans')
+                ->onDelete('cascade');
 
             // Kolom data jadwal
             $table->date('tanggal');
             $table->time('waktu');
             $table->string('lokasi');
             $table->text('deskripsi')->nullable();
-
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

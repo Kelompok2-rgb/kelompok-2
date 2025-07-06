@@ -14,5 +14,6 @@ class PenyelenggaraEvent extends Model
     protected $fillable = [
         'nama_penyelenggara_event',
         'kontak',
+        'user_id'
     ];
 }

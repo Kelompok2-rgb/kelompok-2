@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Juri;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class JuriController extends Controller
@@ -12,13 +13,17 @@ class JuriController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,juri');
     }
 
     public function index()
     {
-        $juris = Juri::all();
-        return view('backend.juri.index', compact('juris'));
+        $user = Auth::user();
+
+        $juris = $user->role === 'admin'
+            ? Juri::latest()->get()
+            : Juri::where('user_id', $user->id)->latest()->get();
+
+        return view('backend.juri.index', compact('juris', 'user'));
     }
 
     public function create()
@@ -28,15 +33,13 @@ class JuriController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'nama_juri' => 'required|string|max:255', // DIGANTI
-            'tanggal_lahir' => 'required|date',
-            'sertifikat' => 'required|mimes:pdf|max:2048',
-        ]);
+        $validated = $this->validateJuri($request);
 
         if ($request->hasFile('sertifikat')) {
-            $validated['sertifikat'] = $request->file('sertifikat')->store('sertifikat', 'public');
+            $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         }
+
+        $validated['user_id'] = Auth::id();
 
         Juri::create($validated);
 
@@ -46,6 +49,9 @@ class JuriController extends Controller
     public function edit($id)
     {
         $juri = Juri::findOrFail($id);
+
+        $this->authorizeJuri($juri);
+
         return view('backend.juri.edit', compact('juri'));
     }
 
@@ -53,17 +59,13 @@ class JuriController extends Controller
     {
         $juri = Juri::findOrFail($id);
 
-        $validated = $request->validate([
-            'nama_juri' => 'required|string|max:255', // DIGANTI
-            'tanggal_lahir' => 'required|date',
-            'sertifikat' => 'nullable|mimes:pdf|max:2048',
-        ]);
+        $this->authorizeJuri($juri);
+
+        $validated = $this->validateJuri($request, false);
 
         if ($request->hasFile('sertifikat')) {
-            if ($juri->sertifikat && Storage::disk('public')->exists($juri->sertifikat)) {
-                Storage::disk('public')->delete($juri->sertifikat);
-            }
-            $validated['sertifikat'] = $request->file('sertifikat')->store('sertifikat', 'public');
+            $this->deleteOldSertifikat($juri->sertifikat);
+            $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         }
 
         $juri->update($validated);
@@ -75,12 +77,47 @@ class JuriController extends Controller
     {
         $juri = Juri::findOrFail($id);
 
-        if ($juri->sertifikat && Storage::disk('public')->exists($juri->sertifikat)) {
-            Storage::disk('public')->delete($juri->sertifikat);
-        }
+        $this->authorizeJuri($juri);
+
+        $this->deleteOldSertifikat($juri->sertifikat);
 
         $juri->delete();
 
         return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil dihapus');
+    }
+
+    // ===== Helper Methods =====
+
+    private function validateJuri(Request $request, bool $isStore = true): array
+    {
+        return $request->validate([
+            'nama_juri'     => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat'    => ($isStore ? 'required' : 'nullable') . '|mimes:pdf|max:2048',
+        ]);
+    }
+
+    private function handleSertifikatUpload(Request $request): string
+    {
+        return $request->file('sertifikat')->store('sertifikat', 'public');
+    }
+
+    private function deleteOldSertifikat(?string $path): void
+    {
+        if ($path && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
+    }
+
+    private function authorizeJuri(Juri $juri): void
+    {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($juri->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
+        }
     }
 }

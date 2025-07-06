@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Galeri;
 
 class GaleriController extends Controller
@@ -12,13 +13,17 @@ class GaleriController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin,penyelenggara');
     }
 
     public function index()
     {
-        $galeris = Galeri::paginate(10);
-        return view('backend.galeri.index', compact('galeris'));
+        $user = Auth::user();
+
+        $galeris = $user->role === 'admin'
+            ? Galeri::latest()->paginate(10)
+            : Galeri::where('user_id', $user->id)->latest()->paginate(10);
+
+        return view('backend.galeri.index', compact('galeris', 'user'));
     }
 
     public function create()
@@ -30,51 +35,56 @@ class GaleriController extends Controller
     {
         $validated = $this->validateGaleri($request);
 
-        $fileName = $this->handleUpload($request);
+        $fileName = $this->uploadImage($request);
 
         Galeri::create([
             'judul'     => $validated['judul'],
             'deskripsi' => $validated['deskripsi'] ?? null,
             'gambar'    => $fileName,
+            'user_id'   => Auth::id(),
         ]);
 
-        return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil ditambahkan');
+        return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
         $galeri = Galeri::findOrFail($id);
+        $this->authorizeGaleri($galeri);
+
         return view('backend.galeri.edit', compact('galeri'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $galeri = Galeri::findOrFail($id);
+        $this->authorizeGaleri($galeri);
 
         $validated = $this->validateGaleri($request, true);
 
-        $galeri->judul = $validated['judul'];
-        $galeri->deskripsi = $validated['deskripsi'] ?? $galeri->deskripsi;
-
         if ($request->hasFile('gambar')) {
-            $this->deleteOldImage($galeri->gambar);
-            $galeri->gambar = $this->handleUpload($request);
+            $this->deleteImage($galeri->gambar);
+            $galeri->gambar = $this->uploadImage($request);
         }
 
-        $galeri->save();
+        $galeri->update([
+            'judul'     => $validated['judul'],
+            'deskripsi' => $validated['deskripsi'] ?? $galeri->deskripsi,
+            'gambar'    => $galeri->gambar
+        ]);
 
-        return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil diperbarui');
+        return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil diperbarui.');
     }
 
     public function destroy($id): RedirectResponse
     {
         $galeri = Galeri::findOrFail($id);
+        $this->authorizeGaleri($galeri);
 
-        $this->deleteOldImage($galeri->gambar);
-
+        $this->deleteImage($galeri->gambar);
         $galeri->delete();
 
-        return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil dihapus');
+        return redirect()->route('backend.galeri.index')->with('success', 'Galeri berhasil dihapus.');
     }
 
     public function show($id)
@@ -90,22 +100,36 @@ class GaleriController extends Controller
         return $request->validate([
             'judul'     => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar'    => ($isUpdate ? 'nullable' : 'required') . '|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar'    => ($isUpdate ? 'nullable' : 'required') . '|image|mimes:jpg,jpeg,png|max:10000',
         ]);
     }
 
-    private function handleUpload(Request $request): string
+    private function uploadImage(Request $request): string
     {
         $fileName = time() . '.' . $request->file('gambar')->extension();
         $request->file('gambar')->move(public_path('uploads'), $fileName);
         return $fileName;
     }
 
-    private function deleteOldImage(?string $fileName): void
+    private function deleteImage(?string $fileName): void
     {
-        $path = public_path('uploads/' . $fileName);
-        if ($fileName && File::exists($path)) {
-            File::delete($path);
+        if ($fileName) {
+            $filePath = public_path('uploads/' . $fileName);
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+        }
+    }
+
+    private function authorizeGaleri(Galeri $galeri): void
+    {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return;
+        }
+
+        if ($galeri->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }
     }
 }
