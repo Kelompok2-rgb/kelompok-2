@@ -18,8 +18,9 @@ class ContactFormController extends Controller
         ]);
 
         // Kirim email ke admin
-        Mail::to('zrizfy@gmail.com')->send(new ContactFormMail($validated));
+        Mail::to('porlempikapadang@gmail.com')->send(new ContactFormMail($validated));
 
-        return back()->with('success', 'Pesan kamu berhasil dikirim!');
+        return redirect()->to(url()->previous() . '#contact')->with('success', 'Pesan kamu berhasil dikirim!');
+
     }
 }
