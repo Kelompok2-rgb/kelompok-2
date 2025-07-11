@@ -18,11 +18,11 @@ class PenyelenggaraEventController extends Controller
     {
         $user = Auth::user();
 
-        $penyelenggara_events = $user->role === 'admin'
+        $penyelenggaraEvents = $user->role === 'admin'
             ? PenyelenggaraEvent::latest()->get()
             : PenyelenggaraEvent::where('user_id', $user->id)->latest()->get();
 
-        return view('backend.penyelenggara_event.index', compact('penyelenggara_events', 'user'));
+        return view('backend.penyelenggara_event.index', compact('penyelenggaraEvents', 'user'));
     }
 
     public function create()
@@ -32,48 +32,55 @@ class PenyelenggaraEventController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $this->validateEvent($request);
-        $validated['user_id'] = Auth::id();
+        $validatedData = $this->validateEvent($request);
+        $validatedData['user_id'] = Auth::id();
 
-        PenyelenggaraEvent::create($validated);
+        PenyelenggaraEvent::create($validatedData);
 
-        return redirect()->route('backend.penyelenggara_event.index')
+        return redirect()
+            ->route('backend.penyelenggara_event.index')
             ->with('success', 'Penyelenggara Event berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-        $penyelenggara_event = PenyelenggaraEvent::findOrFail($id);
-        $this->authorizeEvent($penyelenggara_event);
+        $penyelenggaraEvent = PenyelenggaraEvent::findOrFail($id);
 
-        return view('backend.penyelenggara_event.edit', compact('penyelenggara_event'));
+        $this->authorizeEvent($penyelenggaraEvent);
+
+        return view('backend.penyelenggara_event.edit', compact('penyelenggaraEvent'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $penyelenggara_event = PenyelenggaraEvent::findOrFail($id);
-        $this->authorizeEvent($penyelenggara_event);
+        $penyelenggaraEvent = PenyelenggaraEvent::findOrFail($id);
 
-        $validated = $this->validateEvent($request);
+        $this->authorizeEvent($penyelenggaraEvent);
 
-        $penyelenggara_event->update($validated);
+        $validatedData = $this->validateEvent($request);
 
-        return redirect()->route('backend.penyelenggara_event.index')
+        $penyelenggaraEvent->update($validatedData);
+
+        return redirect()
+            ->route('backend.penyelenggara_event.index')
             ->with('success', 'Penyelenggara Event berhasil diperbarui.');
     }
 
     public function destroy($id): RedirectResponse
     {
-        $penyelenggara_event = PenyelenggaraEvent::findOrFail($id);
-        $this->authorizeEvent($penyelenggara_event);
+        $penyelenggaraEvent = PenyelenggaraEvent::findOrFail($id);
 
-        $penyelenggara_event->delete();
+        $this->authorizeEvent($penyelenggaraEvent);
 
-        return redirect()->route('backend.penyelenggara_event.index')
+        $penyelenggaraEvent->delete();
+
+        return redirect()
+            ->route('backend.penyelenggara_event.index')
             ->with('success', 'Penyelenggara Event berhasil dihapus.');
     }
 
     // ===== Helper Methods =====
+
     private function validateEvent(Request $request): array
     {
         return $request->validate([

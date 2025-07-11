@@ -2,111 +2,131 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Juri;
 use Illuminate\Http\Request;
-use App\Models\Pengumuman;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
-class PengumumanController extends Controller
+class JuriController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin');
     }
 
     public function index()
     {
-        $pengumumans = Pengumuman::orderBy('tanggal', 'desc')->get();
-        return view('backend.pengumuman.index', compact('pengumumans'));
+        $user = Auth::user();
+
+        $juris = $user->role === 'admin'
+            ? Juri::latest()->get()
+            : Juri::where('user_id', $user->id)->latest()->get();
+
+        return view('backend.juri.index', compact('juris', 'user'));
     }
 
     public function create()
     {
-        return view('backend.pengumuman.create');
+        return view('backend.juri.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'judul'   => 'required|string|max:255',
-            'isi'     => 'required|string',
-            'tanggal' => 'required|date',
-            'foto'    => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        $validatedData = $this->validateJuri($request);
 
-        // Simpan foto
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
-
-            $folder = public_path('uploads/pengumuman');
-            if (!file_exists($folder)) {
-                mkdir($folder, 0755, true);
-            }
-
-            $file->move($folder, $filename);
-            $validated['foto'] = $filename;
+        if ($request->hasFile('sertifikat')) {
+            $validatedData['sertifikat'] = $this->handleSertifikatUpload($request);
         }
 
-        Pengumuman::create($validated);
+        $validatedData['user_id'] = Auth::id();
 
-        return redirect()->route('backend.pengumuman.index')
-                         ->with('success', 'Pengumuman berhasil ditambahkan.');
+        Juri::create($validatedData);
+
+        return redirect()
+            ->route('backend.juri.index')
+            ->with('success', 'Juri berhasil ditambahkan');
     }
 
     public function edit($id)
     {
-        $pengumuman = Pengumuman::findOrFail($id);
-        return view('backend.pengumuman.edit', compact('pengumuman'));
+        $juri = Juri::findOrFail($id);
+
+        $this->authorizeJuri($juri);
+
+        return view('backend.juri.edit', compact('juri'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        $pengumuman = Pengumuman::findOrFail($id);
+        $juri = Juri::findOrFail($id);
 
-        $validated = $request->validate([
-            'judul'   => 'required|string|max:255',
-            'isi'     => 'required|string',
-            'tanggal' => 'required|date',
-            'foto'    => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        $this->authorizeJuri($juri);
+
+        $validatedData = $this->validateJuri($request, false);
+
+        if ($request->hasFile('sertifikat')) {
+            $this->deleteOldSertifikat($juri->sertifikat);
+            $validatedData['sertifikat'] = $this->handleSertifikatUpload($request);
+        }
+
+        $juri->update($validatedData);
+
+        return redirect()
+            ->route('backend.juri.index')
+            ->with('success', 'Juri berhasil diperbarui');
+    }
+
+    public function destroy($id): RedirectResponse
+    {
+        $juri = Juri::findOrFail($id);
+
+        $this->authorizeJuri($juri);
+
+        $this->deleteOldSertifikat($juri->sertifikat);
+
+        $juri->delete();
+
+        return redirect()
+            ->route('backend.juri.index')
+            ->with('success', 'Juri berhasil dihapus');
+    }
+
+    // ===============================
+    //           Helper Methods       
+    // ===============================
+
+    private function validateJuri(Request $request, bool $isStore = true): array
+    {
+        return $request->validate([
+            'nama_juri'     => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat'    => ($isStore ? 'required' : 'nullable') . '|mimes:pdf|max:2048',
         ]);
-
-        // Jika ada foto baru diupload
-        if ($request->hasFile('foto')) {
-            // Hapus foto lama
-            if ($pengumuman->foto && file_exists(public_path('uploads/pengumuman/' . $pengumuman->foto))) {
-                unlink(public_path('uploads/pengumuman/' . $pengumuman->foto));
-            }
-
-            $file = $request->file('foto');
-            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
-
-            $folder = public_path('uploads/pengumuman');
-            if (!file_exists($folder)) {
-                mkdir($folder, 0755, true);
-            }
-
-            $file->move($folder, $filename);
-            $validated['foto'] = $filename;
-        }
-
-        $pengumuman->update($validated);
-
-        return redirect()->route('backend.pengumuman.index')
-                         ->with('success', 'Pengumuman berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    private function handleSertifikatUpload(Request $request): string
     {
-        $pengumuman = Pengumuman::findOrFail($id);
+        return $request->file('sertifikat')->store('sertifikat', 'public');
+    }
 
-        // Hapus foto jika ada
-        if ($pengumuman->foto && file_exists(public_path('uploads/pengumuman/' . $pengumuman->foto))) {
-            unlink(public_path('uploads/pengumuman/' . $pengumuman->foto));
+    private function deleteOldSertifikat(?string $path): void
+    {
+        if ($path && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
+    }
+
+    private function authorizeJuri(Juri $juri): void
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return;
         }
 
-        $pengumuman->delete();
-
-        return redirect()->route('backend.pengumuman.index')
-                         ->with('success', 'Pengumuman berhasil dihapus.');
+        if ($juri->user_id !== $user->id) {
+            abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
+        }
     }
 }
