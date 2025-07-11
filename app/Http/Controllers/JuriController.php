@@ -66,13 +66,15 @@ class JuriController extends Controller
         if ($request->hasFile('sertifikat')) {
 
             $this->deleteOldSertifikat($juri->sertifikat);
-            
+
             $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         }
 
         $juri->update($validated);
 
-        return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil diperbarui');
+        return redirect()
+        ->route('backend.juri.index')
+        ->with('success', 'Juri berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
