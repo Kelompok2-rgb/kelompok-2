@@ -19,29 +19,28 @@ class JadwalPertandinganController extends Controller
     {
         $user = Auth::user();
 
-        $jadwalPertandingans = $user->role === 'admin'
+        $jadwalpertandingans = $user->role === 'admin'
             ? Jadwal_Pertandingan::with('pertandingan')->latest()->get()
             : Jadwal_Pertandingan::with('pertandingan')
                 ->where('user_id', $user->id)
                 ->latest()
                 ->get();
 
-        return view('backend.jadwal_pertandingan.index', compact('jadwalPertandingans', 'user'));
+        return view('backend.jadwal_pertandingan.index', compact('jadwalpertandingans', 'user'));
     }
 
     public function create()
     {
         $pertandingans = Pertandingan::select('id', 'nama_pertandingan')->latest()->get();
-
         return view('backend.jadwal_pertandingan.create', compact('pertandingans'));
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $validatedData = $this->validateJadwal($request);
-        $validatedData['user_id'] = Auth::id();
+        $validated = $this->validateJadwal($request);
+        $validated['user_id'] = Auth::id();
 
-        Jadwal_Pertandingan::create($validatedData);
+        Jadwal_Pertandingan::create($validated);
 
         return redirect()->route('backend.jadwal_pertandingan.index')
             ->with('success', 'Jadwal pertandingan berhasil ditambahkan.');
@@ -49,21 +48,22 @@ class JadwalPertandinganController extends Controller
 
     public function edit($id)
     {
-        $jadwalPertandingan = Jadwal_Pertandingan::findOrFail($id);
-        $this->authorizeJadwal($jadwalPertandingan);
+        $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
+        $this->authorizeJadwal($jadwalpertandingan);
 
         $pertandingans = Pertandingan::select('id', 'nama_pertandingan')->latest()->get();
 
-        return view('backend.jadwal_pertandingan.edit', compact('jadwalPertandingan', 'pertandingans'));
+        return view('backend.jadwal_pertandingan.edit', compact('jadwalpertandingan', 'pertandingans'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $jadwalPertandingan = Jadwal_Pertandingan::findOrFail($id);
-        $this->authorizeJadwal($jadwalPertandingan);
+        $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
+        $this->authorizeJadwal($jadwalpertandingan);
 
-        $validatedData = $this->validateJadwal($request);
-        $jadwalPertandingan->update($validatedData);
+        $validated = $this->validateJadwal($request);
+
+        $jadwalpertandingan->update($validated);
 
         return redirect()->route('backend.jadwal_pertandingan.index')
             ->with('success', 'Jadwal pertandingan berhasil diperbarui.');
@@ -71,10 +71,10 @@ class JadwalPertandinganController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $jadwalPertandingan = Jadwal_Pertandingan::findOrFail($id);
-        $this->authorizeJadwal($jadwalPertandingan);
+        $jadwalpertandingan = Jadwal_Pertandingan::findOrFail($id);
+        $this->authorizeJadwal($jadwalpertandingan);
 
-        $jadwalPertandingan->delete();
+        $jadwalpertandingan->delete();
 
         return redirect()->route('backend.jadwal_pertandingan.index')
             ->with('success', 'Jadwal pertandingan berhasil dihapus.');

@@ -33,19 +33,17 @@ class JuriController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validatedData = $this->validateJuri($request);
+        $validated = $this->validateJuri($request);
 
         if ($request->hasFile('sertifikat')) {
-            $validatedData['sertifikat'] = $this->handleSertifikatUpload($request);
+            $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         }
 
-        $validatedData['user_id'] = Auth::id();
+        $validated['user_id'] = Auth::id();
 
-        Juri::create($validatedData);
+        Juri::create($validated);
 
-        return redirect()
-            ->route('backend.juri.index')
-            ->with('success', 'Juri berhasil ditambahkan');
+        return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -63,18 +61,18 @@ class JuriController extends Controller
 
         $this->authorizeJuri($juri);
 
-        $validatedData = $this->validateJuri($request, false);
+        $validated = $this->validateJuri($request, false);
 
         if ($request->hasFile('sertifikat')) {
+
             $this->deleteOldSertifikat($juri->sertifikat);
-            $validatedData['sertifikat'] = $this->handleSertifikatUpload($request);
+            
+            $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         }
 
-        $juri->update($validatedData);
+        $juri->update($validated);
 
-        return redirect()
-            ->route('backend.juri.index')
-            ->with('success', 'Juri berhasil diperbarui');
+        return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
@@ -88,13 +86,11 @@ class JuriController extends Controller
         $juri->delete();
 
         return redirect()
-            ->route('backend.juri.index')
-            ->with('success', 'Juri berhasil dihapus');
+        ->route('backend.juri.index')
+        ->with('success', 'Juri berhasil dihapus');
     }
 
-    // ===============================
-    //           Helper Methods       
-    // ===============================
+    // ===== Helper Methods =====
 
     private function validateJuri(Request $request, bool $isStore = true): array
     {
@@ -120,7 +116,6 @@ class JuriController extends Controller
     private function authorizeJuri(Juri $juri): void
     {
         $user = Auth::user();
-
         if ($user->role === 'admin') {
             return;
         }

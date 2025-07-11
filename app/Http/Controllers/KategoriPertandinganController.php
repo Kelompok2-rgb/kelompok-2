@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Juri;
+use App\Models\Kategori_Pertandingan;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
 
-class JuriController extends Controller
+class KategoriPertandinganController extends Controller
 {
     public function __construct()
     {
@@ -19,112 +18,80 @@ class JuriController extends Controller
     {
         $user = Auth::user();
 
-        $juris = $user->role === 'admin'
-            ? Juri::latest()->get()
-            : Juri::where('user_id', $user->id)->latest()->get();
+        $kategoripertandingans = $user->role === 'admin'
+            ? Kategori_Pertandingan::latest()->get()
+            : Kategori_Pertandingan::where('user_id', $user->id)->latest()->get();
 
-        return view('backend.juri.index', compact('juris', 'user'));
+        return view('backend.kategori_pertandingan.index', compact('kategoripertandingans', 'user'));
     }
 
     public function create()
     {
-        return view('backend.juri.create');
+        return view('backend.kategori_pertandingan.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $validatedData = $this->validateJuri($request);
+        $validated = $this->validateKategori($request);
+        $validated['user_id'] = Auth::id();
 
-        if ($request->hasFile('sertifikat')) {
-            $validatedData['sertifikat'] = $this->handleSertifikatUpload($request);
-        }
+        Kategori_Pertandingan::create($validated);
 
-        $validatedData['user_id'] = Auth::id();
-
-        Juri::create($validatedData);
-
-        return redirect()
-            ->route('backend.juri.index')
-            ->with('success', 'Juri berhasil ditambahkan');
+        return redirect()->route('backend.kategori_pertandingan.index')
+                         ->with('success', 'Kategori pertandingan berhasil ditambahkan');
     }
 
     public function edit($id)
     {
-        $juri = Juri::findOrFail($id);
+        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $this->authorizeKategori($kategori);
 
-        $this->authorizeJuri($juri);
-
-        return view('backend.juri.edit', compact('juri'));
+        return view('backend.kategori_pertandingan.edit', compact('kategori'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $juri = Juri::findOrFail($id);
+        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $this->authorizeKategori($kategori);
 
-        $this->authorizeJuri($juri);
+        $validated = $this->validateKategori($request);
 
-        $validatedData = $this->validateJuri($request, false);
+        $kategori->update($validated);
 
-        if ($request->hasFile('sertifikat')) {
-            $this->deleteOldSertifikat($juri->sertifikat);
-
-            $validatedData['sertifikat'] = $this->handleSertifikatUpload($request);
-        }
-
-        $juri->update($validatedData);
-
-        return redirect()
-            ->route('backend.juri.index')
-            ->with('success', 'Juri berhasil diperbarui');
+        return redirect()->route('backend.kategori_pertandingan.index')
+                         ->with('success', 'Kategori pertandingan berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
     {
-        $juri = Juri::findOrFail($id);
+        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $this->authorizeKategori($kategori);
 
-        $this->authorizeJuri($juri);
+        $kategori->delete();
 
-        $this->deleteOldSertifikat($juri->sertifikat);
-
-        $juri->delete();
-
-        return redirect()
-            ->route('backend.juri.index')
-            ->with('success', 'Juri berhasil dihapus');
+        return redirect()->route('backend.kategori_pertandingan.index')
+                         ->with('success', 'Kategori pertandingan berhasil dihapus');
     }
 
     // ===== Helper Methods =====
 
-    private function validateJuri(Request $request, bool $isStore = true): array
+    private function validateKategori(Request $request): array
     {
         return $request->validate([
-            'nama_juri'     => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'sertifikat'    => ($isStore ? 'required' : 'nullable') . '|mimes:pdf|max:2048',
+            'nama'    => 'required|string|max:255',
+            'aturan'  => 'required|string|max:255',
+            'batasan' => 'required|string|max:255',
         ]);
     }
 
-    private function handleSertifikatUpload(Request $request): string
-    {
-        return $request->file('sertifikat')->store('sertifikat', 'public');
-    }
-
-    private function deleteOldSertifikat(?string $path): void
-    {
-        if ($path && Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->delete($path);
-        }
-    }
-
-    private function authorizeJuri(Juri $juri): void
+    private function authorizeKategori(Kategori_Pertandingan $kategori): void
     {
         $user = Auth::user();
-
         if ($user->role === 'admin') {
             return;
         }
 
-        if ($juri->user_id !== $user->id) {
+        if ($kategori->user_id !== $user->id) {
             abort(403, 'Anda tidak memiliki izin untuk mengakses data ini.');
         }
     }
