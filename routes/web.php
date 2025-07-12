@@ -37,6 +37,11 @@ use App\Http\Controllers\{
 // FRONTEND
 // ==============================
 
+Route::get('/', function () {
+    return 'Home OK!';
+});
+
+
 Route::get('/cek-rute', function () {
     return view('frontend.cek-rute');
 });
