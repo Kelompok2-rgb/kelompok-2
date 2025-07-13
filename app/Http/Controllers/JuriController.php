@@ -17,13 +17,8 @@ class JuriController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-
-        $juris = $user->role === 'admin'
-            ? Juri::latest()->get()
-            : Juri::where('user_id', $user->id)->latest()->get();
-
-        return view('backend.juri.index', compact('juris', 'user'));
+        $juris = Juri::all();
+        return view('backend.juri.index', compact('juris'));
     }
 
     public function create()
@@ -34,22 +29,18 @@ class JuriController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $this->validateJuri($request);
-
-        if ($request->hasFile('sertifikat')) {
-            $validated['sertifikat'] = $this->handleSertifikatUpload($request);
-        }
-
+        $validated['sertifikat'] = $this->handleSertifikatUpload($request);
         $validated['user_id'] = Auth::id();
 
         Juri::create($validated);
 
-        return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil ditambahkan');
+        return redirect()->route('backend.juri.index')
+                         ->with('success', 'Juri berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $juri = Juri::findOrFail($id);
-
         $this->authorizeJuri($juri);
 
         return view('backend.juri.edit', compact('juri'));
@@ -58,7 +49,6 @@ class JuriController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $juri = Juri::findOrFail($id);
-
         $this->authorizeJuri($juri);
 
         $validated = $this->validateJuri($request, false);
@@ -70,20 +60,20 @@ class JuriController extends Controller
 
         $juri->update($validated);
 
-        return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil diperbarui');
+        return redirect()->route('backend.juri.index')
+                         ->with('success', 'Juri berhasil diperbarui');
     }
 
     public function destroy($id): RedirectResponse
     {
         $juri = Juri::findOrFail($id);
-
         $this->authorizeJuri($juri);
 
         $this->deleteOldSertifikat($juri->sertifikat);
-
         $juri->delete();
 
-        return redirect()->route('backend.juri.index')->with('success', 'Juri berhasil dihapus');
+        return redirect()->route('backend.juri.index')
+                         ->with('success', 'Juri berhasil dihapus');
     }
 
     // ===== Helper Methods =====
@@ -93,13 +83,15 @@ class JuriController extends Controller
         return $request->validate([
             'nama_juri'     => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
-            'sertifikat'    => ($isStore ? 'required' : 'nullable') . '|mimes:pdf|max:2048',
+            'sertifikat'    => ($isStore ? 'required' : 'sometimes').'|mimes:pdf|max:2048',
         ]);
     }
 
-    private function handleSertifikatUpload(Request $request): string
+    private function handleSertifikatUpload(Request $request): ?string
     {
-        return $request->file('sertifikat')->store('sertifikat', 'public');
+        return $request->hasFile('sertifikat')
+            ? $request->file('sertifikat')->store('sertifikat', 'public')
+            : null;
     }
 
     private function deleteOldSertifikat(?string $path): void
@@ -112,6 +104,7 @@ class JuriController extends Controller
     private function authorizeJuri(Juri $juri): void
     {
         $user = Auth::user();
+
         if ($user->role === 'admin') {
             return;
         }

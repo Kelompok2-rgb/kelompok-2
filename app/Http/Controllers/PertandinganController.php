@@ -18,28 +18,17 @@ class PertandinganController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        $pertandingans = Pertandingan::with(['penyelenggaraEvent', 'juri'])
+                            ->latest()
+                            ->get();
 
-        $pertandingans = $user->role === 'admin'
-            ? Pertandingan::with(['penyelenggaraEvent', 'juri'])->latest()->get()
-            : Pertandingan::whereHas('penyelenggaraEvent', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            })
-            ->with(['penyelenggaraEvent', 'juri'])
-            ->latest()
-            ->get();
-
-        return view('backend.pertandingan.index', compact('pertandingans', 'user'));
+        return view('backend.pertandingan.index', compact('pertandingans'));
     }
 
     public function create()
     {
-        $user = Auth::user();
-
-        $penyelenggaras = $user->role === 'admin'
-            ? PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get()
-            : PenyelenggaraEvent::where('user_id', $user->id)->orderBy('nama_penyelenggara_event')->get();
-
+        // semua role bebas memilih penyelenggara mana saja
+        $penyelenggaras = PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get();
         $juris = Juri::orderBy('nama_juri')->get();
 
         return view('backend.pertandingan.create', compact('penyelenggaras', 'juris'));
@@ -48,21 +37,15 @@ class PertandinganController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $this->validatePertandingan($request);
-        $user = Auth::user();
 
-        if ($user->role !== 'admin') {
-            $penyelenggara = PenyelenggaraEvent::where('id', $validated['penyelenggara_event_id'])
-                ->where('user_id', $user->id)
-                ->first();
-
-            if (!$penyelenggara) {
-                abort(403, 'Anda tidak memiliki izin untuk menggunakan penyelenggara ini.');
-            }
+        // ambil penyelenggara
+        $penyelenggara = PenyelenggaraEvent::where('id', $validated['penyelenggara_event_id'])->first();
+        if (!$penyelenggara) {
+            abort(404, 'Penyelenggara tidak ditemukan.');
         }
 
-        $validated['user_id'] = $user->id;
-
-        Pertandingan::create($validated);
+        // tetap simpan user_id dari penyelenggara untuk konsistensi
+        Pertandingan::create(array_merge($validated, ['user_id' => $penyelenggara->user_id]));
 
         return redirect()->route('backend.pertandingan.index')
             ->with('success', 'Pertandingan berhasil ditambahkan.');
@@ -72,12 +55,8 @@ class PertandinganController extends Controller
     {
         $this->authorizePenyelenggara($pertandingan);
 
-        $user = Auth::user();
-
-        $penyelenggaras = $user->role === 'admin'
-            ? PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get()
-            : PenyelenggaraEvent::where('user_id', $user->id)->orderBy('nama_penyelenggara_event')->get();
-
+        // semua role bebas memilih penyelenggara mana saja
+        $penyelenggaras = PenyelenggaraEvent::orderBy('nama_penyelenggara_event')->get();
         $juris = Juri::orderBy('nama_juri')->get();
 
         return view('backend.pertandingan.edit', compact('pertandingan', 'penyelenggaras', 'juris'));
@@ -88,19 +67,15 @@ class PertandinganController extends Controller
         $this->authorizePenyelenggara($pertandingan);
 
         $validated = $this->validatePertandingan($request);
-        $user = Auth::user();
 
-        if ($user->role !== 'admin') {
-            $penyelenggara = PenyelenggaraEvent::where('id', $validated['penyelenggara_event_id'])
-                ->where('user_id', $user->id)
-                ->first();
-
-            if (!$penyelenggara) {
-                abort(403, 'Anda tidak memiliki izin untuk memilih penyelenggara ini.');
-            }
+        // ambil penyelenggara baru
+        $penyelenggara = PenyelenggaraEvent::where('id', $validated['penyelenggara_event_id'])->first();
+        if (!$penyelenggara) {
+            abort(404, 'Penyelenggara tidak ditemukan.');
         }
 
-        $pertandingan->update($validated);
+        // update termasuk user_id agar tetap konsisten
+        $pertandingan->update(array_merge($validated, ['user_id' => $penyelenggara->user_id]));
 
         return redirect()->route('backend.pertandingan.index')
             ->with('success', 'Pertandingan berhasil diperbarui.');

@@ -17,13 +17,8 @@ class GaleriController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-
-        $galeris = $user->role === 'admin'
-            ? Galeri::latest()->paginate(10)
-            : Galeri::where('user_id', $user->id)->latest()->paginate(10);
-
-        return view('backend.galeri.index', compact('galeris', 'user'));
+        $galeris = Galeri::latest()->paginate(10);
+        return view('backend.galeri.index', compact('galeris'));
     }
 
     public function create()
@@ -93,7 +88,7 @@ class GaleriController extends Controller
         return view('backend.galeri.show', compact('galeri'));
     }
 
-    // ===== Helper Methods =====
+    // ============ Helper Methods =============
 
     private function validateGaleri(Request $request, bool $isUpdate = false): array
     {

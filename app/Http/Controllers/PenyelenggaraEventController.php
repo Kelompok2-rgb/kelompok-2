@@ -16,13 +16,12 @@ class PenyelenggaraEventController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        $penyelenggara_events = PenyelenggaraEvent::latest()->get();
 
-        $penyelenggara_events = $user->role === 'admin'
-            ? PenyelenggaraEvent::latest()->get()
-            : PenyelenggaraEvent::where('user_id', $user->id)->latest()->get();
-
-        return view('backend.penyelenggara_event.index', compact('penyelenggara_events', 'user'));
+        return view('backend.penyelenggara_event.index', [
+            'penyelenggara_events' => $penyelenggara_events,
+            'user' => Auth::user(),
+        ]);
     }
 
     public function create()
@@ -55,7 +54,6 @@ class PenyelenggaraEventController extends Controller
         $this->authorizeEvent($penyelenggara_event);
 
         $validated = $this->validateEvent($request);
-
         $penyelenggara_event->update($validated);
 
         return redirect()->route('backend.penyelenggara_event.index')

@@ -16,13 +16,10 @@ class KategoriPertandinganController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        // Tampilkan SEMUA data untuk semua role
+        $kategoripertandingans = KategoriPertandingan::latest()->get();
 
-        $kategoripertandingans = $user->role === 'admin'
-            ? KategoriPertandingan::latest()->get()
-            : KategoriPertandingan::where('user_id', $user->id)->latest()->get();
-
-        return view('backend.kategori_pertandingan.index', compact('kategoripertandingans', 'user'));
+        return view('backend.kategori_pertandingan.index', compact('kategoripertandingans'));
     }
 
     public function create()

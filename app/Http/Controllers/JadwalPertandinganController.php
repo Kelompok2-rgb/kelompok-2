@@ -17,16 +17,12 @@ class JadwalPertandinganController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        // Tampilkan semua data tanpa filter user
+        $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')
+            ->latest()
+            ->get();
 
-        $jadwalpertandingans = $user->role === 'admin'
-            ? Jadwal_Pertandingan::with('pertandingan')->latest()->get()
-            : Jadwal_Pertandingan::with('pertandingan')
-                ->where('user_id', $user->id)
-                ->latest()
-                ->get();
-
-        return view('backend.jadwal_pertandingan.index', compact('jadwalpertandingans', 'user'));
+        return view('backend.jadwal_pertandingan.index', compact('jadwalpertandingans'));
     }
 
     public function create()
