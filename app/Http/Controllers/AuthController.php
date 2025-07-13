@@ -69,7 +69,7 @@ class AuthController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'digits_between:10,15'],
+            'phone_number' => ['required', 'digits_between:10,15', 'unique:users,phone_number'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'in:atlet,juri,klub,anggota,penyelenggara'],
