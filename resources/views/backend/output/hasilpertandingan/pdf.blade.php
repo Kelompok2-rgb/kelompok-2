@@ -95,23 +95,22 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($pertandingan->hasilPertandingan as $key => $hasil)
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ optional($hasil->atlet)->nama ?? '-' }}</td>
-                    <td>{{ $hasil->lemparan_1 }}</td>
-                    <td>{{ $hasil->lemparan_2 }}</td>
-                    <td>{{ $hasil->lemparan_3 }}</td>
-                    <td>{{ $hasil->lemparan_4 }}</td>
-                    <td>{{ $hasil->lemparan_5 }}</td>
-                    <td>{{ $hasil->skor }}</td>
-                    <td>{{ $hasil->rangking }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="9">Belum ada data hasil pertandingan.</td>
-                </tr>
-            @endforelse
+            @foreach ($pertandingan->hasilPertandingan as $hasil)
+                @foreach ($hasil->detailHasil as $key => $detail)
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $detail->nama }}</td>
+                        <td>{{ $detail->lemparan1 }}</td>
+                        <td>{{ $detail->lemparan2 }}</td>
+                        <td>{{ $detail->lemparan3 }}</td>
+                        <td>{{ $detail->lemparan4 }}</td>
+                        <td>{{ $detail->lemparan5 }}</td>
+                        <td>{{ $detail->skor }}</td>
+                        <td>{{ $detail->rangking }}</td>
+                    </tr>
+                @endforeach
+            @endforeach
+
         </tbody>
     </table>
 
