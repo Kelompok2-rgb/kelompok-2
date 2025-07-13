@@ -14,8 +14,9 @@
         @endif
 
         <div class="d-flex justify-content-between mb-3">
-            <a href="{{ route('backend.pengumuman.create') }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Tambah Pengumuman</a>
-            
+            <a href="{{ route('backend.pengumuman.create') }}" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Tambah
+                Pengumuman</a>
+
         </div>
 
         <div class="row">
@@ -128,13 +129,14 @@
         }
 
         function showDetailModal(judul, tanggal, isi, foto) {
+            const assetBaseUrl = '{{ asset('uploads/pengumuman') }}';
             document.getElementById('modalJudul').innerText = judul;
             document.getElementById('modalTanggal').innerText = `Tanggal: ${tanggal}`;
             document.getElementById('modalIsi').innerText = isi;
 
             if (foto) {
                 document.getElementById('modalFoto').innerHTML =
-                    `<img src="/uploads/pengumuman/${foto}" style="max-width: 100%; border-radius: 8px;">`;
+                    `<img src="${assetBaseUrl}/${foto}" style="max-width: 100%; border-radius: 8px;">`;
             } else {
                 document.getElementById('modalFoto').innerHTML = '';
             }

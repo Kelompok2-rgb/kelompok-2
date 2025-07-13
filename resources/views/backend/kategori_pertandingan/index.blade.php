@@ -8,11 +8,11 @@
     <hr>
 </div>
 
- @if (session('success'))
-        <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-            {{ session('success') }}
-        </div>
-    @endif
+@if (session('success'))
+    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div class="mb-3">
     <a href="{{ route('backend.kategori_pertandingan.create') }}" class="btn btn-primary">
@@ -34,8 +34,7 @@
         <tbody>
             @foreach ($kategoripertandingans as $index => $kategori)
                 @php
-                    // hanya admin & penyelenggara yg boleh edit/hapus
-                    $canEditDelete = Auth::user()->role === 'admin' || Auth::user()->role === 'penyelenggara';
+                    $canEditDelete = Auth::user()->role === 'admin' || Auth::id() === $kategori->user_id;
                 @endphp
                 <tr>
                     <td>{{ $index + 1 }}</td>
@@ -45,7 +44,7 @@
                     <td class="text-nowrap">
                         <a href="{{ $canEditDelete ? route('backend.kategori_pertandingan.edit', $kategori->id) : '#' }}"
                            class="btn btn-warning btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
-                           title="{{ !$canEditDelete ? 'Hanya admin atau penyelenggara yang dapat edit' : 'Edit data' }}">
+                           title="{{ !$canEditDelete ? 'Hanya admin atau pembuat data yang dapat edit' : 'Edit data' }}">
                             <i class="fas fa-edit"></i> Edit
                         </a>
 
@@ -57,7 +56,7 @@
                             @method('DELETE')
                             <button type="submit"
                                     class="btn btn-danger btn-sm {{ !$canEditDelete ? 'disabled' : '' }}"
-                                    title="{{ !$canEditDelete ? 'Hanya admin atau penyelenggara yang dapat hapus' : 'Hapus data' }}">
+                                    title="{{ !$canEditDelete ? 'Hanya admin atau pembuat data yang dapat hapus' : 'Hapus data' }}">
                                 <i class="fas fa-trash"></i> Hapus
                             </button>
                         </form>
