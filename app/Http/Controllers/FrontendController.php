@@ -17,7 +17,7 @@ use App\Models\Testimonial;
 use App\Models\AboutSection;
 use App\Models\Jadwal_Pertandingan;
 use Illuminate\Support\Facades\View;
-use App\Models\Kategori_pertandingan;
+use App\Models\KategoriPertandingan;
 use App\Models\OrganizationalStructure;
 
 
@@ -45,7 +45,7 @@ class FrontendController extends Controller
         $hero = HeroSection::latest()->first();
         $about = AboutSection::latest()->first();
         $jadwalpertandingans = Jadwal_Pertandingan::with('pertandingan')->get();
-        $kategoripertandingans = Kategori_pertandingan::all();
+        $kategoripertandingans = KategoriPertandingan::all();
         $galeris = Galeri::latest()->get();
         $pengumumans = Pengumuman::latest()->get();
         $rules = RuleSection::all();
@@ -85,7 +85,7 @@ class FrontendController extends Controller
 
     public function ajaxKategori()
     {
-        $kategoripertandingans = Kategori_pertandingan::all();
+        $kategoripertandingans = KategoriPertandingan::all();
         return view('frontend.ajax.kategori', compact('kategoripertandingans'));
     }
 

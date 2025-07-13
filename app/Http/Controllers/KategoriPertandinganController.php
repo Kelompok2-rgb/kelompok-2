@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori_Pertandingan;
+use App\Models\KategoriPertandingan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -19,8 +19,8 @@ class KategoriPertandinganController extends Controller
         $user = Auth::user();
 
         $kategoripertandingans = $user->role === 'admin'
-            ? Kategori_Pertandingan::latest()->get()
-            : Kategori_Pertandingan::where('user_id', $user->id)->latest()->get();
+            ? KategoriPertandingan::latest()->get()
+            : KategoriPertandingan::where('user_id', $user->id)->latest()->get();
 
         return view('backend.kategori_pertandingan.index', compact('kategoripertandingans', 'user'));
     }
@@ -35,7 +35,7 @@ class KategoriPertandinganController extends Controller
         $validated = $this->validateKategori($request);
         $validated['user_id'] = Auth::id();
 
-        Kategori_Pertandingan::create($validated);
+        KategoriPertandingan::create($validated);
 
         return redirect()->route('backend.kategori_pertandingan.index')
                          ->with('success', 'Kategori pertandingan berhasil ditambahkan');
@@ -43,7 +43,7 @@ class KategoriPertandinganController extends Controller
 
     public function edit($id)
     {
-        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $kategori = KategoriPertandingan::findOrFail($id);
         $this->authorizeKategori($kategori);
 
         return view('backend.kategori_pertandingan.edit', compact('kategori'));
@@ -51,7 +51,7 @@ class KategoriPertandinganController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $kategori = KategoriPertandingan::findOrFail($id);
         $this->authorizeKategori($kategori);
 
         $validated = $this->validateKategori($request);
@@ -64,7 +64,7 @@ class KategoriPertandinganController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $kategori = Kategori_Pertandingan::findOrFail($id);
+        $kategori = KategoriPertandingan::findOrFail($id);
         $this->authorizeKategori($kategori);
 
         $kategori->delete();
@@ -84,7 +84,7 @@ class KategoriPertandinganController extends Controller
         ]);
     }
 
-    private function authorizeKategori(Kategori_Pertandingan $kategori): void
+    private function authorizeKategori(KategoriPertandingan $kategori): void
     {
         $user = Auth::user();
         if ($user->role === 'admin') {
