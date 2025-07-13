@@ -18,7 +18,7 @@ class HasilPertandingan extends Model
 
     public function detailHasil()
     {
-        return $this->hasMany(DetailHasilPertandingan::class);
+        return $this->hasMany(DetailHasilPertandingan::class, 'hasil_pertandingan_id', 'id');
     }
 
     public function atlet()

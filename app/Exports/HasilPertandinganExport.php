@@ -22,19 +22,14 @@ class HasilPertandinganExport implements
     protected $pertandingan;
 
     public function __construct($pertandingan_id)
-    {
-        $this->pertandingan = Pertandingan::with([
-            'penyelenggaraEvent',
-            'juri',
-            'jadwalPertandingan',
-            'hasilPertandingan.atlet'
-        ])->findOrFail($pertandingan_id);
-    }
+{
+    $this->pertandingan = Pertandingan::findOrFail($pertandingan_id);
+}
+
 
     public function collection()
     {
-        // Kosong karena kita isi manual via AfterSheet
-        return collect([]);
+        return collect([]); // tetap kosong
     }
 
     public function styles(Worksheet $sheet)
@@ -45,15 +40,15 @@ class HasilPertandinganExport implements
     public function columnWidths(): array
     {
         return [
-            'A' => 5,   // No
-            'B' => 25,  // Nama Peserta
-            'C' => 15,  // Lemparan 1
-            'D' => 15,  // Lemparan 2
-            'E' => 15,  // Lemparan 3
-            'F' => 15,  // Lemparan 4
-            'G' => 15,  // Lemparan 5
-            'H' => 15,  // Skor
-            'I' => 15,  // Rangking
+            'A' => 5,
+            'B' => 25,
+            'C' => 15,
+            'D' => 15,
+            'E' => 15,
+            'F' => 15,
+            'G' => 15,
+            'H' => 15,
+            'I' => 15,
         ];
     }
 
@@ -98,7 +93,6 @@ class HasilPertandinganExport implements
                 // Header Data Peserta
                 // ============================
                 $startRow = 11;
-
                 $sheet->fromArray([
                     ['No', 'Nama Peserta', 'Lemparan 1', 'Lemparan 2', 'Lemparan 3', 'Lemparan 4', 'Lemparan 5', 'Skor', 'Rangking']
                 ], null, "A{$startRow}");
@@ -110,34 +104,34 @@ class HasilPertandinganExport implements
                 $no = 1;
 
                 foreach ($this->pertandingan->hasilPertandingan as $hasil) {
-                    $sheet->fromArray([
-                        [
-                            $no++,
-                            optional($hasil->atlet)->nama ?? '-',
-                            $hasil->lemparan1,
-                            $hasil->lemparan2,
-                            $hasil->lemparan3,
-                            $hasil->lemparan4,
-                            $hasil->lemparan5,
-                            $hasil->skor,
-                            $hasil->rangking
-                        ]
-                    ], null, "A{$row}");
-                    $row++;
+                    foreach ($hasil->detailHasil as $detail) {
+                        $sheet->fromArray([
+                            [
+                                $no++,
+                                $detail->nama,
+                                $detail->lemparan1,
+                                $detail->lemparan2,
+                                $detail->lemparan3,
+                                $detail->lemparan4,
+                                $detail->lemparan5,
+                                $detail->skor,
+                                $detail->rangking
+                            ]
+                        ], null, "A{$row}");
+                        $row++;
+                    }
                 }
 
                 // ============================
                 // Styling
                 // ============================
+                $lastRow = $row - 1;
 
-                // Bold header
                 $sheet->getStyle("A{$startRow}:I{$startRow}")->applyFromArray([
                     'font' => ['bold' => true],
                     'alignment' => ['horizontal' => 'center'],
                 ]);
 
-                // Border seluruh data
-                $lastRow = $row - 1;
                 $sheet->getStyle("A{$startRow}:I{$lastRow}")->applyFromArray([
                     'borders' => [
                         'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
